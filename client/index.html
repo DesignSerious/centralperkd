@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Central Perk'd</title>
+  <meta name="theme-color" content="#1A1240" />
+  <link rel="icon" type="image/png" href="/central-perkd-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Shared coordinates so the logo and the content beneath it line up
+       identically on the splash and the lobby — same DOM node, same position,
+       so nothing moves during the fade. */
+    :root {
+      --logo-top: 6vh;
+      --logo-width: min(840px, 92vw);
+      --logo-height: calc(var(--logo-width) * 0.508);
+      --content-top: calc(var(--logo-top) + var(--logo-height) + 32px);
+    }
+    body {
+      margin: 0; min-height: 100vh;
+      /* NYC-window splash art behind the landing, with a dark wash on top so
+         the logo, copy and buttons stay legible. Fixed + cover so it fills the
+         viewport like the phone entrance. */
+      background:
+        linear-gradient(180deg, rgba(8, 4, 26, 0.72) 0%, rgba(8, 4, 26, 0.55) 42%, rgba(8, 4, 26, 0.86) 100%),
+        url('/central-perkd-splash-bg.jpg') center / cover no-repeat fixed;
+      color: #FFF5E1; font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    /* Single shared logo, fixed to a stable position. Stays put while the
+       splash backdrop fades out beneath it. */
+    .wd-logo {
+      position: fixed;
+      top: var(--logo-top);
+      left: 50%;
+      transform: translateX(-50%);
+      width: var(--logo-width);
+      height: auto;
+      z-index: 90;
+      pointer-events: none;
+      display: block;
+    }
+    /* Splash entrance: dark backdrop + Enter button. Clicking the button
+       fades the backdrop out AND starts the audio (a user gesture is required
+       by browser autoplay policies). */
+    .splash {
+      position: fixed; inset: 0;
+      /* The entrance gate carries the SAME splash art (opaque jpg) so it hides
+         the landing links behind it until Enter, then fades to reveal the
+         body's lighter-washed version. A touch darker than the body so the
+         Enter button reads clearly. */
+      background:
+        linear-gradient(180deg, rgba(8, 4, 26, 0.80) 0%, rgba(8, 4, 26, 0.62) 42%, rgba(8, 4, 26, 0.90) 100%),
+        url('/central-perkd-splash-bg.jpg') center / cover no-repeat fixed;
+      z-index: 80;
+      transition: opacity 0.5s ease;
+    }
+    .splash button {
+      position: absolute;
+      top: var(--content-top);
+      left: 50%;
+      transform: translateX(-50%);
+      min-height: 56px; padding: 16px 44px;
+      background: rgba(43, 122, 76, 0.22);
+      color: #FFF5E1;
+      border: 2px solid rgba(104, 197, 140, 0.65);
+      border-radius: 999px;
+      font-family: 'Rubik', 'Nunito', sans-serif;
+      font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .splash button:hover {
+      background: rgba(43, 122, 76, 0.40);
+      border-color: rgba(146, 219, 175, 0.95);
+      color: #FFFFFF;
+    }
+    .splash.is-hidden { opacity: 0; pointer-events: none; }
+
+    .landing {
+      position: fixed;
+      top: var(--content-top);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 540px;
+      padding: 0 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .landing p { font-size: 1.05rem; line-height: 1.65; color: rgba(255,245,225,0.78); margin: 0 0 36px; }
+    .links { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+    /* Canonical button — mirrors .lp-btn in client/src/lib/theme.css. */
+    .links a {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 52px; padding: 14px 32px;
+      background: rgba(43, 122, 76, 0.18);
+      color: #FFF5E1;
+      border: 2px solid rgba(104, 197, 140, 0.55);
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: 'Rubik', 'Nunito', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .links a:hover {
+      background: rgba(43, 122, 76, 0.32);
+      border-color: rgba(146, 219, 175, 0.85);
+      color: #FFFFFF;
+    }
+    .links a.secondary {
+      background: transparent;
+      border-color: rgba(255, 245, 225, 0.22);
+      color: rgba(255, 245, 225, 0.82);
+    }
+    .links a.secondary:hover {
+      background: rgba(255, 245, 225, 0.06);
+      border-color: rgba(255, 245, 225, 0.40);
+      color: #FFF5E1;
+    }
+    /* Speaker toggle + volume slider for the lobby ambient track. The whole
+       cluster is fixed top-left; hovering (or focusing) anywhere in the
+       cluster expands the slider out to the right. */
+    .audio-control {
+      position: fixed; top: 36px; left: 20px;
+      z-index: 70;
+      display: flex; align-items: center;
+      overflow: visible;
+      padding-top: 2px;
+    }
+    .audio-toggle {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(14, 8, 38, 0.6);
+      border: 1px solid rgba(104, 197, 140, 0.40);
+      color: #FFF5E1;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .audio-toggle:hover {
+      background: rgba(43, 122, 76, 0.30);
+      border-color: rgba(146, 219, 175, 0.85);
+    }
+    .audio-toggle svg { width: 22px; height: 22px; display: block; }
+    .audio-toggle .icon-off { display: none; }
+    .audio-toggle.is-off .icon-on { display: none; }
+    .audio-toggle.is-off .icon-off { display: block; }
+
+    .audio-slider {
+      -webkit-appearance: none; appearance: none;
+      /* Make the input tall enough to contain the thumb so it can't be clipped */
+      height: 14px;
+      width: 0; opacity: 0;
+      margin-left: 0;
+      background: transparent; /* actual visible track is the pseudo-element */
+      padding: 0; /* keep layout consistent when collapsed */
+      outline: none; cursor: pointer;
+      transition: width 0.25s ease, opacity 0.2s ease, margin-left 0.25s ease;
+    }
+    .audio-control:hover .audio-slider,
+    .audio-control:focus-within .audio-slider {
+      width: 110px; opacity: 1; margin-left: 10px;
+    }
+    .audio-slider::-webkit-slider-runnable-track {
+      height: 4px;
+      background: rgba(255, 245, 225, 0.22);
+      border-radius: 2px;
+      margin-top: 5px; /* center the 4px track inside the 14px input */
+    }
+    .audio-slider::-moz-range-track {
+      height: 4px;
+      background: rgba(255, 245, 225, 0.22);
+      border-radius: 2px;
+    }
+    .audio-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 14px; height: 14px;
+      background: #FFF5E1;
+      border: 1px solid rgba(104, 197, 140, 0.65);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(104, 197, 140, 0.45);
+      /* input is tall enough so no offset is needed */
+    }
+    .audio-slider::-moz-range-thumb {
+      width: 14px; height: 14px;
+      background: #FFF5E1;
+      border: 1px solid rgba(104, 197, 140, 0.65);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(104, 197, 140, 0.45);
+      /* Firefox centers the thumb automatically when the input is tall enough */
+    }
+    /* Tiny copyright at the very bottom of the landing/splash. Sits behind
+       the splash backdrop (z-index < 80) so it only reveals once the user
+       enters. */
+    .wd-copyright {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255, 245, 225, 0.32);
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <img class="wd-logo" src="/central-perkd-logo.png" alt="Central Perk'd">
+
+  <div id="splash" class="splash">
+    <button id="splash-enter" type="button">Enter</button>
+  </div>
+
+  <div class="audio-control">
+    <button id="audio-toggle" class="audio-toggle" aria-label="Toggle background music" title="Toggle music">
+      <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9 L4 15 L8 15 L13 19 L13 5 L8 9 Z" fill="currentColor" fill-opacity="0.25"/>
+        <path d="M16 8.5 C17.5 10 17.5 14 16 15.5"/>
+        <path d="M19 6 C21.5 8.5 21.5 15.5 19 18"/>
+      </svg>
+      <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 9 L4 15 L8 15 L13 19 L13 5 L8 9 Z" fill="currentColor" fill-opacity="0.25"/>
+        <path d="M17 9 L21 13"/>
+        <path d="M21 9 L17 13"/>
+      </svg>
+    </button>
+    <input id="audio-volume" class="audio-slider" type="range" min="0" max="100" step="1" value="100" aria-label="Music volume" title="Music volume">
+  </div>
+  <audio id="lobby-audio" src="/Ill%20be%20there%20for%20you.mp3" loop preload="auto"></audio>
+
+  <div class="landing">
+    <p>A Friends trivia race for the TV. Open the TV view on your screen, then have everyone join from their phones with the room code.</p>
+    <div class="links">
+      <a href="/tv">Open TV Screen</a>
+      <a href="/join" class="secondary">Join from Phone</a>
+    </div>
+  </div>
+
+  <div class="wd-copyright">Central Perk'd © 2026 Totes Wild Entertainment Network</div>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'cperkd_lobby_music_on';
+      var VOLUME_KEY = 'cperkd_lobby_music_volume';
+      var splash = document.getElementById('splash');
+      var enterBtn = document.getElementById('splash-enter');
+      var btn = document.getElementById('audio-toggle');
+      var slider = document.getElementById('audio-volume');
+      var audio = document.getElementById('lobby-audio');
+
+      var savedVol = null;
+      try { savedVol = localStorage.getItem(VOLUME_KEY); } catch (e) {}
+      var volume = savedVol === null ? 1.0 : Math.max(0, Math.min(1, parseFloat(savedVol)));
+      audio.volume = volume;
+      slider.value = String(Math.round(volume * 100));
+
+      slider.addEventListener('input', function () {
+        var v = Math.max(0, Math.min(1, slider.value / 100));
+        audio.volume = v;
+        try { localStorage.setItem(VOLUME_KEY, String(v)); } catch (e) {}
+      });
+
+      var stored = null;
+      try { stored = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+      var musicOn = stored !== '0';
+      if (!musicOn) btn.classList.add('is-off');
+
+      // Skip the splash when arriving from the TV's "Exit to lobby" button
+      // (URL has ?fromGame=1). The user has already entered the experience
+      // and just wants to land on the Open TV / Join buttons.
+      var skipSplash = /[?&]fromGame=1\b/.test(window.location.search);
+      if (skipSplash) {
+        splash.remove();
+        // Try to start the lobby music immediately. The user's click on
+        // the Exit button counts as recent same-tab activation for most
+        // browsers, and the domain typically has enough media engagement
+        // by this point to autoplay. If a browser still blocks it, a
+        // single click on the speaker toggle will fix it.
+        if (musicOn) {
+          var p = audio.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+
+      // Lightweight UI "confirm" chime (two ascending notes) for the
+      // landing buttons. Self-contained Web Audio so this static page
+      // needs no module import; the click itself unlocks the context.
+      var clickCtx = null;
+      function clickSound() {
+        try {
+          if (!clickCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            clickCtx = new AC();
+          }
+          if (clickCtx.state === 'suspended') clickCtx.resume();
+          var now = clickCtx.currentTime;
+          [[660, 0], [990, 0.06]].forEach(function (n) {
+            var o = clickCtx.createOscillator();
+            var g = clickCtx.createGain();
+            o.type = 'sine';
+            o.frequency.value = n[0];
+            var t = now + n[1];
+            g.gain.setValueAtTime(0.0001, t);
+            g.gain.exponentialRampToValueAtTime(0.16, t + 0.012);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+            o.connect(g);
+            g.connect(clickCtx.destination);
+            o.start(t);
+            o.stop(t + 0.2);
+          });
+        } catch (e) {}
+      }
+
+      // Play the chime on the "Open TV Screen" / "Join from Phone" links,
+      // then navigate after a short beat so the sound is audible. Skip the
+      // hijack for new-tab/middle-click so those still work normally.
+      var navLinks = document.querySelectorAll('.landing .links a');
+      Array.prototype.forEach.call(navLinks, function (a) {
+        a.addEventListener('click', function (e) {
+          if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          e.preventDefault();
+          clickSound();
+          var href = a.getAttribute('href');
+          setTimeout(function () { window.location.href = href; }, 150);
+        });
+      });
+
+      function enter() {
+        clickSound();
+        splash.classList.add('is-hidden');
+        setTimeout(function () { splash.remove(); }, 600);
+        // Click on the button counts as a user gesture — autoplay is allowed.
+        if (musicOn) {
+          var p = audio.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+      enterBtn.addEventListener('click', enter);
+
+      btn.addEventListener('click', function () {
+        musicOn = btn.classList.contains('is-off');
+        if (musicOn) {
+          btn.classList.remove('is-off');
+          var p = audio.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          btn.classList.add('is-off');
+          audio.pause();
+        }
+        try { localStorage.setItem(STORAGE_KEY, musicOn ? '1' : '0'); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

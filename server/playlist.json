@@ -1,0 +1,39 @@
+{
+  "activeVibeId": "coffeehouse",
+  "vibes": [
+    {
+      "id": "sitcom",
+      "name": "Friends AF",
+      "tracks": [
+        "Bob Dylan - Sign on the Window Official Audio.mp3",
+        "Don Henley - The Very Best of Don Henley - 08 - New York Minute.mp3",
+        "Embryonic Journey.mp3",
+        "For All We Know.mp3",
+        "Pearl Jam - Yellow Ledbetter.mp3",
+        "George Michael - Careless Whisper.mp3",
+        "I Go Blind.mp3",
+        "Lionel Richie - Hello.mp3",
+        "Madonna - Take A Bow.mp3",
+        "Top Of The World.mp3",
+        "Thirteen Senses - Into The Fire.mp3",
+        "Phoebe Buffay - Smelly Cat.mp3"
+      ]
+    },
+    {
+      "id": "coffeehouse",
+      "name": "Coffee House",
+      "tracks": [
+        "Totes Wild.mp3",
+        "Afternoon in the Rain.mp3"
+      ]
+    },
+    {
+      "id": "nineties",
+      "name": "90s Throwback",
+      "tracks": []
+    }
+  ],
+  "volumes": {
+    "Friends outtro.mp3": 1
+  }
+}

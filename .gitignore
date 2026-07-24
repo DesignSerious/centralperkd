@@ -1,0 +1,28 @@
+node_modules/
+dist/
+.DS_Store
+.env
+*.log
+
+# Player accounts SQLite DB (holds hashed PINs — never commit)
+server/data/
+
+# Runtime AI-piece cache (regenerated on demand; may contain photo-derived
+# images from local testing — never commit)
+server/uploads/
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Claude Code working dir
+.claude/
+
+# Design source / scratch files (not used by the app — production assets live
+# under client/public/). Anchored to repo root so client/public/audio/ etc.
+# are still tracked.
+/art/
+/audio/
+/*.psd
+/*.ai
+/ChatGPT Image *.png

@@ -1,0 +1,29 @@
+{
+  "name": "friends-trivia",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Central Perk'd — a phone-controlled TV trivia board game (Socket.io, React, Vite).",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c yellow,cyan \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node --watch --env-file-if-exists=.env server/index.js",
+    "dev:client": "vite",
+    "build": "vite build",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "sharp": "^0.34.5",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io-client": "^4.7.5",
+    "vite": "^5.4.8"
+  }
+}

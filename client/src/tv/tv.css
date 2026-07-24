@@ -1,0 +1,2247 @@
+/* TV view — board.png IS the entire game surface.
+   Pieces float on the tile path; all wording overlays in the darker forest
+   area below the path tiles. Designed for 1920x1080 first, adapts down. */
+
+.tv-shell {
+  position: fixed;
+  inset: 0;
+  background: #050214;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Frame matches the natural aspect of board.png (1537/1023 ≈ 1.5028) so
+   token coordinates given in percentages always land precisely on the same
+   point of the image, regardless of viewport size. */
+.tv-board-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Board art aspect ratio (1672x941). `.tv-board-bg` uses object-fit: fill,
+     so this MUST match the image or the art is stretched — and because every
+     PATH coordinate is a percentage of this frame, a mismatch also shifts
+     every piece. Re-measure if the art is ever re-exported. */
+  max-width: calc(100vh * 1.7768);
+  max-height: calc(100vw / 1.7768);
+  margin: 0 auto;
+  container-type: inline-size;
+}
+.tv-board-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+  display: block;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Central Perk'd logo, overlaid on the empty middle of the board (the art has
+   no logo baked in, so steam can animate from the mugs). Positioned + sized as
+   a % of the board frame so it scales with the board. Above the board art,
+   below the pieces (z >= 10) and the phase overlays (z 5). */
+.tv-board-logo-wrap {
+  position: absolute;
+  left: 50%;
+  /* ~50px above the old 33.5% at the board's display size (steam rides with it,
+     still anchored to the mugs). */
+  top: 29.75%;
+  transform: translate(-50%, -50%);
+  width: 27%;
+  /* Below the token layer (z-index 2) so the pieces AND their special-square
+     notification pops (.tv-flair-pop) always render on TOP of the logo and stay
+     readable — never hidden behind it. Still above the board art (z-index 0). */
+  z-index: 1;
+  pointer-events: none;
+}
+.tv-board-logo {
+  display: block;
+  width: 100%; height: auto;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+}
+/* Steam columns anchored over each mug's opening (percentages within the logo,
+   whose intrinsic size is 700x286 — the mug openings sit ~11% / ~88% across and
+   ~40% down). Each column bottom sits at the mug rim and rises upward. */
+.tv-steam {
+  position: absolute;
+  bottom: 57%;          /* bottom edge ~43% from the logo top = the coffee surface */
+  height: 54%;
+  width: 16%;
+}
+.tv-steam--left  { left: 5%; }
+.tv-steam--right { left: 79.5%; }
+/* Each wisp is a tall, narrow, soft ribbon (not a puff): a vertical gradient
+   that fades at both ends, rises from the coffee, gently sways (rotates about
+   its base), and stretches thinner as it climbs — reads as a curl of steam.
+   Three per mug on staggered delays with alternating sway = a continuous
+   rising tendril. */
+.tv-steam i {
+  position: absolute;
+  bottom: 0; left: 50%;
+  width: 34%;
+  height: 62%;
+  border-radius: 60% 60% 50% 50% / 70% 70% 30% 30%;
+  background: linear-gradient(to top,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.68) 40%,
+    rgba(255, 255, 255, 0.28) 76%,
+    rgba(255, 255, 255, 0) 100%);
+  filter: blur(3.5px);
+  opacity: 0;
+  transform-origin: bottom center;
+  animation: tv-steam-rise 4.4s ease-out infinite;
+}
+.tv-steam i:nth-child(1) { --sway: -9deg; animation-delay: 0s; }
+.tv-steam i:nth-child(2) { --sway:  8deg; animation-delay: 1.5s; }
+.tv-steam i:nth-child(3) { --sway: -5deg; animation-delay: 3s; }
+@keyframes tv-steam-rise {
+  0%   { opacity: 0;    transform: translate(-50%, 8%)    rotate(0deg)                     scaleY(0.5); }
+  22%  { opacity: 0.7;  transform: translate(-50%, -30%)  rotate(calc(var(--sway) * 0.5))  scaleY(0.9); }
+  60%  { opacity: 0.5;  transform: translate(-50%, -95%)  rotate(var(--sway))              scaleY(1.3); }
+  100% { opacity: 0;    transform: translate(-50%, -205%) rotate(calc(var(--sway) * -0.6)) scaleY(1.75); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-steam i { animation: none; opacity: 0; }
+}
+
+/* Wilderdash crown + "LIE. LAUGH. WIN." logo. The board art (board-no-logo.jpg)
+   has no logo baked in; this floats over the empty sky area as a separate
+   element so it can drift gently above the painted board. Width is a % of
+   the board frame so it scales with the viewport. */
+.tv-logo-overlay {
+  position: absolute;
+  /* Sits 70px above where the baked-in logo lived; lets it float just
+     above the painted sky while still reading as part of the scene. */
+  top: calc(3.5% - 70px);
+  left: 50%;
+  width: 28%;
+  height: auto;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.65))
+          drop-shadow(0 0 18px rgba(104, 197, 140, 0.22));
+  /* Two layered animations: a slow sporadic wander that drifts the logo
+     around in irregular directions (with a tiny tilt each leg) + a slower
+     scale breath. The wander cycle (24s) and breathe cycle (7.5s) have no
+     common factor so the loops never sync, which keeps the motion looking
+     drunken and organic rather than mechanically periodic. */
+  animation: tv-logo-wander 44s ease-in-out infinite,
+             tv-logo-breathe 15.5s ease-in-out infinite;
+}
+@keyframes tv-logo-wander {
+  /* Eight-leg meander — each leg eases in and out so the logo drifts then
+     hangs briefly before lurching off again, like it can't quite decide
+     where it's going. Translation stays within ±13px so the motion is
+     subtle but still noticeable across the room. */
+  0%   { translate:   0px   0px; rotate:  0deg; }
+  12%  { translate:  -8px  -4px; rotate: -1deg; }
+  25%  { translate:   5px  -8px; rotate:  0.7deg; }
+  38%  { translate:  12px  -2px; rotate:  1.2deg; }
+  50%  { translate:  -4px   5px; rotate: -0.6deg; }
+  63%  { translate: -13px  -3px; rotate:  1deg; }
+  75%  { translate:   7px  -6px; rotate: -1.2deg; }
+  88%  { translate:  -3px   7px; rotate:  0.5deg; }
+  100% { translate:   0px   0px; rotate:  0deg; }
+}
+@keyframes tv-logo-breathe {
+  /* Breathes both ways — pulls in below baseline then swells past it for a
+     ~11% total swing. Big enough to read across the room, small enough to
+     stay organic instead of jumpy. */
+  0%, 100% { scale: 0.95; }
+  50%      { scale: 1.06; }
+}
+
+/* Floating tokens — positioned via left/top percentages of the frame. */
+.tv-board-tokens {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.tv-token {
+  position: absolute;
+  /* Fixed-size box centered on the path coord using width/height + negative
+     margins. The margins are exactly half the dimensions, so the box's
+     geometric center always lands exactly on the path coord. Sized as
+     `6cqw` (6% of the board frame's width) so tokens stay proportionally
+     the same relative to the board no matter the viewport — important on
+     wall-projector setups where the board can be 3000px+ wide. The min
+     prevents pieces from disappearing on tiny preview windows; no max
+     cap because that would shrink pieces relative to a huge board. */
+  width: calc(6cqw * var(--token-scale, 1));
+  height: calc(6cqw * var(--token-scale, 1));
+  min-width: calc(48px * var(--token-scale, 1));
+  min-height: calc(48px * var(--token-scale, 1));
+  margin-left: calc(-3cqw * var(--token-scale, 1));
+  margin-top: calc(-3cqw * var(--token-scale, 1));
+  /* Motion is owned entirely by Board2D's imperative Web Animations API
+     controller — one piece glides at a time, in lockstep with its slide
+     sound. NO CSS transition here: a stray React style write must never
+     animate a token. NO entrance `animation` either — it shares the
+     `animation` property with the bridge-cross keyframes, so toggling the
+     bridge class off would otherwise retrigger a fade. Tokens appear
+     instantly (they only mount in the lobby / on join). */
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.75));
+}
+.tv-token-img {
+  /* The image fills its parent .tv-token box. object-fit: contain scales
+     the PNG to fit while preserving aspect, with object-position: center
+     centering it in the box. */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+/* Photo pieces (player selfies) crop to a circle inside the same .tv-token
+   square so they read at any board zoom. Overrides .tv-token-img's contain. */
+.tv-token-img--photo {
+  object-fit: cover;
+  border-radius: 50%;
+}
+.tv-token-emoji { font-size: 1.8rem; line-height: 1; }
+
+/* Arrow-tile leap. When a player lands on an arrow tile their token arcs
+   forward the bonus space(s); once it settles, a brief wobble runs and the
+   ".tv-flair-pop.is-advance" blurb floats up above it. Fires once per
+   SCORING phase. (Class name is historical — it was the bridge tile in the
+   game this was cloned from.) */
+.tv-token--bridge {
+  /* The travel itself is a WAAPI arc built from the piece's real from/to
+     coordinates (see arc() in Board2D). This class only carries the landing
+     wobble, which fires AFTER the ~2.6s arc completes — a CSS keyframe can't
+     know where a given leap starts or ends. */
+  animation: tv-token-bridge-wobble 1.2s ease-in-out 2.6s;
+}
+/* Landing flair: a blurb that pops above a piece when it lands on a special
+   tile (coffee cup / arrow), explaining the effect. Board2D mounts it at the
+   right moment via JS, so the animation runs immediately on mount (no CSS
+   delay). Colour is themed per tile type by the .is-* modifiers below. */
+.tv-flair-pop {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  /* width:max-content sizes the box to the text on ONE line, then max-width
+     caps it so a long message wraps to a SECOND LINE instead of stretching
+     into one very wide bar. (Plain shrink-to-fit can't be used: the pop is
+     positioned inside the piece-sized token, which would collapse it to a
+     single word.) Short messages stay on one line. */
+  display: block;
+  width: max-content;
+  white-space: normal;
+  max-width: 26cqw;
+  text-align: center;
+  line-height: 1.18;
+  padding: 7px 14px;
+  background: rgba(var(--panel-lift), 0.92);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.1cqw, 1.2rem);
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(255, 184, 69, 0.55);
+  box-shadow: 0 0 24px rgba(255, 184, 69, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -8px);
+  animation: tv-flair-pop 2.4s ease-out both;
+  z-index: 40;
+}
+/* Coffee cup — warm gold (matches the tile + the default above). */
+.tv-flair-pop.is-bonus {
+  border-color: var(--gold);
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(255, 184, 69, 0.55);
+  box-shadow: 0 0 24px rgba(255, 184, 69, 0.35);
+}
+/* Arrow — purple, matching the painted advance tiles. */
+.tv-flair-pop.is-advance {
+  border-color: #b884ff;
+  color: #d9bcff;
+  text-shadow: 0 0 12px rgba(168, 120, 255, 0.6);
+  box-shadow: 0 0 24px rgba(139, 96, 255, 0.4);
+}
+.tv-flair-pop-icon { font-size: 1.3em; line-height: 1; margin-right: 5px; vertical-align: -0.08em; }
+/* Near the top of the board: drop the pop BELOW the piece and drift it down, so
+   it never rises off the top edge (Board2D adds this for pieces with c.y < 26%). */
+.tv-flair-pop--below {
+  bottom: auto;
+  top: 100%;
+  animation-name: tv-flair-pop-below;
+}
+@keyframes tv-flair-pop-below {
+  0%   { opacity: 0; transform: translate(-50%, -4px) scale(0.6); }
+  12%  { opacity: 1; transform: translate(-50%, 14px)  scale(1.08); }
+  75%  { opacity: 1; transform: translate(-50%, 24px)  scale(1); }
+  100% { opacity: 0; transform: translate(-50%, 36px)  scale(1); }
+}
+
+/* Bridge-cross slide. Five keyframes:
+   0%   the piece's PREVIOUS position (set by --bridge-from-x/-y CSS vars
+        captured in Board2D before the bridge fires; defaults to spot 14
+        in case the start coord wasn't captured).
+   30%  arrival at spot 14 (87.9, 50.2) — the bridge entry point.
+   55%  apex of the bridge arch — pulled slightly up + inward to follow
+        the painted footbridge's curvature.
+   80%  descending the far side of the arch.
+   100% spot 17 (71.4, 70.1) — final position.
+   Easing is a soft cubic-bezier so the piece glides into the arc and
+   lingers near the apex before sliding down to 17. */
+/* Walks the CENTRE of the wooden bridge deck: hold at tile 14, step up
+   onto the walkway, ride the crest, come down the far side, then drop off
+   the bridge to tile 17. The mid waypoints sit on the deck centreline
+   (raised from the old path, which tracked the lower rail). */
+@keyframes tv-token-bridge-wobble {
+  /* .tv-token is positioned via left/top + margin (not transform), so it's
+     safe to drive the celebration via transform: scale/rotate alone without
+     fighting the live left/top transition that's still gliding the piece. */
+  0%   { transform: scale(1) rotate(0deg); }
+  15%  { transform: scale(1.18) rotate(-6deg); }
+  30%  { transform: scale(0.94) rotate(5deg); }
+  45%  { transform: scale(1.08) rotate(-3deg); }
+  65%  { transform: scale(0.98) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes tv-flair-pop {
+  0%   { opacity: 0; transform: translate(-50%, 4px) scale(0.6); }
+  12%  { opacity: 1; transform: translate(-50%, -14px) scale(1.08); }
+  75%  { opacity: 1; transform: translate(-50%, -24px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -36px) scale(1); }
+}
+
+/* Tiny credit at the very bottom of the TV view, below the board frame. */
+.tv-copyright {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-family: var(--serif);
+  font-size: 0.72rem;
+  color: rgba(255, 245, 225, 0.32);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Calibration tokens — same anchor as real tokens so the calibration is
+   WYSIWYG. Preview tracks the cursor (translucent); placed shows confirmed
+   clicks (full opacity). */
+.tv-token--preview {
+  opacity: 0.55;
+  animation: none;
+  z-index: 6;
+}
+.tv-token--placed {
+  animation: none;
+  z-index: 5;
+}
+/* Drag-to-adjust mode — clickable/draggable tokens with a number badge. */
+.tv-token--adjust {
+  animation: none;
+  pointer-events: auto;
+  cursor: grab;
+  z-index: 7;
+}
+.tv-token--adjust.is-dragging { cursor: grabbing; opacity: 0.7; }
+.tv-token--adjust .tv-adjuster-label {
+  position: absolute; top: -6px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 80, 80, 0.95);
+  color: #FFF;
+  font-family: var(--display); font-weight: 700;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 8px;
+  border: 1px solid #FFF;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.tv-adjuster-prompt {
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 60;
+  padding: 10px 18px;
+  background: rgba(var(--panel), 0.92);
+  border: 1px solid rgba(104, 197, 140, 0.55);
+  color: var(--cream);
+  font-family: var(--display); font-size: 0.95rem;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.tv-adjuster-output {
+  position: fixed; right: 16px; bottom: 16px;
+  z-index: 60;
+  width: 380px;
+}
+.tv-adjuster-output textarea {
+  width: 100%; height: 360px;
+  background: rgba(var(--panel), 0.92);
+  border: 1px solid rgba(255, 245, 225, 0.20);
+  color: var(--cream);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px; line-height: 1.4;
+  padding: 12px; resize: none;
+}
+
+/* Background music toggle + volume slider — top-left of the TV view, kept
+   clear of the room chip in the top-right. Hover (or focus) anywhere in
+   the cluster expands the slider out to the right. Mirrors the landing
+   page audio control so the UX is consistent everywhere. */
+.tv-audio-control {
+  position: fixed; top: 36px; left: 20px;
+  z-index: 70; /* bring above other UI chrome */
+  display: flex; align-items: flex-start; /* ensure sliders stack from the top so thumbs aren't clipped */
+  overflow: visible; /* allow taller inputs to render outside */
+  padding-top: 2px; /* small buffer so the top thumb sits comfortably below the viewport edge */
+}
+.tv-audio-toggle {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--panel), 0.6);
+  border: 1px solid rgba(104, 197, 140, 0.40);
+  color: var(--cream);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.tv-audio-toggle:hover {
+  background: rgba(43, 122, 76, 0.30);
+  border-color: rgba(146, 219, 175, 0.85);
+}
+.tv-audio-toggle svg { width: 22px; height: 22px; display: block; }
+.tv-audio-toggle .icon-off { display: none; }
+.tv-audio-toggle.is-off .icon-on { display: none; }
+.tv-audio-toggle.is-off .icon-off { display: block; }
+
+/* Live audio spectrum sitting between the speaker icon and the (hover-
+   expanded) slider. Always visible so you can tell music is playing at a
+   glance even when the slider is collapsed. The canvas itself is drawn by
+   MusicSpectrum.jsx. */
+.tv-audio-spectrum {
+  display: block;
+  width: 78px;
+  height: 22px;
+  margin-left: 10px;
+  pointer-events: none;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 6px rgba(168, 123, 221, 0.55))
+          drop-shadow(0 0 10px rgba(122, 212, 255, 0.18));
+}
+
+.tv-audio-slider {
+  -webkit-appearance: none; appearance: none;
+  /* Input is taller than the thumb (14px + 1px border ≈ 16px painted) so the
+     round thumb sits fully inside its box with slack, never clipped by the
+     overflow:hidden slider stack. */
+  height: 20px;
+  width: 120px;
+  background: transparent; /* visual track via pseudo-element */
+  padding: 0;
+  outline: none; cursor: pointer;
+}
+
+/* Both volume sliders (Music + Sound FX) live in this vertical stack,
+   which is the element that slides open on hover/focus so the two rows
+   reveal together and stay left-aligned. */
+.tv-audio-sliders {
+  display: flex; flex-direction: column; gap: 10px;
+  /* Vertical padding keeps the round thumb (and its glow) clear of the
+     overflow:hidden clip edge so the bottom (Sound FX) row isn't cut off. */
+  padding: 5px 0;
+  max-width: 0; opacity: 0; margin-left: 0;
+  overflow: hidden;
+  transition: max-width 0.25s ease, opacity 0.2s ease, margin-left 0.25s ease;
+}
+.tv-audio-control:hover .tv-audio-sliders,
+.tv-audio-control:focus-within .tv-audio-sliders {
+  max-width: 260px; opacity: 1; margin-left: 12px;
+}
+.tv-audio-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: rgba(255, 245, 225, 0.22);
+  border-radius: 2px;
+  margin-top: 8px; /* center the 4px track inside the 20px input */
+}
+.tv-audio-slider::-moz-range-track {
+  height: 4px;
+  background: rgba(255, 245, 225, 0.22);
+  border-radius: 2px;
+}
+.tv-audio-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px;
+  background: var(--cream);
+  border: 1px solid rgba(104, 197, 140, 0.65);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(104, 197, 140, 0.45);
+}
+.tv-audio-slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  background: var(--cream);
+  border: 1px solid rgba(104, 197, 140, 0.65);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(104, 197, 140, 0.45);
+}
+
+/* [<] song name [>] cluster sits to the right of the slider in the TV
+   control; hidden behind the same hover/focus gate as the slider. The
+   inner buttons + label use the shared .music-track-* base styles in
+   theme.css; this wrapper just owns the slide-in animation. */
+.tv-audio-track-nav {
+  display: flex; align-items: center; gap: 6px;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-left: 0;
+  transition: max-width 0.25s ease, opacity 0.2s ease, margin-left 0.25s ease;
+}
+.tv-audio-control:hover .tv-audio-track-nav,
+.tv-audio-control:focus-within .tv-audio-track-nav {
+  max-width: 320px;
+  opacity: 1;
+  margin-left: 12px;
+}
+.tv-audio-track-nav .music-track-name {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  max-width: 200px;
+}
+
+/* Song selector + vibe selector stacked vertically, to the right of the
+   sliders. Each row keeps its own hover slide-in. */
+.tv-audio-control .music-nav-stack {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.tv-audio-vibe-nav {
+  display: flex; align-items: center; gap: 6px;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-left: 0;
+  transition: max-width 0.25s ease, opacity 0.2s ease, margin-left 0.25s ease;
+}
+.tv-audio-control:hover .tv-audio-vibe-nav,
+.tv-audio-control:focus-within .tv-audio-vibe-nav {
+  max-width: 320px;
+  opacity: 1;
+  margin-left: 12px;
+}
+.tv-audio-vibe-nav .music-track-name {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  max-width: 200px;
+  font-size: 0.82em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+/* "Pause game" button — same shape as the rules/abort buttons, stacked
+   below How-to-play. Hidden during LOBBY/GAME_OVER and while already paused. */
+.tv-pause-btn {
+  position: fixed; top: 188px; left: 20px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--panel), 0.45);
+  border: 1px solid rgba(104, 197, 140, 0.22);
+  border-radius: 0;
+  color: rgba(255, 245, 225, 0.55);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  z-index: 50;
+}
+.tv-pause-btn:hover {
+  background: rgba(255, 184, 69, 0.18);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.tv-pause-btn svg { width: 22px; height: 22px; display: block; }
+
+/* Fullscreen toggle — bottom-right corner. Same square chip style as the
+   left-side stack so the corner controls all read as one family. Icon
+   swaps between expand and compress arrows depending on current state. */
+.tv-fullscreen-btn {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--panel), 0.45);
+  border: 1px solid rgba(104, 197, 140, 0.22);
+  border-radius: 0;
+  color: rgba(255, 245, 225, 0.55);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  z-index: 50;
+}
+.tv-fullscreen-btn:hover {
+  background: rgba(43, 122, 76, 0.30);
+  border-color: rgba(146, 219, 175, 0.75);
+  color: var(--cream);
+}
+.tv-fullscreen-btn svg { width: 22px; height: 22px; display: block; }
+
+/* "How to play" button — same shape as the abort button, stacked below
+   it. Opens the shared rules overlay. */
+.tv-rules-btn {
+  position: fixed; top: 132px; left: 20px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--panel), 0.45);
+  border: 1px solid rgba(104, 197, 140, 0.22);
+  border-radius: 0;
+  color: rgba(255, 245, 225, 0.55);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  z-index: 50;
+  font-family: var(--display);
+  font-weight: 700; font-size: 1.2rem;
+}
+.tv-rules-btn:hover {
+  background: rgba(43, 122, 76, 0.30);
+  border-color: rgba(146, 219, 175, 0.75);
+  color: var(--cream);
+}
+
+/* Subtle "quit to lobby" button — same shape as the audio toggle but dimmer,
+   tucked below it so the volume slider can expand to the right without
+   overlapping. */
+.tv-abort-btn {
+  position: fixed; top: 76px; left: 20px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--panel), 0.45);
+  border: 1px solid rgba(104, 197, 140, 0.22);
+  border-radius: 0;
+  color: rgba(255, 245, 225, 0.55);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, opacity 0.15s;
+  z-index: 50;
+}
+.tv-abort-btn:hover {
+  background: rgba(43, 122, 76, 0.30);
+  border-color: rgba(146, 219, 175, 0.75);
+  color: var(--cream);
+}
+.tv-abort-btn svg { width: 22px; height: 22px; display: block; }
+
+/* Debug overlay — toggled by adding ?debug to the TV URL. Each PATH waypoint
+   is rendered as a small numbered dot. ?calibrate enters click-to-capture
+   mode for re-recording PATH coordinates. */
+.tv-debug-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 80, 80, 0.85);
+  border: 2px solid #FFF;
+  color: #FFF;
+  font-family: var(--display); font-weight: 700;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.7);
+  pointer-events: none;
+}
+
+.tv-calibrator-prompt {
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 60;
+  padding: 12px 22px;
+  background: rgba(var(--panel), 0.92);
+  border: 1px solid rgba(104, 197, 140, 0.55);
+  color: var(--cream);
+  font-family: var(--display); font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  display: flex; align-items: center; gap: 16px;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.tv-calibrator-prompt strong {
+  color: var(--gold-soft);
+  font-size: 1.4rem;
+}
+.tv-calibrator-prompt .counter {
+  color: rgba(255, 245, 225, 0.55);
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+.tv-calibrator-output {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 70;
+  background: rgba(var(--panel), 0.96);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; padding: 32px;
+  color: var(--cream); font-family: var(--display);
+}
+.tv-calibrator-output textarea {
+  width: 100%; max-width: 720px; height: 70vh;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,245,225,0.20);
+  color: var(--cream);
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 13px; line-height: 1.5;
+  padding: 16px; resize: none;
+}
+.tv-calibrator-output button {
+  padding: 12px 24px;
+  background: rgba(43, 122, 76, 0.2);
+  border: 1px solid rgba(104, 197, 140, 0.55);
+  color: var(--cream);
+  font-family: var(--display); font-size: 1rem; letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+/* Fireflies — kept as a subtle magical overlay on top of the board. */
+.tv-fireflies {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 3;
+}
+.tv-fireflies .firefly {
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFE066 0%, rgba(255,224,102,0.6) 35%, transparent 70%);
+  filter: blur(0.3px);
+  opacity: 0;
+  animation: firefly 14s linear infinite;
+}
+@keyframes firefly {
+  0%   { transform: translate(0,0) scale(0.6); opacity: 0; }
+  10%  { opacity: 0.85; }
+  50%  { transform: translate(40px, -50px) scale(1.2); opacity: 1; }
+  90%  { opacity: 0.5; }
+  100% { transform: translate(-30px, -120px) scale(0.4); opacity: 0; }
+}
+
+/* Animated board ambience: UFO additive glow + cycling house lights.
+   Sits above the painted board image but below player tokens. */
+.tv-board-ambience {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── UFO ── */
+.ufo-beam-glow {
+  position: absolute;
+  left: 78.2%; top: 14.7%;
+  width: 7%; height: 32%;
+  background: linear-gradient(180deg,
+    rgba(160, 255, 200, 0.55) 0%,
+    rgba(120, 230, 180, 0.40) 30%,
+    rgba(100, 200, 160, 0.20) 65%,
+    rgba(80, 180, 140, 0)    100%);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  animation: ufo-beam-pulse 4.5s ease-in-out infinite;
+}
+.ufo-body-glow {
+  position: absolute;
+  left: 83%; top: 15.2%;
+  width: 7%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(180, 255, 220, 0.85) 0%,
+    rgba(120, 220, 180, 0.40) 40%,
+    transparent 70%);
+  filter: blur(4px);
+  mix-blend-mode: screen;
+  animation: ufo-body-pulse 3.8s ease-in-out infinite;
+}
+
+/* ── House lights ── */
+.house-light { position: absolute; }
+.house-light--firewatch { left: 8.3%; top: 11%;   }
+.house-light--cabin     { left: 72%;  top: 40.5%; }
+
+.house-light-halo {
+  position: absolute;
+  left: 0; top: 0;
+  width: 5cqw; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(255, 220, 130, 0.75) 0%,
+    rgba(255, 200, 100, 0.40) 30%,
+    rgba(255, 180,  80, 0.15) 60%,
+    transparent 80%);
+  filter: blur(3px);
+  mix-blend-mode: screen;
+  animation: house-window-on 18s ease-in-out infinite;
+}
+.house-light--cabin .house-light-halo { animation-delay: -9s; }
+
+@keyframes ufo-beam-pulse {
+  0%, 100% { opacity: 0.40; }
+  50%      { opacity: 0.85; }
+}
+@keyframes ufo-body-pulse {
+  0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(1);    }
+  50%      { opacity: 0.75; transform: translate(-50%, -50%) scale(1.12); }
+}
+/* Halo only dims and brightens — the board's painted window glow always
+   shows through. The slight irregularity reads as someone moving past the
+   lamps inside rather than a perfect sine wave. */
+@keyframes house-window-on {
+  0%, 100% { opacity: 0.85; }
+  22%      { opacity: 0.50; }
+  45%      { opacity: 0.75; }
+  68%      { opacity: 0.40; }
+  85%      { opacity: 0.70; }
+}
+
+/* ── Bridge lantern lights ── */
+/* Six soft warm glows on the footbridge lanterns. They light in pairs along
+   the span — 3&4 (near space 14) → 2&5 → 1&6 (toward space 17) — so the
+   sweep traces the bridge shortcut: land on 14, travel to 17. Subtle: every
+   light shares one cycle, offset a third apiece, so it reads as a gentle
+   wave, not a blink. */
+.bridge-light {
+  position: absolute;
+  width: 2.6cqw; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(255, 224, 158, 0.80) 0%,
+    rgba(255, 198, 116, 0.40) 36%,
+    rgba(255, 174,  86, 0.14) 62%,
+    transparent 80%);
+  filter: blur(2.5px);
+  mix-blend-mode: screen;
+  animation: bridge-glow 5.1s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+/* Position (left/top) is fixed per lantern; the pair's spot in the sweep is
+   set purely by animation-delay (0 → T/3 → 2T/3 of the 5.1s cycle). */
+.bridge-light:nth-child(1) { left: 69.2%; top: 62.7%; animation-delay: 3.40s; }
+.bridge-light:nth-child(2) { left: 71.7%; top: 55.8%; animation-delay: 1.70s; }
+.bridge-light:nth-child(3) { left: 81.6%; top: 48.6%; animation-delay: 0s;    }
+.bridge-light:nth-child(4) { left: 86.2%; top: 52.2%; animation-delay: 0s;    }
+.bridge-light:nth-child(5) { left: 76.8%; top: 61.0%; animation-delay: 1.70s; }
+.bridge-light:nth-child(6) { left: 74.4%; top: 66.5%; animation-delay: 3.40s; }
+
+/* Gentle on→off: eases up to a soft peak in the first third of the cycle,
+   fades back down, then stays dimmed for the rest while the other pairs take
+   their turn. Low peak + dim (not black) floor keeps it understated. */
+@keyframes bridge-glow {
+  0%   { opacity: 0.06; transform: translate(-50%, -50%) scale(0.94); }
+  10%  { opacity: 0.74; transform: translate(-50%, -50%) scale(1.04); }
+  20%  { opacity: 0.64; transform: translate(-50%, -50%) scale(1.01); }
+  33%  { opacity: 0.09; transform: translate(-50%, -50%) scale(0.95); }
+  100% { opacity: 0.06; transform: translate(-50%, -50%) scale(0.94); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bridge-light { animation: none; opacity: 0.5; }
+  /* Tokens have no CSS transition/animation anyway; the controller also
+     skips the WAAPI glide and bridge arc under reduced motion and settles
+     pieces instantly while keeping the staggered slide sound. This kills
+     the bridge keyframes as a belt-and-suspenders. */
+  .tv-token--bridge { animation: none; }
+}
+
+/* ─── PHASE OVERLAY: every info box (word pick, writing, reading, voting,
+   the green reveal box, etc.) is centered in the MIDDLE of the board — both
+   horizontally and vertically — so it always reads as the focal point rather
+   than hugging the bottom edge. Fills the whole board frame and centers its
+   single phase card; the card carries its own background, so the board shows
+   through around it. Capped (via the inner .tv-stage) so even worst-case
+   content (full ballot during VOTING) stays inside the frame and never gets
+   clipped off the top or bottom of a 100" TV. ─── */
+.tv-overlay-bottom {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  padding: 3% 4%;
+  pointer-events: auto;
+}
+.tv-overlay-bottom .tv-stage {
+  max-height: 100%;
+  min-height: 0;
+}
+
+/* ─── Round scoreboard ───────────────────────────────────────────────────
+   A real centered card in the MIDDLE of the board with its own dim backdrop
+   (readable over the busy art), then it shrinks down + the backdrop fades so
+   the pieces slide in full view. Only transform/opacity animate (GPU
+   compositor, no reflow → the piece slides are never disturbed). The
+   .tv-overlay-scoring wrapper fills the whole board frame and centers the
+   card; pointer-events:none so it never blocks the board. */
+.tv-overlay-scoring {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  padding: 3% 4%;
+  pointer-events: none;
+}
+.tv-scoring-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--panel-deep), 0.62);
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+.tv-scoring-backdrop.is-hidden { opacity: 0; }
+
+.tv-scorecard {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  width: min(900px, 82vw);
+  max-height: 88vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  padding: 30px 36px;
+  background: rgba(var(--panel), 0.94);
+  border: 1px solid rgba(215, 192, 149, 0.30);
+  border-radius: var(--radius);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  opacity: 1;
+  /* Gentle one-shot entrance. `backwards` shows the `from` state before it
+     starts (no first-frame flash) and, crucially, does NOT hold the `to`
+     state afterwards — so the .is-hidden fade-out transition is free to run
+     (an `animation: ... both` would trap opacity:1 and block the fade). */
+  animation: tv-scorecard-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+/* After ~4s the whole scoreboard fades fully away (card + backdrop), THEN
+   the server releases the pieces — so it's gone before anything moves. */
+.tv-scorecard.is-hidden {
+  opacity: 0;
+  transform: scale(0.96);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-scorecard { transition: none; animation: none; }
+  .tv-scoring-backdrop { transition: none; }
+}
+
+/* ─── Game-cue popups (next-round intro + "cast your vote") ───────────────
+   A brief full-screen splash styled to MATCH the green "real definition"
+   reveal box: gold uppercase eyebrow + green-sheen title in a glowing
+   green-tinted panel, then it fades out. Fixed to the viewport so it
+   covers the whole board regardless of the phase wrapper. ─── */
+.tv-cue-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--panel-deepest), 0.58);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.tv-cue-overlay.is-done { opacity: 0; }
+.tv-cue-card {
+  width: min(900px, 82vw);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px;
+  padding: 34px 44px;
+  /* Same panel as .tv-reveal-build.is-real (the real-definition box). */
+  border: 2px solid rgba(var(--tg-glow), 0.55);
+  background: linear-gradient(135deg, rgba(var(--tg-glow), 0.20), rgba(var(--panel), 0.80));
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+  box-shadow: 0 0 64px rgba(var(--tg-glow), 0.34), 0 22px 70px rgba(0, 0, 0, 0.55);
+  text-align: center;
+  animation: tv-cue-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+}
+.tv-cue-eyebrow {
+  font-family: var(--display); font-weight: 700;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  font-size: clamp(0.85rem, 1.4vw, 1.3rem);
+  color: var(--gold-soft);
+}
+.tv-cue-title {
+  font-family: var(--display); font-weight: 800;
+  line-height: 1.06;
+  font-size: clamp(1.7rem, 4vw, 3.2rem);
+  /* Green sheen identical to the real-definition build label. */
+  color: var(--true-green);
+  background: linear-gradient(110deg,
+    var(--true-green) 35%, #ecfff4 50%, var(--true-green) 65%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 14px rgba(var(--tg-glow), 0.55));
+  animation: tv-real-label-sheen 2.6s linear infinite;
+}
+.tv-cue-sub {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1rem, 2.2vw, 1.8rem);
+  color: var(--cream);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+.tv-cue-picker {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.tv-cue-dots { display: flex; gap: 14px; }
+.tv-cue-dots span {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--true-green);
+  box-shadow: 0 0 16px rgba(var(--tg-glow), 0.85);
+  animation: tv-build-dot-real 0.5s ease-in-out infinite;
+}
+.tv-cue-dots span:nth-child(2) { animation-delay: 0.18s; }
+.tv-cue-dots span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes tv-cue-in {
+  from { opacity: 0; transform: scale(0.9) translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-cue-overlay { transition: none; }
+  .tv-cue-card,
+  .tv-cue-title,
+  .tv-cue-dots span { animation: none; }
+}
+
+/* ─── CENTER OVERLAY: used for the game-over scorecard so it stays inside
+   the board frame instead of pushing the page taller. Dims the board with a
+   semi-transparent backdrop so the scorecard reads against the artwork. ─── */
+.tv-overlay-center {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  padding: 3% 4%;
+  pointer-events: auto;
+  background: rgba(var(--panel), 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.tv-stage {
+  width: 100%;
+  max-width: 1500px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  gap: 8px;
+  /* Subtle glow behind text so it reads against any pattern */
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85), 0 0 24px rgba(0, 0, 0, 0.7);
+}
+/* Wide variant — used for the round scoreboard so leaderboard tiles can
+   stretch close to the screen edges on big TVs/projectors instead of
+   being capped at the standard 1500px stage width. */
+.tv-stage.tv-stage--wide { max-width: 90vw; }
+
+/* Panel variant — wraps a phase's wording in a readable purple box (same
+   treatment as the lobby + reveal cards) so text never sits bare over the
+   busy painted board. Used by the screens that otherwise had no card of
+   their own: booting, word-pick, announcing, writing (the word), reading,
+   voting. Reveal/scoring/game-over already carry their own boxes. Add
+   .tv-stage--panel-green to tint it green when a moment calls for it. */
+.tv-stage.tv-stage--panel {
+  width: auto;
+  max-width: min(1100px, 92vw);
+  padding: 22px 40px 26px;
+  background: rgba(var(--panel), 0.72);
+  border: 1px solid rgba(255, 245, 225, 0.14);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.tv-stage.tv-stage--panel.tv-stage--panel-green {
+  background: linear-gradient(135deg, rgba(var(--tg-glow), 0.26), rgba(var(--panel), 0.78));
+  border-color: rgba(var(--tg-glow), 0.40);
+  box-shadow: 0 0 28px rgba(var(--tg-glow), 0.24);
+}
+
+/* Lobby variant — the settings cluster sits over the busy painted board, so
+   wrap it in a compact semi-transparent panel (same treatment as the join
+   "localhost" box) so the wording stays readable. Shrinks to its content
+   instead of spanning the full stage width. */
+.tv-stage.tv-stage--lobby {
+  width: auto;
+  max-width: min(860px, 92vw);
+  padding: 22px 36px 26px;
+  background: rgba(var(--panel), 0.72);
+  border: 1px solid rgba(255, 245, 225, 0.14);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Lobby stack — logo + settings panel scaled together by AutoFit so the
+   whole cluster (crown logo, room code, every setting) always fits on the TV
+   without scrolling. The logo lives in normal flow here (not the floating
+   .tv-logo-overlay, which is hidden during LOBBY) so it can never be clipped
+   off the top edge. */
+.tv-lobby-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.tv-lobby-logo {
+  width: 30cqw;
+  max-width: 460px;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.65))
+          drop-shadow(0 0 18px rgba(104, 197, 140, 0.22));
+}
+
+/* ─── Typography ─── */
+.tv-eyebrow {
+  font-family: var(--display);
+  font-size: clamp(0.9rem, 1.1cqw, 1.3rem);
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--gold-soft);
+  font-weight: 500;
+}
+.tv-h1 {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3cqw, 3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--cream);
+  letter-spacing: 0.04em;
+}
+.tv-sub {
+  font-family: var(--sans);
+  font-size: clamp(1rem, 1.4cqw, 1.6rem);
+  color: var(--cream-dim);
+  font-style: italic;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.tv-word-inline {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5cqw, 5.5rem);
+  color: var(--gold-soft);
+  letter-spacing: 0.05em;
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.9),
+    0 0 28px rgba(183, 143, 83, 0.34);
+}
+
+.tv-timer-inline {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2cqw, 2.4rem);
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 18px rgba(255,184,69,0.55), 0 2px 8px rgba(0,0,0,0.9);
+}
+.tv-timer-inline.urgent { color: var(--coral); text-shadow: 0 0 22px rgba(255,122,110,0.65), 0 2px 8px rgba(0,0,0,0.9); }
+
+/* ─── Lobby ─── */
+/* The "scan to join" CTA is the lobby panel's header (it used to float in
+   the middle of the board, which collided with the now-taller settings
+   panel). Sized large so it still reads across the room. */
+.tv-lobby-join {
+  display: flex; justify-content: center;
+  margin-bottom: 6px;
+}
+.tv-lobby-join .tv-join-cta {
+  gap: 24px;
+  padding: 14px 34px;
+}
+.tv-lobby-join .tv-join-cta .url  { font-size: clamp(1.4rem, 2.1cqw, 2.35rem); }
+.tv-lobby-join .tv-join-cta .code { font-size: clamp(1.6rem, 2.4cqw, 2.8rem); }
+
+.tv-join-cta {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 10px 24px;
+  background: rgba(var(--panel), 0.72);
+  border: 1px solid rgba(255, 245, 225, 0.14);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--display);
+}
+.tv-join-cta .url { font-size: clamp(0.95rem, 1.4cqw, 1.5rem); color: var(--cream); }
+.tv-join-cta .arrow { color: var(--gold-soft); }
+.tv-join-cta .code  { font-size: clamp(1.1rem, 1.6cqw, 1.8rem); color: var(--gold-soft); letter-spacing: 0.18em; }
+
+.tv-player-chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+  max-width: 100%;
+}
+.tv-player-chips .chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 14px 6px 6px;
+  background: rgba(var(--panel), 0.72);
+  border: 1px solid rgba(255, 245, 225, 0.12);
+  border-radius: var(--radius);
+  backdrop-filter: blur(4px);
+}
+.tv-player-chips .chip .name {
+  font-family: var(--display);
+  font-size: clamp(0.9rem, 1.1cqw, 1.2rem);
+  color: var(--cream);
+}
+
+.tv-start-btn {
+  margin-top: 4px;
+  padding: 12px 32px !important;
+  font-family: var(--display) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em;
+  font-size: clamp(1rem, 1.4cqw, 1.4rem) !important;
+}
+.tv-simulate-btn {
+  margin-top: 12px;
+  padding: 10px 24px !important;
+  font-size: clamp(0.8rem, 1.0cqw, 1.0rem) !important;
+  opacity: 0.7;
+}
+.tv-simulate-btn:hover { opacity: 1; }
+
+/* Series length picker on the TV lobby. */
+.tv-series-picker {
+  margin-top: 4px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.tv-series-label {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(0.8rem, 1.1cqw, 1.1rem);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.tv-series-options {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.tv-series-options .lp-btn {
+  padding: 8px 18px !important;
+  font-size: clamp(0.75rem, 0.95cqw, 0.95rem) !important;
+  letter-spacing: 0.08em !important;
+  min-height: 36px !important;
+}
+.tv-series-options .tv-series-selected {
+  background: rgba(43, 122, 76, 0.40) !important;
+  border-color: rgba(146, 219, 175, 0.95) !important;
+  color: var(--cream) !important;
+}
+
+/* One-line caption under the lobby Game type picker explaining the
+   in-person vs. long-distance trade-off (read-aloud phases on/off). */
+.tv-mode-note {
+  max-width: 860px;
+  font-family: var(--serif);
+  font-size: clamp(0.95rem, 1.25cqw, 1.25rem);
+  line-height: 1.5;
+  color: rgba(255, 245, 225, 0.88);
+  text-align: center;
+}
+
+/* CPU player stepper on the TV lobby. Mirrors the series picker layout so
+   the two controls feel related. */
+.tv-bot-picker {
+  margin-top: 4px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.tv-bot-stepper {
+  display: flex; align-items: center; gap: 14px;
+}
+.tv-bot-step {
+  padding: 0 !important;
+  width: 40px; min-height: 40px !important;
+  font-size: 1.4rem !important;
+  font-family: var(--display) !important;
+  letter-spacing: 0 !important;
+}
+.tv-bot-count {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.6cqw, 1.6rem);
+  color: var(--cream);
+  min-width: 72px; text-align: center;
+}
+.tv-bot-count .of {
+  font-weight: 400;
+  font-size: 0.65em;
+  color: var(--cream-dim);
+  margin-left: 2px;
+}
+
+/* CPU badge on bot player chips so humans can tell who's automated. */
+.tv-player-chips .chip.is-bot { border-color: rgba(104, 197, 140, 0.45); }
+.tv-player-chips .chip .bot-badge {
+  font-family: var(--display);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: rgba(146, 219, 175, 0.95);
+  background: rgba(43, 122, 76, 0.30);
+  border: 1px solid rgba(104, 197, 140, 0.45);
+  padding: 2px 7px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+/* ─── Submission / vote progress chips ─── */
+.tv-submission-list {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  justify-content: center;
+  margin-top: 10px;
+  max-width: 100%;
+}
+.tv-submission-list .item {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 10px 22px 10px 16px;
+  background: rgba(var(--panel), 0.62);
+  border: 1px solid rgba(215, 192, 149, 0.16);
+  border-radius: var(--radius-pill);
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2cqw, 1.9rem);
+  backdrop-filter: blur(4px);
+}
+.tv-submission-list .item .check {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(215, 192, 149, 0.18);
+  color: rgba(255, 245, 225, 0.4);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.35s ease;
+}
+.tv-submission-list .item .check svg {
+  width: 18px; height: 18px;
+}
+/* Done state — saturated emerald orb with a strong, steady green halo.
+   No pulse: just a constant glowing presence. The radial gradient stays
+   in true green territory (no pastel washout) so it reads as a solid
+   color, not mint. The check itself is dark forest green so it pops
+   crisp against the bright orb. */
+.tv-submission-list .item.done .check {
+  background: radial-gradient(circle at 35% 30%, #7dff9f 0%, #1fea65 45%, #0a9444 100%);
+  border: 1px solid rgba(50, 235, 110, 0.95);
+  color: #052916;
+  box-shadow:
+    0 0 0 3px rgba(50, 235, 110, 0.38),
+    0 0 22px rgba(50, 235, 110, 0.85),
+    0 0 44px rgba(50, 235, 110, 0.55),
+    0 0 80px rgba(50, 235, 110, 0.28),
+    inset 0 1px 3px rgba(255, 255, 255, 0.65);
+}
+.tv-submission-list .item.done .check svg {
+  stroke-width: 4;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.55));
+}
+
+/* ─── Voting ballot ─── */
+.tv-ballot {
+  display: grid;
+  /* Lower the column min so wide TVs can fit 3 columns when there are many
+     entries — keeps the whole ballot inside the bottom overlay. */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+  width: 100%;
+  max-width: 1400px;
+}
+.tv-ballot .entry {
+  display: flex; gap: 12px; align-items: center;
+  padding: 9px 16px;
+  background: rgba(var(--panel), 0.72);
+  border: 1px solid rgba(215, 192, 149, 0.18);
+  border-radius: var(--radius);
+  backdrop-filter: blur(4px);
+}
+.tv-ballot .entry .letter {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.05rem, 1.4cqw, 1.45rem);
+  background: var(--gold-soft); color: var(--twilight-deep);
+  width: 38px; height: 38px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.tv-ballot .entry .text {
+  font-family: var(--sans); font-weight: 600;
+  font-size: clamp(1.15rem, 1.6cqw, 1.6rem);
+  line-height: 1.25;
+  color: var(--cream);
+  flex: 1; text-align: left;
+}
+
+/* ─── Reveal entry ─── */
+.tv-reveal-entry {
+  width: 100%; max-width: 1200px;
+  background: rgba(var(--panel), 0.76);
+  border: 1px solid rgba(215, 192, 149, 0.22);
+  border-radius: var(--radius-lg);
+  padding: 16px 24px;
+  backdrop-filter: blur(6px);
+}
+.tv-reveal-entry.is-real {
+  position: relative;
+  background: linear-gradient(135deg, rgba(var(--tg-glow),0.26), rgba(var(--panel), 0.78));
+  border-color: rgba(var(--tg-glow),0.40);
+  box-shadow: 0 0 28px rgba(var(--tg-glow),0.24);
+}
+.tv-reveal-entry { padding: 22px 32px 26px; }
+
+/* HERO BLOCK — vertically stacked: eyebrow, then piece + name as one
+   centered identity unit. Points badge floats in the top-right corner
+   so the center group never feels pulled to one side. */
+.reveal-hero {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px;
+  padding: 4px 0 18px;
+  border-bottom: 1px dashed rgba(215, 192, 149, 0.18);
+}
+.reveal-hero-eyebrow {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(0.95rem, 1.1cqw, 1.2rem);
+  letter-spacing: 0.04em;
+  color: var(--cream-dim);
+  text-align: center;
+}
+.reveal-hero-identity {
+  display: inline-flex; align-items: center; gap: 18px;
+  /* Tight to its content so flexbox actually centers the visual group
+     rather than the implicit row-width. */
+}
+.reveal-hero-piece {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  width: 96px; height: 96px;
+}
+.reveal-hero-star {
+  font-size: 5rem; color: var(--true-green);
+  text-shadow: 0 0 22px rgba(var(--tg-glow),0.6);
+  line-height: 1;
+}
+.reveal-hero-name {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(2rem, 2.8cqw, 3rem);
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6),
+               0 0 18px rgba(255, 184, 69, 0.3);
+  white-space: nowrap;
+}
+.tv-reveal-entry.is-real .reveal-hero-name {
+  color: var(--true-green);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6),
+               0 0 20px rgba(var(--tg-glow),0.5);
+}
+.reveal-hero-points {
+  position: absolute; top: 0; right: 0;
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(2.4rem, 3.2cqw, 3.6rem);
+  line-height: 1;
+  color: var(--gold-soft);
+  text-shadow: 0 0 18px rgba(255, 184, 69, 0.45),
+               0 2px 8px rgba(0,0,0,0.6);
+}
+.reveal-hero-points.is-real { color: var(--true-green); text-shadow: 0 0 18px rgba(var(--tg-glow),0.6), 0 2px 8px rgba(0,0,0,0.6); }
+.reveal-hero-points .ea {
+  display: block;
+  font-family: var(--serif); font-weight: 500; font-style: italic;
+  font-size: 0.32em; letter-spacing: 0.08em;
+  color: var(--cream-dim);
+  text-shadow: none;
+  margin-top: 2px;
+  text-align: right;
+}
+
+/* THE BLUFF — big serif quoted text. The decorative quote marks frame
+   it like a real quote so the reader's eye knows this is "the thing". */
+.reveal-text {
+  margin: 18px 0 22px;
+  padding: 0 36px;
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.2cqw, 2.4rem);
+  line-height: 1.35;
+  color: var(--cream);
+  text-align: center;
+  position: relative;
+}
+.reveal-quote {
+  font-family: var(--serif);
+  font-size: 1.6em;
+  color: rgba(215, 192, 149, 0.45);
+  line-height: 0;
+  vertical-align: -0.25em;
+}
+.reveal-quote--open  { margin-right: 6px; }
+.reveal-quote--close { margin-left: 6px; }
+
+/* OUTCOME — who got fooled / who saw through it. Big pieces with names
+   under each so the social moment is unmissable. */
+.reveal-victims {
+  margin-top: 8px;
+}
+.reveal-victims-eyebrow {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1rem, 1.3cqw, 1.4rem);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-soft);
+  text-align: center;
+  margin-bottom: 14px;
+  text-shadow: 0 0 10px rgba(255, 184, 69, 0.3);
+}
+.reveal-victims.is-real .reveal-victims-eyebrow {
+  color: var(--true-green);
+  text-shadow: 0 0 10px rgba(var(--tg-glow),0.45);
+}
+.reveal-victims-row {
+  display: flex; flex-wrap: wrap; gap: 22px 28px;
+  justify-content: center;
+}
+.reveal-victim {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  min-width: 92px;
+}
+.reveal-victim-name {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1rem, 1.2cqw, 1.3rem);
+  color: var(--cream);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.reveal-victim.is-real .reveal-victim-name { color: var(--true-green); }
+.reveal-victim-tag {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(0.85rem, 1cqw, 1.05rem);
+  color: var(--true-green);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  padding: 2px 10px;
+  border: 1px solid rgba(var(--tg-glow),0.55);
+  border-radius: 999px;
+}
+
+/* No-victim treatment for an unfooled bluff. Single restrained line —
+   no tile, no piece, just a beat of silence. */
+.reveal-no-victims {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.1rem, 1.4cqw, 1.5rem);
+  color: var(--cream-dim);
+  letter-spacing: 0.02em;
+}
+
+/* ─── Reveal build-up phase ───
+   Brief anticipation screen (heartbeat underneath) shown before each
+   reveal card actually flips in. The first card and the real (last) card
+   get longer build-ups for drama. */
+.tv-reveal-build {
+  width: 100%; max-width: 900px;
+  min-height: 180px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px;
+  padding: 24px 32px;
+  border: 1px solid rgba(215, 192, 149, 0.22);
+  background: rgba(var(--panel), 0.55);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius);
+  animation: tv-build-in 0.25s ease;
+}
+.tv-reveal-build.is-real {
+  border-color: rgba(var(--tg-glow), 0.75);
+  /* Near-solid dark backing so the question reads cleanly over the busy board;
+     just a faint green tint plus the green border/glow keep the charging mood. */
+  background: linear-gradient(135deg, rgba(var(--tg-glow), 0.16), rgba(var(--panel-deepest), 0.95));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* Two animations: the shared 0.25s entrance, then a 3s "charge" that
+     intensifies the green aura while a giant spread shadow tunnels the
+     board into darkness around it — tension builds with the heartbeat
+     and peaks the instant the card flips. Timed to the 3000ms buildMs. */
+  animation: tv-build-in 0.25s ease, tv-real-charge 3s cubic-bezier(0.5, 0, 0.85, 0.3) forwards;
+}
+.tv-reveal-build-label {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.2cqw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+  animation: tv-build-label-pulse 1.4s ease-in-out infinite;
+}
+.tv-reveal-build.is-real .tv-reveal-build-label {
+  /* Bright, high-contrast pale-green text on the dark box — readable over the
+     board. The green identity comes from a strong green glow + the box's aura,
+     not from tinting the letters themselves (that was the low-contrast sheen). */
+  color: #eafff2;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: #eafff2;
+  text-shadow: 0 0 22px rgba(var(--tg-glow), 0.7), 0 2px 14px rgba(0, 0, 0, 0.9);
+  filter: none;
+  animation: tv-build-label-pulse 1.4s ease-in-out infinite;
+}
+.tv-reveal-build-dots {
+  display: flex; gap: 14px;
+}
+.tv-reveal-build-dots span {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: rgba(215, 192, 149, 0.85);
+  box-shadow: 0 0 10px rgba(215, 192, 149, 0.45);
+  animation: tv-build-dot 1s ease-in-out infinite;
+}
+.tv-reveal-build-dots span:nth-child(2) { animation-delay: 0.18s; }
+.tv-reveal-build-dots span:nth-child(3) { animation-delay: 0.36s; }
+.tv-reveal-build.is-real .tv-reveal-build-dots span {
+  background: var(--true-green);
+  box-shadow: 0 0 16px rgba(var(--tg-glow), 0.85);
+  /* Quicker bounce so the rhythm feels like an accelerating countdown. */
+  animation-name: tv-build-dot-real;
+  animation-duration: 0.5s;
+}
+@keyframes tv-build-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes tv-build-label-pulse {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 1; }
+}
+@keyframes tv-build-dot {
+  0%, 100% { transform: translateY(0)   scale(1);   opacity: 0.55; }
+  50%      { transform: translateY(-6px) scale(1.15); opacity: 1;    }
+}
+/* Real-definition build: dots punch harder and faster than bluff dots. */
+@keyframes tv-build-dot-real {
+  0%, 100% { transform: translateY(0)    scale(1);    opacity: 0.5; }
+  50%      { transform: translateY(-11px) scale(1.35); opacity: 1;  }
+}
+/* Real-definition build label — a bright highlight sweeps across the text
+   on a loop (gradient clipped to the glyphs). No opacity throb, no scale,
+   no letter-spacing jitter; just a clean "charging" shimmer. */
+@keyframes tv-real-label-sheen {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+/* After the charge flips to the answer, this full-screen layer HOLDS the board
+   at the charge's peak darkness so the answer is read on a dark screen, then
+   fades back to normal brightness slowly. Sits over the board but under the
+   answer card (which is given z-index:1 in the reveal), so the answer stays
+   bright while everything behind it stays dark and then lifts. */
+.tv-reveal-dim-clear {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(6, 3, 18, 0.66); /* matches the charge's end darkness */
+  pointer-events: none;
+  animation: tv-reveal-dim-clear 3s ease-out forwards;
+}
+@keyframes tv-reveal-dim-clear {
+  0%   { opacity: 1; }   /* full dark — seamless handoff from the charge */
+  38%  { opacity: 1; }   /* hold dark while the answer is read */
+  100% { opacity: 0; }   /* fade back to normal brightness, slowly */
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-reveal-dim-clear { animation: none; opacity: 0; }
+}
+
+/* The 3s charge: green aura swells while a viewport-sized spread shadow
+   tunnels the board into darkness around the panel, peaking at 88% with a
+   micro-settle so the held frame before the flip looks "loaded", not frozen.
+   No transform — the panel must not grow/shrink, only the light intensifies. */
+@keyframes tv-real-charge {
+  0% {
+    border-color: rgba(var(--tg-glow), 0.45);
+    box-shadow: 0 0 24px rgba(var(--tg-glow), 0.16),
+                0 0 0 0 rgba(var(--tg-glow), 0.04),
+                0 0 0 100vmax rgba(6, 3, 18, 0);
+  }
+  55% {
+    box-shadow: 0 0 64px rgba(var(--tg-glow), 0.40),
+                0 0 0 10px rgba(var(--tg-glow), 0.10),
+                0 0 0 100vmax rgba(6, 3, 18, 0.5);
+  }
+  88% {
+    border-color: rgba(var(--tg-glow), 0.95);
+    box-shadow: 0 0 110px rgba(var(--tg-glow), 0.62),
+                0 0 0 16px rgba(var(--tg-glow), 0.18),
+                0 0 0 100vmax rgba(6, 3, 18, 0.74);
+  }
+  100% {
+    border-color: rgba(var(--tg-glow), 0.7);
+    box-shadow: 0 0 78px rgba(var(--tg-glow), 0.48),
+                0 0 0 11px rgba(var(--tg-glow), 0.12),
+                0 0 0 100vmax rgba(6, 3, 18, 0.66);
+  }
+}
+
+/* Bluff cards keep the punchy scale-and-settle so each "lands". The real
+   definition does NOT grow/shrink — it simply fades in (its resting green
+   glow comes from the static .tv-reveal-entry.is-real rule). */
+.tv-reveal-pop      { animation: tv-reveal-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.tv-reveal-pop-real { animation: tv-reveal-pop-real 0.6s ease-out; }
+@keyframes tv-reveal-pop {
+  0%   { opacity: 0; transform: translateY(14px) scale(0.94); }
+  60%  { opacity: 1; transform: translateY(-2px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+@keyframes tv-reveal-pop-real {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* The real-definition reveal is now a plain fade-in (see tv-reveal-pop-real
+   above) — no shockwave halo and no screen flash, so nothing grows, shrinks,
+   or pops. The card's resting green glow comes from .tv-reveal-entry.is-real. */
+
+/* ─── Leaderboard ─── */
+.tv-leaderboard {
+  width: 100%;
+  /* No hard cap — defer to the parent .tv-stage width (1500px standard, or
+     90vw under .tv-stage--wide for the round scoreboard). */
+  max-width: 100%;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 12px;
+}
+.tv-leaderboard .row {
+  display: flex; align-items: center; gap: 18px;
+  padding: 14px 22px;
+  background: rgba(var(--panel), 0.68);
+  border: 1px solid rgba(215, 192, 149, 0.20);
+  border-radius: var(--radius);
+  backdrop-filter: blur(4px);
+}
+.tv-leaderboard .row .rank {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.6rem, 2cqw, 2.2rem); color: var(--gold-soft); width: 36px;
+  text-align: center;
+}
+.tv-leaderboard .row .emoji { font-size: 2rem; flex-shrink: 0; }
+.tv-leaderboard .row .name {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.5rem, 2cqw, 2rem);
+  color: var(--cream);
+  flex: 1; text-align: left;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tv-leaderboard .row .delta {
+  font-family: var(--display); color: var(--gold-soft); margin-right: 10px;
+  font-size: clamp(1.2rem, 1.6cqw, 1.6rem);
+  font-weight: 600;
+}
+.tv-leaderboard .row .total {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.9rem, 2.6cqw, 2.8rem);
+  color: var(--cream); min-width: 56px; text-align: right;
+}
+
+/* "Most Liked" award — a compact card under the winner hero: the top-liked
+   player plus a small per-player like breakdown. Parallel to the real score. */
+.tv-most-liked {
+  width: 100%; max-width: 760px;
+  background: rgba(var(--panel), 0.68);
+  border: 1px solid rgba(198, 128, 214, 0.35);
+  border-radius: var(--radius);
+  padding: 16px 26px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  backdrop-filter: blur(4px);
+}
+.tv-most-liked-head {
+  font-family: var(--display); font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: clamp(1rem, 1.3cqw, 1.25rem); color: #e6a8ff;
+}
+.tv-most-liked-winner { display: flex; align-items: center; gap: 16px; }
+.tv-most-liked-name {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.5rem, 2.3cqw, 2.3rem); color: var(--cream);
+}
+.tv-most-liked-count {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.5rem, 2.3cqw, 2.3rem); color: #ff5a7a;
+}
+.tv-most-liked-list {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px;
+  opacity: 0.85;
+}
+.tv-most-liked-row {
+  display: flex; align-items: baseline; gap: 8px;
+  font-family: var(--display); font-size: clamp(0.95rem, 1.3cqw, 1.2rem);
+}
+.tv-most-liked-row .name { color: var(--cream); }
+.tv-most-liked-row .count { color: #ff8098; font-weight: 700; }
+
+/* ─── Series Scorecard ─── */
+/* One row per player, one column per game. Replaces the old two-table
+   layout (series wins + last-game scores) with a single clear breakdown. */
+.tv-scorecard {
+  width: 100%; max-width: 1100px;
+  margin: 8px 0 4px;
+}
+.tv-scorecard-grid {
+  display: grid;
+  gap: 6px 8px;
+  align-items: stretch;
+}
+.tv-scorecard .hdr-cell {
+  font-family: var(--display);
+  font-size: clamp(0.78rem, 1cqw, 1rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  padding: 8px 4px 4px;
+  text-align: center;
+}
+.tv-scorecard .hdr-blank { background: transparent; }
+.tv-scorecard .cell {
+  padding: 10px 14px;
+  background: rgba(var(--panel), 0.68);
+  border: 1px solid rgba(215, 192, 149, 0.20);
+  border-radius: var(--radius);
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.4cqw, 1.4rem);
+  color: var(--cream);
+  text-align: center;
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+}
+.tv-scorecard .piece-cell { padding: 6px; }
+.tv-scorecard .name-cell {
+  justify-content: flex-start;
+  text-align: left;
+  gap: 10px;
+}
+.tv-scorecard .name-cell .name-text {
+  font-size: clamp(1rem, 1.3cqw, 1.3rem);
+}
+.tv-scorecard .game-cell.is-winner {
+  border-color: rgba(140, 230, 180, 0.65);
+  background: rgba(40, 90, 70, 0.55);
+  color: #D8FFE6;
+}
+.tv-scorecard .game-cell .trophy {
+  color: #B8FFCB;
+  font-size: 0.85em;
+  margin-left: 2px;
+}
+.tv-scorecard .cell.is-champ {
+  border-color: rgba(255, 220, 130, 0.55);
+  background: rgba(80, 60, 20, 0.55);
+}
+.tv-scorecard .wins-cell {
+  font-weight: 700;
+}
+.tv-scorecard .wins-cell .wins-clinch {
+  font-size: 0.7em;
+  color: var(--gold-soft);
+  font-weight: 400;
+  margin-left: 1px;
+}
+.tv-scorecard .cell.empty {
+  color: rgba(255, 245, 225, 0.32);
+  background: rgba(var(--panel), 0.30);
+  border-style: dashed;
+  font-size: 1.1em;
+}
+.tv-scorecard .champ-badge {
+  font-family: var(--display);
+  font-size: 0.65em;
+  color: var(--gold-soft);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(255, 220, 130, 0.15);
+  border: 1px solid rgba(255, 220, 130, 0.4);
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ─── Winner celebration ──────────────────────────────────────────────────
+   Fireworks + confetti layer (decorative) plus the grand winner hero. The
+   layer fills the board frame and sits above the centered game-over card;
+   pointer-events:none keeps the Play Again / Return buttons clickable. */
+.tv-celebration {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* A firework burst: a zero-size anchor whose ::before is the white flash and
+   whose child .cel-spark dots shoot outward. Repeats on a stagger so the sky
+   never goes quiet and never visibly syncs. */
+.cel-burst {
+  position: absolute;
+  width: 0; height: 0;
+  animation-name: cel-flash;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+.cel-burst::before {
+  content: '';
+  position: absolute;
+  left: -28px; top: -28px;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0) 68%);
+  animation: inherit;
+}
+.cel-spark {
+  position: absolute;
+  left: -3.5px; top: -3.5px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+  animation-name: cel-spark;
+  animation-timing-function: cubic-bezier(0.15, 0.6, 0.3, 1);
+  animation-iteration-count: infinite;
+}
+@keyframes cel-flash {
+  0%   { opacity: 0; transform: scale(0.2); }
+  5%   { opacity: 0.95; transform: scale(1); }
+  18%  { opacity: 0; transform: scale(1.35); }
+  100% { opacity: 0; }
+}
+@keyframes cel-spark {
+  0%   { transform: translate(0, 0) scale(1.1); opacity: 0; }
+  6%   { opacity: 1; }
+  45%  { transform: translate(var(--tx), var(--ty)) scale(0.45); opacity: 0.9; }
+  60%  { transform: translate(calc(var(--tx) * 1.08), calc(var(--ty) * 1.08 + 16px)) scale(0.2); opacity: 0; }
+  100% { transform: translate(calc(var(--tx) * 1.08), calc(var(--ty) * 1.08 + 16px)) scale(0.2); opacity: 0; }
+}
+
+/* Confetti — thin rectangles (and a few dots) raining down with a sway and
+   tumble. Drifts past the bottom of the frame, then loops. */
+.cel-confetti {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+  opacity: 0.9;
+  animation-name: cel-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.cel-confetti.is-round { border-radius: 50%; }
+@keyframes cel-fall {
+  0%   { transform: translate(0, -12vh) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.95; }
+  50%  { transform: translate(var(--sway), 50vh) rotate(360deg); }
+  100% { transform: translate(calc(var(--sway) * -1), 114vh) rotate(760deg); opacity: 0.9; }
+}
+
+/* The hero: crown, big glowing piece, shimmering title, name. */
+.tv-winner-hero {
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.tv-winner-crown {
+  font-size: clamp(2.4rem, 4cqw, 4rem);
+  line-height: 1;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  animation: tv-crown-bob 2.4s ease-in-out infinite;
+}
+.tv-winner-piece {
+  filter: drop-shadow(0 0 32px rgba(255, 213, 107, 0.55));
+  animation: tv-winner-pop 0.6s cubic-bezier(0.22, 1.4, 0.5, 1) backwards;
+}
+.tv-winner-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6cqw, 6rem);
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin-top: 6px;
+  background: linear-gradient(110deg, var(--gold) 30%, #fff6df 50%, var(--gold) 70%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 16px rgba(255, 200, 80, 0.4));
+  animation: tv-title-sheen 3s linear infinite;
+}
+.tv-winner-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3cqw, 3rem);
+  color: var(--cream);
+  letter-spacing: 0.03em;
+}
+.tv-winner-sub {
+  font-family: var(--sans);
+  font-style: italic;
+  font-size: clamp(1rem, 1.4cqw, 1.5rem);
+  color: var(--cream-dim);
+}
+@keyframes tv-crown-bob {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%      { transform: translateY(-9px) rotate(5deg); }
+}
+@keyframes tv-winner-pop {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+@keyframes tv-title-sheen {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cel-burst, .cel-spark, .cel-confetti,
+  .tv-winner-crown, .tv-winner-piece, .tv-winner-title { animation: none; }
+}
+
+/* ============================================================
+   CENTRAL PERK'D — trivia phases
+   Everything below is new for this game (the classes above are
+   inherited board/lobby/scoreboard chrome). Keeps the same tokens
+   so the trivia screens sit in the existing look.
+   ============================================================ */
+
+/* The question itself — the single most important line on the TV. */
+.tv-question {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 2.1cqw, 2.1rem);
+  line-height: 1.2;
+  color: var(--cream);
+  text-align: center;
+  max-width: 1200px;
+  margin: 2px auto 4px;
+  text-wrap: balance;
+}
+
+/* A/B/C/D choices reuse .tv-ballot's grid; force two columns so the four
+   options always read as a 2x2 block rather than reflowing to 1 or 3. */
+.tv-choices {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1200px;
+}
+.tv-choice { transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease; }
+.tv-choice.is-correct {
+  background: rgba(46, 122, 74, 0.34);
+  border-color: rgba(126, 224, 160, 0.75);
+  transform: scale(1.02);
+}
+.tv-choice.is-correct .letter { background: linear-gradient(180deg, #9defb9, #4fbd7d); }
+.tv-choice.is-wrong {
+  background: rgba(122, 38, 46, 0.26);
+  border-color: rgba(232, 132, 132, 0.45);
+}
+/* Pieces of the players who picked this choice, tucked on the right. */
+.tv-choice-pickers { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+
+/* Per-player outcome strip under the reveal. */
+.tv-result-list {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 6px 10px; width: 100%; max-width: 1300px;
+}
+.tv-result {
+  display: flex; align-items: center; gap: 8px;
+  padding: 3px 12px 3px 6px;
+  border-radius: var(--radius);
+  background: rgba(var(--panel), 0.7);
+  border: 1px solid rgba(215, 192, 149, 0.16);
+  font-family: var(--sans);
+  font-size: clamp(0.72rem, 0.95cqw, 0.95rem);
+}
+.tv-result.is-correct { border-color: rgba(126, 224, 160, 0.5); }
+.tv-result.is-wrong { opacity: 0.62; }
+.tv-result .who { color: var(--cream); font-weight: 600; }
+.tv-result .mark { font-weight: 700; }
+.tv-result.is-correct .mark { color: #7ee0a0; }
+.tv-result.is-wrong .mark { color: #e88484; }
+.tv-result .ms { color: var(--cream-fade); font-variant-numeric: tabular-nums; }
+.tv-result .spaces {
+  font-family: var(--display); font-weight: 700;
+  color: var(--gold-soft); font-variant-numeric: tabular-nums;
+}
+.tv-result .flair {
+  text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 0.62em; font-weight: 700;
+  color: var(--twilight-deep); background: var(--gold-soft);
+  padding: 1px 6px; border-radius: 999px;
+}
+
+/* Round-intro callouts for the two special-space mechanics. */
+.tv-duel-line, .tv-clinch-line { color: var(--gold-soft); font-weight: 600; }
+
+.tv-gameover-actions {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+/* ─── Answer-first bluff phases ─── */
+
+/* Reveal cards: the truth lands green, lies land plum. */
+.tv-reveal-card {
+  width: 100%; max-width: 1100px;
+  padding: 18px 26px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(215, 192, 149, 0.28);
+  background: rgba(var(--panel), 0.82);
+  text-align: center;
+  animation: tv-build-in 0.42s ease both;
+}
+.tv-reveal-card.is-truth {
+  border-color: rgba(126, 224, 160, 0.75);
+  background: rgba(46, 122, 74, 0.30);
+  box-shadow: 0 0 60px rgba(126, 224, 160, 0.18);
+}
+.tv-reveal-tag {
+  font-family: var(--sans); font-weight: 700;
+  font-size: clamp(0.62rem, 0.9cqw, 0.8rem);
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold-soft); margin-bottom: 6px;
+}
+.tv-reveal-card.is-truth .tv-reveal-tag { color: #9defb9; }
+.tv-reveal-text {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 2.2cqw, 2.2rem);
+  line-height: 1.18; color: var(--cream); text-wrap: balance;
+}
+.tv-reveal-authors {
+  margin-top: 8px; color: var(--cream-fade);
+  font-size: clamp(0.7rem, 1cqw, 0.95rem); font-style: italic;
+}
+.tv-reveal-voters {
+  margin-top: 10px; display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center; gap: 4px 12px;
+  color: var(--cream-fade); font-size: clamp(0.68rem, 0.95cqw, 0.9rem);
+}
+.tv-reveal-voters-label { letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+.tv-reveal-voter { display: inline-flex; align-items: center; gap: 5px; color: var(--cream); }
+
+/* "Who fooled who" summary — every bluff on ONE page. A responsive grid so 1–5
+   bluff cards lay out evenly; AutoFit scales the whole thing to the TV. */
+.tv-bluffs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 4px auto 0;
+}
+/* One card per bluff, so it reads as a self-contained "this lie fooled these
+   people" unit. Green-tinted to echo the lie cards in the stepped reveal. */
+.tv-bluff-card {
+  background: rgba(var(--panel-lift), 0.66);
+  border: 1px solid rgba(104, 197, 140, 0.32);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  text-align: left;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.tv-bluff-lie {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.25rem, 2cqw, 1.9rem);
+  color: var(--cream); line-height: 1.22;
+}
+.tv-bluff-by {
+  color: var(--cream-dim); font-style: italic;
+  font-size: clamp(0.95rem, 1.35cqw, 1.25rem);
+}
+.tv-bluff-fooled {
+  margin-top: 3px; display: flex; flex-wrap: wrap;
+  align-items: center; gap: 6px 12px;
+  font-size: clamp(0.95rem, 1.35cqw, 1.25rem); color: var(--cream-dim);
+}
+.tv-bluff-fooled-label {
+  letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;
+  color: var(--gold-soft);
+}
+.tv-bluff-voter { display: inline-flex; align-items: center; gap: 6px; color: var(--cream); font-weight: 600; }
+.tv-bluff-nofool { font-style: italic; opacity: 0.7; }
+
+/* ─── Answer review (dispute) ─── */
+.tv-review-head {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  margin: 4px 0 10px;
+}
+.tv-review-claim { font-size: clamp(1.1rem, 1.6cqw, 1.6rem); color: var(--cream-dim); }
+.tv-review-claim .who { color: var(--cream); font-weight: 800; }
+.tv-review-answers {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  width: 100%; max-width: 1000px; margin: 0 auto;
+}
+.tv-review-answer {
+  padding: 14px 18px; border-radius: var(--radius-lg); text-align: left;
+  background: rgba(var(--panel-deep), 0.6);
+  border: 1px solid rgba(255, 245, 225, 0.14);
+}
+.tv-review-answer.is-truth { border-color: rgba(104, 197, 140, 0.55); }
+.tv-review-tag {
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 700; color: var(--gold-soft); margin-bottom: 6px;
+}
+.tv-review-answer.is-truth .tv-review-tag { color: var(--mint); }
+.tv-review-text {
+  font-family: var(--display); font-weight: 800; color: var(--cream);
+  font-size: clamp(1.15rem, 1.8cqw, 1.7rem); line-height: 1.22;
+}
+
+.tv-review-tally {
+  display: flex; align-items: stretch; justify-content: center; gap: 18px;
+  margin: 16px 0 6px;
+}
+.tv-review-tally-side {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 120px; padding: 10px 20px; border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 245, 225, 0.14);
+}
+.tv-review-tally-side .n {
+  font-family: var(--display); font-weight: 800; line-height: 1;
+  font-size: clamp(2rem, 4cqw, 3.4rem); font-variant-numeric: tabular-nums;
+}
+.tv-review-tally-side .l {
+  font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+}
+.tv-review-tally-side.is-yes { background: rgba(var(--tg-glow), 0.14); border-color: rgba(var(--tg-glow), 0.5); color: var(--true-green); }
+.tv-review-tally-side.is-no { background: rgba(197, 109, 82, 0.14); border-color: rgba(197, 109, 82, 0.5); color: var(--coral-soft); }
+
+.tv-review-verdict {
+  margin: 16px auto 0; padding: 14px 26px; border-radius: var(--radius-lg);
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.3rem, 2.2cqw, 2.1rem);
+  display: inline-flex; align-items: center; gap: 16px;
+}
+.tv-review-verdict.is-pass { background: rgba(var(--tg-glow), 0.18); border: 1px solid rgba(var(--tg-glow), 0.6); color: var(--true-green); }
+.tv-review-verdict.is-deny { background: rgba(197, 109, 82, 0.16); border: 1px solid rgba(197, 109, 82, 0.55); color: var(--coral-soft); }
+.tv-review-verdict-tally { font-size: 0.6em; font-weight: 700; color: var(--cream-dim); }
+.tv-review-more { margin-top: 12px; font-size: 0.9rem; color: var(--cream-fade); }
+
+/* Small inline badges on the scoring rows ("knew it", "fooled 2"). */
+.tv-row-flair {
+  margin-left: 8px; padding: 2px 8px; border-radius: 999px;
+  font-size: 0.6em; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--twilight-deep); background: var(--gold-soft);
+  vertical-align: middle;
+}
+
+/* Lobby steppers for the tunable movement values. */
+.tv-stepper { display: inline-flex; align-items: center; gap: 6px; }
+.tv-stepper-value {
+  font-family: var(--display); font-weight: 700; min-width: 1.4em;
+  text-align: center; color: var(--gold-soft);
+}
+.tv-stepper-label {
+  color: var(--cream-fade); font-size: 0.8em; margin-right: 10px;
+}
+
+/* Explains a skipped BLUFFING/VOTING phase so it never reads as a lost turn. */
+.tv-skip-note {
+  margin-top: 10px;
+  color: var(--gold-soft);
+  font-size: clamp(0.72rem, 1cqw, 0.95rem);
+  font-style: italic;
+  text-align: center;
+}
+
+/* A setback badge reads red rather than gold — it isn't an achievement. */
+.tv-row-flair.is-bad {
+  color: #2a0f14;
+  background: linear-gradient(180deg, #f0a6a6, #d97070);
+}

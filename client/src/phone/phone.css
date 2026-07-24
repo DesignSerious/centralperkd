@@ -1,0 +1,1296 @@
+/* Phone-specific layout. Mobile-first, designed for 390px width and up. */
+
+.phone-shell {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  padding: 60px 16px 24px;  /* 60px = 44 badge + 16 original gap */
+  max-width: 520px; margin: 0 auto;
+  position: relative;
+}
+
+/* Always-visible identity bar: piece + name + score, pinned at viewport top. */
+.player-badge {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 520px;
+  height: 44px;
+  z-index: 30;
+  background: rgba(var(--panel), 0.92);
+  border-bottom: 1px solid rgba(255, 245, 225, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.player-badge-inner {
+  height: 100%;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 16px;
+}
+.player-badge .piece-img {
+  width: 28px; height: 28px; object-fit: contain;
+  display: block;
+}
+.player-badge .piece-img--photo {
+  object-fit: cover;
+  border-radius: 50%;
+}
+.player-badge .piece-emoji { font-size: 1.4rem; line-height: 1; }
+.player-badge .badge-name {
+  font-family: var(--serif); font-size: 0.95rem;
+  color: var(--cream); flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.player-badge .badge-score {
+  font-family: var(--display); font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gold-soft); letter-spacing: 0.04em;
+}
+.player-badge .badge-leave,
+.player-badge .badge-pause {
+  margin-left: 4px;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(255, 245, 225, 0.20);
+  color: rgba(255, 245, 225, 0.72);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.player-badge .badge-leave svg,
+.player-badge .badge-pause svg { width: 18px; height: 18px; display: block; }
+.player-badge .badge-leave:hover {
+  background: rgba(197, 109, 82, 0.18);
+  border-color: var(--coral);
+  color: var(--coral);
+}
+.player-badge .badge-pause:hover {
+  background: rgba(255, 184, 69, 0.16);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Inline volume slider in the badge. Speaker icon + slim track + thumb.
+   Sized to fit alongside the pause + leave buttons on narrow phones; the
+   slider compresses gracefully when the layout runs out of room. */
+.player-badge .badge-volume {
+  display: flex; align-items: center; gap: 6px;
+  margin-left: 4px;
+  color: rgba(255, 245, 225, 0.72);
+}
+.player-badge .badge-volume-icon {
+  display: flex; align-items: center;
+  background: none; border: 0; padding: 0; margin: 0;
+  color: inherit; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.player-badge .badge-volume-icon:hover,
+.player-badge .badge-volume-icon:focus-visible { color: var(--gold, #ffb845); outline: none; }
+.player-badge .badge-volume-icon svg { width: 16px; height: 16px; display: block; }
+.player-badge .badge-volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 70px;
+  /* keep the input tall enough to contain the thumb */
+  height: 18px;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+.player-badge .badge-volume-slider::-webkit-slider-runnable-track {
+  height: 3px;
+  background: rgba(255, 245, 225, 0.20);
+  border-radius: 999px;
+  margin-top: 7.5px; /* center 3px track in 18px input */
+}
+.player-badge .badge-volume-slider::-moz-range-track {
+  height: 3px;
+  background: rgba(255, 245, 225, 0.20);
+  border-radius: 999px;
+}
+.player-badge .badge-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--cream, #fff5e1);
+  border: 0;
+  /* Center the 12px thumb on the 3px runnable track: (3 - 12) / 2. WebKit
+     does not auto-center an appearance:none thumb, so without this it sits
+     ~4.5px low instead of on the line. */
+  margin-top: -4.5px;
+}
+.player-badge .badge-volume-slider::-moz-range-thumb {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--cream, #fff5e1);
+  border: 0;
+}
+/* On very narrow phones, hide the slider track but keep the icon. Users
+   can still tap-and-drag because the input is still 70px wide, just visually
+   collapsed. */
+@media (max-width: 380px) {
+  .player-badge .badge-volume-slider { width: 50px; }
+}
+
+/* Atmospheric centerpiece for the four "Wait" cut-scenes (picker-picking,
+   picker-announcing, picker-reading, voting-picker). A scrying crystal
+   ball on a wooden stand, glowing warm with a smoky purple interior, sits
+   centered with ambient gold sparkles drifting around it. Reads as "a
+   held moment of magic" — fitting for a bluffing party game. */
+.phone-cutscene-scene {
+  position: relative;
+  width: 260px; height: 260px;
+  margin: 0 auto 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.phone-cutscene-orb-svg {
+  width: 240px;
+  height: auto;
+  filter: drop-shadow(0 10px 24px rgba(255, 184, 69, 0.40))
+          drop-shadow(0 0 22px rgba(168, 123, 221, 0.35));
+  animation: phone-cutscene-orb-pulse 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+.phone-cutscene-star {
+  position: absolute;
+  left: var(--sx, 50%);
+  top: var(--sy, 50%);
+  width: var(--sz, 8px);
+  height: var(--sz, 8px);
+  background: radial-gradient(circle,
+    rgba(255, 235, 165, 0.95) 0%,
+    rgba(255, 184, 69, 0.55) 35%,
+    rgba(255, 184, 69, 0.0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: phone-cutscene-star-twinkle 3.5s ease-in-out infinite;
+  animation-delay: var(--sd, 0s);
+}
+@keyframes phone-cutscene-orb-pulse {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.035); }
+}
+@keyframes phone-cutscene-star-twinkle {
+  0%, 100% { opacity: 0.18; transform: translate(-50%, -50%) scale(0.6); }
+  50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Big dramatic headline for the cutscene status text — gold display font
+   with a warm glow that complements the orb's halo. Used by voting-picker
+   right now; available for any of the other cutscene modes that want it. */
+.phone-cutscene-headline {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  margin: 6px 0 12px;
+  text-shadow: 0 0 18px rgba(255, 184, 69, 0.55),
+               0 2px 10px rgba(0, 0, 0, 0.7);
+}
+.phone-cutscene-sub {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Image-led cutscene pages (voting-picker uses /scrying-orb.jpg,
+   picker-picking uses /word-picker-scene.jpg). A tall painted illustration
+   is the centerpiece, with a gold serif headline framed by diamond
+   sparkle ornaments above a softer subtitle and a decorative gold rule.
+   If the image file is missing the layout still works — the typography
+   alone reads against the dark background. Same class set for both pages
+   since the visual treatment is identical. */
+.cutscene-page-shell { padding-bottom: 40px; }
+.cutscene-page-stage {
+  text-align: center;
+  padding: 0 0 12px;
+}
+.cutscene-page-img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: 42vh;
+  max-height: 360px;
+  min-height: 200px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 auto 20px;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55),
+              0 0 24px rgba(168, 123, 221, 0.18),
+              inset 0 0 0 1px rgba(255, 220, 140, 0.12);
+  user-select: none;
+  pointer-events: none;
+}
+/* Cutscene figurine wrapper: hosts a PieceVisual (any piece type — AI
+   figurine, photo, or stock figurine PNG). Borderless, transparent
+   background, tight margins so the figurine doesn't drift far from the
+   element above it. */
+.cutscene-page-figurine-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 12px auto 16px;
+}
+
+.cutscene-page-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 6.5vw, 2.4rem);
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 4px auto 10px;
+  text-shadow: 0 0 18px rgba(255, 184, 69, 0.45),
+               0 2px 10px rgba(0, 0, 0, 0.7);
+}
+.cutscene-page-ornament {
+  font-size: 0.55em;
+  color: var(--gold-soft);
+  opacity: 0.85;
+  text-shadow: 0 0 8px rgba(255, 184, 69, 0.35);
+}
+.cutscene-page-sub {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  max-width: 360px;
+  margin: 0 auto;
+}
+.cutscene-page-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 26px auto 0;
+  color: var(--gold-soft);
+  opacity: 0.55;
+  font-size: 0.9rem;
+}
+.cutscene-page-divider::before,
+.cutscene-page-divider::after {
+  content: '';
+  flex: 1;
+  max-width: 110px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 184, 69, 0.45), transparent);
+}
+
+/* Bridge-bonus callout on the phone scoring screen. Mirrors the TV's
+   floating gold pop so players know why a piece just leapt forward. */
+.bridge-callout {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  background: rgba(255, 184, 69, 0.10);
+  border: 1px solid rgba(255, 184, 69, 0.45);
+  border-radius: var(--radius);
+  font-family: var(--serif);
+  font-size: 0.98rem; line-height: 1.45;
+  color: var(--cream);
+  box-shadow: 0 0 24px rgba(255, 184, 69, 0.18);
+}
+.bridge-callout strong { color: var(--gold); font-weight: 700; }
+.bridge-callout-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+
+/* Styled confirmation modal styles live in theme.css now so the TV view
+   can share them. */
+
+/* Pinned header — the word is ALWAYS visible at the top during a round. */
+.phone-header {
+  position: sticky; top: 44px; z-index: 10;
+  margin: -16px -16px 18px;
+  padding: 16px 18px 16px;
+  background: linear-gradient(180deg, var(--twilight-soft) 0%, var(--twilight) 70%, rgba(24,16,51,0.92) 100%);
+  border-bottom: 1px solid rgba(255,245,225,0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.phone-header .eyebrow {
+  font-family: var(--serif); font-size: 0.7rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold-soft); font-weight: 500;
+  margin-bottom: 4px;
+}
+.phone-header .word {
+  font-family: var(--serif); font-size: 1.8rem; font-weight: 600;
+  color: var(--cream); line-height: 1.1;
+}
+.phone-header .word-help {
+  font-size: 0.85rem; color: var(--cream-dim); margin-top: 4px;
+  /* The timer is absolutely positioned in the top-right of this header, so
+     the help copy has to keep clear of it or the two overlap on a phone. */
+  padding-right: 72px;
+}
+.phone-header .timer {
+  position: absolute; top: 12px; right: 14px;
+  padding: 6px 12px;
+  background: rgba(var(--panel), 0.55);
+  border: 1px solid rgba(215, 192, 149, 0.35);
+  font-family: var(--display); font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  min-width: 56px; text-align: center;
+}
+.phone-header .timer.urgent {
+  color: var(--coral);
+  border-color: rgba(197, 109, 82, 0.65);
+  background: rgba(197, 109, 82, 0.18);
+}
+.phone-header .timer .timer-suffix {
+  font-family: var(--serif); font-weight: 500;
+  font-size: 0.8rem; opacity: 0.7; margin-left: 2px;
+}
+
+.phone-logo { display: block; margin: 8px auto 24px; max-width: 370px; width: 92%; }
+
+/* Entrance + lobby splash: the NYC-window artwork sits behind the join/lobby
+   column. A FIXED layer so it fills the whole viewport rather than just the
+   centered 520px column, with a dark wash on top so the logo, code field and
+   player list stay legible over the photo. z-index:-1 keeps it behind the
+   shell's content but above the body gradient. */
+.phone-shell--splash::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(var(--panel-deepest), 0.74) 0%, rgba(var(--panel-deepest), 0.55) 42%, rgba(var(--panel-deepest), 0.86) 100%),
+    url('/central-perkd-splash-bg.jpg') center / cover no-repeat;
+}
+
+.phone-h1 {
+  font-family: var(--serif); font-size: 2rem; font-weight: 600;
+  color: var(--cream); text-align: center; margin-bottom: 8px;
+}
+.phone-sub {
+  text-align: center; color: var(--cream-dim);
+  margin-bottom: 24px; font-size: 1rem; line-height: 1.5;
+}
+
+.phone-stack > * + * { margin-top: 14px; }
+.phone-stack-lg > * + * { margin-top: 24px; }
+
+.phone-status {
+  text-align: center; padding: 40px 12px;
+  color: var(--cream-dim); font-size: 1.05rem; line-height: 1.55;
+}
+.phone-status .spinner { margin: 0 auto 16px; }
+.phone-status strong { color: var(--gold); font-size: inherit; font-weight: 700; }
+
+/* First-round "Get ready!" intro overlay. Replaces the screen body for 3
+   seconds when the game first kicks off so the player isn't startled by
+   the picker/wait screen popping in mid-glance. */
+.get-ready-intro {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.get-ready-text {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 2.4rem; color: var(--gold);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(255,184,69,0.45), 0 2px 8px rgba(0,0,0,0.6);
+  animation: get-ready-in 0.5s ease-out, lp-pulse 1.8s ease-in-out 0.5s infinite;
+}
+@keyframes get-ready-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Reveal build-up screen on the phone. Mirrors the TV's anticipation panel
+   so both screens flip in unison — "The results are in…" → first card,
+   "Next up…" → bluffs, "And the real definition is…" → final card. */
+.phone-reveal-build {
+  margin-top: 18px;
+  padding: 36px 20px;
+  border: 1px solid rgba(215, 192, 149, 0.22);
+  background: rgba(var(--panel-lift), 0.55);
+  border-radius: 8px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  animation: lp-fade-in 0.25s ease;
+}
+.phone-reveal-build.is-real {
+  border-color: rgba(var(--tg-glow), 0.55);
+  background: linear-gradient(135deg, rgba(var(--tg-glow), 0.18), rgba(var(--panel), 0.65));
+  box-shadow: 0 0 24px rgba(var(--tg-glow), 0.20);
+}
+.phone-reveal-build-label {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+  animation: lp-pulse 1.4s ease-in-out infinite;
+}
+.phone-reveal-build.is-real .phone-reveal-build-label {
+  color: var(--true-green);
+}
+.phone-reveal-build-dots {
+  display: flex; gap: 10px;
+}
+.phone-reveal-build-dots span {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(215, 192, 149, 0.85);
+  animation: phone-reveal-build-dot 1s ease-in-out infinite;
+}
+.phone-reveal-build-dots span:nth-child(2) { animation-delay: 0.18s; }
+.phone-reveal-build-dots span:nth-child(3) { animation-delay: 0.36s; }
+.phone-reveal-build.is-real .phone-reveal-build-dots span { background: var(--true-green); }
+@keyframes phone-reveal-build-dot {
+  0%, 100% { transform: translateY(0)   scale(1);   opacity: 0.55; }
+  50%      { transform: translateY(-5px) scale(1.15); opacity: 1;    }
+}
+
+/* Piece picker grid */
+.piece-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+.piece-tile {
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 30%, rgba(140, 90, 220, 0.18) 0%, transparent 70%),
+    rgba(255,245,225,0.04);
+  border: 2px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 14px 8px 10px; text-align: center;
+  transition: all 0.15s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.piece-tile-art {
+  height: 110px;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.piece-tile .label {
+  font-family: var(--serif); font-size: 0.88rem; margin-top: 8px;
+  letter-spacing: 0.04em;
+  color: var(--cream);
+}
+.piece-tile.selected {
+  border-color: var(--gold-soft); background: rgba(215, 192, 149, 0.14);
+  box-shadow: 0 0 0 3px rgba(215, 192, 149, 0.22), 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+.piece-tile.disabled { opacity: 0.3; cursor: not-allowed; filter: grayscale(50%); }
+
+/* Picker: word options */
+.word-choice {
+  display: block; width: 100%; text-align: left;
+  background: rgba(255,245,225,0.05);
+  border: 2px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  color: var(--cream);
+  transition: all 0.15s;
+}
+.word-choice:hover, .word-choice.selected {
+  border-color: rgba(215, 192, 149, 0.22); background: rgba(215, 192, 149, 0.10);
+}
+.word-choice .w {
+  font-family: var(--display); font-size: 1.3rem; font-weight: 700;
+  color: var(--cream); margin-bottom: 6px;
+}
+.word-choice .d { font-size: 0.92rem; color: var(--cream-dim); line-height: 1.5; }
+
+/* Name input + Join button side-by-side row on the join screen. The input
+   takes the remaining width; the button stays a fixed comfortable size so
+   it's tappable but doesn't dominate. */
+.name-join-row {
+  display: flex; align-items: stretch; gap: 10px;
+}
+.name-join-row .lp-input { flex: 1; min-width: 0; }
+.name-join-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding-left: 18px; padding-right: 18px;
+}
+
+/* "Take a Photo" tile in the piece picker grid + the camera modal it opens.
+   The tile slots into the same .piece-grid layout as the figurine tiles. */
+.piece-tile--camera .piece-tile-art {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--cream);
+}
+.piece-tile--camera .piece-tile-art svg {
+  width: 60px; height: 60px;
+  filter: drop-shadow(0 4px 14px rgba(255, 184, 69, 0.25));
+}
+.piece-tile--camera .piece-tile-photo {
+  width: 92px; height: 92px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 4px 14px rgba(255, 184, 69, 0.45));
+}
+
+/* "Generate with AI" tile, twin to the photo tile but with a sparkle icon
+   to read as the AI flow at a glance. */
+.piece-tile--ai .piece-tile-art {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--cream);
+}
+.piece-tile--ai .piece-tile-art svg {
+  width: 60px; height: 60px;
+  filter: drop-shadow(0 4px 14px rgba(146, 219, 175, 0.30));
+}
+
+/* AI generation modal preview area: a soft-glow card showing the returned
+   figurine at full board-piece size while the player decides. */
+.ai-piece-modal .ai-piece-preview {
+  display: flex; align-items: center; justify-content: center;
+  margin: 14px 0 6px;
+  padding: 14px;
+  background: rgba(255, 245, 225, 0.04);
+  border: 1px solid rgba(255, 245, 225, 0.10);
+  border-radius: 10px;
+  min-height: 220px;
+}
+.ai-piece-modal .ai-piece-preview img {
+  max-width: 100%; max-height: 260px;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+.ai-piece-modal .ai-piece-remaining {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--cream-dim, rgba(255, 245, 225, 0.55));
+  margin: 8px 0 4px;
+  letter-spacing: 0.04em;
+}
+.ai-piece-modal .ai-piece-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* Character / Object segmented toggle above the description input. */
+.ai-piece-mode {
+  display: flex; gap: 8px;
+  margin: 4px 0 12px;
+}
+.ai-piece-mode-btn {
+  flex: 1;
+  padding: 10px 8px;
+  background: transparent;
+  border: 1px solid rgba(104, 197, 140, 0.30);
+  border-radius: 8px;
+  color: var(--cream-dim);
+  font-family: var(--sans); font-size: 0.92rem; font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.ai-piece-mode-btn:hover { color: var(--cream); border-color: rgba(146, 219, 175, 0.55); }
+.ai-piece-mode-btn.is-on {
+  background: rgba(43, 122, 76, 0.40);
+  border-color: rgba(146, 219, 175, 0.85);
+  color: var(--cream);
+}
+
+/* AI generation in-progress state. Sits in the same framed box as the
+   preview (matched min-height) so the modal doesn't jump when the image
+   arrives. A pulsing core + spinning ring + orbiting spark + shimmer bar
+   make it unmistakably "still working" through a 20–40s wait. */
+.ai-piece-modal .ai-piece-loading {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 15px;
+  margin: 14px 0 6px;
+  padding: 24px 14px;
+  background: rgba(255, 245, 225, 0.04);
+  border: 1px solid rgba(255, 245, 225, 0.10);
+  border-radius: 10px;
+  min-height: 220px;
+}
+.ai-piece-orb {
+  position: relative;
+  width: 76px; height: 76px;
+}
+/* glowing core */
+.ai-piece-orb::before {
+  content: '';
+  position: absolute; inset: 21px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%,
+    var(--gold-soft) 0%, var(--gold) 55%, rgba(43, 122, 76, 0) 78%);
+  box-shadow: 0 0 22px 6px rgba(146, 219, 175, 0.35);
+  animation: ai-orb-pulse 1.7s ease-in-out infinite;
+}
+/* spinning ring (reuses lp-spin) */
+.ai-piece-orb::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(146, 219, 175, 0.18);
+  border-top-color: var(--gold);
+  animation: lp-spin 1s linear infinite;
+}
+/* orbiting sparkle */
+.ai-piece-spark {
+  position: absolute; top: 50%; left: 50%;
+  width: 6px; height: 6px; margin: -3px;
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: 0 0 8px 2px rgba(255, 245, 225, 0.7);
+  transform-origin: 0 0;
+  animation: ai-spark-orbit 1.6s linear infinite;
+}
+@keyframes ai-orb-pulse {
+  0%, 100% { transform: scale(0.82); opacity: 0.7; }
+  50%      { transform: scale(1);    opacity: 1; }
+}
+@keyframes ai-spark-orbit {
+  from { transform: rotate(0deg)   translateX(38px); }
+  to   { transform: rotate(360deg) translateX(38px); }
+}
+.ai-piece-loading-msg {
+  font-size: 0.98rem; color: var(--cream);
+  letter-spacing: 0.03em; text-align: center;
+  min-height: 1.3em;
+  animation: ai-msg-fade 0.4s ease;
+}
+@keyframes ai-msg-fade { from { opacity: 0; } to { opacity: 1; } }
+.ai-piece-loading-bar {
+  width: 70%; max-width: 220px; height: 4px;
+  border-radius: 999px; overflow: hidden;
+  background: rgba(255, 245, 225, 0.10);
+}
+.ai-piece-loading-bar::before {
+  content: '';
+  display: block; height: 100%; width: 38%;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    transparent, var(--gold-soft), var(--gold), transparent);
+  animation: ai-bar-slide 1.5s ease-in-out infinite;
+}
+@keyframes ai-bar-slide {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(330%); }
+}
+.ai-piece-loading-sub {
+  font-size: 0.8rem; color: var(--cream-dim);
+  text-align: center; letter-spacing: 0.04em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-piece-orb::before,
+  .ai-piece-orb::after,
+  .ai-piece-spark,
+  .ai-piece-loading-bar::before,
+  .ai-piece-loading-msg { animation: none; }
+}
+
+/* Photo capture modal — full-screen, dark backdrop, big circular preview. */
+.photo-capture-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(var(--panel-deepest), 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+  padding: 24px;
+  animation: lp-fade-in 0.18s ease;
+}
+.photo-capture-modal {
+  width: 100%; max-width: 420px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: 14px;
+}
+.photo-capture-title {
+  font-family: var(--display);
+  font-weight: 700; font-size: 1.4rem;
+  color: var(--cream);
+  letter-spacing: 0.04em;
+}
+.photo-capture-caption {
+  font-family: var(--serif);
+  font-size: 0.95rem; line-height: 1.45;
+  color: var(--cream-dim);
+  margin: 0;
+}
+.photo-capture-error {
+  font-family: var(--serif);
+  font-size: 1rem; line-height: 1.5;
+  color: var(--coral, #FF7A6E);
+  padding: 18px 8px;
+}
+.photo-capture-stage {
+  width: min(76vw, 320px);
+  height: min(76vw, 320px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(104, 197, 140, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+.photo-capture-frame {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Mirror the live video so the player sees themselves in a natural,
+     selfie-style flip. The captured canvas is mirrored separately so the
+     stored JPEG matches what they composed against. */
+}
+video.photo-capture-frame { transform: scaleX(-1); }
+.photo-capture-actions {
+  display: flex; gap: 12px; justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.photo-capture-actions .lp-btn { flex: 1 1 calc(50% - 6px); min-width: 0; }
+
+/* Flatten the circular stage when it's showing AI content so the figurine's
+   wooden base and rim aren't clipped off by the round mask. */
+.photo-capture-stage:has(.photo-capture-ai-preview),
+.photo-capture-stage:has(.photo-capture-loading) {
+  border-radius: 12px;
+  background: rgba(255, 245, 225, 0.04);
+}
+.photo-capture-ai-preview {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 8px;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+.photo-capture-loading {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+}
+.photo-capture-loading-text {
+  font-family: var(--serif);
+  color: var(--cream-dim);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.photo-capture-remaining {
+  font-size: 0.85rem;
+  color: var(--cream-dim);
+  margin: 8px 0 4px;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* "How to play" rules overlay styles live in lib/theme.css so the same
+   overlay component works from both the phone lobby and the TV side. */
+
+/* Voting */
+.vote-choice {
+  display: flex; align-items: flex-start; gap: 14px;
+  width: 100%; text-align: left;
+  background: rgba(255,245,225,0.05);
+  border: 2px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  color: var(--cream);
+  transition: all 0.15s;
+}
+.vote-choice:hover:not(:disabled), .vote-choice.selected {
+  border-color: rgba(215, 192, 149, 0.22); background: rgba(215, 192, 149, 0.10);
+}
+.vote-choice:disabled { opacity: 0.45; cursor: not-allowed; }
+/* The player's own bluff — visibly grayed out and tagged so it's clear
+   why it can't be tapped, rather than just looking dim. */
+.vote-choice.is-own {
+  opacity: 0.55;
+  background: rgba(255, 255, 255, 0.02);
+  border-style: dashed;
+  border-color: rgba(215, 192, 149, 0.18);
+  cursor: not-allowed;
+  position: relative;
+}
+.vote-choice.is-own .text { color: var(--cream-dim); font-style: italic; }
+.vote-choice.is-own .letter {
+  background: rgba(215, 192, 149, 0.25);
+  color: rgba(255, 245, 225, 0.55);
+  box-shadow: none;
+}
+.vote-choice-own-tag {
+  position: absolute;
+  top: 8px; right: 10px;
+  font-family: var(--display);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  opacity: 0.7;
+}
+.vote-choice .letter {
+  font-family: var(--display); font-size: 1.4rem; font-weight: 700;
+  background: var(--gold-soft); color: var(--twilight-deep);
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.vote-choice .text {
+  font-family: var(--serif);
+  font-size: 1.2rem; line-height: 1.55;
+  color: var(--cream);
+  padding-top: 6px;
+}
+
+/* Answer row = the vote-choice card + a like heart beside it. */
+.vote-row { display: flex; align-items: stretch; gap: 10px; }
+.vote-row .vote-choice { flex: 1; min-width: 0; position: relative; }
+.vote-choice.is-voted {
+  border-color: var(--gold-soft);
+  background: rgba(215, 192, 149, 0.14);
+}
+.vote-choice-voted-tag {
+  position: absolute; top: 8px; right: 10px;
+  font-family: var(--display); font-size: 0.62rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-soft); opacity: 0.9;
+}
+.vote-like {
+  flex-shrink: 0; width: 56px;
+  border: 2px solid var(--rule);
+  border-radius: var(--radius);
+  background: rgba(255, 245, 225, 0.05);
+  color: var(--cream-dim);
+  font-size: 1.6rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.12s;
+}
+.vote-like:hover { border-color: rgba(255, 90, 122, 0.4); color: #ff8098; }
+.vote-like:active { transform: scale(0.92); }
+.vote-like.liked {
+  color: #ff5a7a;
+  border-color: rgba(255, 90, 122, 0.55);
+  background: rgba(255, 90, 122, 0.14);
+}
+.vote-voted-banner {
+  text-align: center; font-family: var(--serif);
+  color: var(--cream-dim); font-size: 0.95rem;
+  padding: 2px 0 8px;
+}
+
+/* Picker's read-aloud list — plain definitions to read out, not buttons.
+   No border, no hover, just letter + text rows separated by a thin rule. */
+.read-list {
+  background: transparent;
+}
+.read-entry {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.read-entry:first-child { padding-top: 4px; }
+.read-entry:last-child  { border-bottom: none; padding-bottom: 4px; }
+.read-entry .letter {
+  font-family: var(--display); font-size: 1.4rem; font-weight: 700;
+  background: var(--gold-soft); color: var(--twilight-deep);
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.read-entry .text {
+  font-family: var(--serif);
+  font-size: 1.2rem; line-height: 1.6;
+  color: var(--cream);
+  padding-top: 6px;
+}
+
+.phone-counter {
+  font-size: 0.78rem; color: var(--cream-fade);
+  text-align: right; margin-top: 6px;
+}
+
+.error { color: var(--coral); font-size: 0.9rem; margin-top: 8px; min-height: 18px; }
+
+/* Leaderboard row used in scoring / game over */
+.score-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  background: rgba(255,245,225,0.04);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.score-row .emoji { font-size: 1.6rem; }
+.score-row .name { flex: 1; font-family: var(--serif); font-size: 1.05rem; }
+.score-row .delta { color: var(--gold); font-family: var(--serif); font-weight: 600; }
+.score-row .total { color: var(--cream-dim); margin-left: 10px; }
+
+/* ─── Player accounts ─── */
+.acct-bar {
+  display: flex; justify-content: center;
+  margin: -12px 0 18px;
+}
+.acct-link {
+  background: none; border: none;
+  color: var(--gold-soft);
+  font-family: var(--sans); font-size: 0.9rem;
+  text-decoration: underline; text-underline-offset: 3px;
+  cursor: pointer; padding: 6px 10px;
+}
+.acct-link:hover { color: var(--gold); }
+.acct-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 14px;
+  background: rgba(104, 197, 140, 0.14);
+  border: 1px solid rgba(104, 197, 140, 0.38);
+  border-radius: 999px;
+  color: var(--cream);
+  font-family: var(--sans); font-size: 0.88rem;
+  cursor: pointer;
+}
+.acct-chip:hover { border-color: var(--gold); }
+.acct-chip-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--mint, #7bd9b8);
+  box-shadow: 0 0 7px rgba(123, 217, 184, 0.7);
+}
+
+.acct-modal { max-width: 420px; }
+.acct-tabs {
+  display: flex; gap: 6px;
+  margin: 4px 0 18px;
+}
+.acct-tab {
+  flex: 1;
+  padding: 9px 8px;
+  background: transparent;
+  border: 1px solid rgba(104, 197, 140, 0.28);
+  border-radius: 8px;
+  color: var(--cream-dim);
+  font-family: var(--sans); font-size: 0.9rem;
+  cursor: pointer;
+}
+.acct-tab--on {
+  background: rgba(43, 122, 76, 0.38);
+  border-color: rgba(146, 219, 175, 0.85);
+  color: var(--cream);
+}
+
+.acct-head { text-align: center; margin-bottom: 18px; }
+.acct-avatar {
+  width: 84px; height: 84px;
+  margin: 0 auto 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.acct-avatar--photo { border-radius: 50%; object-fit: cover; }
+.acct-avatar--empty {
+  border-radius: 50%;
+  background: rgba(104, 197, 140, 0.14);
+  border: 1px solid rgba(104, 197, 140, 0.35);
+  color: var(--gold-soft); font-size: 2rem;
+}
+.acct-name {
+  font-family: var(--serif); font-size: 1.5rem;
+  color: var(--cream);
+}
+.acct-sub {
+  font-family: var(--sans); font-size: 0.85rem;
+  color: var(--cream-dim); margin-top: 4px;
+}
+.acct-stats {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+.acct-stat {
+  background: rgba(var(--panel-deepest), 0.5);
+  border: 1px solid rgba(104, 197, 140, 0.20);
+  border-radius: 10px;
+  padding: 12px 6px; text-align: center;
+}
+.acct-stat-value {
+  font-family: var(--display); font-weight: 700;
+  font-size: 1.25rem; color: var(--gold);
+}
+.acct-stat-label {
+  font-family: var(--sans); font-size: 0.68rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--cream-dim); margin-top: 4px;
+}
+/* "Change piece" link under the avatar, and the scrollable picker grid. */
+.acct-change-piece {
+  margin-top: 10px;
+  background: rgba(104, 197, 140, 0.14);
+  border: 1px solid rgba(104, 197, 140, 0.38);
+  border-radius: 999px;
+  color: var(--cream);
+  font-family: var(--sans); font-size: 0.82rem; font-weight: 600;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+.acct-change-piece:hover { border-color: var(--gold); background: rgba(104, 197, 140, 0.22); }
+.acct-piece-grid {
+  max-height: 48vh;
+  overflow-y: auto;
+  margin: 8px 0 4px;
+  padding-right: 4px;
+}
+
+/* ============================================================
+   CENTRAL PERK'D — phone trivia screens
+   ============================================================ */
+
+/* The question on the player's own screen. Smaller than the TV's copy —
+   the TV is the source of truth, this is a reference while they tap. */
+.phone-question {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--cream);
+  text-align: center;
+  margin: 4px 0 16px;
+  text-wrap: balance;
+}
+
+/* Result card after the reveal: the one thing the player wants to know. */
+.phone-result {
+  text-align: center;
+  padding: 22px 18px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(215, 192, 149, 0.2);
+  background: rgba(var(--panel), 0.6);
+}
+.phone-result.is-correct { border-color: rgba(126, 224, 160, 0.6); background: rgba(46, 122, 74, 0.22); }
+.phone-result.is-wrong { border-color: rgba(232, 132, 132, 0.4); background: rgba(122, 38, 46, 0.18); }
+
+.phone-result.is-correct 
+.phone-result.is-wrong 
+.phone-result-headline {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--cream);
+  margin-top: 8px;
+}
+
+
+
+/* The correct answer, restated under the result. */
+
+
+
+
+/* ─── Answer-first bluff phases ─── */
+
+/* Echo of what the player submitted, on the "locked in" confirmation. */
+.phone-answer-echo {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--cream);
+  background: rgba(255, 245, 225, 0.06);
+  border: 1px solid rgba(215, 192, 149, 0.22);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin: 12px 0 4px;
+  text-align: center;
+}
+/* What you said, shown under the truth when you missed it. */
+
+/* Per-round points breakdown on the result screen. */
+.phone-breakdown {
+  margin-top: 14px;
+  border: 1px solid rgba(215, 192, 149, 0.18);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.phone-breakdown-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; padding: 9px 13px;
+  background: rgba(var(--panel), 0.5);
+  border-bottom: 1px solid rgba(255, 245, 225, 0.06);
+  font-size: 0.92rem; color: var(--cream-dim);
+}
+.phone-breakdown-row:last-child { border-bottom: 0; }
+.phone-breakdown-row .v {
+  font-family: var(--serif); font-weight: 700;
+  color: var(--gold); font-variant-numeric: tabular-nums;
+}
+
+/* Explains a skipped BLUFFING/VOTING phase on the result card. */
+.phone-skip-note {
+  margin-top: 12px; padding: 10px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(215, 192, 149, 0.25);
+  background: rgba(215, 192, 149, 0.08);
+  color: var(--gold-soft);
+  font-size: 0.9rem; text-align: center;
+}
+
+
+/* ─── Round result card ───
+   Reads top to bottom as a story: the answer, what you said, what it earned,
+   where it put you. The headline used to stamp a red ✕ on anyone who missed
+   the question even if they'd fooled the table and voted correctly — hence
+   the third "mixed" tone. */
+.phone-truth {
+  text-align: center;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(126, 224, 160, 0.55);
+  background: rgba(46, 122, 74, 0.22);
+}
+.phone-truth-label {
+  font-family: var(--serif);
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #9defb9;
+}
+.phone-truth-text {
+  font-family: var(--serif); font-size: 1.35rem; line-height: 1.25;
+  color: var(--cream); margin-top: 4px; text-wrap: balance;
+}
+
+.phone-yours {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-top: 10px; padding: 10px 13px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 245, 225, 0.12);
+  background: rgba(var(--panel), 0.5);
+}
+.phone-yours .mark { font-weight: 700; }
+.phone-yours.is-correct .mark { color: #7ee0a0; }
+.phone-yours.is-wrong .mark { color: #e88484; }
+.phone-yours .label {
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--cream-fade);
+}
+.phone-yours .text { color: var(--cream); font-family: var(--serif); font-size: 1.02rem; }
+
+.phone-result {
+  margin-top: 12px;
+  text-align: center;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(215, 192, 149, 0.2);
+  background: rgba(var(--panel), 0.6);
+}
+.phone-result.is-correct { border-color: rgba(126, 224, 160, 0.55); background: rgba(46, 122, 74, 0.2); }
+.phone-result.is-mixed   { border-color: rgba(215, 192, 149, 0.5);  background: rgba(215, 192, 149, 0.1); }
+.phone-result.is-wrong   { border-color: rgba(232, 132, 132, 0.35); background: rgba(122, 38, 46, 0.16); }
+.phone-result-headline {
+  font-family: var(--serif); font-size: 1.2rem; line-height: 1.3;
+  color: var(--cream); text-wrap: balance;
+}
+.phone-result-move {
+  margin-top: 6px;
+  font-family: var(--serif); font-weight: 700; font-size: 2.1rem;
+  color: var(--gold); font-variant-numeric: tabular-nums;
+}
+.phone-result-move .unit {
+  font-size: 0.9rem; font-weight: 500; color: var(--cream-fade);
+  margin-left: 6px; letter-spacing: 0.08em;
+}
+
+/* How far along the board this leaves you. */
+.phone-progress {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 14px; padding: 10px 13px;
+  border-radius: var(--radius);
+  background: rgba(var(--panel), 0.5);
+  border: 1px solid rgba(255, 245, 225, 0.1);
+}
+.phone-progress .label {
+  font-size: 0.86rem; color: var(--cream-dim); white-space: nowrap;
+}
+.phone-progress .bar {
+  flex: 1; height: 6px; border-radius: 999px;
+  background: rgba(255, 245, 225, 0.12); overflow: hidden;
+}
+.phone-progress .bar .fill {
+  display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+}
+
+/* Explains a board tile that moved you — without this a setback reads as the
+   game arbitrarily teleporting your piece backwards. */
+.phone-slide-note {
+  margin-top: 10px; padding: 10px 13px;
+  border-radius: var(--radius);
+  font-size: 0.88rem; line-height: 1.4;
+}
+.phone-slide-note.is-back {
+  border: 1px solid rgba(232, 132, 132, 0.45);
+  background: rgba(122, 38, 46, 0.2);
+  color: #f2c4c4;
+}
+.phone-slide-note.is-forward {
+  border: 1px solid rgba(126, 224, 160, 0.45);
+  background: rgba(46, 122, 74, 0.18);
+  color: #b8ecc9;
+}
+.phone-slide-note strong { color: var(--cream); }
+
+/* ─── Answer review (dispute) ─── */
+/* CTA under the wrong answer on the Watch/Result screen. */
+.phone-review-cta { margin-top: 12px; text-align: center; }
+.phone-review-request { width: 100%; }
+.phone-review-requested {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 12px; border-radius: var(--radius);
+  border: 1px solid rgba(126, 224, 160, 0.45); background: rgba(46, 122, 74, 0.18);
+  color: #b8ecc9; font-weight: 700;
+}
+.phone-review-requested .mark { font-size: 1.1rem; }
+.phone-review-hint { margin-top: 8px; font-size: 0.85rem; color: var(--cream-fade); text-align: center; }
+
+/* The dispute card shown to everyone during REVIEW. */
+.phone-review-card {
+  margin-top: 6px; padding: 16px; border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--panel-lift), 0.9);
+  background: rgba(var(--panel), 0.55); text-align: center;
+}
+.phone-review-who {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  color: var(--cream-dim); font-weight: 700; margin-bottom: 8px;
+}
+.phone-review-answer {
+  font-family: var(--display); font-weight: 800; font-size: 1.4rem;
+  color: var(--cream); line-height: 1.25;
+}
+.phone-review-vs {
+  margin: 10px 0 4px; font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--cream-fade);
+}
+.phone-review-truth {
+  font-family: var(--display); font-weight: 800; font-size: 1.25rem; color: var(--mint);
+}
+
+.phone-review-q {
+  text-align: center; font-weight: 700; color: var(--cream);
+  margin: 16px 0 12px; font-size: 1.05rem;
+}
+.phone-review-btns { display: flex; flex-direction: column; gap: 10px; }
+.phone-review-yes, .phone-review-no { width: 100%; }
+.phone-review-yes.is-selected {
+  box-shadow: 0 0 0 3px rgba(var(--tg-glow), 0.65); filter: brightness(1.08);
+}
+.phone-review-no.is-selected {
+  box-shadow: 0 0 0 3px rgba(232, 132, 132, 0.6);
+  border-color: rgba(232, 132, 132, 0.8) !important; color: #f2c4c4 !important;
+}
+
+.phone-review-wait {
+  margin-top: 16px; text-align: center; color: var(--cream-dim);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.phone-review-tally {
+  margin-top: 4px; font-variant-numeric: tabular-nums; font-weight: 700;
+  color: var(--gold-soft); letter-spacing: 0.04em;
+}
+
+.phone-review-verdict {
+  margin-top: 16px; padding: 16px; border-radius: var(--radius-lg); text-align: center;
+}
+.phone-review-verdict-head { font-family: var(--display); font-weight: 800; font-size: 1.2rem; }
+.phone-review-verdict.is-pass {
+  border: 1px solid rgba(var(--tg-glow), 0.6); background: rgba(var(--tg-glow), 0.16); color: #b8ecc9;
+}
+.phone-review-verdict.is-deny {
+  border: 1px solid rgba(232, 132, 132, 0.5); background: rgba(122, 38, 46, 0.2); color: #f2c4c4;
+}

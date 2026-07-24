@@ -1,0 +1,36 @@
+/* Shared admin top-nav. Sticky bar across the top of every admin page. */
+.adnav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: 16px;
+  padding: 10px 20px;
+  background: rgba(10, 6, 28, 0.92);
+  border-bottom: 1px solid rgba(104, 197, 140, 0.22);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.adnav-brand {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--display); font-weight: 800; font-size: 1.02rem;
+  color: var(--cream); text-decoration: none; white-space: nowrap;
+}
+.adnav-brand-mark { font-size: 1.1rem; }
+.adnav-links { display: flex; align-items: center; gap: 6px; flex: 1; flex-wrap: wrap; }
+.adnav-link {
+  font-family: var(--display); font-weight: 700; font-size: 0.88rem;
+  color: var(--cream-dim); text-decoration: none;
+  padding: 7px 14px; border-radius: var(--radius-pill);
+  border: 1px solid transparent; transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.adnav-link:hover { color: var(--cream); background: rgba(255, 245, 225, 0.06); }
+.adnav-link.is-active {
+  color: #fff; background: rgba(43, 122, 76, 0.5);
+  border-color: rgba(146, 219, 175, 0.55);
+}
+.adnav-signout {
+  font-family: var(--display); font-weight: 700; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--cream-dim); background: transparent;
+  border: 1px solid rgba(255, 245, 225, 0.22); border-radius: var(--radius-pill);
+  padding: 7px 16px; cursor: pointer; white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.adnav-signout:hover { color: var(--cream); border-color: var(--coral); background: rgba(197, 109, 82, 0.14); }

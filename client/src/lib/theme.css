@@ -1,0 +1,525 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+
+/* Central Perk'd — shared design tokens.
+   A more grounded board palette: rich twilight, warm gold, sage accents, and a classic display feel. */
+
+:root {
+  --twilight-deep:   #0E0826;
+  --twilight:        #181033;
+  --twilight-soft:   #2A1A52;
+  --gold:            #B78F53;
+  --gold-soft:       #D7C095;
+  --mint:            #7BD9B8;
+  --mint-deep:       #4FB897;
+  /* Vivid celebration green — used ONLY for the real-definition reveal so
+     it punches harder than the teal mint without recoloring the rest of
+     the UI. --tg-glow is the same green as an rgb list for rgba() glows. */
+  --true-green:      #2FCB5A;
+  --tg-glow:         60, 226, 110;
+  --coral:           #C56D52;
+  --coral-soft:      #D8A899;
+  --cream:           #FFF5E1;
+  --cream-dim:       rgba(255, 245, 225, 0.72);
+  --cream-fade:      rgba(255, 245, 225, 0.40);
+  --plum:            #2B7A4C;
+  --rule:            rgba(255, 245, 225, 0.10);
+
+  /* Info-panel / modal fills — deep Central Perk greens (used as
+     rgba(var(--panel…), a)). These replaced the old twilight-purple fills so
+     panels, cards and backdrops read GREEN, not purple. Tweak here to
+     re-tint every modal at once; the screen/board ambiance stays twilight. */
+  --panel:         10, 34, 25;   /* main info-panel fill */
+  --panel-lift:    16, 46, 34;   /* slightly lighter card fill */
+  --panel-deep:    7, 26, 19;    /* darker backdrop */
+  --panel-deepest: 6, 22, 16;    /* darkest backing */
+
+  /* All sans now, for a friendlier "Friends" feel. Rubik is the chunky,
+     slightly-rounded display face (headings, buttons, big TV text — closest
+     common font to the Friends logo); Nunito is the warm rounded body face.
+     --serif keeps its name so the many callers don't churn, but it's a sans. */
+  --serif:  'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --display: 'Rubik', 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sans:   'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius:        10px;
+  --radius-lg:     18px;
+  --radius-pill:   999px;
+  --shadow-soft:   0 10px 24px rgba(0, 0, 0, 0.24);
+  --shadow-glow:   0 0 28px rgba(183, 143, 83, 0.28);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { min-height: 100vh; }
+body {
+  font-family: var(--sans);
+  color: var(--cream);
+  background: radial-gradient(ellipse at top, var(--twilight-soft) 0%, var(--twilight) 55%, var(--twilight-deep) 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; }
+
+button { font: inherit; cursor: pointer; }
+input, select, textarea { font: inherit; color: inherit; }
+
+a { color: var(--gold); }
+
+/* Reusable bits */
+.lp-card {
+  background: rgba(14, 8, 38, 0.74);
+  border: 1px solid rgba(255, 245, 225, 0.10);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.lp-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-family: var(--serif); font-weight: 500;
+  font-size: 0.85rem; letter-spacing: 0.04em;
+  background: rgba(255, 245, 225, 0.08);
+  color: var(--gold-soft);
+}
+/* Canonical button — kept in sync with .links a in client/index.html.
+   Use this class everywhere a button or link-as-button is rendered. */
+.lp-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 54px; padding: 14px 34px;
+  background: rgba(43, 122, 76, 0.22);
+  color: var(--cream);
+  border: 2px solid rgba(104, 197, 140, 0.55);
+  /* Friendly rounded pill instead of the old sharp corners. */
+  border-radius: var(--radius-pill);
+  font-family: var(--display); font-weight: 700;
+  font-size: 1rem; letter-spacing: 0.04em; text-transform: uppercase;
+  transition: background 0.15s, border-color 0.15s, color 0.15s,
+    transform 0.12s ease, box-shadow 0.15s;
+}
+.lp-btn:hover:not(:disabled) {
+  background: rgba(43, 122, 76, 0.36);
+  border-color: rgba(146, 219, 175, 0.9);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(43, 122, 76, 0.28);
+}
+.lp-btn:active:not(:disabled) { transform: translateY(0); box-shadow: none; }
+.lp-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.lp-btn--ghost {
+  background: transparent;
+  color: rgba(255, 245, 225, 0.82);
+  border: 1px solid rgba(255, 245, 225, 0.22);
+}
+.lp-btn--ghost:hover:not(:disabled) {
+  background: rgba(255, 245, 225, 0.06);
+  border-color: rgba(255, 245, 225, 0.40);
+  color: var(--cream);
+}
+.lp-btn--mint {
+  background: rgba(79, 184, 151, 0.18);
+  color: var(--cream);
+  border-color: rgba(123, 217, 184, 0.55);
+}
+.lp-btn--mint:hover:not(:disabled) {
+  background: rgba(79, 184, 151, 0.30);
+  border-color: rgba(160, 230, 200, 0.80);
+}
+/* Pulses a button warm-amber to draw the eye when time is running out.
+   Paired with the "Random bluff" rescue button on the writing screen so
+   the player notices it exists right when they need it. */
+.lp-btn--urgent {
+  background: rgba(255, 184, 69, 0.16);
+  border-color: rgba(255, 184, 69, 0.55);
+  color: var(--cream);
+  animation: lp-btn-urgent-pulse 1.6s ease-in-out infinite;
+}
+.lp-btn--urgent:hover:not(:disabled) {
+  background: rgba(255, 184, 69, 0.30);
+  border-color: rgba(255, 200, 100, 0.80);
+}
+@keyframes lp-btn-urgent-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 184, 69, 0.0); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 184, 69, 0.18); }
+}
+
+.lp-input, .lp-textarea, .lp-select {
+  width: 100%;
+  background: rgba(255, 245, 225, 0.06);
+  border: 1px solid rgba(255, 245, 225, 0.12);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  color: var(--cream);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.lp-input:focus, .lp-textarea:focus, .lp-select:focus {
+  border-color: var(--gold);
+  background: rgba(255, 245, 225, 0.09);
+}
+.lp-input::placeholder, .lp-textarea::placeholder { color: var(--cream-fade); }
+.lp-textarea { min-height: 88px; resize: vertical; }
+
+.lp-label {
+  display: block;
+  font-family: var(--serif); font-weight: 500;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 8px;
+}
+
+@keyframes lp-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.lp-fade-in { animation: lp-fade-in 0.35s ease forwards; }
+
+/* Page-level transition between game phases. Slightly slower than the
+   element-level lp-fade-in, with a tiny scale lift so the new screen
+   "settles in" rather than snapping. Applied to a keyed wrapper around
+   the phase router on both TV and phone so every phase change animates
+   consistently. Honors prefers-reduced-motion. */
+@keyframes phase-fade {
+  from { opacity: 0; transform: translateY(12px) scale(0.986); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+.phase-fade {
+  animation: phase-fade 0.42s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  will-change: opacity, transform;
+}
+/* Opt-out for phases that own their entrance (e.g. the REVEAL build box):
+   no transparent wrapper beat, so the content appears with no empty pause. */
+.phase-fade--instant { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .phase-fade { animation: none; }
+}
+
+/* Round-scoreboard entrance: a single gentle fade + scale-up in place
+   (the card is already centered by .tv-overlay-scoring). The `to` transform
+   MUST match .tv-scorecard--centered exactly (scale(1)) so `animation: both`
+   hands off seamlessly before the card docks down. */
+@keyframes tv-scorecard-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes tv-scorecard-in { from { opacity: 0; } to { opacity: 1; } }
+}
+
+@keyframes lp-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+.lp-pulse { animation: lp-pulse 1.8s ease-in-out infinite; }
+
+@keyframes lp-spin {
+  to { transform: rotate(360deg); }
+}
+.lp-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(255,245,225,0.15);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: lp-spin 1s linear infinite;
+}
+
+/* Styled confirmation modal — matches the canonical button aesthetic.
+   Used by both the phone leave-game dialog and the TV exit-to-lobby dialog. */
+.lp-modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(8, 4, 26, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 24px;
+  animation: lp-fade-in 0.18s ease;
+}
+.lp-modal {
+  width: 100%; max-width: 420px;
+  background: rgba(20, 12, 50, 0.95);
+  border: 1px solid rgba(104, 197, 140, 0.55);
+  padding: 28px 28px 24px;
+  text-align: center;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.5);
+}
+.lp-modal-title {
+  font-family: var(--display);
+  font-weight: 700; font-size: 1.4rem;
+  color: var(--cream);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.lp-modal-body {
+  font-family: var(--serif);
+  font-size: 1rem; line-height: 1.5;
+  color: var(--cream-dim);
+  margin-bottom: 22px;
+}
+.lp-modal-actions {
+  display: flex; gap: 12px; justify-content: center;
+}
+.lp-modal-actions .lp-btn { flex: 1; }
+
+/* "How to play" rules overlay — shared between the phone lobby and the TV
+   board page. Renders inside the existing .lp-modal-backdrop with its own
+   scrollable card so long rules content fits even on a small phone. */
+.rules-overlay {
+  position: relative;
+  width: 100%; max-width: 720px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: rgba(20, 12, 50, 0.96);
+  border: 1px solid rgba(104, 197, 140, 0.55);
+  /* Generous padding on the TV / desktop, tighter on phone so the bigger
+     fonts still get room to breathe inside a ~340px column. */
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.5);
+  text-align: left;
+}
+.rules-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(104, 197, 140, 0.35);
+  color: var(--cream-dim);
+  cursor: pointer;
+}
+.rules-close:hover { color: var(--cream); border-color: rgba(146, 219, 175, 0.85); }
+.rules-close svg { width: 20px; height: 20px; }
+.rules-title {
+  font-family: var(--display);
+  font-weight: 700; font-size: 2.1rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin-bottom: 6px;
+}
+.rules-tagline {
+  font-family: var(--serif);
+  font-size: 1.15rem; line-height: 1.45;
+  color: var(--cream-dim);
+  text-align: center;
+  margin: 0 0 24px;
+  font-style: italic;
+}
+.rules-section { margin-top: 22px; }
+.rules-h {
+  font-family: var(--display);
+  font-size: 1.0rem; font-weight: 700;
+  color: var(--gold-soft);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.rules-list, .rules-body-list {
+  margin: 0; padding-left: 24px;
+  font-family: var(--serif);
+  font-size: 1.18rem; line-height: 1.55;
+  color: var(--cream);
+}
+.rules-list li, .rules-body-list li { margin-bottom: 10px; }
+.rules-list li::marker, .rules-body-list li::marker { color: var(--gold-soft); }
+.rules-body {
+  font-family: var(--serif);
+  font-size: 1.18rem; line-height: 1.6;
+  color: var(--cream);
+  margin: 0;
+}
+.rules-points {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex; flex-direction: column;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 1.18rem; line-height: 1.5;
+  color: var(--cream);
+}
+.rules-points li {
+  display: flex; align-items: baseline; gap: 16px;
+}
+.rules-points .pts {
+  flex-shrink: 0;
+  min-width: 60px;
+  text-align: center;
+  font-family: var(--display); font-weight: 700;
+  color: var(--gold);
+  background: rgba(255, 184, 69, 0.12);
+  border: 1px solid rgba(255, 184, 69, 0.35);
+  padding: 6px 10px;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+/* Game paused overlay — covers the whole viewport on both phone and TV.
+   Shown whenever snap.paused === true. Has a bright pause icon, a clear
+   title, and a Resume button. Sits above all gameplay UI and the player
+   badge but below the leave-game and abort modals (which are z-index 100). */
+.pause-overlay {
+  position: fixed; inset: 0;
+  z-index: 95;
+  background: rgba(8, 4, 26, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: lp-fade-in 0.2s ease;
+}
+.pause-overlay-card {
+  width: 100%; max-width: 380px;
+  background: rgba(20, 12, 50, 0.96);
+  border: 1px solid rgba(104, 197, 140, 0.55);
+  padding: 32px 28px 28px;
+  text-align: center;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.5);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 14px;
+}
+.pause-overlay-icon {
+  width: 56px; height: 56px;
+  color: var(--gold);
+  filter: drop-shadow(0 0 12px rgba(255, 184, 69, 0.5));
+}
+.pause-overlay-title {
+  font-family: var(--display);
+  font-weight: 700; font-size: 1.6rem;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+}
+.pause-overlay-body {
+  font-family: var(--serif);
+  font-size: 0.98rem; line-height: 1.5;
+  color: var(--cream-dim);
+  margin: 0 0 6px;
+}
+.pause-overlay-card .lp-btn { min-width: 200px; }
+
+/* In-pause music control — speaker button + always-visible slider. Same
+   visual language as the top-left TV control but laid out as a centered
+   row inside the pause card. The track-name label wraps to a second row
+   beneath the controls (via flex-wrap) and is always visible while paused.
+   Hidden when there's no MusicProvider (phone). */
+.pause-music-control {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(104, 197, 140, 0.25);
+  background: rgba(14, 8, 38, 0.5);
+  width: 100%;
+}
+
+/* One labeled slider row (Music / Sound FX). Shared by the TV control and
+   the pause card. The fixed-width label keeps both sliders left-aligned so
+   the two thumbs sit on a common track edge. */
+.vol-row { display: flex; align-items: center; gap: 8px; }
+.vol-row-label {
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--cream); opacity: 0.72;
+  white-space: nowrap; min-width: 60px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Pause card: stack the two labeled sliders on their own full-width line
+   below the speaker toggle (the flex-wrap parent breaks here). */
+.pause-music-sliders {
+  flex-basis: 100%;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.pause-music-sliders .vol-row { width: 100%; }
+.pause-music-sliders .pause-music-slider { flex: 1; }
+/* Shared inner styles for the [<] song name [>] cluster used inside both
+   the TV's hover-revealed `.tv-audio-track-nav` and the always-visible
+   `.pause-music-track-nav`. */
+.music-track-prev,
+.music-track-next {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  flex-shrink: 0;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(104, 197, 140, 0.30);
+  color: var(--cream-dim);
+  font-family: var(--display);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.music-track-prev:hover,
+.music-track-next:hover {
+  background: rgba(43, 122, 76, 0.30);
+  border-color: rgba(146, 219, 175, 0.85);
+  color: var(--cream);
+}
+.music-track-name {
+  font-family: var(--display);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--cream-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Pause-overlay layout: track-nav row sits below the speaker+slider row
+   inside the pause card, full width, centered. */
+.pause-music-track-nav {
+  flex-basis: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.pause-music-track-nav .music-track-name {
+  flex: 1;
+  text-align: center;
+  /* Cap the name's width so very long titles ellipsis instead of pushing
+     the prev/next buttons off the card. */
+  min-width: 0;
+}
+.pause-music-toggle {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(104, 197, 140, 0.40);
+  color: var(--cream);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.pause-music-toggle:hover {
+  background: rgba(43, 122, 76, 0.30);
+  border-color: rgba(146, 219, 175, 0.85);
+}
+.pause-music-toggle svg { width: 20px; height: 20px; display: block; }
+.pause-music-toggle .icon-off { display: none; }
+.pause-music-toggle.is-off .icon-on { display: none; }
+.pause-music-toggle.is-off .icon-off { display: block; }
+.pause-music-slider {
+  -webkit-appearance: none; appearance: none;
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 245, 225, 0.22);
+  border-radius: 2px;
+  outline: none; cursor: pointer;
+}
+.pause-music-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px;
+  background: var(--cream);
+  border: 1px solid rgba(104, 197, 140, 0.65);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(104, 197, 140, 0.45);
+}
+.pause-music-slider::-moz-range-thumb {
+  width: 14px; height: 14px;
+  background: var(--cream);
+  border: 1px solid rgba(104, 197, 140, 0.65);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(104, 197, 140, 0.45);
+}

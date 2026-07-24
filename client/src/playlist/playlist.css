@@ -1,0 +1,459 @@
+/* Playlist admin styles. Same twilight palette as the main app but with a
+   more compact, utilitarian layout — this is a tool, not a stage. */
+
+body {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(43, 122, 76, 0.20), transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(123, 217, 184, 0.08), transparent 50%),
+    var(--twilight-deep);
+  min-height: 100vh;
+  color: var(--cream);
+  font-family: var(--sans);
+  margin: 0;
+}
+
+.pa-shell {
+  min-height: 100vh;
+  display: flex; align-items: flex-start; justify-content: center;
+  /* Extra bottom room so the fixed preview player never hides content. */
+  padding: 56px 20px 120px;
+  box-sizing: border-box;
+}
+
+.pa-card {
+  width: 100%; max-width: 760px;
+  background: rgba(20, 12, 50, 0.78);
+  border: 1px solid rgba(104, 197, 140, 0.30);
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.55), 0 0 32px rgba(43, 122, 76, 0.20);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.pa-login { max-width: 420px; }
+
+.pa-title {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+  color: var(--cream);
+  letter-spacing: 0.01em;
+}
+
+.pa-sub {
+  font-family: var(--serif);
+  color: var(--cream-dim);
+  margin: 0 0 22px;
+  font-size: 1rem;
+}
+
+.pa-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--sans); font-size: 1.05rem;
+  padding: 12px 14px;
+  background: rgba(8, 4, 26, 0.65);
+  border: 1px solid rgba(104, 197, 140, 0.45);
+  color: var(--cream);
+  outline: none;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.pa-input:focus { border-color: var(--gold); background: rgba(8, 4, 26, 0.85); }
+
+.pa-error {
+  color: var(--coral);
+  font-family: var(--sans); font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+.pa-error-inline { margin-bottom: 0; }
+
+.pa-btn {
+  font-family: var(--display); font-weight: 700;
+  font-size: 1rem; letter-spacing: 0.06em;
+  padding: 11px 22px;
+  background: linear-gradient(180deg, rgba(104, 197, 140, 0.30), rgba(43, 122, 76, 0.45));
+  color: var(--cream);
+  border: 1px solid rgba(146, 219, 175, 0.55);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.05s;
+}
+.pa-btn:hover { background: linear-gradient(180deg, rgba(146, 219, 175, 0.40), rgba(123, 75, 180, 0.55)); border-color: var(--gold); }
+.pa-btn:active { transform: translateY(1px); }
+.pa-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.pa-btn--ghost {
+  background: transparent;
+  border-color: rgba(104, 197, 140, 0.35);
+  color: var(--cream-dim);
+}
+.pa-btn--ghost:hover { background: rgba(43, 122, 76, 0.15); color: var(--cream); }
+
+.pa-editor { max-width: 760px; }
+
+.pa-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+.pa-header-actions { display: flex; gap: 10px; }
+
+.pa-help {
+  font-family: var(--serif); font-style: italic;
+  color: var(--cream-dim);
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+}
+.pa-saved { color: var(--mint); }
+
+.pa-loading {
+  font-family: var(--serif); font-style: italic;
+  color: var(--cream-dim);
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* The list is a vertical stack of draggable rows. Drop target gets a
+   thicker top border so the operator can see exactly where the dragged
+   item will land. */
+.pa-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex; flex-direction: column;
+  gap: 6px;
+}
+.pa-row {
+  display: flex; align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(8, 4, 26, 0.55);
+  border: 1px solid rgba(104, 197, 140, 0.18);
+  border-radius: 10px;
+  cursor: grab;
+  user-select: none;
+  transition: background 0.12s, border-color 0.12s, transform 0.12s;
+  position: relative;
+}
+.pa-row:hover {
+  background: rgba(20, 12, 50, 0.85);
+  border-color: rgba(146, 219, 175, 0.35);
+}
+.pa-row:active { cursor: grabbing; }
+.pa-row--dragging {
+  opacity: 0.45;
+  transform: scale(0.98);
+}
+.pa-row--over {
+  border-top: 2px solid var(--gold);
+  background: rgba(255, 184, 69, 0.08);
+}
+.pa-row--playing {
+  background: linear-gradient(90deg, rgba(123,217,184,0.18), rgba(20, 12, 50, 0.85));
+  border-color: rgba(123, 217, 184, 0.55);
+}
+
+.pa-row-rank {
+  font-family: var(--display); font-weight: 700;
+  color: var(--gold-soft);
+  width: 28px;
+  text-align: right;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.pa-row-play {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(104, 197, 140, 0.18);
+  border: 1px solid rgba(104, 197, 140, 0.35);
+  color: var(--cream);
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.pa-row-play:hover {
+  background: rgba(255, 184, 69, 0.28);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.pa-row-play svg { width: 14px; height: 14px; display: block; }
+.pa-row--playing .pa-row-play {
+  background: rgba(123, 217, 184, 0.35);
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.pa-row-name {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--cream);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pa-row-handle {
+  font-family: var(--display);
+  color: rgba(104, 197, 140, 0.45);
+  font-size: 1.2rem;
+  letter-spacing: -2px;
+  cursor: grab;
+  flex-shrink: 0;
+  padding: 0 6px;
+}
+.pa-row:hover .pa-row-handle { color: var(--gold-soft); }
+
+/* ─── Library + folders layout ─── */
+.pa-card--wide { max-width: 1140px; }
+
+.pa-cols {
+  display: flex; gap: 22px; align-items: flex-start;
+}
+.pa-col { flex: 1; min-width: 0; }
+.pa-col--library { flex: 1.05; }
+.pa-col--folders { flex: 1; }
+@media (max-width: 880px) {
+  .pa-cols { flex-direction: column; }
+}
+
+.pa-col-head {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--display); font-weight: 700;
+  font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: 12px;
+}
+.pa-col-count {
+  font-family: var(--display); font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.04em;
+  color: var(--gold-soft);
+  background: rgba(255, 184, 69, 0.12);
+  border-radius: 999px;
+  padding: 1px 9px;
+}
+
+/* Song library — scrolls so 20+ tracks don't blow out the page height. */
+.pa-library {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 6px;
+  max-height: 62vh; overflow-y: auto;
+  padding-right: 4px;
+}
+.pa-song {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 12px;
+  background: rgba(8, 4, 26, 0.55);
+  border: 1px solid rgba(104, 197, 140, 0.18);
+  border-radius: 10px;
+  cursor: grab;
+  user-select: none;
+  transition: background 0.12s, border-color 0.12s, transform 0.12s, opacity 0.12s;
+}
+.pa-song:hover { background: rgba(20, 12, 50, 0.85); border-color: rgba(146, 219, 175, 0.35); }
+.pa-song:active { cursor: grabbing; }
+.pa-song--dragging { opacity: 0.4; transform: scale(0.98); }
+.pa-song--playing {
+  background: linear-gradient(90deg, rgba(123,217,184,0.18), rgba(20, 12, 50, 0.85));
+  border-color: rgba(123, 217, 184, 0.55);
+}
+.pa-song-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.pa-song .pa-row-name { font-size: 1rem; }
+.pa-song-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.pa-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px;
+  font-family: var(--sans); font-size: 0.72rem;
+  color: var(--cream-dim);
+  background: rgba(104, 197, 140, 0.14);
+  border: 1px solid rgba(104, 197, 140, 0.30);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.pa-tag:hover { background: rgba(232, 122, 122, 0.18); border-color: var(--coral); color: var(--coral); }
+.pa-tag-x { font-size: 0.62rem; opacity: 0.7; }
+
+/* Genre folders — each card is a drop target for library songs. */
+.pa-folders { display: flex; flex-direction: column; gap: 10px; }
+.pa-folder {
+  background: rgba(8, 4, 26, 0.5);
+  border: 1px solid rgba(104, 197, 140, 0.22);
+  border-radius: 12px;
+  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s;
+}
+.pa-folder--live { border-color: rgba(123, 217, 184, 0.45); }
+.pa-folder--open { background: rgba(20, 12, 50, 0.7); }
+.pa-folder--drop {
+  border-color: var(--gold);
+  background: rgba(255, 184, 69, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 184, 69, 0.35) inset;
+}
+.pa-folder-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+}
+.pa-folder-toggle {
+  background: transparent; border: none; padding: 0;
+  cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center;
+}
+.pa-folder-icon { font-size: 1.5rem; line-height: 1; }
+.pa-folder-name {
+  flex: 1; min-width: 0;
+  margin-bottom: 0;
+  padding: 8px 10px;
+  font-family: var(--serif); font-size: 1.05rem;
+}
+.pa-folder-count {
+  flex-shrink: 0;
+  font-family: var(--display); font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--gold-soft);
+  background: rgba(255, 184, 69, 0.12);
+  border-radius: 999px;
+  padding: 2px 10px;
+  min-width: 22px; text-align: center;
+}
+.pa-folder-live { padding: 7px 12px !important; flex-shrink: 0; }
+.pa-live-badge {
+  flex-shrink: 0;
+  font-family: var(--display); font-weight: 700;
+  font-size: 0.78rem; letter-spacing: 0.04em;
+  color: var(--mint);
+  white-space: nowrap;
+  padding: 0 6px;
+}
+.pa-folder-body {
+  padding: 0 12px 14px;
+  border-top: 1px solid rgba(104, 197, 140, 0.14);
+  margin-top: 2px;
+  padding-top: 12px;
+}
+
+.pa-empty {
+  font-family: var(--serif); font-style: italic;
+  color: var(--cream-dim);
+  font-size: 0.92rem;
+  padding: 10px 4px;
+}
+
+/* Remove (✕) button on the ordered track rows inside an open folder. */
+.pa-row-remove {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(232, 122, 122, 0.35);
+  color: rgba(232, 122, 122, 0.75);
+  border-radius: 8px;
+  font-family: var(--display); font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.pa-row-remove:hover {
+  background: rgba(232, 122, 122, 0.18);
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
+/* ─── Preview player bar ─── */
+/* Fixed at the bottom while previewing so you can scrub a track no matter
+   how far down the library/folders you've scrolled. */
+.pa-player {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: min(1100px, calc(100vw - 40px));
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px;
+  background: rgba(20, 12, 50, 0.94);
+  border: 1px solid rgba(104, 197, 140, 0.40);
+  border-radius: 12px;
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.pa-player-name {
+  flex-shrink: 0;
+  max-width: 240px;
+  font-family: var(--serif); font-size: 1rem;
+  color: var(--cream);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pa-player-time {
+  flex-shrink: 0;
+  font-family: var(--display); font-size: 0.85rem;
+  color: var(--cream-dim);
+  min-width: 46px; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.pa-player-seek {
+  flex: 1; min-width: 80px;
+  -webkit-appearance: none; appearance: none;
+  height: 6px; border-radius: 3px;
+  background: rgba(255, 245, 225, 0.18);
+  outline: none; cursor: pointer;
+}
+.pa-player-seek::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 8px rgba(255, 184, 69, 0.55);
+  cursor: pointer;
+}
+.pa-player-seek::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 8px rgba(255, 184, 69, 0.55);
+  cursor: pointer;
+}
+@media (max-width: 560px) {
+  .pa-player-name { display: none; }
+}
+
+/* Upload drop zone above the library. */
+.pa-drop {
+  border: 2px dashed rgba(104, 197, 140, 0.5);
+  border-radius: var(--radius, 10px);
+  padding: 14px 12px; text-align: center; cursor: pointer;
+  color: var(--cream-dim); background: rgba(43, 122, 76, 0.08);
+  margin-bottom: 12px; font-size: 0.9rem;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.pa-drop:hover, .pa-drop.is-active { background: rgba(43, 122, 76, 0.22); border-color: rgba(146, 219, 175, 0.95); color: var(--cream); }
+
+/* Per-song volume control in each library row. */
+.pa-song-vol { display: inline-flex; align-items: center; gap: 6px; color: var(--cream-fade); flex: 0 0 auto; }
+.pa-vol-icon { width: 15px; height: 15px; opacity: 0.75; }
+.pa-vol-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 74px; height: 14px; background: transparent; cursor: pointer; padding: 0; margin: 0;
+}
+.pa-vol-slider::-webkit-slider-runnable-track { height: 3px; border-radius: 999px; background: rgba(255,245,225,0.22); margin-top: 5.5px; }
+.pa-vol-slider::-moz-range-track { height: 3px; border-radius: 999px; background: rgba(255,245,225,0.22); }
+.pa-vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 13px; height: 13px; border-radius: 50%;
+  background: var(--mint, #7bd9b8); border: 0; margin-top: -5px;
+}
+.pa-vol-slider::-moz-range-thumb { width: 13px; height: 13px; border-radius: 50%; background: var(--mint, #7bd9b8); border: 0; }
+.pa-vol-pct { min-width: 3.2em; text-align: right; font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+
+/* Delete-from-server button on a library row. */
+.pa-row-delete {
+  flex: 0 0 auto; width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: 1px solid rgba(255, 245, 225, 0.14);
+  color: var(--cream-fade); border-radius: 7px; cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.pa-row-delete svg { width: 16px; height: 16px; }
+.pa-row-delete:hover { border-color: var(--coral); color: var(--coral); background: rgba(197, 109, 82, 0.14); }
