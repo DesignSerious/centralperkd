@@ -125,14 +125,15 @@ function Result({ snap }) {
             </div>
           ) : (
             <>
+              <div className="phone-review-prompt">Think you got it right?</div>
               <button
                 type="button"
-                className="lp-btn lp-btn--ghost phone-review-request"
+                className="lp-btn phone-review-request"
                 onClick={() => sendAction('requestReview')}
               >
-                I think mine was right — Request Review
+                ✋ Request a Review
               </button>
-              <div className="phone-review-hint">The other players will vote on it.</div>
+              <div className="phone-review-hint">The other players vote — majority overturns it and you get the points.</div>
             </>
           )}
         </div>

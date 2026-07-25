@@ -715,6 +715,11 @@ function RevealScreen({ snap }) {
         </div>
       )}
       {isTruth && <KnewItStrip snap={snap} />}
+      {isTruth && snap.settings && snap.settings.allowReviews !== false && (
+        <div className="tv-review-hint">
+          Marked wrong but sure you nailed it? Tap <strong>Request a Review</strong> on your phone.
+        </div>
+      )}
       </div>
     </>
   );

@@ -58,9 +58,13 @@ const ROUND_INTRO_MS = 2600;
 // touch, big difference in feel.
 const LAST_DING_BEAT_MS = 700;
 // Leaving ANSWERING while an AI judgement is still in flight would misclassify
-// that player, so we hold briefly for stragglers before falling back to their
-// tier-2 verdict.
-const JUDGE_GRACE_MS = 2500;
+// that player (a genuinely-correct paraphrase gets stamped WRONG and loses its
+// points), so we hold for stragglers before falling back to the tier-2 verdict.
+// This MUST comfortably exceed judge.js AI_TIMEOUT_MS — otherwise a slow OpenAI
+// call (routine from Railway) is abandoned mid-flight and the answer is scored
+// wrong. The grace loops in 250ms steps and proceeds the instant every
+// judgement resolves, so a fast round never actually waits this long.
+const JUDGE_GRACE_MS = 7000;
 
 // REVEAL choreography: the truth card builds, lands, then each ballot entry is
 // walked through so the room can see who wrote what.

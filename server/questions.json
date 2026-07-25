@@ -369,12 +369,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
+      "served": 3,
       "correct": 0,
-      "answered": 3,
+      "answered": 4,
       "topWrong": {
         "pivot": 2,
-        "Las Vegas": 1
+        "Las Vegas": 1,
+        "clearly the wrong thing zzz": 1
       }
     }
   },
@@ -1119,7 +1120,13 @@
       "season": 7,
       "episode": null
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q039",
@@ -1200,9 +1207,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 4,
-      "answered": 13,
+      "served": 4,
+      "correct": 6,
+      "answered": 15,
       "topWrong": {
         "Roberta": 2,
         "he was on a break": 1,
@@ -1233,15 +1240,17 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 5,
-      "answered": 13,
+      "served": 5,
+      "correct": 6,
+      "answered": 16,
       "topWrong": {
         "Russian": 1,
         "Italian": 3,
         "Portuguese": 2,
         "seven": 1,
-        "a sandwich": 1
+        "a sandwich": 1,
+        "a completely wrong guess xyz": 1,
+        "another wrong guess qqq": 1
       }
     }
   },
@@ -1417,7 +1426,15 @@
       "season": 1,
       "episode": 12
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 0,
+      "answered": 1,
+      "topWrong": {
+        "clearly the wrong thing zzz": 1
+      }
+    }
   },
   {
     "id": "q049",
@@ -1498,12 +1515,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
+      "served": 3,
       "correct": 5,
-      "answered": 7,
+      "answered": 8,
       "topWrong": {
         "Phoebe did it": 1,
-        "Fag": 1
+        "Fag": 1,
+        "clearly the wrong thing zzz": 1
       }
     }
   },
@@ -2010,15 +2028,17 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 2,
-      "answered": 9,
+      "served": 3,
+      "correct": 3,
+      "answered": 12,
       "topWrong": {
         "something about a duck": 3,
         "Christina Applegate": 1,
         "Renée Zellweger": 1,
         "no idea": 1,
-        "Kate Hudson": 1
+        "Kate Hudson": 1,
+        "a completely wrong guess xyz": 1,
+        "another wrong guess qqq": 1
       }
     }
   },
@@ -2163,9 +2183,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 5,
-      "correct": 6,
-      "answered": 19,
+      "served": 6,
+      "correct": 7,
+      "answered": 21,
       "topWrong": {
         "a made up nonsense answer": 1,
         "the Central Park boathouse": 2,
@@ -2176,7 +2196,7 @@
         "Central Park": 1,
         "he was on a break": 1,
         "something about a duck": 1,
-        "a completely made up thing": 1
+        "a completely made up thing": 2
       }
     }
   },
@@ -3265,9 +3285,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 6,
-      "answered": 15,
+      "served": 5,
+      "correct": 7,
+      "answered": 18,
       "topWrong": {
         "In central park": 1,
         "it was Janice": 1,
@@ -3276,7 +3296,9 @@
         "in a taxi": 1,
         "Ugly Naked Guy": 1,
         "no idea": 2,
-        "he was on a break": 1
+        "he was on a break": 1,
+        "a completely wrong guess xyz": 1,
+        "another wrong guess qqq": 1
       }
     }
   }

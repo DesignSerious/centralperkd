@@ -22,7 +22,8 @@ const Questions = require('./questions');
 
 // ─── tuning ───
 const AI_MODEL = 'gpt-4o-mini';        // small + fast; the judge is a yes/no call
-const AI_TIMEOUT_MS = 4000;
+const AI_TIMEOUT_MS = 5000;            // per-attempt; generous for Railway->OpenAI latency
+const AI_RETRIES = 1;                  // one retry so a transient blip doesn't stamp a correct answer WRONG
 const AI_CALLS_PER_ROUND = 8;
 // Tier-2 thresholds. Short answers ("Kip", "Yemen") must match tightly —
 // one edit is most of the string — while long answers ("she left her fiancé at
@@ -212,7 +213,12 @@ async function judgeAnswer(submission, q, budget) {
   // (paraphrase). Spend an AI call if the round still has budget.
   if (aiAvailable() && budget && budget.left > 0) {
     budget.left -= 1;
-    const verdict = await tier3(submission, q);
+    // Retry a timed-out/failed call before giving up — a transient blip must not
+    // silently stamp a genuinely-correct answer WRONG.
+    let verdict = null;
+    for (let attempt = 0; attempt <= AI_RETRIES && verdict === null; attempt++) {
+      verdict = await tier3(submission, q);
+    }
     if (verdict === true) {
       // Tier 3 caught a phrasing tiers 1–2 missed — offer it to the admin page
       // so tier 1 catches it for free next time, once approved.

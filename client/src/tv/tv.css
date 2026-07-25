@@ -2212,6 +2212,13 @@
 .tv-review-verdict-tally { font-size: 0.6em; font-weight: 700; color: var(--cream-dim); }
 .tv-review-more { margin-top: 12px; font-size: 0.9rem; color: var(--cream-fade); }
 
+/* Reveal-time nudge so wrongly-judged players know the dispute option exists. */
+.tv-review-hint {
+  margin-top: 12px; font-size: clamp(0.8rem, 1cqw, 1.05rem);
+  color: var(--gold-soft); opacity: 0.9;
+}
+.tv-review-hint strong { color: var(--gold); }
+
 /* Small inline badges on the scoring rows ("knew it", "fooled 2"). */
 .tv-row-flair {
   margin-left: 8px; padding: 2px 8px; border-radius: 999px;

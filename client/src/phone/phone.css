@@ -1227,9 +1227,29 @@ video.photo-capture-frame { transform: scaleX(-1); }
 .phone-slide-note strong { color: var(--cream); }
 
 /* ─── Answer review (dispute) ─── */
-/* CTA under the wrong answer on the Watch/Result screen. */
-.phone-review-cta { margin-top: 12px; text-align: center; }
-.phone-review-request { width: 100%; }
+/* CTA under the wrong answer on the Watch/Result screen. Deliberately loud —
+   this is the safety net when the AI marks a right answer wrong, and players
+   are often watching the TV, so it has to grab attention on the phone. */
+.phone-review-cta {
+  margin-top: 14px; text-align: center;
+  padding: 14px; border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 184, 69, 0.5);
+  background: rgba(255, 184, 69, 0.10);
+}
+.phone-review-prompt {
+  font-family: var(--display); font-weight: 800; font-size: 1.05rem;
+  color: var(--gold-soft); margin-bottom: 10px;
+}
+.phone-review-request {
+  width: 100%; font-size: 1.15rem; padding: 14px;
+  background: linear-gradient(180deg, #FFD27A, var(--gold));
+  color: #2a1c05; border: none;
+  animation: phone-review-pulse 1.6s ease-in-out infinite;
+}
+@keyframes phone-review-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 184, 69, 0.55); }
+  50%      { box-shadow: 0 0 0 10px rgba(255, 184, 69, 0); }
+}
 .phone-review-requested {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 10px 12px; border-radius: var(--radius);
