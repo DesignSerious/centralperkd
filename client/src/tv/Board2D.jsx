@@ -713,9 +713,11 @@ export default function Board2D({ players, spaces, slideUsers, results, state })
                 '--bridge-from-x': bridgeStart.x + '%',
                 '--bridge-from-y': bridgeStart.y + '%'
               }),
-              // The crossing piece floats above the others during its arc;
-              // otherwise the first piece in a cluster stays on top.
-              zIndex: sliding ? 30 : c.z
+              // A piece showing a notification floats ABOVE every other token so
+              // its "Skip a space!" / coffee blurb is never covered by a nearby
+              // piece. Otherwise the crossing piece floats above during its arc,
+              // and the first piece in a cluster stays on top at rest.
+              zIndex: pop ? 60 : (sliding ? 30 : c.z)
             }}
             title={p.name}
           >
