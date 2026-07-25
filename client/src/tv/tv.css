@@ -1065,13 +1065,22 @@
    instead of spanning the full stage width. */
 .tv-stage.tv-stage--lobby {
   width: auto;
-  max-width: min(860px, 92vw);
-  padding: 22px 36px 26px;
+  max-width: min(720px, 92vw);
+  padding: 26px 40px 30px;
   background: rgba(var(--panel), 0.72);
   border: 1px solid rgba(255, 245, 225, 0.14);
   border-radius: var(--radius);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+}
+/* Central Perk'd logo sitting above the join link on the lobby screen. */
+.tv-lobby-logo {
+  display: block;
+  width: min(78%, 460px);
+  height: auto;
+  margin-bottom: 2px;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
 }
 
 /* Lobby stack — logo + settings panel scaled together by AutoFit so the

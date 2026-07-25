@@ -343,10 +343,10 @@ function PhaseStage({ snap, music }) {
 }
 
 // ─── LOBBY ───
-function Lobby({ snap, music }) {
-  const st = snap.settings || {};
-  const cats = snap.allCategories || [];
-  const on = st.categories && st.categories.length ? st.categories : cats;
+// Deliberately minimal: the Central Perk'd logo, the join link + room code, and
+// the players as they arrive. All the game settings (times, categories, points,
+// reviews, vibes…) live in /admin now, so the TV stays clean for the room.
+function Lobby({ snap }) {
   const botCount = snap.players.filter((p) => p.isBot).length;
   const canAddBot = snap.players.length < 8 && botCount < 4;
 
@@ -357,137 +357,16 @@ function Lobby({ snap, music }) {
     prevHumansRef.current = humanCount;
   }, [humanCount]);
 
-  function set(patch) { sendAction('updateSettings', patch); }
-  function toggleCategory(c) {
-    const next = on.includes(c) ? on.filter((x) => x !== c) : on.concat(c);
-    // The server refuses a set too small to fill a board — the toggle just
-    // bounces back rather than breaking anything.
-    set({ categories: next });
-  }
-
   return (
     <div className="tv-lobby-wrap">
       <div className="tv-stage tv-stage--lobby">
+        <img className="tv-lobby-logo" src="/central-perkd-logo.png" alt="Central Perk'd" draggable={false} />
+
         <div className="tv-lobby-join">
           <div className="tv-join-cta">
             <span className="url">{window.location.host + '/join'}</span>
             <span className="arrow">→</span>
             <span className="code">{snap.code}</span>
-          </div>
-        </div>
-
-        <Picker
-          label="Board length"
-          options={[{ v: 16, label: 'Short (16)' }, { v: 32, label: 'Standard (32)' }, { v: 48, label: 'Long (48)' }]}
-          value={st.boardSpaces}
-          onPick={(v) => set({ boardSpaces: v })}
-          note="The painted board is 32 moves (doormat to couch). Short and long reuse the same path, spaced out."
-        />
-        <Picker
-          label="Answer time"
-          options={[20, 25, 40].map((v) => ({ v, label: v + 's' }))}
-          value={st.answerSeconds}
-          onPick={(v) => set({ answerSeconds: v })}
-        />
-        <Picker
-          label="Bluff time"
-          options={[15, 20, 30].map((v) => ({ v, label: v + 's' }))}
-          value={st.bluffSeconds}
-          onPick={(v) => set({ bluffSeconds: v })}
-        />
-        <Picker
-          label="Vote time"
-          options={[20, 25, 40].map((v) => ({ v, label: v + 's' }))}
-          value={st.voteSeconds}
-          onPick={(v) => set({ voteSeconds: v })}
-        />
-
-        <div className="tv-series-picker">
-          <div className="tv-series-label">Categories</div>
-          <div className="tv-series-options">
-            {cats.map((c) => (
-              <button
-                key={c}
-                className={'lp-btn lp-btn--ghost' + (on.includes(c) ? ' tv-series-selected' : '')}
-                onClick={() => toggleCategory(c)}
-              >{c}</button>
-            ))}
-          </div>
-        </div>
-
-        <div className="tv-series-picker">
-          <div className="tv-series-label">Spaces per…</div>
-          <div className="tv-series-options">
-            <Stepper label="knowing it" value={st.pointsCorrectAnswer} onSet={(v) => set({ pointsCorrectAnswer: v })} />
-            <Stepper label="each vote you pull" value={st.pointsPerVote} onSet={(v) => set({ pointsPerVote: v })} />
-            <Stepper label="finding the truth" value={st.pointsFoundTruth} onSet={(v) => set({ pointsFoundTruth: v })} />
-            <Stepper label="☕ tile multiplier" value={st.bonusTileMultiplier} onSet={(v) => set({ bonusTileMultiplier: v })} min={1} />
-          </div>
-        </div>
-
-        <Picker
-          label="Final round to clinch"
-          options={[{ v: false, label: 'Off' }, { v: true, label: 'On' }]}
-          value={!!st.finalRoundToClinch}
-          onPick={(v) => set({ finalRoundToClinch: v })}
-          note={st.finalRoundToClinch
-            ? 'Reaching FINISH only wins if you scored that round.'
-            : 'First piece to reach FINISH wins outright.'}
-        />
-        <Picker
-          label="Answer reviews"
-          options={[{ v: true, label: 'On' }, { v: false, label: 'Off' }]}
-          value={st.allowReviews !== false}
-          onPick={(v) => set({ allowReviews: v })}
-          note={st.allowReviews !== false
-            ? 'A player judged wrong can dispute; the other players vote to overturn it.'
-            : 'The AI ruling is final — no disputes.'}
-        />
-        <Picker
-          label="Unverified questions (dev)"
-          options={[{ v: false, label: 'Off' }, { v: true, label: 'Allow' }]}
-          value={!!st.allowUnverified}
-          onPick={(v) => set({ allowUnverified: v })}
-          note={st.allowUnverified
-            ? 'Serving drafted questions that have NOT been fact-checked. Turn off once you approve some at /questions.'
-            : 'Only verified questions will be served.'}
-        />
-
-        {music && music.vibes && music.vibes.length > 1 && (
-          <div className="tv-series-picker">
-            <div className="tv-series-label">Vibes</div>
-            <div className="tv-series-options">
-              {music.allowAll && (
-                <button
-                  className={'lp-btn lp-btn--ghost' + (music.vibeId === ALL_VIBES_ID ? ' tv-series-selected' : '')}
-                  onClick={() => music.onPickVibe(ALL_VIBES_ID)}
-                >All Vibes</button>
-              )}
-              {music.vibes.map((v) => {
-                const empty = !(v.tracks && v.tracks.length);
-                return (
-                  <button
-                    key={v.id}
-                    className={'lp-btn lp-btn--ghost' + (music.vibeId === v.id ? ' tv-series-selected' : '')}
-                    disabled={empty}
-                    onClick={() => music.onPickVibe(v.id)}
-                  >{v.name}{empty ? ' (no songs)' : ''}</button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        <div className="tv-bot-picker">
-          <div className="tv-series-label">CPU players</div>
-          <div className="tv-bot-stepper">
-            <button type="button" className="lp-btn lp-btn--ghost tv-bot-step"
-              aria-label="Remove a CPU player" disabled={botCount === 0}
-              onClick={() => sendAction('removeBot')}>−</button>
-            <span className="tv-bot-count">{botCount}<span className="of"> / 4</span></span>
-            <button type="button" className="lp-btn lp-btn--ghost tv-bot-step"
-              aria-label="Add a CPU player" disabled={!canAddBot}
-              onClick={() => { sfx.enteredRoom(); sendAction('addBot'); }}>+</button>
           </div>
         </div>
 
@@ -504,6 +383,20 @@ function Lobby({ snap, music }) {
             ))}
           </div>
         )}
+
+        <div className="tv-bot-picker">
+          <div className="tv-series-label">CPU players</div>
+          <div className="tv-bot-stepper">
+            <button type="button" className="lp-btn lp-btn--ghost tv-bot-step"
+              aria-label="Remove a CPU player" disabled={botCount === 0}
+              onClick={() => sendAction('removeBot')}>−</button>
+            <span className="tv-bot-count">{botCount}<span className="of"> / 4</span></span>
+            <button type="button" className="lp-btn lp-btn--ghost tv-bot-step"
+              aria-label="Add a CPU player" disabled={!canAddBot}
+              onClick={() => { sfx.enteredRoom(); sendAction('addBot'); }}>+</button>
+          </div>
+        </div>
+
         {snap.players.length >= 2 && (
           <button className="lp-btn tv-start-btn" onClick={() => sendAction('startGame')}>Start the Game</button>
         )}
