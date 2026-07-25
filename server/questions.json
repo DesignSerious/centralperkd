@@ -83,18 +83,19 @@
     },
     "verified": false,
     "stats": {
-      "served": 5,
-      "correct": 8,
-      "answered": 24,
+      "served": 6,
+      "correct": 10,
+      "answered": 29,
       "topWrong": {
         "a sandwich": 2,
-        "Julie": 5,
+        "Julie": 6,
         "the one with the monkey": 1,
         "pivot": 2,
-        "Carol": 2,
+        "Carol": 3,
         "it was Janice": 2,
         "his mother's": 1,
-        "something about a duck": 1
+        "something about a duck": 1,
+        "vbc": 1
       }
     }
   },
@@ -190,9 +191,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
+      "served": 4,
       "correct": 5,
-      "answered": 14,
+      "answered": 15,
       "topWrong": {
         "Pineapple": 1,
         "peaches": 1,
@@ -200,7 +201,8 @@
         "Ugly Naked Guy": 1,
         "he was on a break": 1,
         "strawberries": 3,
-        "Bananna": 1
+        "Bananna": 1,
+        "clearly the wrong thing zzz": 1
       }
     }
   },
@@ -569,14 +571,17 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 3,
-      "answered": 7,
+      "served": 4,
+      "correct": 4,
+      "answered": 11,
       "topWrong": {
         "a completely made up thing": 1,
         "no idea": 1,
         "Muffin": 1,
-        "cunt": 1
+        "cunt": 1,
+        "a completely wrong guess xyz": 1,
+        "another wrong guess qqq": 1,
+        "clearly the wrong thing zzz": 1
       }
     }
   },
@@ -841,12 +846,12 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 3,
-      "answered": 6,
+      "served": 3,
+      "correct": 4,
+      "answered": 9,
       "topWrong": {
-        "a completely wrong guess xyz": 1,
-        "another wrong guess qqq": 1,
+        "a completely wrong guess xyz": 2,
+        "another wrong guess qqq": 2,
         "fg": 1
       }
     }
@@ -1075,7 +1080,18 @@
       "season": 2,
       "episode": null
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 5,
+      "topWrong": {
+        "Dr Ramore": 1,
+        "Dr. Blake Montgomery": 1,
+        "Dr. Striker Ramone": 1,
+        "Dr. Chase Remington": 1
+      }
+    }
   },
   {
     "id": "q037",
@@ -1683,11 +1699,16 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
+      "served": 2,
       "correct": 4,
-      "answered": 5,
+      "answered": 10,
       "topWrong": {
-        "FUCK YOU": 1
+        "FUCK YOU": 1,
+        "vg": 1,
+        "seven": 1,
+        "a sandwich": 1,
+        "Rotate!": 1,
+        "Lift!": 1
       }
     }
   },
@@ -1977,13 +1998,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
+      "served": 2,
       "correct": 0,
-      "answered": 4,
+      "answered": 5,
       "topWrong": {
         "the Sofa Sultan": 1,
         "the Bedding Baron": 2,
-        "the Discount Duke": 1
+        "the Discount Duke": 1,
+        "clearly the wrong thing zzz": 1
       }
     }
   },
@@ -2072,12 +2094,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 3,
-      "answered": 5,
+      "served": 2,
+      "correct": 5,
+      "answered": 10,
       "topWrong": {
-        "Gunther": 1,
-        "Fuckeyou": 1
+        "Gunther": 2,
+        "Fuckeyou": 1,
+        "afasd": 1,
+        "pivot": 1
       }
     }
   },
@@ -2138,9 +2162,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 7,
-      "answered": 15,
+      "served": 5,
+      "correct": 10,
+      "answered": 20,
       "topWrong": {
         "a completely made up thing": 1,
         "Guitar": 1,
@@ -2149,7 +2173,9 @@
         "pivot": 1,
         "the cello": 1,
         "the keyboard": 1,
-        "Flute": 1
+        "Flute": 1,
+        "bv": 1,
+        "a steel drum": 1
       }
     }
   },
@@ -2502,12 +2528,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 1,
-      "answered": 3,
+      "served": 2,
+      "correct": 4,
+      "answered": 8,
       "topWrong": {
         "something about a duck": 1,
-        "Ugly Naked Guy": 1
+        "Ugly Naked Guy": 1,
+        "fd": 1,
+        "risk assessment and auditing": 1
       }
     }
   },
@@ -2562,16 +2590,19 @@
     },
     "verified": false,
     "stats": {
-      "served": 5,
-      "correct": 10,
-      "answered": 18,
+      "served": 6,
+      "correct": 11,
+      "answered": 23,
       "topWrong": {
         "Glove": 1,
         "a sandwich": 1,
         "seven": 2,
-        "a stockpot": 2,
+        "a stockpot": 3,
         "a pumpkin": 1,
-        "pivot": 1
+        "pivot": 1,
+        "hgddhdfgh": 1,
+        "a football helmet full of stuffing": 1,
+        "Ugly Naked Guy": 1
       }
     }
   },
@@ -2718,13 +2749,15 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 2,
-      "answered": 5,
+      "served": 2,
+      "correct": 3,
+      "answered": 8,
       "topWrong": {
         "It was spilled onto the ground": 1,
         "it never set and poured like soup": 1,
-        "Ugly Naked Guy": 1
+        "Ugly Naked Guy": 1,
+        "a completely wrong guess xyz": 1,
+        "another wrong guess qqq": 1
       }
     }
   },
@@ -2897,14 +2930,18 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
+      "served": 3,
       "correct": 1,
-      "answered": 5,
+      "answered": 10,
       "topWrong": {
         "a completely made up thing": 1,
         "he was on a break": 1,
         "electronic tone sculptures": 1,
-        "a sandwich": 1
+        "a sandwich": 1,
+        "XcZx": 1,
+        "experimental mood pieces": 2,
+        "ambient jazz fusion": 1,
+        "something about a duck": 1
       }
     }
   },
@@ -3068,15 +3105,16 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 2,
-      "answered": 8,
+      "served": 3,
+      "correct": 3,
+      "answered": 10,
       "topWrong": {
         "Cunt": 1,
         "duckie": 2,
         "seven": 1,
         "mama": 1,
-        "juice": 1
+        "juice": 1,
+        "a completely made up thing": 1
       }
     }
   },

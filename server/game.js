@@ -835,74 +835,15 @@ function scheduleNextReveal(io, room) {
 }
 
 // ─── answer review (dispute) ───
-// Only a connected HUMAN can start a dispute (bots have no phone), but everyone
-// still at the table — humans AND bots — judges it. A bot votes by how close the
-// disputed answer is to the real one (see botReviewVote).
-function connectedCount(room) {
-  return room.players.filter((p) => p.connected).length;
+// Reviews are judged by the connected HUMANS only — CPU players never vote on a
+// dispute. So a dispute needs at least two humans at the table (the disputer
+// plus one to judge); a lone human playing against bots can't open one.
+function connectedHumans(room) {
+  return room.players.filter((p) => p.connected && !p.isBot);
 }
-// Who judges a given player's dispute: every other connected player (any bot or
-// human), so a lone human playing against bots can still be overruled in their favour.
+// Who judges a given player's dispute: every OTHER connected human.
 function reviewerIdsFor(room, disputerId) {
-  return room.players.filter((p) => p.connected && p.id !== disputerId).map((p) => p.id);
-}
-
-// A bot's verdict on a dispute: does the disputed answer look close enough to the
-// truth to count? Deliberately more lenient than the strict answer judge (that
-// already said "wrong") — it forgives synonyms, extra words, and typos, which is
-// exactly the kind of miss a review is meant to rescue.
-function normalizeForReview(s) {
-  return String(s || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
-}
-function levenshtein(a, b) {
-  const m = a.length, n = b.length;
-  if (!m) return n; if (!n) return m;
-  let prev = new Array(n + 1);
-  for (let j = 0; j <= n; j++) prev[j] = j;
-  for (let i = 1; i <= m; i++) {
-    const cur = [i];
-    for (let j = 1; j <= n; j++) {
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
-    }
-    prev = cur;
-  }
-  return prev[n];
-}
-function botReviewVote(answerText, truth) {
-  const a = normalizeForReview(answerText);
-  const b = normalizeForReview(truth);
-  if (!a || !b) return 'no';
-  if (a === b) return 'yes';
-  // One phrase contains the other ("18 pages" vs "18 pages front and back").
-  if (a.length >= 3 && b.length >= 3 && (a.includes(b) || b.includes(a))) return 'yes';
-  // Meaningful-word overlap (Jaccard over words longer than 2 chars).
-  const aw = new Set(a.split(' ').filter((w) => w.length > 2));
-  const bw = new Set(b.split(' ').filter((w) => w.length > 2));
-  if (aw.size && bw.size) {
-    let inter = 0;
-    for (const w of aw) if (bw.has(w)) inter++;
-    const union = new Set([...aw, ...bw]).size;
-    if (inter / union >= 0.5) return 'yes';
-  }
-  // Close spelling / typo.
-  if (levenshtein(a, b) / Math.max(a.length, b.length) <= 0.3) return 'yes';
-  return 'no';
-}
-// Bots on the review panel cast their votes on a short human-like stagger.
-function scheduleBotReviewVotes(io, room) {
-  const rc = room.reviewCurrent;
-  if (!rc) return;
-  const bots = room.players.filter((p) => p.connected && p.isBot && p.id !== rc.playerId);
-  bots.forEach((bot, i) => {
-    const vote = botReviewVote(rc.answerText, rc.truth);
-    const delay = room.botMode ? 1 : 500 + i * 550 + Math.floor(Math.random() * 350);
-    trackedBotTimeout(room, () => {
-      if (room.state === STATES.REVIEW && room.reviewCurrent === rc && !rc.resolved) {
-        castReviewVote(io, room, bot.id, vote);
-      }
-    }, delay);
-  });
+  return connectedHumans(room).filter((p) => p.id !== disputerId).map((p) => p.id);
 }
 // Live yes/no tally for the current dispute, recomputed from the ballot so the TV
 // updates as votes land (the frozen count on reviewCurrent is only set at tally).
@@ -922,7 +863,7 @@ function reviewCounts(room) {
 function requestReview(io, room, playerId) {
   if (room.state !== STATES.REVEAL) return false;
   if (!room.settings.allowReviews || !room.truthRevealed) return false;
-  if (connectedCount(room) < 2) return false;   // need at least one other player to judge it
+  if (connectedHumans(room).length < 2) return false;   // need another human to judge it
   const p = room.players.find((x) => x.id === playerId);
   if (!p || !p.connected || p.isBot) return false;
   const a = room.answers[playerId];
@@ -938,7 +879,7 @@ function requestReview(io, room, playerId) {
 function afterReveal(io, room) {
   const wantReviews = room.settings.allowReviews
     && room.reviewRequests.length > 0
-    && connectedCount(room) >= 2;
+    && connectedHumans(room).length >= 2;
   if (wantReviews) beginReviews(io, room);
   else beginScoring(io, room);
 }
@@ -986,7 +927,6 @@ function nextReview(io, room) {
     room.state = STATES.REVIEW;
     touch(room);
     broadcast(io, room.code);
-    scheduleBotReviewVotes(io, room);   // bot reviewers cast their verdicts on a stagger
     setTimer(room, room.botMode ? 1 : REVIEW_SECONDS * 1000, () => tallyReview(io, room));
     return;
   }
@@ -1000,9 +940,7 @@ function castReviewVote(io, room, playerId, vote) {
   if (!rc || rc.resolved) return false;
   if (playerId === rc.playerId) return false;                       // the disputer can't judge
   const p = room.players.find((x) => x.id === playerId);
-  // Bots ARE allowed to vote (called server-side); a human client can only ever
-  // pass its own id, so this can't be spoofed to vote as someone else.
-  if (!p || !p.connected) return false;
+  if (!p || !p.connected || p.isBot) return false;                  // humans only judge reviews
   if (!reviewerIdsFor(room, rc.playerId).includes(playerId)) return false;
   const v = vote === 'yes' ? 'yes' : vote === 'no' ? 'no' : null;
   if (!v) return false;
@@ -1637,7 +1575,7 @@ function baseSnapshot(room) {
     // now (during REVEAL, once the truth is up). `review` = the dispute the
     // table is judging during REVIEW, with a live yes/no tally.
     reviewsOpen: !!(room.settings.allowReviews && room.state === STATES.REVEAL
-      && room.truthRevealed && connectedCount(room) >= 2),
+      && room.truthRevealed && connectedHumans(room).length >= 2),
     review: reviewView(room),
     duel: room.duelPending || null,
     duelPick: room.duelPick || null,
