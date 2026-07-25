@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getSocket, sendAction } from '../lib/socket';
+import Fireflies from './Fireflies';
 import Board2D from './Board2D';
 import Celebration from './Celebration';
 import PieceVisual from '../lib/PieceVisual';
@@ -181,9 +182,10 @@ export default function App() {
             <div className="tv-steam tv-steam--right"><i></i><i></i><i></i></div>
           </div>
         )}
-        {/* Removed the Wilderdash ambient light overlays (Fireflies twinkles +
-            BoardAmbience UFO/house/footbridge glows) — those were tied to the
-            Wilderdash board art and just blinked over random spots here. */}
+        {/* Fireflies stay (a nice magical drift). The BoardAmbience UFO/house/
+            footbridge glows were removed — those blinked over random spots on
+            the Central Perk'd board. */}
+        <Fireflies />
         {snap && code && (
           <Board2D
             players={snap.players}
