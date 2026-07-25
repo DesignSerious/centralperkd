@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as sfx from '../lib/sfx';
+import AdminNav from '../lib/AdminNav';
+import { loadAdminPwd, saveAdminPwd, clearAdminPwd } from '../lib/adminAuth';
 
 // Central Perk'd Sound Board admin.
 // Flow:
-//   1. Login (reuses PLAYLIST_PASSWORD via /api/playlist/login; held in
-//      sessionStorage so a refresh doesn't kick you out).
+//   1. Login using the SHARED admin password (loadAdminPwd), so signing in on
+//      any admin page (/admin, /sounds, /playlist) covers them all — the top
+//      nav then jumps between tools without re-login.
 //   2. Editor: drop mp3s to upload them into the library (left). Drag a library
 //      sound onto a trigger card (right) to assign it, or ✕ to reset a trigger
 //      to its built-in default. Save writes the trigger→file map to the server;
@@ -12,12 +15,9 @@ import * as sfx from '../lib/sfx';
 //
 // A trigger's stable key is what sfx.js references; renaming/uploading never
 // changes which key a sound is bound to. Unassigned triggers use their default.
-const PWD_KEY = 'cperkd_sounds_pwd';
 
 export default function App() {
-  const [password, setPassword] = useState(() => {
-    try { return sessionStorage.getItem(PWD_KEY) || ''; } catch (e) { return ''; }
-  });
+  const [password, setPassword] = useState(() => loadAdminPwd());
   const [authed, setAuthed] = useState(false);
   const [authError, setAuthError] = useState('');
   const [authing, setAuthing] = useState(false);
@@ -33,7 +33,7 @@ export default function App() {
       .then((r) => r.json())
       .then((d) => {
         if (d && d.ok) setAuthed(true);
-        else { setPassword(''); try { sessionStorage.removeItem(PWD_KEY); } catch (e) {} }
+        else { setPassword(''); clearAdminPwd(); }
       })
       .catch(() => {})
       .finally(() => setAuthing(false));
@@ -51,7 +51,7 @@ export default function App() {
     })
       .then((r) => r.json())
       .then((d) => {
-        if (d && d.ok) { try { sessionStorage.setItem(PWD_KEY, password); } catch (e) {} setAuthed(true); }
+        if (d && d.ok) { saveAdminPwd(password); setAuthed(true); }
         else setAuthError((d && d.error) || 'Wrong password.');
       })
       .catch((e) => setAuthError(e.message))
@@ -59,7 +59,7 @@ export default function App() {
   }
 
   function logout() {
-    try { sessionStorage.removeItem(PWD_KEY); } catch (e) {}
+    clearAdminPwd();
     setPassword('');
     setAuthed(false);
   }
@@ -237,12 +237,13 @@ function Editor({ password, onLogout }) {
   }
 
   return (
-    <div className="sb-shell">
+    <>
+      <AdminNav current="sounds" onSignOut={onLogout} />
+      <div className="sb-shell">
       <div className="sb-card sb-card--wide">
         <div className="sb-header">
           <h1 className="sb-title">Sound Board</h1>
           <div className="sb-header-actions">
-            <button className="sb-btn sb-btn--ghost" onClick={onLogout}>Sign out</button>
             <button className="sb-btn" onClick={save} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
           </div>
         </div>
@@ -359,6 +360,7 @@ function Editor({ password, onLogout }) {
         </div>
         <audio ref={audioRef} />
       </div>
-    </div>
+      </div>
+    </>
   );
 }
