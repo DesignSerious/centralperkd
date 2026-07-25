@@ -595,7 +595,7 @@ export default function Board2D({ players, spaces, slideUsers, results, state })
         scootOthers(before, mid, m.id);
 
         // Stop + announce as the walk lands.
-        firePop(m.id, { cls: 'is-advance', icon: '➜', text: advText }, SLIDE_MS, sfx.advance);
+        firePop(m.id, { cls: 'is-advance', icon: '', text: advText }, SLIDE_MS, sfx.advance);
 
         // Leg 2 — after the pause, advance the rest position to the final tile
         // and hop there. tv-token--bridge floats it above the pack for the hop.
@@ -622,7 +622,7 @@ export default function Board2D({ players, spaces, slideUsers, results, state })
         if (m.usedSlide) {
           // Reduced motion: jump straight to final, still announce.
           applyCoord(m.id, after[m.id], null);
-          firePop(m.id, { cls: 'is-advance', icon: '➜', text: advText }, 0, sfx.advance);
+          firePop(m.id, { cls: 'is-advance', icon: '', text: advText }, 0, sfx.advance);
         } else {
           // Normal walk from the old tile to the new one.
           glide(m.id,
@@ -739,7 +739,7 @@ export default function Board2D({ players, spaces, slideUsers, results, state })
                 className={'tv-flair-pop ' + pop.cls + (c.y < 26 ? ' tv-flair-pop--below' : '')}
                 key={'pop-' + p.id + '-' + pop.text}
               >
-                <span className="tv-flair-pop-icon" aria-hidden="true">{pop.icon}</span>
+                {pop.icon && <span className="tv-flair-pop-icon" aria-hidden="true">{pop.icon}</span>}
                 <span className="tv-flair-pop-text">{pop.text}</span>
               </div>
             )}
