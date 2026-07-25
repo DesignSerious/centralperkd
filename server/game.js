@@ -233,6 +233,7 @@ function makeRoom(code) {
     bluffs: {},              // playerId -> lie text (correct players only)
     ballot: [],              // [{ letter, text, authorIds[], isTruth, isDecoy }]
     votes: {},               // playerId -> letter (wrong players only)
+    laughs: {},              // ballot letter -> [playerIds who reacted 😂 to it]
     answersOpenedAt: 0,
     judgeBudget: null,
     pendingJudgements: 0,
@@ -435,6 +436,7 @@ function beginRoundIntro(io, room) {
   room.bluffs = {};
   room.ballot = [];
   room.votes = {};
+  room.laughs = {};
   room.lastResults = {};
   room.lastSlides = {};
   room.revealIndex = 0;
@@ -725,6 +727,40 @@ function castVote(io, room, playerId, letter) {
     setTimer(room, LAST_DING_BEAT_MS, () => beginReveal(io, room));
   }
   return true;
+}
+
+// 😂 react on a ballot entry during voting — "that made me laugh". Toggles the
+// player's laugh on that entry; credited to the entry's author at the reveal.
+// You can't laugh at your own entry.
+function toggleLaugh(io, room, playerId, letter) {
+  if (room.state !== STATES.VOTING) return false;
+  const entry = room.ballot.find((b) => b.letter === letter);
+  if (!entry) return false;
+  if ((entry.authorIds || []).includes(playerId)) return false;   // not your own
+  if (!Array.isArray(room.laughs[letter])) room.laughs[letter] = [];
+  const arr = room.laughs[letter];
+  const i = arr.indexOf(playerId);
+  if (i >= 0) arr.splice(i, 1); else arr.push(playerId);
+  touch(room);
+  broadcast(io, room.code);
+  return true;
+}
+
+// Who got laughed WITH this round: sum each ballot entry's 😂 count onto its
+// author(s). Shown at the reveal. (Truth / house decoys have no author.)
+function laughLeaders(room) {
+  const byPlayer = {};
+  for (const b of room.ballot) {
+    const n = (room.laughs[b.letter] || []).length;
+    if (!n) continue;
+    for (const authorId of (b.authorIds || [])) {
+      byPlayer[authorId] = (byPlayer[authorId] || 0) + n;
+    }
+  }
+  return room.players
+    .filter((p) => byPlayer[p.id])
+    .map((p) => ({ id: p.id, name: p.name, piece: p.piece, laughs: byPlayer[p.id] }))
+    .sort((a, b) => b.laughs - a.laughs);
 }
 
 function beginReveal(io, room) {
@@ -1302,6 +1338,7 @@ function returnToLobby(io, room) {
   room.bluffs = {};
   room.ballot = [];
   room.votes = {};
+  room.laughs = {};
   room.lastResults = {};
   room.lastSlides = {};
   room.reviewRequests = [];
@@ -1365,6 +1402,10 @@ function handle(io, { socket, role, roomCode, playerId, action, data }) {
     case 'vote': {
       if (role !== 'player') return false;
       return castVote(io, room, playerId, data && data.letter);
+    }
+    case 'laughReact': {
+      if (role !== 'player') return false;
+      return toggleLaugh(io, room, playerId, data && data.letter);
     }
     case 'requestReview': {
       if (role !== 'player') return false;
@@ -1570,6 +1611,8 @@ function baseSnapshot(room) {
     correctCount: revealed(room.state) || room.state === STATES.BLUFFING || room.state === STATES.VOTING
       ? correctPlayerIds(room).length : 0,
     bluffedPlayerIds: Object.keys(room.bluffs),
+    // Who got laughed WITH this round (author -> 😂 count), shown at the reveal.
+    laughLeaders: revealed(room.state) ? laughLeaders(room) : [],
     // During BLUFFING, WHO is writing lies (the players who got it right) so the
     // TV can show a check-in strip of just the writers. Only exposed in this
     // phase — outside it, revealing the correct players would leak the ballot.
@@ -1640,6 +1683,8 @@ function playerSnapshot(room, playerId) {
   base.myAnswerCorrect = myAnswer && myAnswer.judged ? myAnswer.correct : null;
   base.myBluff = room.bluffs[playerId] || null;
   base.myVote = room.votes[playerId] || null;
+  // Ballot letters this player reacted 😂 to, so the vote screen can highlight them.
+  base.myLaughs = Object.keys(room.laughs).filter((l) => (room.laughs[l] || []).includes(playerId));
   base.myResult = revealed(room.state) ? (room.lastResults[playerId] || null) : null;
   base.canAnswer = room.state === STATES.ANSWERING && !myAnswer;
   base.canBluff = room.state === STATES.BLUFFING && iWasCorrect && !room.bluffs[playerId];

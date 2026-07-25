@@ -811,6 +811,30 @@ video.photo-capture-frame { transform: scaleX(-1); }
   border-color: rgba(215, 192, 149, 0.22); background: rgba(215, 192, 149, 0.10);
 }
 .vote-choice:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* A vote choice + its 😂 laugh react. The choice stays full-width (with extra
+   right padding to reserve room) and the laugh button is absolutely positioned
+   in that gap — so it can NEVER push off-screen regardless of text length. */
+.vote-choice-row { position: relative; width: 100%; }
+.vote-choice-row .vote-choice { width: 100%; padding-right: 70px; }
+.vote-laugh {
+  position: absolute; top: 6px; right: 6px; bottom: 6px;
+  width: 54px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; line-height: 1;
+  background: rgba(255, 245, 225, 0.05);
+  border: 2px solid var(--rule);
+  border-radius: var(--radius);
+  filter: grayscale(0.7); opacity: 0.6;
+  transition: all 0.15s;
+}
+.vote-laugh:hover:not(:disabled) { opacity: 1; filter: none; border-color: rgba(255, 184, 69, 0.4); }
+.vote-laugh.is-laughed {
+  opacity: 1; filter: none;
+  background: rgba(255, 184, 69, 0.18);
+  border-color: rgba(255, 184, 69, 0.7);
+}
+.vote-laugh:disabled { opacity: 0.2; cursor: not-allowed; }
 /* The player's own bluff — visibly grayed out and tagged so it's clear
    why it can't be tapped, rather than just looking dim. */
 .vote-choice.is-own {

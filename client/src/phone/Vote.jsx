@@ -13,6 +13,7 @@ export default function Vote({ snap }) {
   const myVote = snap.myVote;
   const ballot = snap.ballot || [];
   const mine = snap.myBallotLetters || [];
+  const myLaughs = snap.myLaughs || [];
   const seconds = useCountdown(snap.phaseEndsAt);
 
   const prevRef = useRef(myVote);
@@ -24,6 +25,10 @@ export default function Vote({ snap }) {
   function pick(letter) {
     if (myVote || mine.includes(letter)) return;
     sendAction('vote', { letter });
+  }
+  function laugh(letter, e) {
+    e.stopPropagation();
+    sendAction('laughReact', { letter });
   }
 
   return (
@@ -48,19 +53,31 @@ export default function Vote({ snap }) {
         {ballot.map((b) => {
           const own = mine.includes(b.letter);
           const voted = myVote === b.letter;
+          const laughed = myLaughs.includes(b.letter);
           return (
-            <button
-              key={b.letter}
-              className={'vote-choice' + (own ? ' is-own' : '') + (voted ? ' is-voted' : '')}
-              disabled={own || !!myVote}
-              onClick={() => pick(b.letter)}
-              title={own ? "That's yours — can't vote for it." : ''}
-            >
-              <span className="letter">{b.letter}</span>
-              <span className="text">{b.text}</span>
-              {own && <span className="vote-choice-own-tag">Yours</span>}
-              {voted && <span className="vote-choice-voted-tag">Your vote</span>}
-            </button>
+            <div key={b.letter} className={'vote-choice-row' + (voted ? ' is-voted' : '')}>
+              <button
+                className={'vote-choice' + (own ? ' is-own' : '') + (voted ? ' is-voted' : '')}
+                disabled={own || !!myVote}
+                onClick={() => pick(b.letter)}
+                title={own ? "That's yours — can't vote for it." : ''}
+              >
+                <span className="letter">{b.letter}</span>
+                <span className="text">{b.text}</span>
+                {own && <span className="vote-choice-own-tag">Yours</span>}
+                {voted && <span className="vote-choice-voted-tag">Your vote</span>}
+              </button>
+              {/* 😂 react — "this made me laugh". Not on your own entry. */}
+              <button
+                type="button"
+                className={'vote-laugh' + (laughed ? ' is-laughed' : '')}
+                disabled={own}
+                onClick={(e) => laugh(b.letter, e)}
+                aria-pressed={laughed}
+                aria-label="That made me laugh"
+                title={own ? "Can't laugh at your own" : 'That made me laugh'}
+              >😂</button>
+            </div>
           );
         })}
       </div>

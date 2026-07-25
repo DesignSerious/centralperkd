@@ -1091,15 +1091,16 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 4,
-      "answered": 9,
+      "served": 4,
+      "correct": 11,
+      "answered": 17,
       "topWrong": {
         "a sandwich": 1,
         "pushed off a yacht": 1,
         "seven": 1,
         "he was on a break": 1,
-        "Thrown out of a window": 1
+        "Thrown out of a window": 1,
+        "a brain tumor": 1
       }
     }
   },
@@ -1516,13 +1517,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 5,
-      "answered": 8,
+      "served": 4,
+      "correct": 8,
+      "answered": 12,
       "topWrong": {
         "Phoebe did it": 1,
         "Fag": 1,
-        "clearly the wrong thing zzz": 1
+        "clearly the wrong thing zzz": 1,
+        "he offered six months' rent up front": 1
       }
     }
   },
@@ -1821,9 +1823,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 1,
-      "answered": 6,
+      "served": 3,
+      "correct": 3,
+      "answered": 8,
       "topWrong": {
         "a completely made up thing": 1,
         "it was Janice": 1,
@@ -1884,11 +1886,11 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 5,
-      "answered": 12,
+      "served": 4,
+      "correct": 6,
+      "answered": 14,
       "topWrong": {
-        "a completely made up thing": 1,
+        "a completely made up thing": 2,
         "Animal sanctuary": 1,
         "a sandwich": 1,
         "a primate sanctuary in Florida": 3,
@@ -1917,11 +1919,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 5,
-      "answered": 6,
+      "served": 3,
+      "correct": 6,
+      "answered": 9,
       "topWrong": {
-        "a completely made up thing": 1
+        "a completely made up thing": 1,
+        "a silly wrong guess": 1,
+        "another wrong one": 1
       }
     }
   },
@@ -2397,13 +2401,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 5,
-      "answered": 8,
+      "served": 3,
+      "correct": 7,
+      "answered": 12,
       "topWrong": {
-        "archaeologist": 1,
+        "archaeologist": 2,
         "something about a duck": 1,
-        "adsfadf": 1
+        "adsfadf": 1,
+        "geologist": 1
       }
     }
   },

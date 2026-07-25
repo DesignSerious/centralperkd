@@ -617,6 +617,7 @@ function RevealScreen({ snap }) {
         </div>
       )}
       {isTruth && <KnewItStrip snap={snap} />}
+      {isTruth && <LaughStrip snap={snap} />}
       {isTruth && snap.settings && snap.settings.allowReviews !== false && (
         <div className="tv-review-hint">
           Marked wrong but sure you nailed it? Tap <strong>Request a Review</strong> on your phone.
@@ -624,6 +625,27 @@ function RevealScreen({ snap }) {
       )}
       </div>
     </>
+  );
+}
+
+// Who got laughed WITH this round — the players whose ballot entry drew 😂
+// reactions from the table. Shown alongside the truth at the reveal.
+function LaughStrip({ snap }) {
+  const leaders = snap.laughLeaders || [];
+  if (!leaders.length) return null;
+  return (
+    <div className="tv-laugh-strip">
+      <span className="tv-laugh-label">😂 Made everyone laugh</span>
+      <div className="tv-laugh-list">
+        {leaders.map((p) => (
+          <span className="tv-laugh-item" key={p.id}>
+            <PieceVisual id={p.piece} size={40} />
+            <span className="who">{p.name}</span>
+            <span className="n">{p.laughs}</span>
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
 

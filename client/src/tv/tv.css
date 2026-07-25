@@ -2239,6 +2239,28 @@
 .tv-review-verdict-tally { font-size: 0.6em; font-weight: 700; color: var(--cream-dim); }
 .tv-review-more { margin-top: 12px; font-size: 0.9rem; color: var(--cream-fade); }
 
+/* Who got laughed WITH — the 😂 leaderboard shown at the reveal. */
+.tv-laugh-strip {
+  margin-top: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.tv-laugh-label {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1rem, 1.4cqw, 1.5rem); color: var(--gold-soft);
+}
+.tv-laugh-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 16px; }
+.tv-laugh-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px 6px 8px; border-radius: var(--radius-pill);
+  background: rgba(255, 184, 69, 0.14); border: 1px solid rgba(255, 184, 69, 0.4);
+  color: var(--cream); font-weight: 600;
+  font-size: clamp(1rem, 1.3cqw, 1.35rem);
+}
+.tv-laugh-item .n {
+  font-family: var(--display); font-weight: 800; color: var(--gold-soft);
+  font-variant-numeric: tabular-nums;
+}
+.tv-laugh-item .n::before { content: '😂 '; font-weight: 400; }
+
 /* Reveal-time nudge so wrongly-judged players know the dispute option exists. */
 .tv-review-hint {
   margin-top: 12px; font-size: clamp(0.8rem, 1cqw, 1.05rem);
