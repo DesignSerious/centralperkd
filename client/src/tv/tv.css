@@ -2181,6 +2181,13 @@
 }
 .tv-bluff-voter { display: inline-flex; align-items: center; gap: 6px; color: var(--cream); font-weight: 600; }
 .tv-bluff-nofool { font-style: italic; opacity: 0.7; }
+/* Who 😂'd this entry — shown under "fooled" on each bluff card. */
+.tv-bluff-laughs {
+  margin-top: 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px;
+  font-size: clamp(0.95rem, 1.35cqw, 1.25rem); color: var(--cream);
+}
+.tv-bluff-laughs-label { font-size: 1.15em; line-height: 1; }
+.tv-bluff-laugher { display: inline-flex; align-items: center; gap: 6px; color: var(--cream); font-weight: 600; }
 
 /* ─── Answer review (dispute) ─── */
 .tv-review-head {

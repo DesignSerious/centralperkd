@@ -691,15 +691,16 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 5,
-      "answered": 13,
+      "served": 5,
+      "correct": 6,
+      "answered": 16,
       "topWrong": {
-        "Phoebe": 3,
+        "Phoebe": 4,
         "something about a duck": 1,
         "it was Janice": 1,
         "Rachel": 2,
-        "a completely made up thing": 1
+        "a completely made up thing": 1,
+        "fghd": 1
       }
     }
   },
@@ -723,14 +724,15 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 4,
-      "answered": 12,
+      "served": 5,
+      "correct": 5,
+      "answered": 15,
       "topWrong": {
         "Joey cracked under pressure": 4,
         "Through Phoebe": 1,
-        "pivot": 2,
-        "he read Monica's day planner": 1
+        "pivot": 3,
+        "he read Monica's day planner": 1,
+        "dfv": 1
       }
     }
   },
@@ -802,16 +804,19 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 1,
-      "answered": 8,
+      "served": 4,
+      "correct": 3,
+      "answered": 14,
       "topWrong": {
         "Hair": 1,
         "it was Janice": 1,
         "a pet adoption PSA": 1,
-        "a flea collar commercial": 1,
+        "a flea collar commercial": 2,
         "an air freshener ad": 2,
-        "no idea": 1
+        "no idea": 1,
+        "g": 1,
+        "a silly wrong guess": 1,
+        "another wrong one": 1
       }
     }
   },
@@ -836,12 +841,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 1,
-      "answered": 3,
+      "served": 2,
+      "correct": 3,
+      "answered": 6,
       "topWrong": {
         "a completely wrong guess xyz": 1,
-        "another wrong guess qqq": 1
+        "another wrong guess qqq": 1,
+        "fg": 1
       }
     }
   },
@@ -1706,12 +1712,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 3,
-      "answered": 5,
+      "served": 2,
+      "correct": 5,
+      "answered": 8,
       "topWrong": {
         "pivot": 1,
-        "It was destroyed": 1
+        "It was destroyed": 1,
+        "vc": 1
       }
     }
   },
@@ -2094,18 +2101,20 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
+      "served": 4,
       "correct": 5,
-      "answered": 14,
+      "answered": 17,
       "topWrong": {
         "Whatches him while he slept": 1,
         "no idea": 1,
-        "talking to a mannequin head": 2,
+        "talking to a mannequin head": 3,
         "Fag": 1,
         "he was on a break": 1,
         "pivot": 1,
         "stealing Chandler's mail": 1,
-        "something about a duck": 1
+        "something about a duck": 1,
+        "hgn": 1,
+        "wearing Chandler's clothes": 1
       }
     }
   },
@@ -2586,13 +2595,15 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
+      "served": 4,
       "correct": 2,
-      "answered": 7,
+      "answered": 10,
       "topWrong": {
-        "a spray-painted turkey baster": 3,
+        "a spray-painted turkey baster": 4,
         "Milk carton": 1,
-        "something about a duck": 1
+        "something about a duck": 1,
+        "afsdaf": 1,
+        "seven": 1
       }
     }
   },
@@ -2992,12 +3003,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 1,
-      "answered": 3,
+      "served": 3,
+      "correct": 2,
+      "answered": 6,
       "topWrong": {
         "they shrank near the radiator": 1,
-        "the one with the monkey": 1
+        "the one with the monkey": 1,
+        "hgh": 1,
+        "the zipper broke off": 1
       }
     }
   },
@@ -3022,16 +3035,18 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 3,
-      "answered": 9,
+      "served": 3,
+      "correct": 4,
+      "answered": 12,
       "topWrong": {
         "He used butter": 1,
         "a sandwich": 1,
         "the machine jammed mid-spray": 1,
         "Ugly Naked Guy": 1,
         "he picked the wrong shade": 1,
-        "no idea": 1
+        "no idea": 1,
+        "asdf": 1,
+        "he faced the wrong way": 1
       }
     }
   },

@@ -657,7 +657,7 @@ function BluffsSummary({ snap }) {
   const ballot = snap.ballot || [];
   const playerById = (id) => snap.players.find((p) => p.id === id);
   const bluffs = ballot.filter((b) => !b.isTruth &&
-    ((b.authorIds || []).length || (b.voters || []).length));
+    ((b.authorIds || []).length || (b.voters || []).length || (b.laughers || []).length));
 
   return (
     <div className="tv-stage tv-stage--panel">
@@ -690,6 +690,16 @@ function BluffsSummary({ snap }) {
                     </>
                   )}
               </div>
+              {(b.laughers || []).length > 0 && (
+                <div className="tv-bluff-laughs">
+                  <span className="tv-bluff-laughs-label" aria-hidden="true">😂</span>
+                  {(b.laughers || []).map(playerById).filter(Boolean).map((p) => (
+                    <span className="tv-bluff-laugher" key={p.id}>
+                      <PieceVisual id={p.piece} size={40} />{p.name}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}

@@ -1580,6 +1580,7 @@ function publicBallot(room, withTruth) {
       out.isDecoy = b.isDecoy;
       out.authorIds = b.authorIds;
       out.voters = votersFor(room, b.letter);
+      out.laughers = (room.laughs[b.letter] || []).slice();   // who 😂'd this entry
     }
     return out;
   });
