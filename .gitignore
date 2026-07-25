@@ -8,8 +8,12 @@ dist/
 server/data/
 
 # Runtime AI-piece cache (regenerated on demand; may contain photo-derived
-# images from local testing — never commit)
-server/uploads/
+# images from local testing — never commit).
+server/uploads/pieces/
+
+# NOTE: custom game sound effects (server/uploads/sounds/) ARE tracked so the
+# Sound Board's assignments in sounds.json resolve on deploy. Only pieces/ above
+# is ignored; the sounds folder is committed with the app.
 
 # Editor / IDE
 .vscode/
