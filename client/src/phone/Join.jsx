@@ -24,6 +24,24 @@ export default function Join({ onJoined }) {
   // Track sign-in changes (sign in/out from the Account modal).
   useEffect(() => subscribeAuth(setAuthState), []);
 
+  // Deep-link from the TV's QR code: /join?code=XXXX pre-fills the room code and
+  // jumps straight to the name step, so scanning skips manual code entry.
+  useEffect(() => {
+    let param = '';
+    try { param = new URLSearchParams(window.location.search).get('code') || ''; } catch (e) {}
+    const clean = param.trim().toUpperCase().replace(/[^A-Z]/g, '');
+    if (clean.length !== 4) return;
+    setCode(clean);
+    getSocket().emit('room:peek', { code: clean }, (res) => {
+      if (res && res.ok) {
+        setTakenPieces(res.takenPieces || []);
+        setStep('details');
+      }
+      // Invalid/closed room → stay on the code step with it pre-filled.
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // When signed in, prefill name + avatar — but only fields the player
   // hasn't touched yet, so guests and manual edits are never overridden.
   useEffect(() => {

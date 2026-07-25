@@ -5,6 +5,7 @@ import BoardAmbience from './BoardAmbience';
 import Board2D from './Board2D';
 import Celebration from './Celebration';
 import PieceVisual from '../lib/PieceVisual';
+import QrCode from '../lib/QrCode';
 import RulesOverlay from '../lib/RulesOverlay';
 import PauseOverlay from '../lib/PauseOverlay';
 import { MusicProvider } from '../lib/MusicContext';
@@ -363,10 +364,17 @@ function Lobby({ snap }) {
         <img className="tv-lobby-logo" src="/central-perkd-logo.png" alt="Central Perk'd" draggable={false} />
 
         <div className="tv-lobby-join">
-          <div className="tv-join-cta">
-            <span className="url">{window.location.host + '/join'}</span>
-            <span className="arrow">→</span>
-            <span className="code">{snap.code}</span>
+          <div className="tv-qr-card">
+            <QrCode value={window.location.origin + '/join?code=' + snap.code} size={200} className="tv-qr-img" />
+          </div>
+          <div className="tv-join-info">
+            <div className="tv-join-scan">Scan to join</div>
+            <div className="tv-join-or">or go to</div>
+            <div className="tv-join-cta">
+              <span className="url">{window.location.host + '/join'}</span>
+              <span className="arrow">→</span>
+              <span className="code">{snap.code}</span>
+            </div>
           </div>
         </div>
 
@@ -376,7 +384,7 @@ function Lobby({ snap }) {
           <div className="tv-player-chips">
             {snap.players.map((p) => (
               <div key={p.id} className={'chip lp-fade-in' + (p.isBot ? ' is-bot' : '')}>
-                <span className="emoji"><PieceVisual id={p.piece} size={42} glow /></span>
+                <span className="emoji"><PieceVisual id={p.piece} size={72} glow /></span>
                 <span className="name">{p.name}</span>
                 {p.isBot && <span className="bot-badge">CPU</span>}
               </div>

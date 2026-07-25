@@ -1155,15 +1155,33 @@
    the middle of the board, which collided with the now-taller settings
    panel). Sized large so it still reads across the room. */
 .tv-lobby-join {
-  display: flex; justify-content: center;
+  display: flex; justify-content: center; align-items: center;
+  gap: 28px; flex-wrap: wrap;
   margin-bottom: 6px;
 }
-.tv-lobby-join .tv-join-cta {
-  gap: 24px;
-  padding: 14px 34px;
+/* QR: cream card so the code scans cleanly against the green panel. */
+.tv-qr-card {
+  flex: 0 0 auto;
+  background: var(--cream, #fff5e1);
+  padding: 12px; border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
-.tv-lobby-join .tv-join-cta .url  { font-size: clamp(1.4rem, 2.1cqw, 2.35rem); }
-.tv-lobby-join .tv-join-cta .code { font-size: clamp(1.6rem, 2.4cqw, 2.8rem); }
+.tv-qr-img { display: block; width: clamp(150px, 15cqw, 220px); height: auto; }
+.tv-join-info { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.tv-join-scan {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.3rem, 2cqw, 2.2rem); color: var(--cream);
+}
+.tv-join-or {
+  font-size: clamp(0.8rem, 1cqw, 1.1rem); color: var(--cream-fade);
+  text-transform: uppercase; letter-spacing: 0.12em; margin: 2px 0;
+}
+.tv-lobby-join .tv-join-cta {
+  gap: 18px;
+  padding: 12px 26px;
+}
+.tv-lobby-join .tv-join-cta .url  { font-size: clamp(1.1rem, 1.7cqw, 1.9rem); }
+.tv-lobby-join .tv-join-cta .code { font-size: clamp(1.4rem, 2.1cqw, 2.4rem); }
 
 .tv-join-cta {
   display: inline-flex; align-items: center; gap: 16px;
@@ -1180,21 +1198,21 @@
 .tv-join-cta .code  { font-size: clamp(1.1rem, 1.6cqw, 1.8rem); color: var(--gold-soft); letter-spacing: 0.18em; }
 
 .tv-player-chips {
-  display: flex; flex-wrap: wrap; gap: 10px;
+  display: flex; flex-wrap: wrap; gap: 14px;
   justify-content: center;
   max-width: 100%;
 }
 .tv-player-chips .chip {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 6px 14px 6px 6px;
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 8px 20px 8px 8px;
   background: rgba(var(--panel), 0.72);
   border: 1px solid rgba(255, 245, 225, 0.12);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   backdrop-filter: blur(4px);
 }
 .tv-player-chips .chip .name {
-  font-family: var(--display);
-  font-size: clamp(0.9rem, 1.1cqw, 1.2rem);
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.15rem, 1.5cqw, 1.55rem);
   color: var(--cream);
 }
 
