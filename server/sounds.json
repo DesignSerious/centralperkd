@@ -12,20 +12,20 @@
     "roundIntro": "universfield-warning-notification-199277.mp3"
   },
   "volumes": {
-    "arrowBonus": 0.4,
-    "pieceMove": 0.1,
-    "coffeeBonus": 0.45,
-    "truthReveal": 0.75,
-    "answerLocked": 0.1,
-    "joinRoom": 0.4,
-    "questionReveal": 0.65,
-    "bluffCard": 0.3,
-    "suspense": 1.25,
+    "arrowBonus": 0.45,
+    "pieceMove": 0.15,
+    "coffeeBonus": 0.55,
+    "truthReveal": 0.8,
+    "answerLocked": 0.5,
+    "joinRoom": 0.45,
+    "questionReveal": 0.8,
+    "bluffCard": 0.4,
+    "suspense": 1.35,
     "countdownTock": 0.3,
-    "timeUp": 0.55,
+    "timeUp": 0.7,
     "scoreboard": 0.4,
-    "bluffPhase": 0.6,
+    "bluffPhase": 0.75,
     "votingIntro": 0.35,
-    "roundIntro": 0.45
+    "roundIntro": 0.5
   }
 }
