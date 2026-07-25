@@ -1,5 +1,14 @@
 /* Phone-specific layout. Mobile-first, designed for 390px width and up. */
 
+/* The phone has no board art behind it like the TV — this gradient IS the whole
+   screen. Override the shared twilight-purple body with the Central Perk GREEN
+   so the phone matches the game's colour. phone.css loads after theme.css and
+   only on the phone page, so this is scoped to phones and never touches the TV. */
+body {
+  background: radial-gradient(ellipse at top, #1b4835 0%, #0e2c20 52%, #071811 100%);
+  background-attachment: fixed;
+}
+
 .phone-shell {
   min-height: 100vh;
   display: flex; flex-direction: column;
@@ -310,7 +319,7 @@
   position: sticky; top: 44px; z-index: 10;
   margin: -16px -16px 18px;
   padding: 16px 18px 16px;
-  background: linear-gradient(180deg, var(--twilight-soft) 0%, var(--twilight) 70%, rgba(24,16,51,0.92) 100%);
+  background: linear-gradient(180deg, rgba(var(--panel-lift), 0.96) 0%, rgba(var(--panel), 0.9) 70%, rgba(var(--panel-deepest), 0.92) 100%);
   border-bottom: 1px solid rgba(255,245,225,0.10);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
