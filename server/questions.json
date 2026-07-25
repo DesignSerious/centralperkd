@@ -661,14 +661,15 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 1,
-      "answered": 5,
+      "served": 3,
+      "correct": 2,
+      "answered": 7,
       "topWrong": {
         "Cunt": 1,
         "she catered a rival restaurant's party": 1,
         "pivot": 1,
-        "no idea": 1
+        "no idea": 1,
+        "something about a duck": 1
       }
     }
   },
@@ -722,11 +723,11 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
+      "served": 4,
       "correct": 4,
-      "answered": 10,
+      "answered": 12,
       "topWrong": {
-        "Joey cracked under pressure": 2,
+        "Joey cracked under pressure": 4,
         "Through Phoebe": 1,
         "pivot": 2,
         "he read Monica's day planner": 1
