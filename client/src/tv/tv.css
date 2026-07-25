@@ -1077,9 +1077,9 @@
 /* Central Perk'd logo sitting above the join link on the lobby screen. */
 .tv-lobby-logo {
   display: block;
-  width: min(78%, 460px);
+  width: min(96%, 620px);
   height: auto;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
 }
 
@@ -1155,8 +1155,8 @@
    the middle of the board, which collided with the now-taller settings
    panel). Sized large so it still reads across the room. */
 .tv-lobby-join {
-  display: flex; justify-content: center; align-items: center;
-  gap: 28px; flex-wrap: wrap;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 16px;
   margin-bottom: 6px;
 }
 /* QR: cream card so the code scans cleanly against the green panel. */
@@ -1167,7 +1167,7 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 .tv-qr-img { display: block; width: clamp(150px, 15cqw, 220px); height: auto; }
-.tv-join-info { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.tv-join-info { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; }
 .tv-join-scan {
   font-family: var(--display); font-weight: 800;
   font-size: clamp(1.3rem, 2cqw, 2.2rem); color: var(--cream);
