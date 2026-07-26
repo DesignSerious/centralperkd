@@ -431,6 +431,7 @@ function joinRoom({ code, name, piece, existingPlayerId, socketId, userId }) {
     streak: 0,
     bestStreak: 0,
     doubleNext: false,   // armed by a bonus tile
+    rescuesLeft: RESCUES_PER_GAME,   // "Give me one" uses left this game
     connected: true,
     userId: userId || null
   });
@@ -450,12 +451,14 @@ function startGame(io, room) {
     p.streak = 0;
     p.bestStreak = 0;
     p.doubleNext = false;
+    p.rescuesLeft = RESCUES_PER_GAME;
   });
   room.round = 0;
   room.winnerId = null;
   room.usedQuestions = new Set();
   room.duelPending = null;
   room.duelPick = null;
+  room.faceOff = null;
   room.lastResults = {};
   room.lastSlides = {};
   beginRoundIntro(io, room);
@@ -681,14 +684,81 @@ async function submitBluff(io, room, playerId, text) {
   touch(room);
   broadcast(io, room.code);
 
-  const expected = correctPlayerIds(room).filter((id) => {
-    const p = room.players.find((x) => x.id === id);
-    return p && p.connected;
-  });
-  if (expected.every((id) => room.bluffs[id])) {
-    setTimer(room, LAST_DING_BEAT_MS, () => beginVoting(io, room));
+  // Only BLUFFING can end on the last lie. An early lie written during
+  // ANSWERING must never pull the room forward — the others are still typing
+  // their answers, and correctPlayerIds() doesn't know about them yet.
+  if (room.state === STATES.BLUFFING) {
+    const expected = correctPlayerIds(room).filter((id) => {
+      const p = room.players.find((x) => x.id === id);
+      return p && p.connected;
+    });
+    if (expected.every((id) => room.bluffs[id])) {
+      setTimer(room, LAST_DING_BEAT_MS, () => beginVoting(io, room));
+    }
   }
   return { ok: true };
+}
+
+// The ANSWER-screen rescue: a believable WRONG answer for a player who has gone
+// blank, so they put something on the ballot instead of nothing. It never scores
+// the answer points — it buys a lottery ticket on other people's votes.
+//
+// The use is spent on GENERATION, not submission, so nobody can reroll until
+// they like the suggestion. It only fills the box: the player still has to lock
+// it in, and may edit it first.
+//
+// AI first, for variety — a table that plays often would start recognising the
+// house decoys. Nothing the model returns is trusted, though: an invented answer
+// that lands on the truth would quietly turn this button into free points, which
+// is precisely what it must not be. The re-judge runs on a ZERO budget (tiers 1
+// and 2 only) because it happens with the answer clock visibly ticking, and a
+// blatant match is exactly what those tiers are good at.
+async function rescueAnswer(io, room, playerId) {
+  if (room.state !== STATES.ANSWERING) return { ok: false, error: 'Not accepting answers' };
+  const p = room.players.find((x) => x.id === playerId);
+  if (!p) return { ok: false, error: 'Unknown player' };
+  if (room.answers[playerId]) return { ok: false, error: 'You already answered' };
+  if ((p.rescuesLeft || 0) <= 0) return { ok: false, error: "That's both of yours used up." };
+  const q = room.question;
+  if (!q) return { ok: false, error: 'No question yet.' };
+
+  p.rescuesLeft -= 1;
+
+  // Deduped with sameAnswer, not string equality: buildBallot merges near-
+  // identical entries, so two rescues that only differ in wording would collapse
+  // into one line and the second player would have spent a use for nothing.
+  const offers = Object.values(room.rescueOffers);
+  const isDupe = (t) => offers.some((prev) => Judge.sameAnswer(prev, t));
+  const avoid = (q.decoys || []).concat(offers);
+
+  let text = null;
+  try {
+    const invented = await Judge.inventWrongAnswer(q, avoid);
+    if (invented) {
+      const dup = isDupe(invented);
+      const isTruth = dup ? false : await Judge.isTooCloseToTruth(invented, q, { left: 0 });
+      if (!dup && !isTruth) text = invented;
+      else console.warn('[rescue] discarded AI suggestion (' + (isTruth ? 'it was the truth' : 'too close to one already out') + ')');
+    }
+  } catch (e) {
+    console.warn('[rescue] invent failed:', e.message);
+  }
+  if (!text) {
+    const pool = (q.decoys || []).filter((d) => !isDupe(d));
+    if (pool.length) text = pool[Math.floor(Math.random() * pool.length)];
+  }
+  if (!text) {
+    // Every decoy is already spoken for and the model gave us nothing. Hand the
+    // use back rather than charging for an empty box.
+    p.rescuesLeft += 1;
+    return { ok: false, error: 'Nothing left to offer on this one — take a wild guess.' };
+  }
+
+  room.rescueOffers[playerId] = text;
+  touch(room);
+  broadcast(io, room.code);
+  console.log('[rescue] ' + p.name + ' used one (' + p.rescuesLeft + ' left): "' + text + '"');
+  return { ok: true, text, rescuesLeft: p.rescuesLeft };
 }
 
 // The random-bluff rescue: hand the player one of the question's house decoys.
@@ -1535,6 +1605,7 @@ function returnToLobby(io, room) {
     p.streak = 0;
     p.bestStreak = 0;
     p.doubleNext = false;
+    p.rescuesLeft = RESCUES_PER_GAME;
   });
   room.lastBotState = null;
   room.paused = false;

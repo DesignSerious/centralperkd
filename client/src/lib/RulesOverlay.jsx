@@ -68,6 +68,16 @@ export default function RulesOverlay({ snap, onClose }) {
         </div>
 
         <div className="rules-section">
+          <div className="rules-h">Give me one</div>
+          <p className="rules-body">
+            Drawn a total blank? The answer screen has a <strong>Give me one</strong> button
+            that writes a believable wrong answer for you. It won't score you the
+            points for knowing it — but it puts something on the ballot, and people
+            do vote for it. Two per player, per game, and nobody is told you used one.
+          </p>
+        </div>
+
+        <div className="rules-section">
           <div className="rules-h">Winning</div>
           <p className="rules-body">
             {finalQuestion

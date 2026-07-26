@@ -16,8 +16,25 @@ export default function Answer({ snap }) {
   const [submitted, setSubmitted] = useState(!!snap.myAnswer);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [rescueBusy, setRescueBusy] = useState(false);
   const seconds = useCountdown(snap.phaseEndsAt);
   const q = snap.question;
+  const rescuesLeft = typeof snap.rescuesLeft === 'number' ? snap.rescuesLeft : 0;
+
+  // "Give me one" — a believable WRONG answer for a blank, twice a game. It only
+  // fills the box; locking it in is still on the player, and they can edit it
+  // first. The use is spent server-side the moment one is generated, so tapping
+  // again costs a second one rather than rerolling the first.
+  function rescue() {
+    if (rescueBusy || busy || submitted) return;
+    setRescueBusy(true);
+    setError('');
+    sendAction('rescueAnswer').then((r) => {
+      setRescueBusy(false);
+      if (!r || !r.ok || !r.text) { setError((r && r.error) || 'Could not think of one.'); return; }
+      setText(r.text);
+    });
+  }
 
   function submit(e) {
     if (e) e.preventDefault();
@@ -79,6 +96,18 @@ export default function Answer({ snap }) {
           <button className="lp-btn" type="submit" style={{ width: '100%' }} disabled={busy}>
             {busy ? 'Checking…' : 'Lock it in'}
           </button>
+          {rescuesLeft > 0 && (
+            <button
+              className="lp-btn lp-btn--ghost"
+              type="button"
+              style={{ width: '100%' }}
+              onClick={rescue}
+              disabled={rescueBusy || busy}
+            >
+              {rescueBusy ? 'Thinking…' : 'Give me one'}
+              <span className="rescue-count">{rescuesLeft} left</span>
+            </button>
+          )}
         </form>
       )}
     </div>

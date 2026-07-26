@@ -232,6 +232,73 @@ async function judgeAnswer(submission, q, budget) {
   return { correct: false, tier: 2, aiUsed: false };
 }
 
+// ─── public: invent a believable WRONG answer ───
+//
+// Powers the answer screen's "Give me one" rescue. Runs on a tighter clock than
+// the judge: this one fires mid-phase with the answer timer visibly ticking, so
+// a slow model is worse than no model — the caller has curated decoys to fall
+// back on and uses them the moment this returns null.
+//
+// The result is NOT trusted. A model asked for a wrong answer will occasionally
+// hand back the right one, so the caller re-judges whatever comes out of here
+// before showing it to anybody.
+const INVENT_MODEL = 'gpt-4o-mini';
+const INVENT_TIMEOUT_MS = 3000;
+
+async function inventWrongAnswer(q, avoid = []) {
+  if (!aiAvailable()) return null;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), INVENT_TIMEOUT_MS);
+  try {
+    const lines = [
+      'Trivia question: ' + q.question,
+      'The REAL answer is: ' + q.answer,
+      '',
+      'Invent ONE believable but FALSE answer to this question.',
+      'Rules:',
+      '- It must NOT be the real answer, or a rewording of it.',
+      '- Match the real answer in length and grammatical form.',
+      '- Prefer a genuine Friends detail that simply is not the answer here.',
+      '- No quotation marks, no explanation, no trailing period.'
+    ];
+    if (avoid.length) lines.push('- Do not use any of these: ' + avoid.join(' / '));
+    const r = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + OPENAI_API_KEY
+      },
+      body: JSON.stringify({
+        model: INVENT_MODEL,
+        max_tokens: 40,
+        temperature: 1,          // variety is the whole reason this isn't just a decoy
+        messages: [
+          { role: 'system', content: 'You write plausible wrong answers for a Friends trivia party game. Reply with the answer only.' },
+          { role: 'user', content: lines.join('\n') }
+        ]
+      })
+    });
+    if (!r.ok) {
+      console.warn('[invent] OpenAI', r.status, (await r.text()).slice(0, 200));
+      return null;
+    }
+    const data = await r.json();
+    let text = (data && data.choices && data.choices[0] && data.choices[0].message &&
+      data.choices[0].message.content || '').trim();
+    // Models like to wrap a one-line answer in quotes and end it with a period
+    // however firmly you ask them not to.
+    text = text.replace(/^["'“”‘’]+|["'“”‘’]+$/g, '').replace(/\.$/, '').trim();
+    if (!text || text.length > 120) return null;
+    return text;
+  } catch (e) {
+    console.warn('[invent] unavailable:', e.name === 'AbortError' ? 'timed out' : e.message);
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ─── public: is this crafted lie too close to the truth? ───
 // Runs the same funnel: if the "lie" would have judged as a correct answer,
 // it's really the truth and must not join the ballot.
@@ -273,6 +340,7 @@ function newRoundBudget() { return { left: AI_CALLS_PER_ROUND }; }
 
 module.exports = {
   judgeAnswer,
+  inventWrongAnswer,
   isTooCloseToTruth,
   sameAnswer,
   normalize,
