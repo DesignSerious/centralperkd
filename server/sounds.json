@@ -1,20 +1,20 @@
 {
   "assignments": {
     "scoreboard": "applause.mp3",
-    "arrowBonus": "bonus.mp3",
+    "arrowBonus": "congratulations.mp3",
     "pieceMove": "slide-move.mp3",
     "countdownTock": "tock.mp3",
     "truthReveal": "reveal1.mp3",
-    "coffeeBonus": "pouring.mp3",
+    "coffeeBonus": "this-is-incredible.mp3",
     "bluffCard": "freesound_community-ding-36029.mp3",
     "bluffPhase": "universfield-notification-beep-229154.mp3",
-    "votingIntro": "freesound_community-beep-6-96243.mp3",
+    "votingIntro": "can-i-tell-you-what-the-answer-is.mp3",
     "roundIntro": "universfield-warning-notification-199277.mp3"
   },
   "volumes": {
-    "arrowBonus": 0.45,
+    "arrowBonus": 0.85,
     "pieceMove": 0.15,
-    "coffeeBonus": 0.55,
+    "coffeeBonus": 0.75,
     "truthReveal": 0.8,
     "answerLocked": 0.5,
     "joinRoom": 0.45,
@@ -25,7 +25,7 @@
     "timeUp": 0.7,
     "scoreboard": 0.4,
     "bluffPhase": 0.75,
-    "votingIntro": 0.35,
+    "votingIntro": 0.6,
     "roundIntro": 0.5
   }
 }
