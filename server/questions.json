@@ -3360,5 +3360,4037 @@
         "another wrong guess qqq": 1
       }
     }
+  },
+  {
+    "id": "q111",
+    "category": "Ross & Rachel",
+    "difficulty": 1,
+    "question": "According to Phoebe, what sea creature did she compare Ross and Rachel to because they mate for life?",
+    "answer": "a lobster",
+    "altAnswers": [
+      "lobster",
+      "her lobster",
+      "he's her lobster"
+    ],
+    "decoys": [
+      "a penguin",
+      "a swan",
+      "a seahorse"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q112",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "In Rachel's high-school prom video, who was her original date that failed to show up on time?",
+    "answer": "Chip Matthews",
+    "altAnswers": [
+      "Chip"
+    ],
+    "decoys": [
+      "Barry Farber",
+      "Paolo",
+      "Gandalf"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q113",
+    "category": "Ross & Rachel",
+    "difficulty": 1,
+    "question": "In the prom video, what did Ross do when it looked like Rachel had been stood up?",
+    "answer": "he got dressed up in a suit to take her himself",
+    "altAnswers": [
+      "put on a suit to take her to prom",
+      "offered to be her prom date"
+    ],
+    "decoys": [
+      "he wrote her a love poem",
+      "he asked Monica to set them up",
+      "he hid in his bedroom"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q114",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "In 'The One Where Ross Finds Out,' what did a drunk Rachel confess to Ross on his answering machine?",
+    "answer": "that she's over him",
+    "altAnswers": [
+      "she was over him",
+      "over him"
+    ],
+    "decoys": [
+      "that she's pregnant",
+      "that she's moving to Paris",
+      "that she wants to marry him"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q115",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "Where did Ross and Rachel share their first real kiss?",
+    "answer": "Central Perk",
+    "altAnswers": [
+      "at the coffee house",
+      "in Central Perk after hours"
+    ],
+    "decoys": [
+      "the museum",
+      "the airport",
+      "Ross's apartment"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q116",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "What was the name of the girlfriend Ross brought back from his trip to China?",
+    "answer": "Julie",
+    "altAnswers": [],
+    "decoys": [
+      "Emily",
+      "Bonnie",
+      "Mona"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q117",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "Which of Ross's girlfriends did Rachel sneakily talk into shaving her head?",
+    "answer": "Bonnie",
+    "altAnswers": [],
+    "decoys": [
+      "Julie",
+      "Mona",
+      "Charlie"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q118",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "What was scandalous about Ross dating a young woman named Elizabeth?",
+    "answer": "she was his student",
+    "altAnswers": [
+      "he was her college professor",
+      "teacher and student"
+    ],
+    "decoys": [
+      "she was Rachel's cousin",
+      "she was still in high school",
+      "she was Emily's sister"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q119",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "What was the name of the woman Ross started dating around the time he found out Rachel was pregnant?",
+    "answer": "Mona",
+    "altAnswers": [],
+    "decoys": [
+      "Charlie",
+      "Elizabeth",
+      "Kathy"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q120",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "What was the name of the paleontologist both Ross and Joey dated?",
+    "answer": "Charlie",
+    "altAnswers": [
+      "Charlie Wheeler"
+    ],
+    "decoys": [
+      "Mona",
+      "Julie",
+      "Kathy"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q121",
+    "category": "Ross & Rachel",
+    "difficulty": 1,
+    "question": "When Rachel was pregnant with Emma, whose apartment did she move into?",
+    "answer": "Ross's",
+    "altAnswers": [
+      "Ross",
+      "Ross's apartment"
+    ],
+    "decoys": [
+      "Joey's",
+      "Monica and Chandler's",
+      "Phoebe's"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q122",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "After Emma was born, Rachel moved in with which friend, who then developed feelings for her?",
+    "answer": "Joey",
+    "altAnswers": [],
+    "decoys": [
+      "Ross",
+      "Gunther",
+      "Chandler"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q123",
+    "category": "Ross & Rachel",
+    "difficulty": 1,
+    "question": "What is the name of Ross and Rachel's daughter?",
+    "answer": "Emma",
+    "altAnswers": [],
+    "decoys": [
+      "Erica",
+      "Emily",
+      "Ella"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q124",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "Ross claimed he and Rachel were 'on a break,' so it didn't count when he slept with someone. Whose idea was the break, in his telling?",
+    "answer": "Rachel's",
+    "altAnswers": [
+      "Rachel",
+      "it was Rachel's idea"
+    ],
+    "decoys": [
+      "Ross's",
+      "Chandler's",
+      "Monica's"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q125",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "What did Rachel and Ross fight about that Rachel bought from Pottery Barn but pretended was an antique?",
+    "answer": "an apothecary table",
+    "altAnswers": [
+      "a Pottery Barn apothecary table",
+      "the apothecary table"
+    ],
+    "decoys": [
+      "a lamp",
+      "an antique clock",
+      "a painting"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q126",
+    "category": "Monica & Chandler",
+    "difficulty": 1,
+    "question": "In which city did Monica and Chandler first sleep together?",
+    "answer": "London",
+    "altAnswers": [
+      "London, England"
+    ],
+    "decoys": [
+      "Las Vegas",
+      "Montauk",
+      "Paris"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q127",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "Whose wedding were the friends attending when Monica and Chandler first hooked up?",
+    "answer": "Ross and Emily's",
+    "altAnswers": [
+      "Ross's wedding",
+      "Ross and Emily"
+    ],
+    "decoys": [
+      "Phoebe and Mike's",
+      "Monica and Chandler's own",
+      "Barry and Mindy's"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q128",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "How did Chandler propose to Monica in the end — what was set up in their apartment?",
+    "answer": "a room full of candles",
+    "altAnswers": [
+      "candles all over the apartment",
+      "hundreds of candles"
+    ],
+    "decoys": [
+      "a horse-drawn carriage",
+      "a jumbotron message",
+      "a scavenger hunt"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 25
+    },
+    "verified": false
+  },
+  {
+    "id": "q129",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "Who almost ruined Chandler's proposal by proposing to Monica first?",
+    "answer": "Richard",
+    "altAnswers": [
+      "Richard Burke",
+      "her ex Richard"
+    ],
+    "decoys": [
+      "Pete",
+      "Fun Bobby",
+      "Ross"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 25
+    },
+    "verified": false
+  },
+  {
+    "id": "q130",
+    "category": "Monica & Chandler",
+    "difficulty": 1,
+    "question": "What was Chandler's job that no one could ever correctly describe?",
+    "answer": "statistical analysis and data reconfiguration",
+    "altAnswers": [
+      "something with numbers",
+      "a WENUS / transponster job",
+      "data processing"
+    ],
+    "decoys": [
+      "advertising copywriter",
+      "paleontology",
+      "a chef"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q131",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "When Chandler quit his corporate job, what new field did he switch to?",
+    "answer": "advertising",
+    "altAnswers": [
+      "advertising, as an intern",
+      "advertising copywriter"
+    ],
+    "decoys": [
+      "cooking",
+      "acting",
+      "teaching"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q132",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "What was the name of the surrogate agency worker/adoption birth mother who chose Monica and Chandler to adopt her baby?",
+    "answer": "Erica",
+    "altAnswers": [],
+    "decoys": [
+      "Emma",
+      "Emily",
+      "Erin"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q133",
+    "category": "Monica & Chandler",
+    "difficulty": 1,
+    "question": "How many babies did Erica end up having, surprising Monica and Chandler?",
+    "answer": "two (twins)",
+    "altAnswers": [
+      "twins",
+      "two"
+    ],
+    "decoys": [
+      "one",
+      "triplets",
+      "four"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q134",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "What were the names of the twins Monica and Chandler adopted?",
+    "answer": "Jack and Erica",
+    "altAnswers": [
+      "Erica and Jack"
+    ],
+    "decoys": [
+      "Ben and Emma",
+      "Jack and Judy",
+      "Frank and Alice"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q135",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "Chandler once tried to break up with a girlfriend but kept failing; which on-again girlfriend had the loud laugh and catchphrase 'Oh. My. God.'?",
+    "answer": "Janice",
+    "altAnswers": [
+      "Janice Litman"
+    ],
+    "decoys": [
+      "Kathy",
+      "Aurora",
+      "Ginger"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q136",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "Where did Chandler famously tell Janice he was being transferred to, just to avoid her?",
+    "answer": "Yemen",
+    "altAnswers": [],
+    "decoys": [
+      "Tulsa",
+      "Alaska",
+      "Paris"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q137",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "Where did Chandler's company actually transfer him for a while, straining his marriage?",
+    "answer": "Tulsa",
+    "altAnswers": [
+      "Tulsa, Oklahoma"
+    ],
+    "decoys": [
+      "Yemen",
+      "Chicago",
+      "Boston"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q138",
+    "category": "Monica & Chandler",
+    "difficulty": 1,
+    "question": "What competitive, controlling trait defined Monica in nearly every situation?",
+    "answer": "her need to be the best / to win",
+    "altAnswers": [
+      "being super competitive",
+      "her competitiveness",
+      "perfectionism"
+    ],
+    "decoys": [
+      "her fear of heights",
+      "her forgetfulness",
+      "her shyness"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q139",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "What was the number of the apartment Monica lived in (the one everyone hung out in)?",
+    "answer": "20",
+    "altAnswers": [
+      "apartment 20"
+    ],
+    "decoys": [
+      "19",
+      "5",
+      "7"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q140",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "What was Chandler's New Year's resolution that he broke by making fun of it?",
+    "answer": "to stop making jokes / making fun of people",
+    "altAnswers": [
+      "to not make fun of people",
+      "stop mocking his friends"
+    ],
+    "decoys": [
+      "to learn the guitar",
+      "to go to the gym",
+      "to quit smoking"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q141",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "When Monica and Chandler's relationship was still secret, which friend accidentally saw them through a window and screamed?",
+    "answer": "Phoebe",
+    "altAnswers": [],
+    "decoys": [
+      "Rachel",
+      "Joey",
+      "Ross"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q142",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "Phoebe and Rachel, knowing the secret, tried to mess with Chandler and Monica. What did Phoebe do to make Chandler crack?",
+    "answer": "she pretended to come on to / flirt with him",
+    "altAnswers": [
+      "flirted with Chandler",
+      "hit on him"
+    ],
+    "decoys": [
+      "threatened to tell Ross",
+      "stole his wallet",
+      "kissed Joey in front of him"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q143",
+    "category": "Phoebe",
+    "difficulty": 1,
+    "question": "What is the name of Phoebe's identical twin sister?",
+    "answer": "Ursula",
+    "altAnswers": [
+      "Ursula Buffay"
+    ],
+    "decoys": [
+      "Regina",
+      "Alice",
+      "Frannie"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q144",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "What surprising career did Phoebe's twin sister Ursula secretly have, using Phoebe's name?",
+    "answer": "adult film star",
+    "altAnswers": [
+      "porn star",
+      "porn actress",
+      "adult movies"
+    ],
+    "decoys": [
+      "a nun",
+      "a police officer",
+      "a chef"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q145",
+    "category": "Phoebe",
+    "difficulty": 1,
+    "question": "What is the name of the man Phoebe eventually marries?",
+    "answer": "Mike",
+    "altAnswers": [
+      "Mike Hannigan"
+    ],
+    "decoys": [
+      "David",
+      "Gary",
+      "Roger"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q146",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "What high-paying job did Mike quit so he could pursue playing the piano?",
+    "answer": "lawyer",
+    "altAnswers": [
+      "being a lawyer",
+      "law"
+    ],
+    "decoys": [
+      "doctor",
+      "teacher",
+      "police officer"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q147",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "How did Phoebe first meet her police-officer boyfriend Gary?",
+    "answer": "she found his badge and started using it as her own",
+    "altAnswers": [
+      "she found his police badge",
+      "she found his badge on the ground"
+    ],
+    "decoys": [
+      "he arrested her",
+      "he was Mike's brother",
+      "at a self-defense class"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q148",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "What is the name of Phoebe's much-younger half-brother, whose triplets she carried?",
+    "answer": "Frank Jr.",
+    "altAnswers": [
+      "Frank Junior",
+      "Frank Buffay Jr."
+    ],
+    "decoys": [
+      "Mike",
+      "David",
+      "Gary"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q149",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Frank Jr. married his former home-economics teacher — what was her name?",
+    "answer": "Alice",
+    "altAnswers": [
+      "Alice Knight"
+    ],
+    "decoys": [
+      "Ursula",
+      "Regina",
+      "Susan"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q150",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "Phoebe named one of the triplets after a friend, once he noted it could be a girl's name. Which friend?",
+    "answer": "Chandler",
+    "altAnswers": [],
+    "decoys": [
+      "Ross",
+      "Joey",
+      "Mike"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q151",
+    "category": "Phoebe",
+    "difficulty": 1,
+    "question": "What instrument does Phoebe play while performing her songs at Central Perk?",
+    "answer": "guitar",
+    "altAnswers": [
+      "the guitar"
+    ],
+    "decoys": [
+      "ukulele",
+      "piano",
+      "banjo"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q152",
+    "category": "Phoebe",
+    "difficulty": 1,
+    "question": "What is Phoebe's main profession?",
+    "answer": "masseuse",
+    "altAnswers": [
+      "massage therapist",
+      "masseuse / massage therapist"
+    ],
+    "decoys": [
+      "chef",
+      "nurse",
+      "hairdresser"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q153",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "Phoebe's 'secret' family chocolate-chip cookie recipe turned out to actually be whose?",
+    "answer": "Nestlé Toll House",
+    "altAnswers": [
+      "the Nestle Toll House recipe",
+      "Nestle Toll House"
+    ],
+    "decoys": [
+      "Betty Crocker's",
+      "Pillsbury's",
+      "her grandmother's from France"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q154",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "Phoebe claims she can see people's what, floating around them?",
+    "answer": "auras",
+    "altAnswers": [
+      "their aura"
+    ],
+    "decoys": [
+      "palms",
+      "futures",
+      "past lives"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q155",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "What did Phoebe change her legal name to after marrying Mike?",
+    "answer": "Princess Consuela Banana-Hammock",
+    "altAnswers": [
+      "Princess Consuela Banana Hammock"
+    ],
+    "decoys": [
+      "Regina Phalange",
+      "Phoebe Hannigan",
+      "Ursula Buffay"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q156",
+    "category": "Phoebe",
+    "difficulty": 2,
+    "question": "After Phoebe changed her name, Mike jokingly changed his to what?",
+    "answer": "Crap Bag",
+    "altAnswers": [
+      "Crap-Bag"
+    ],
+    "decoys": [
+      "Ken Adams",
+      "Mike Phalange",
+      "Buffay"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q157",
+    "category": "Phoebe",
+    "difficulty": 1,
+    "question": "How many babies did Phoebe give birth to as a surrogate for her brother?",
+    "answer": "three (triplets)",
+    "altAnswers": [
+      "triplets",
+      "three"
+    ],
+    "decoys": [
+      "one",
+      "two",
+      "four"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q158",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Phoebe once dated a UN diplomat named Sergei, using which friend as a hopeless translator?",
+    "answer": "Joey",
+    "altAnswers": [],
+    "decoys": [
+      "Ross",
+      "Chandler",
+      "Mike"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q159",
+    "category": "Joey",
+    "difficulty": 1,
+    "question": "What is Joey's last name?",
+    "answer": "Tribbiani",
+    "altAnswers": [],
+    "decoys": [
+      "Bing",
+      "Buffay",
+      "Geller"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q160",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "How many sisters does Joey have?",
+    "answer": "seven",
+    "altAnswers": [
+      "7"
+    ],
+    "decoys": [
+      "five",
+      "three",
+      "nine"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q161",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "In one of his earliest jobs, Joey was hired to be the butt double for which famous actor?",
+    "answer": "Al Pacino",
+    "altAnswers": [
+      "Pacino"
+    ],
+    "decoys": [
+      "Robert De Niro",
+      "Marlon Brando",
+      "Tom Selleck"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q162",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "Joey was mortified to be the face of a public-health poster warning people about what?",
+    "answer": "VD (sexually transmitted diseases)",
+    "altAnswers": [
+      "STDs",
+      "venereal disease",
+      "V.D."
+    ],
+    "decoys": [
+      "drunk driving",
+      "smoking",
+      "the flu"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q163",
+    "category": "Joey",
+    "difficulty": 3,
+    "question": "What confusing game show, with rules no one could follow, did Joey audition to host?",
+    "answer": "Bamboozled",
+    "altAnswers": [],
+    "decoys": [
+      "Pyramid",
+      "Cups",
+      "Wheel of Mayhem"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q164",
+    "category": "Joey",
+    "difficulty": 3,
+    "question": "Joey used a thesaurus on every word of the adoption reference letter, signing it with what name?",
+    "answer": "Baby Kangaroo Tribbiani",
+    "altAnswers": [
+      "Baby Kangaroo"
+    ],
+    "decoys": [
+      "Sir Joseph",
+      "Dr. Drake Ramoray",
+      "The Fonz"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q165",
+    "category": "Joey",
+    "difficulty": 1,
+    "question": "What food is Joey most passionately protective of throughout the series?",
+    "answer": "sandwiches",
+    "altAnswers": [
+      "food",
+      "his sandwiches"
+    ],
+    "decoys": [
+      "pizza",
+      "tacos",
+      "meatloaf"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q166",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "When Phoebe tried to teach Joey French for an audition, what was the result?",
+    "answer": "he could only speak gibberish, never real French",
+    "altAnswers": [
+      "he spoke nonsense / gibberish",
+      "he failed completely"
+    ],
+    "decoys": [
+      "he became fluent",
+      "he learned Spanish instead",
+      "he quit acting"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q167",
+    "category": "Joey",
+    "difficulty": 3,
+    "question": "Joey bought a boat at an auction. Why couldn't he really use it?",
+    "answer": "he didn't know how to sail",
+    "altAnswers": [
+      "he couldn't sail it",
+      "he had no idea how to sail"
+    ],
+    "decoys": [
+      "it had a hole in it",
+      "it was too big for the dock",
+      "it wasn't actually a boat"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q168",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "Joey and Chandler loved their new reclining chairs so much they did what all day?",
+    "answer": "sat in them and ordered food so they never had to get up",
+    "altAnswers": [
+      "sat in them all day without getting up",
+      "never left the chairs"
+    ],
+    "decoys": [
+      "watched a Baywatch marathon standing up",
+      "sold the foosball table",
+      "napped at the coffee house"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q169",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 1,
+    "question": "What color is the door to Monica's apartment?",
+    "answer": "purple",
+    "altAnswers": [
+      "purple door"
+    ],
+    "decoys": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q170",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "What iconic item hung around the peephole on Monica's apartment door?",
+    "answer": "a gold picture frame",
+    "altAnswers": [
+      "a yellow frame",
+      "a gold frame"
+    ],
+    "decoys": [
+      "a wreath",
+      "a small mirror",
+      "a welcome sign"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q171",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 1,
+    "question": "What piece of furniture did the friends always claim as their spot at Central Perk?",
+    "answer": "the orange couch",
+    "altAnswers": [
+      "the couch"
+    ],
+    "decoys": [
+      "the window booth",
+      "the armchairs by the counter",
+      "the barstools"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q172",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "Which Central Perk barista, hopelessly in love with Rachel, eventually became the manager?",
+    "answer": "Gunther",
+    "altAnswers": [],
+    "decoys": [
+      "Terry",
+      "Joey",
+      "Roger"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q173",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "What was the name of the Central Perk manager who was fed up with Rachel's terrible waitressing early on?",
+    "answer": "Terry",
+    "altAnswers": [],
+    "decoys": [
+      "Gunther",
+      "Mr. Heckles",
+      "Pete"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q174",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 1,
+    "question": "How did the friends decide who had to swap apartments in 'The One with the Embryos'?",
+    "answer": "a trivia quiz game",
+    "altAnswers": [
+      "a trivia game",
+      "a quiz"
+    ],
+    "decoys": [
+      "a coin flip",
+      "arm wrestling",
+      "rock paper scissors"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q175",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "In that apartment quiz, what did Monica and Rachel wager — and lose?",
+    "answer": "their apartment",
+    "altAnswers": [
+      "the big apartment"
+    ],
+    "decoys": [
+      "a month's rent",
+      "their Thanksgiving",
+      "Chandler's recliner"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q176",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 1,
+    "question": "What was the nickname of the naked neighbor the friends spied on from Monica's window?",
+    "answer": "Ugly Naked Guy",
+    "altAnswers": [
+      "the Ugly Naked Guy"
+    ],
+    "decoys": [
+      "Mr. Heckles",
+      "Weird Barry",
+      "Fun Bobby"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q177",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "What caused the fire in Rachel and Phoebe's apartment that forced them to move out?",
+    "answer": "Rachel left her hair straightener on",
+    "altAnswers": [
+      "Rachel's hair straightener",
+      "a hair iron left on"
+    ],
+    "decoys": [
+      "Phoebe's scented candles",
+      "a gas leak",
+      "Joey's cigarette"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q178",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "After the fire, where did Rachel move in?",
+    "answer": "Joey's apartment",
+    "altAnswers": [
+      "with Joey",
+      "Joey's"
+    ],
+    "decoys": [
+      "with Ross",
+      "a hotel",
+      "back with Monica"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q179",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "What did Joey and Chandler keep as pets in their apartment?",
+    "answer": "a chick and a duck",
+    "altAnswers": [
+      "a baby chick and a duck",
+      "the Chick and the Duck"
+    ],
+    "decoys": [
+      "a dog and a cat",
+      "two goldfish",
+      "a hamster"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q180",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "What is the apartment number of Joey and Chandler's place, across the hall from Monica?",
+    "answer": "19",
+    "altAnswers": [
+      "apartment 19"
+    ],
+    "decoys": [
+      "20",
+      "4",
+      "14"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q181",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "What did Chandler and Joey have instead of a proper dining table for years?",
+    "answer": "a foosball table",
+    "altAnswers": [
+      "a foosball / football table"
+    ],
+    "decoys": [
+      "a ping-pong table",
+      "a card table",
+      "a pinball machine"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q182",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "When Joey briefly had money, he moved into his own fancy place and bought what oversized item he had to give back?",
+    "answer": "expensive new furniture (he had to return it and beg to move back)",
+    "altAnswers": [
+      "fancy furniture",
+      "new furniture he couldn't afford"
+    ],
+    "decoys": [
+      "a hot tub",
+      "a pool table",
+      "a jukebox"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q183",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 1,
+    "question": "What is the name of the coffee house where the friends spend most of their time?",
+    "answer": "Central Perk",
+    "altAnswers": [],
+    "decoys": [
+      "Central Perk'd",
+      "The Grind",
+      "Java Joe's"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q184",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "Tom Selleck played Monica's older boyfriend who was also a friend of her father. What was his name?",
+    "answer": "Richard",
+    "altAnswers": [
+      "Richard Burke",
+      "Dr. Richard Burke"
+    ],
+    "decoys": [
+      "Pete",
+      "Fun Bobby",
+      "Chip"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q185",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Julia Roberts guest-starred as a childhood classmate who got revenge on Chandler for a schoolyard prank. What was her name?",
+    "answer": "Susie Moss",
+    "altAnswers": [
+      "Susie"
+    ],
+    "decoys": [
+      "Kathy",
+      "Janice",
+      "Aurora"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q186",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "What is the name of Carol's partner, the woman she left Ross for?",
+    "answer": "Susan",
+    "altAnswers": [
+      "Susan Bunch"
+    ],
+    "decoys": [
+      "Emily",
+      "Kathy",
+      "Julie"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q187",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Which actress played Rachel's spoiled sister Amy, who fights with everyone at Thanksgiving?",
+    "answer": "Christina Applegate",
+    "altAnswers": [],
+    "decoys": [
+      "Reese Witherspoon",
+      "Winona Ryder",
+      "Brooke Shields"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q188",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Winona Ryder guest-starred as Rachel's old sorority sister who claimed the two of them once did what?",
+    "answer": "kissed / made out",
+    "altAnswers": [
+      "kissed",
+      "made out"
+    ],
+    "decoys": [
+      "got matching tattoos",
+      "robbed a store",
+      "were secretly engaged"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q189",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Brooke Shields played a woman Joey dated who had a strange belief about him. What did she think?",
+    "answer": "that he was really his soap character Dr. Drake Ramoray",
+    "altAnswers": [
+      "that Drake Ramoray was real",
+      "she thought he was actually Drake"
+    ],
+    "decoys": [
+      "that he was a spy",
+      "that he was her husband",
+      "that he could read minds"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q190",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "Which actor played Phoebe's boyfriend and eventual husband, Mike Hannigan?",
+    "answer": "Paul Rudd",
+    "altAnswers": [],
+    "decoys": [
+      "Hank Azaria",
+      "Jon Favreau",
+      "Tate Donovan"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q191",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Bruce Willis guest-starred as the intimidating father of Ross's student girlfriend. Which friend did his character end up dating?",
+    "answer": "Rachel",
+    "altAnswers": [],
+    "decoys": [
+      "Monica",
+      "Phoebe",
+      "Janice"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q192",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Danny DeVito appeared at a bachelorette party playing what?",
+    "answer": "a stripper",
+    "altAnswers": [
+      "a male stripper"
+    ],
+    "decoys": [
+      "a caterer",
+      "a priest",
+      "a magician"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q193",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "Chandler's ex-girlfriend Kathy was, awkwardly, first dating which friend?",
+    "answer": "Joey",
+    "altAnswers": [],
+    "decoys": [
+      "Ross",
+      "Gunther",
+      "Pete"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q194",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "Rachel's ex-fiancé Barry worked as what?",
+    "answer": "an orthodontist",
+    "altAnswers": [
+      "a dentist",
+      "orthodontist"
+    ],
+    "decoys": [
+      "a lawyer",
+      "a doctor",
+      "an accountant"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q195",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Sean Penn guest-starred as Ursula's fiancé who mistook Phoebe for her. What was his name?",
+    "answer": "Eric",
+    "altAnswers": [],
+    "decoys": [
+      "Mike",
+      "Gary",
+      "David"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q196",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "By the end of the series, how many times has Ross been divorced?",
+    "answer": "three",
+    "altAnswers": [
+      "3",
+      "three times"
+    ],
+    "decoys": [
+      "one",
+      "two",
+      "four"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q197",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "Mindy, who ended up marrying Rachel's ex Barry, was originally Rachel's what?",
+    "answer": "maid of honor / best friend",
+    "altAnswers": [
+      "maid of honor",
+      "best friend"
+    ],
+    "decoys": [
+      "sister",
+      "cousin",
+      "coworker"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q198",
+    "category": "Weddings & Breakups",
+    "difficulty": 3,
+    "question": "When Chandler got cold feet and vanished before his wedding, who tracked him down and brought him back?",
+    "answer": "Ross and Phoebe",
+    "altAnswers": [
+      "Ross",
+      "Phoebe"
+    ],
+    "decoys": [
+      "Joey",
+      "Monica",
+      "Rachel"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q199",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "After their drunken Vegas wedding, Ross promised to annul it but secretly did what?",
+    "answer": "he never annulled it — they stayed married for a while",
+    "altAnswers": [
+      "he didn't annul it",
+      "he kept them married"
+    ],
+    "decoys": [
+      "got it annulled immediately",
+      "proposed for real",
+      "told everyone the truth"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q200",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "Why did Monica and Richard break up the first time?",
+    "answer": "he didn't want to have more children",
+    "altAnswers": [
+      "he didn't want kids",
+      "he already had grown kids and didn't want more"
+    ],
+    "decoys": [
+      "he moved to another city",
+      "he cheated on her",
+      "he was too old for her"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q201",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "Ross and Rachel's first attempt at dating nearly collapsed immediately because of what Ross made?",
+    "answer": "a pros-and-cons list about her",
+    "altAnswers": [
+      "the list",
+      "a list of her flaws"
+    ],
+    "decoys": [
+      "a mixtape",
+      "a scrapbook",
+      "a spreadsheet of her exes"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q202",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "Rachel got pregnant with Emma after a night with Ross at whose wedding?",
+    "answer": "Monica and Chandler's",
+    "altAnswers": [
+      "Monica and Chandler",
+      "their wedding"
+    ],
+    "decoys": [
+      "Phoebe and Mike's",
+      "Ross and Emily's",
+      "Barry and Mindy's"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q203",
+    "category": "Weddings & Breakups",
+    "difficulty": 3,
+    "question": "In one episode, Monica, Rachel, and Phoebe spent a whole day wearing what around the apartment for fun?",
+    "answer": "wedding dresses",
+    "altAnswers": [
+      "bridal gowns",
+      "wedding gowns"
+    ],
+    "decoys": [
+      "bikinis",
+      "Halloween costumes",
+      "bridesmaid dresses"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q204",
+    "category": "Weddings & Breakups",
+    "difficulty": 3,
+    "question": "Ross and Rachel's big breakup was triggered by Ross sleeping with whom during their 'break'?",
+    "answer": "Chloe, the copy-shop girl",
+    "altAnswers": [
+      "Chloe",
+      "the copy shop girl"
+    ],
+    "decoys": [
+      "Julie",
+      "Bonnie",
+      "Mona"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q205",
+    "category": "Jobs & Money",
+    "difficulty": 2,
+    "question": "Where did Ross work as a paleontologist for most of the series?",
+    "answer": "a museum (the Museum of Natural History)",
+    "altAnswers": [
+      "the natural history museum",
+      "a museum"
+    ],
+    "decoys": [
+      "a university",
+      "a fossil dig site",
+      "a research lab"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q206",
+    "category": "Jobs & Money",
+    "difficulty": 2,
+    "question": "Later in the series, Ross became a professor at which university?",
+    "answer": "NYU",
+    "altAnswers": [
+      "New York University"
+    ],
+    "decoys": [
+      "Columbia",
+      "Barnard",
+      "Yale"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q207",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "When Ross first started teaching, he embarrassingly faked what to impress his students?",
+    "answer": "a British accent",
+    "altAnswers": [
+      "an English accent"
+    ],
+    "decoys": [
+      "a French accent",
+      "a doctorate from Oxford",
+      "a limp"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q208",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "Rachel's dream job that would have taken her to Paris was with which luxury fashion house?",
+    "answer": "Louis Vuitton",
+    "altAnswers": [],
+    "decoys": [
+      "Gucci",
+      "Chanel",
+      "Ralph Lauren"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q209",
+    "category": "Jobs & Money",
+    "difficulty": 1,
+    "question": "What was Rachel's very first job in the series?",
+    "answer": "a waitress at Central Perk",
+    "altAnswers": [
+      "waitress",
+      "Central Perk waitress"
+    ],
+    "decoys": [
+      "a nanny",
+      "a sales clerk",
+      "a receptionist"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q210",
+    "category": "Jobs & Money",
+    "difficulty": 2,
+    "question": "At a department store, Joey briefly had a job squirting passing customers with what?",
+    "answer": "cologne",
+    "altAnswers": [
+      "perfume",
+      "men's cologne"
+    ],
+    "decoys": [
+      "hairspray",
+      "sunscreen",
+      "free juice samples"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q211",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "What was the name of the short-lived sci-fi cop show where Joey starred opposite a robot?",
+    "answer": "Mac and C.H.E.E.S.E.",
+    "altAnswers": [
+      "Mac and Cheese",
+      "Mac and CHEESE"
+    ],
+    "decoys": [
+      "Deep Powder",
+      "Days of Our Lives",
+      "Law & Order"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q212",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "Monica briefly ran a catering business out of the apartment with which friend's help?",
+    "answer": "Phoebe",
+    "altAnswers": [],
+    "decoys": [
+      "Rachel",
+      "Chandler",
+      "Joey"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q213",
+    "category": "Thanksgiving",
+    "difficulty": 1,
+    "question": "What competitive game is the Geller family Thanksgiving tradition?",
+    "answer": "touch football",
+    "altAnswers": [
+      "football",
+      "the football game"
+    ],
+    "decoys": [
+      "charades",
+      "poker",
+      "a relay race"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q214",
+    "category": "Thanksgiving",
+    "difficulty": 2,
+    "question": "In Thanksgiving flashbacks, how was Monica different from her present self?",
+    "answer": "she was overweight ('Fat Monica')",
+    "altAnswers": [
+      "she was heavier / fat",
+      "Fat Monica"
+    ],
+    "decoys": [
+      "she had a shaved head",
+      "she was blonde",
+      "she was much taller"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q215",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "What hurtful thing did Chandler blurt in a flashback that motivated Monica to lose weight?",
+    "answer": "he called her fat",
+    "altAnswers": [
+      "he made fun of her weight",
+      "he called her fat / a whale"
+    ],
+    "decoys": [
+      "he called her ugly",
+      "he ignored her",
+      "he mocked her cooking"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q216",
+    "category": "Thanksgiving",
+    "difficulty": 2,
+    "question": "On the Thanksgiving 'Ross Got High' in college, whom did Ross blame it on to his parents?",
+    "answer": "Chandler",
+    "altAnswers": [],
+    "decoys": [
+      "Joey",
+      "Monica",
+      "Rachel"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q217",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "In the first-season Thanksgiving, the friends got locked out of the apartment watching which parade balloon get loose?",
+    "answer": "Underdog",
+    "altAnswers": [
+      "the Underdog balloon"
+    ],
+    "decoys": [
+      "Snoopy",
+      "Garfield",
+      "Bullwinkle"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q218",
+    "category": "Thanksgiving",
+    "difficulty": 2,
+    "question": "Why was the very first Thanksgiving dinner ruined?",
+    "answer": "they got locked out and the food burned",
+    "altAnswers": [
+      "the food burned while they were locked out",
+      "they were locked out of the apartment"
+    ],
+    "decoys": [
+      "the oven broke",
+      "Joey ate it all",
+      "the turkey was undercooked"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q219",
+    "category": "Thanksgiving",
+    "difficulty": 2,
+    "question": "What did Joey suffer from after eating an entire Thanksgiving turkey by himself?",
+    "answer": "the meat sweats",
+    "altAnswers": [
+      "meat sweats"
+    ],
+    "decoys": [
+      "a food coma",
+      "hiccups",
+      "an allergic reaction"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q220",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "Brad Pitt guest-starred at Thanksgiving as Ross's old friend Will, who admitted spreading a cruel rumor about which friend in high school?",
+    "answer": "Rachel",
+    "altAnswers": [],
+    "decoys": [
+      "Monica",
+      "Phoebe",
+      "Emily"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q221",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "In 'The One with the Rumor,' what outrageous rumor did Will admit spreading about Rachel in high school?",
+    "answer": "that she was a hermaphrodite / had 'a nub'",
+    "altAnswers": [
+      "that she had a nub",
+      "that she was intersex"
+    ],
+    "decoys": [
+      "that she was adopted",
+      "that she had a tail",
+      "that she flunked out"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q222",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What did Chandler's father do for a living in Las Vegas?",
+    "answer": "performed in a drag/burlesque show",
+    "altAnswers": [
+      "he was a Las Vegas drag performer",
+      "a burlesque star"
+    ],
+    "decoys": [
+      "dealt cards at a casino",
+      "owned a wedding chapel",
+      "was a lounge singer"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q223",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What was the stage name of Chandler's father, the Las Vegas performer?",
+    "answer": "Helena Handbasket",
+    "altAnswers": [],
+    "decoys": [
+      "Miss Chanandler",
+      "Bella Bing",
+      "Nora Tyler"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q224",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "What was the career of Chandler's mother, Nora Tyler Bing?",
+    "answer": "an erotic/romance novelist",
+    "altAnswers": [
+      "she wrote erotic novels",
+      "a romance author"
+    ],
+    "decoys": [
+      "a talk-show host",
+      "a chef",
+      "a defense lawyer"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q225",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "What TV show did Joey and Chandler obsessively bond over, shouting at the screen?",
+    "answer": "Baywatch",
+    "altAnswers": [],
+    "decoys": [
+      "Bonanza",
+      "Miami Vice",
+      "Melrose Place"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q226",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "In a famous lesson, Monica taught Chandler about a woman's how-many erogenous zones?",
+    "answer": "seven",
+    "altAnswers": [
+      "7"
+    ],
+    "decoys": [
+      "five",
+      "three",
+      "nine"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q227",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "In Chandler's office jargon, what did the acronym 'WENUS' stand for?",
+    "answer": "Weekly Estimated Net Usage Systems",
+    "altAnswers": [
+      "Weekly Estimated Net Usage Statistics"
+    ],
+    "decoys": [
+      "Wireless Employee Network",
+      "Worldwide Employee Numbers",
+      "Weekly Employee Notice"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q228",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "When Ross finally caught Monica and Chandler together through his window, what did he shout across the courtyard?",
+    "answer": "Get off my sister!",
+    "altAnswers": [
+      "get off my sister"
+    ],
+    "decoys": [
+      "What is going on here?",
+      "How could you?",
+      "Not my little Monica!"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q229",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What did Monica famously do that showed off her extreme cleaning obsession?",
+    "answer": "she vacuumed her vacuum cleaner with a smaller vacuum",
+    "altAnswers": [
+      "cleaned the vacuum with a vacuum",
+      "she had a vacuum for her vacuum"
+    ],
+    "decoys": [
+      "she ironed her socks",
+      "she alphabetized the fridge",
+      "she dusted the ceiling"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q230",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "Ross kept a laminated list of five celebrities he was 'allowed' to sleep with. Which one did he actually run into?",
+    "answer": "Isabella Rossellini",
+    "altAnswers": [
+      "Isabella Rosellini"
+    ],
+    "decoys": [
+      "Winona Ryder",
+      "Susan Sarandon",
+      "Yasmine Bleeth"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q231",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "What embarrassing thing did Ross's monkey Marcel constantly do to people and furniture?",
+    "answer": "hump them",
+    "altAnswers": [
+      "hump things / legs",
+      "humping everything"
+    ],
+    "decoys": [
+      "bite them",
+      "scream all night",
+      "throw food"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q232",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "Which sarcastic phrase most defined Chandler's whole way of speaking?",
+    "answer": "Could I BE any more...?",
+    "altAnswers": [
+      "Could I be any more",
+      "Could I BE"
+    ],
+    "decoys": [
+      "Oh. My. God.",
+      "How you doin'?",
+      "We were on a break!"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q233",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "During the citywide blackout, Chandler got trapped in an ATM vestibule with which supermodel?",
+    "answer": "Jill Goodacre",
+    "altAnswers": [
+      "Jill Goodacre (the Victoria's Secret model)"
+    ],
+    "decoys": [
+      "Cindy Crawford",
+      "Elle Macpherson",
+      "Yasmine Bleeth"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q234",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "In the apartment trivia quiz, what was Monica's nickname back when she was a field-hockey goalie?",
+    "answer": "Big Fat Goalie",
+    "altAnswers": [
+      "Big Fat Goalie Geller"
+    ],
+    "decoys": [
+      "The Wall",
+      "Sweaty Monica",
+      "Goalie Geller"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q235",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "According to the apartment quiz, what is Monica's biggest pet peeve?",
+    "answer": "animals dressed as humans",
+    "altAnswers": [
+      "animals dressed up as people"
+    ],
+    "decoys": [
+      "dirty dishes",
+      "people being late",
+      "loud chewing"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q236",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What was the name of Rachel's demanding boss at Ralph Lauren?",
+    "answer": "Mr. Zelner",
+    "altAnswers": [
+      "Zelner"
+    ],
+    "decoys": [
+      "Mr. Waltham",
+      "Mr. Kaplan",
+      "Mr. Posner"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q237",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "Ross was uncomfortable when Rachel hired a warm, sensitive male nanny for Emma. What was his name?",
+    "answer": "Sandy",
+    "altAnswers": [],
+    "decoys": [
+      "Gary",
+      "Tag",
+      "Gavin"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q238",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "Rachel scared off her boyfriend Joshua by doing what far too soon?",
+    "answer": "jokingly proposing to him",
+    "altAnswers": [
+      "she proposed / suggested marriage",
+      "she implied they should get married"
+    ],
+    "decoys": [
+      "moving in with him",
+      "meeting his parents",
+      "getting matching tattoos"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q239",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "Which coworker at Bloomingdale's made Ross intensely jealous, feeding into the 'break'?",
+    "answer": "Mark",
+    "altAnswers": [],
+    "decoys": [
+      "Gavin",
+      "Tag",
+      "Joshua"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q240",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "Which charming Ralph Lauren coworker, played by Dermot Mulroney, did Rachel kiss?",
+    "answer": "Gavin",
+    "altAnswers": [
+      "Gavin Mitchell"
+    ],
+    "decoys": [
+      "Mark",
+      "Tag",
+      "Joshua"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q241",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "Where did Monica and Chandler move at the very end of the series?",
+    "answer": "the suburbs (a house in Westchester)",
+    "altAnswers": [
+      "a house in the suburbs",
+      "Westchester"
+    ],
+    "decoys": [
+      "Paris",
+      "Tulsa",
+      "Long Island"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q242",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "What are the first names of Ross and Monica's parents?",
+    "answer": "Jack and Judy",
+    "altAnswers": [
+      "Jack and Judy Geller"
+    ],
+    "decoys": [
+      "Frank and Lily",
+      "Charles and Nora",
+      "Leonard and Sandra"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q243",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "Monica and Chandler worried about their adopted twins because birth mother Erica had slept with two men, one of whom was what?",
+    "answer": "a convicted murderer",
+    "altAnswers": [
+      "a murderer / in prison",
+      "a criminal"
+    ],
+    "decoys": [
+      "a famous doctor",
+      "a movie star",
+      "a priest"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q244",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Phoebe was once married to a gay Canadian ice dancer so he could get a green card. What was his name?",
+    "answer": "Duncan",
+    "altAnswers": [],
+    "decoys": [
+      "Mike",
+      "Roger",
+      "Gary"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q245",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Phoebe dated a psychiatrist named Roger who irritated the whole group by doing what?",
+    "answer": "psychoanalyzing all of them",
+    "altAnswers": [
+      "analyzing everyone's issues",
+      "picking apart their personalities"
+    ],
+    "decoys": [
+      "correcting their grammar",
+      "secretly recording them",
+      "hypnotizing them"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q246",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Phoebe shocked Ross by confessing that, as a homeless teenager, she had once done what to him?",
+    "answer": "mugged him",
+    "altAnswers": [
+      "she mugged him",
+      "robbed him on the street"
+    ],
+    "decoys": [
+      "dated him",
+      "stolen his monkey",
+      "crashed his car"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q247",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "After Chandler moved out, Joey got a new roommate — an Australian dancer named what?",
+    "answer": "Janine",
+    "altAnswers": [],
+    "decoys": [
+      "Janice",
+      "Kathy",
+      "Charlie"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q248",
+    "category": "Joey",
+    "difficulty": 3,
+    "question": "When Joey got too scared reading The Shining, where did he keep the book?",
+    "answer": "in the freezer",
+    "altAnswers": [
+      "the freezer"
+    ],
+    "decoys": [
+      "under his bed",
+      "in a drawer",
+      "he threw it out"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q249",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "Which classic Stephen King novel did Rachel get Joey to read, prompting him to hide it in the freezer?",
+    "answer": "The Shining",
+    "altAnswers": [
+      "Stephen King's The Shining"
+    ],
+    "decoys": [
+      "Little Women",
+      "Cujo",
+      "The Stand"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q250",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 1,
+    "question": "In what city is Friends set?",
+    "answer": "New York City",
+    "altAnswers": [
+      "New York",
+      "NYC"
+    ],
+    "decoys": [
+      "Chicago",
+      "Boston",
+      "Los Angeles"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q251",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "What was the name of the building superintendent who nearly evicted Monica over her illegal sublet?",
+    "answer": "Mr. Treeger",
+    "altAnswers": [
+      "Treeger"
+    ],
+    "decoys": [
+      "Mr. Heckles",
+      "Mr. Zelner",
+      "Gunther"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q252",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 2,
+    "question": "In the final scene of the series, where does the group decide to go together one last time?",
+    "answer": "Central Perk, to get coffee",
+    "altAnswers": [
+      "for coffee",
+      "to Central Perk"
+    ],
+    "decoys": [
+      "the airport",
+      "Monica's new house",
+      "a bar"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q253",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "What did everyone symbolically leave on the counter of the empty apartment in the finale?",
+    "answer": "their keys",
+    "altAnswers": [
+      "the keys",
+      "their apartment keys"
+    ],
+    "decoys": [
+      "a goodbye note",
+      "a photo of the group",
+      "their coffee mugs"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q254",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "George Clooney and Noah Wyle guest-starred in season one as two of what, dating Monica and Rachel?",
+    "answer": "doctors",
+    "altAnswers": [
+      "ER doctors"
+    ],
+    "decoys": [
+      "cops",
+      "firefighters",
+      "lawyers"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q255",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Which actor, famous for voicing many Simpsons characters, played Phoebe's scientist boyfriend David?",
+    "answer": "Hank Azaria",
+    "altAnswers": [],
+    "decoys": [
+      "Paul Rudd",
+      "Jon Favreau",
+      "Tate Donovan"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q256",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Which actor played Monica's millionaire boyfriend, Pete Becker?",
+    "answer": "Jon Favreau",
+    "altAnswers": [],
+    "decoys": [
+      "Tom Selleck",
+      "Paul Rudd",
+      "Bruce Willis"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q257",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Which actress played Chandler's flamboyant Las Vegas-performer father?",
+    "answer": "Kathleen Turner",
+    "altAnswers": [],
+    "decoys": [
+      "Morgan Fairchild",
+      "Susan Sarandon",
+      "Christina Applegate"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q258",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Chandler once dated a woman named Ginger who had what, which ultimately freaked him out?",
+    "answer": "a prosthetic (wooden) leg",
+    "altAnswers": [
+      "a fake leg",
+      "an artificial leg"
+    ],
+    "decoys": [
+      "a pet snake",
+      "a secret twin",
+      "six toes"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q259",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Chandler's early girlfriend Aurora was unusual because she was comfortable doing what?",
+    "answer": "seeing several men at the same time",
+    "altAnswers": [
+      "an open relationship",
+      "dating multiple men at once"
+    ],
+    "decoys": [
+      "never speaking to him",
+      "only meeting at midnight",
+      "him dating Joey"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q260",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What did Chandler have surgically removed that he referred to as a 'nubbin'?",
+    "answer": "a third nipple",
+    "altAnswers": [
+      "an extra nipple",
+      "his third nipple / nubbin"
+    ],
+    "decoys": [
+      "a mole",
+      "a sixth toe",
+      "a birthmark"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q261",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "At a Halloween party, Ross dressed as 'Spudnik' — a mash-up of which two things?",
+    "answer": "a potato (spud) and Sputnik",
+    "altAnswers": [
+      "a spud and Sputnik",
+      "a potato and a satellite"
+    ],
+    "decoys": [
+      "a spider and a robot",
+      "a superhero and a potato",
+      "a spaceman and a spud"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q262",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "At that same Halloween party, what did Chandler reluctantly dress up as?",
+    "answer": "a giant pink bunny",
+    "altAnswers": [
+      "a pink bunny"
+    ],
+    "decoys": [
+      "Doctor Doom",
+      "a hot dog",
+      "a cowboy"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q263",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "Which band performed the Friends theme song, 'I'll Be There for You'?",
+    "answer": "The Rembrandts",
+    "altAnswers": [],
+    "decoys": [
+      "The Cardigans",
+      "Hootie & the Blowfish",
+      "R.E.M."
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q264",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "How many seasons did Friends run on television?",
+    "answer": "ten",
+    "altAnswers": [
+      "10"
+    ],
+    "decoys": [
+      "eight",
+      "twelve",
+      "nine"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q265",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "When Rachel and Phoebe went to get tattoos, Rachel got a small heart, but Phoebe chickened out and got only what?",
+    "answer": "a tiny black dot",
+    "altAnswers": [
+      "a black dot",
+      "just a dot"
+    ],
+    "decoys": [
+      "a full rose",
+      "a butterfly",
+      "nothing at all"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q266",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What was the profession of Rachel's stern father, Dr. Green?",
+    "answer": "a doctor",
+    "altAnswers": [
+      "a physician",
+      "a cardiologist"
+    ],
+    "decoys": [
+      "a lawyer",
+      "a banker",
+      "a dentist"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q267",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Ben Stiller played one of Rachel's boyfriends, Tommy, who secretly had a habit of doing what?",
+    "answer": "screaming/raging at people",
+    "altAnswers": [
+      "screaming at people",
+      "being a rage-aholic"
+    ],
+    "decoys": [
+      "stealing",
+      "lying constantly",
+      "crying"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q268",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Charlie Sheen played Phoebe's Navy-submariner boyfriend, who caught what from her?",
+    "answer": "chicken pox",
+    "altAnswers": [
+      "the chicken pox"
+    ],
+    "decoys": [
+      "the flu",
+      "a cold",
+      "measles"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q269",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Which action-movie star did Monica and Rachel both fight to date on a film set?",
+    "answer": "Jean-Claude Van Damme",
+    "altAnswers": [
+      "Van Damme"
+    ],
+    "decoys": [
+      "Steven Seagal",
+      "Chuck Norris",
+      "Dolph Lundgren"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q270",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "Where was Rachel's smooth-talking early boyfriend Paolo from?",
+    "answer": "Italy",
+    "altAnswers": [
+      "Italian"
+    ],
+    "decoys": [
+      "Spain",
+      "France",
+      "Greece"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q271",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Ross dated a gorgeous woman named Cheryl (Rebecca Romijn) but was horrified to discover her apartment was what?",
+    "answer": "an absolutely filthy mess",
+    "altAnswers": [
+      "disgustingly dirty",
+      "a total mess"
+    ],
+    "decoys": [
+      "tiny",
+      "haunted",
+      "full of cats"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q272",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Chandler dated Rachel's intimidating boss at Bloomingdale's — what was her name?",
+    "answer": "Joanna",
+    "altAnswers": [],
+    "decoys": [
+      "Sophie",
+      "Nancy",
+      "Kim"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q273",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "Ross got upset when his young son Ben's favorite toy was what, which Ross considered a 'girl' toy?",
+    "answer": "a Barbie doll",
+    "altAnswers": [
+      "a Barbie"
+    ],
+    "decoys": [
+      "a toy oven",
+      "a doll house",
+      "a jump rope"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q274",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "When a drunk Rachel said she was 'over' him, Ross indignantly shot back: 'You're over me? When were you...' what?",
+    "answer": "under me?",
+    "altAnswers": [
+      "'under me?'",
+      "under me"
+    ],
+    "decoys": [
+      "with me?",
+      "on me?",
+      "into me?"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q275",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "What is Gunther, the Central Perk barista, most physically recognizable for?",
+    "answer": "his bright bleached-blond hair",
+    "altAnswers": [
+      "platinum blond hair",
+      "bleached hair"
+    ],
+    "decoys": [
+      "a handlebar mustache",
+      "full sleeve tattoos",
+      "a bow tie"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q276",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "After her mother's death, Phoebe became convinced her mom had been reincarnated as what?",
+    "answer": "a cat",
+    "altAnswers": [
+      "a stray cat"
+    ],
+    "decoys": [
+      "a bird",
+      "a dog",
+      "a butterfly"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q277",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "Where did Ross and Rachel spend their first romantic night together?",
+    "answer": "the planetarium at the museum",
+    "altAnswers": [
+      "the museum planetarium",
+      "the planetarium"
+    ],
+    "decoys": [
+      "a Vegas hotel",
+      "Ross's apartment",
+      "the beach house"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q278",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "To make amends with Joey for kissing his girlfriend Kathy, Chandler agreed to spend six hours doing what?",
+    "answer": "sitting inside a wooden box",
+    "altAnswers": [
+      "sitting in a box",
+      "in a box"
+    ],
+    "decoys": [
+      "cleaning the apartment",
+      "wearing a dress",
+      "apologizing on live TV"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q279",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "In an early episode, Ross shockingly kissed whose mother?",
+    "answer": "Chandler's mother (Nora)",
+    "altAnswers": [
+      "Chandler's mom",
+      "Nora Bing"
+    ],
+    "decoys": [
+      "Joey's mother",
+      "Monica's mother",
+      "Rachel's mother"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q280",
+    "category": "Deep Cuts",
+    "difficulty": 2,
+    "question": "In the show's famous opening credits, the six friends dance around in what?",
+    "answer": "a fountain",
+    "altAnswers": [
+      "a water fountain"
+    ],
+    "decoys": [
+      "Central Perk",
+      "the rain",
+      "a park"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q281",
+    "category": "Monica & Chandler",
+    "difficulty": 2,
+    "question": "Why did Monica and Chandler ultimately decide to adopt a baby?",
+    "answer": "they learned they couldn't conceive on their own",
+    "altAnswers": [
+      "they had fertility problems",
+      "they were medically unable to have kids"
+    ],
+    "decoys": [
+      "they didn't want their own baby",
+      "they were too busy",
+      "Monica was too old"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q282",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "Monica and Chandler flew to Las Vegas planning to elope, but were beaten to it by which drunk couple?",
+    "answer": "Ross and Rachel",
+    "altAnswers": [
+      "Ross and Rachel (who got married drunk)"
+    ],
+    "decoys": [
+      "Phoebe and Mike",
+      "Joey and a stranger",
+      "Barry and Mindy"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q283",
+    "category": "Ross & Rachel",
+    "difficulty": 2,
+    "question": "After watching the prom video and realizing Ross had planned to be her backup date, what did Rachel do?",
+    "answer": "she kissed him and they got together",
+    "altAnswers": [
+      "she kissed Ross",
+      "she got back together with him"
+    ],
+    "decoys": [
+      "she thanked him and left",
+      "she started crying",
+      "she called Barry"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q284",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "What major event happened to Rachel's parents during the series?",
+    "answer": "they got divorced",
+    "altAnswers": [
+      "her parents divorced",
+      "Dr. and Mrs. Green split up"
+    ],
+    "decoys": [
+      "they moved to Europe",
+      "her father passed away",
+      "they renewed their vows"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q285",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Phoebe dated a pretentious poet named Julio who wrote a poem implying she was an empty what?",
+    "answer": "an empty vase (shallow)",
+    "altAnswers": [
+      "a vase",
+      "empty vase"
+    ],
+    "decoys": [
+      "an empty room",
+      "an empty page",
+      "an empty cup"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q286",
+    "category": "Joey",
+    "difficulty": 3,
+    "question": "Joey once got completely stuck inside which piece of furniture in his apartment?",
+    "answer": "the entertainment center / TV cabinet",
+    "altAnswers": [
+      "the entertainment center",
+      "the TV cabinet"
+    ],
+    "decoys": [
+      "the closet",
+      "the refrigerator",
+      "the recliner"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q287",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "By the later seasons, Monica became head chef at a high-end restaurant called what?",
+    "answer": "Javu",
+    "altAnswers": [],
+    "decoys": [
+      "Alessandro's",
+      "Iridium",
+      "the Moondance Diner"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q288",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "Before fashion took off, what was Rachel's job title at Bloomingdale's?",
+    "answer": "a personal shopper / assistant buyer",
+    "altAnswers": [
+      "personal shopper",
+      "assistant buyer"
+    ],
+    "decoys": [
+      "a cashier",
+      "a window dresser",
+      "a store manager"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q289",
+    "category": "Guest Stars & Exes",
+    "difficulty": 3,
+    "question": "Rachel's ditzy sister Amy caused an uproar by taking baby Emma and doing what to her?",
+    "answer": "getting her ears pierced",
+    "altAnswers": [
+      "piercing her ears"
+    ],
+    "decoys": [
+      "cutting her hair",
+      "losing her at the mall",
+      "dyeing her hair"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q290",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "In 'The One Where Ross Got High,' whose secrets all came spilling out at the Thanksgiving table?",
+    "answer": "everyone's — the whole group's hidden secrets",
+    "altAnswers": [
+      "everyone's secrets",
+      "all of them"
+    ],
+    "decoys": [
+      "only Monica's",
+      "only Chandler's",
+      "nobody's"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q291",
+    "category": "Weddings & Breakups",
+    "difficulty": 2,
+    "question": "In which city did Ross and Emily get married?",
+    "answer": "London",
+    "altAnswers": [
+      "London, England"
+    ],
+    "decoys": [
+      "Paris",
+      "New York",
+      "Dublin"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q292",
+    "category": "Weddings & Breakups",
+    "difficulty": 1,
+    "question": "In the pilot, Rachel bursts into Central Perk in a wedding dress, having just done what?",
+    "answer": "run out on her wedding to Barry",
+    "altAnswers": [
+      "left Barry at the altar",
+      "ditched her wedding"
+    ],
+    "decoys": [
+      "gotten married",
+      "been proposed to",
+      "won the lottery"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q293",
+    "category": "Weddings & Breakups",
+    "difficulty": 3,
+    "question": "Rachel later discovered that her ex-fiancé Barry had been cheating on her with whom?",
+    "answer": "Mindy, her maid of honor",
+    "altAnswers": [
+      "Mindy"
+    ],
+    "decoys": [
+      "her sister Jill",
+      "Janice",
+      "her cousin"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q294",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Phoebe's scientist boyfriend David broke her heart by leaving to do research where?",
+    "answer": "Minsk",
+    "altAnswers": [
+      "Minsk (Belarus/Russia)"
+    ],
+    "decoys": [
+      "Antarctica",
+      "Tokyo",
+      "the Moon"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q295",
+    "category": "Phoebe",
+    "difficulty": 3,
+    "question": "Lisa Kudrow played Phoebe's twin Ursula, a character she originated on which other NBC sitcom?",
+    "answer": "Mad About You",
+    "altAnswers": [],
+    "decoys": [
+      "Seinfeld",
+      "Cheers",
+      "Frasier"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q296",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "During the apartment quiz, Rachel embarrassingly guessed Chandler's job was a 'what'?",
+    "answer": "a transponster (not a real word)",
+    "altAnswers": [
+      "a transponster",
+      "transponster"
+    ],
+    "decoys": [
+      "a transponder",
+      "a data processor",
+      "a statistician"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q297",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "Monica was once fired from a restaurant for accepting what gift from a meat supplier?",
+    "answer": "free steaks",
+    "altAnswers": [
+      "steaks",
+      "steaks and a gift"
+    ],
+    "decoys": [
+      "cash",
+      "a case of wine",
+      "a gold watch"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q298",
+    "category": "Jobs & Money",
+    "difficulty": 3,
+    "question": "Rachel broke workplace rules by dating her young assistant, whose name was what?",
+    "answer": "Tag",
+    "altAnswers": [
+      "Tag Jones"
+    ],
+    "decoys": [
+      "Gavin",
+      "Mark",
+      "Joshua"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q299",
+    "category": "Joey",
+    "difficulty": 3,
+    "question": "Joey impulsively bought what big-ticket item at an auction, sure it was a smart investment?",
+    "answer": "a boat (a sailboat)",
+    "altAnswers": [
+      "a boat",
+      "a sailboat"
+    ],
+    "decoys": [
+      "a racehorse",
+      "a sports car",
+      "a jukebox"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q300",
+    "category": "Joey",
+    "difficulty": 2,
+    "question": "What was the name of Joey's chain-smoking talent agent?",
+    "answer": "Estelle",
+    "altAnswers": [
+      "Estelle Leonard"
+    ],
+    "decoys": [
+      "Janine",
+      "Sophie",
+      "Gloria"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 25
+    },
+    "verified": false
+  },
+  {
+    "id": "q301",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "Why does Chandler famously hate Thanksgiving?",
+    "answer": "his parents announced their divorce over Thanksgiving dinner when he was nine",
+    "altAnswers": [
+      "his parents told him they were divorcing on Thanksgiving",
+      "his parents split up on Thanksgiving"
+    ],
+    "decoys": [
+      "he's allergic to turkey",
+      "he once burned the turkey",
+      "he was dumped on Thanksgiving"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q302",
+    "category": "Thanksgiving",
+    "difficulty": 3,
+    "question": "To cheer up a sulking Chandler, Monica put a raw turkey on her head, danced around, and prompted him to say what for the first time?",
+    "answer": "'I love you'",
+    "altAnswers": [
+      "I love you",
+      "that he loved her"
+    ],
+    "decoys": [
+      "'Marry me'",
+      "'You're the best'",
+      "'Could I BE any happier'"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q303",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 3,
+    "question": "What large, tacky decoration did Joey and Chandler proudly display in their apartment?",
+    "answer": "a big white porcelain dog statue",
+    "altAnswers": [
+      "a white ceramic dog",
+      "a big white dog statue"
+    ],
+    "decoys": [
+      "a suit of armor",
+      "a jukebox",
+      "a stuffed moose head"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q304",
+    "category": "Ross & Rachel",
+    "difficulty": 3,
+    "question": "Ross dated a woman named Mona whom he first met at which event?",
+    "answer": "Monica and Chandler's wedding",
+    "altAnswers": [
+      "M&C's wedding",
+      "the wedding"
+    ],
+    "decoys": [
+      "Emily's wedding",
+      "a museum gala",
+      "a blind date"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q305",
+    "category": "Guest Stars & Exes",
+    "difficulty": 2,
+    "question": "Chandler's on-again, off-again girlfriend Janice was famous for which grating catchphrase?",
+    "answer": "'Oh. My. God.'",
+    "altAnswers": [
+      "Oh my God!",
+      "Oh. My. God."
+    ],
+    "decoys": [
+      "'How you doin'?'",
+      "'We were on a break!'",
+      "'Could I BE...'"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q306",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "Ross was traumatized to eventually learn that his childhood dog, Chi-Chi, had actually done what — a fact his parents hid?",
+    "answer": "died",
+    "altAnswers": [
+      "died (they claimed it went to a farm)",
+      "passed away"
+    ],
+    "decoys": [
+      "run away",
+      "been given away",
+      "been stolen"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q307",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "In college, Ross and Chandler formed a band with what unusual name?",
+    "answer": "Way, No Way",
+    "altAnswers": [
+      "'Way, No Way'"
+    ],
+    "decoys": [
+      "The Wayners",
+      "Free Bird",
+      "Numbers"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q308",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What instrument did Ross play, subjecting his friends to his awful experimental 'sound'?",
+    "answer": "a keyboard / synthesizer",
+    "altAnswers": [
+      "the keyboard",
+      "a synthesizer"
+    ],
+    "decoys": [
+      "the trumpet",
+      "the drums",
+      "the saxophone"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q309",
+    "category": "Deep Cuts",
+    "difficulty": 3,
+    "question": "What is Ross's embarrassing middle name?",
+    "answer": "Eustace",
+    "altAnswers": [
+      "Ross Eustace Geller"
+    ],
+    "decoys": [
+      "Eugene",
+      "Ellis",
+      "Edward"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q310",
+    "category": "Monica & Chandler",
+    "difficulty": 3,
+    "question": "What did Monica and Chandler name their adopted twins?",
+    "answer": "Jack and Erica",
+    "altAnswers": [
+      "Erica and Jack"
+    ],
+    "decoys": [
+      "Ben and Emma",
+      "Frank and Alice",
+      "Leslie and Chandler"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 18
+    },
+    "verified": false
   }
 ]
