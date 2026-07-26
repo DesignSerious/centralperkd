@@ -94,7 +94,12 @@ async function partA() {
   let didPrivacy = false;
   let didReveal = false;
   let didVoteChecks = false;
+  let didEarlyBluff = false;
+  let didEarlySurvived = false;
+  let didEarlyBallot = false;
+  let didRescue = false;
   let realAnswer = null;
+  const EARLY_LIE = 'Marcel the monkey confessed on tape';
   const deadline = Date.now() + 120000;
 
   while (Date.now() < deadline && rounds <= 2) {
@@ -135,6 +140,60 @@ async function partA() {
           { type: 'submitAnswer', data: { text: 'second try' } }, (x) => r(x)));
         check(dup && dup.ok === false, 'a second answer from the same phone is refused');
       }
+
+      // Round 1 also covers the answer-screen rescue. Phone 2 is the silent
+      // player, so it can burn both of its "Give me one" uses without disturbing
+      // the round the other two assertions depend on.
+      if (rounds === 1 && !didRescue) {
+        didRescue = true;
+        console.log('\n— give me one —');
+        check(pState[2].rescuesLeft === 2, 'a player starts the game with 2 uses');
+        const one = await new Promise((r) => phones[2].emit('action',
+          { type: 'rescueAnswer' }, (x) => r(x)));
+        check(one && one.ok === true && !!one.text, 'the button hands back an answer: "' + (one && one.text) + '"');
+        check(one.rescuesLeft === 1, 'using one leaves 1');
+        // The whole point of this button is that it does NOT score you points.
+        // An invented answer that lands on the truth would make it free spaces.
+        check(Judge.normalize(one.text) !== Judge.normalize(realAnswer),
+          'the suggestion is NOT the real answer');
+        const two = await new Promise((r) => phones[2].emit('action',
+          { type: 'rescueAnswer' }, (x) => r(x)));
+        check(two && two.ok === true && !!two.text, 'a second use is allowed');
+        check(Judge.normalize(two.text) !== Judge.normalize(one.text),
+          'the second suggestion is a different one');
+        check(two.rescuesLeft === 0, 'using the second leaves 0');
+        const three = await new Promise((r) => phones[2].emit('action',
+          { type: 'rescueAnswer' }, (x) => r(x)));
+        check(three && three.ok === false, 'a third use is refused');
+        await waitFor(() => pState[2] && pState[2].rescuesLeft === 0, 4000, 'count pushed to the phone');
+        // Nobody else's allowance moved, and no snapshot names who reached for one.
+        check(pState[0].rescuesLeft === 2, "another player's allowance is untouched");
+        check(tvState.players.every((p) => p.rescuesLeft === undefined),
+          'the TV is never told who used a rescue');
+      }
+
+      // Round 2 covers the EARLY bluff path: a player cleared by the judge
+      // writes their lie while ANSWERING is still running, instead of waiting
+      // for the phase to close. Round 1 above already covered the classic
+      // wait-for-BLUFFING path, so both routes are exercised.
+      if (rounds === 2 && !didEarlyBluff) {
+        didEarlyBluff = true;
+        console.log('\n— early bluff (still in ANSWERING) —');
+        await waitFor(() => pState[0] && pState[0].canBluff, 8000, 'right player handed the lie screen');
+        check(tvState.state === 'ANSWERING', 'still in ANSWERING when the bluff window opens');
+        check(pState[0].myAnswerCorrect === true, 'right player is told they were right immediately');
+        check(!(pState[1] && pState[1].canBluff), 'wrong player gets no early bluff window');
+        // The whole table can see the TV. It must not name who got it right
+        // while the others are still typing their answers.
+        check(!tvState.bluffedPlayerIds || !tvState.bluffedPlayerIds.length,
+          'TV is not told who has already written a lie');
+        check(!tvState.correctCount, 'TV is not told how many got it right yet');
+        const early = await new Promise((r) => phones[0].emit('action',
+          { type: 'submitBluff', data: { text: EARLY_LIE } }, (x) => r(x)));
+        check(early && early.ok === true, 'a lie submitted during ANSWERING is accepted');
+        await waitFor(() => pState[0] && pState[0].myBluff === EARLY_LIE, 4000, 'early lie echoed back');
+        check(tvState.state === 'ANSWERING', 'the early lie did NOT pull the room out of ANSWERING');
+      }
     }
 
     // BLUFFING: only the correct player may write.
@@ -150,6 +209,14 @@ async function partA() {
         const ok = await new Promise((r) => phones[0].emit('action',
           { type: 'submitBluff', data: { text: 'Gunther did it, obviously' } }, (x) => r(x)));
         check(ok && ok.ok === true, 'a genuine lie is accepted');
+      }
+      // Round 2: the lie was written back in ANSWERING. Entering BLUFFING must
+      // not wipe it, and the writer must not be asked for a second one.
+      if (didEarlyBluff && !didEarlySurvived) {
+        didEarlySurvived = true;
+        console.log('\n— early bluff survives the phase change —');
+        check(pState[0].myBluff === EARLY_LIE, 'the early lie is still held at BLUFFING');
+        check(pState[0].canBluff === false, 'the early writer is not asked to lie again');
       }
     }
 
@@ -171,6 +238,16 @@ async function partA() {
         const pick = truthLetter || pState[1].ballot.find((b) => !(pState[1].myBallotLetters || []).includes(b.letter));
         if (pick) phones[1].emit('action', { type: 'vote', data: { letter: pick.letter } });
       }
+    }
+
+    // Round 2's ballot must carry the lie that was written back in ANSWERING —
+    // the point of the whole early-bluff path.
+    if (st === 'VOTING' && didEarlySurvived && !didEarlyBallot
+        && pState[1] && pState[1].ballot && pState[1].ballot.length) {
+      didEarlyBallot = true;
+      console.log('\n— early bluff reaches the ballot —');
+      check(pState[1].ballot.some((b) => b.text === EARLY_LIE),
+        'the lie written during ANSWERING is on the ballot');
     }
 
     if (st === 'REVEAL' && !didReveal && tvState.lastResults && Object.keys(tvState.lastResults).length) {

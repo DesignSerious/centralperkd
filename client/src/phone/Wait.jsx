@@ -4,6 +4,9 @@ import PieceVisual from '../lib/PieceVisual';
 
 // Held moments where the phone is informational rather than interactive.
 //   'round-intro'   next round spinning up (may include the duel pick)
+//   'judging'       your answer is in and the judge is still on it. Held apart
+//                   from 'answered' so the ~1s AI call reads as "checking",
+//                   not as the room waiting on somebody else.
 //   'answered'      your answer is in, others are still typing
 //   'bluff-wait'    you got it WRONG — others who were right are writing lies.
 //                   Shows how MANY knew it, never who: naming them would tell
@@ -13,18 +16,20 @@ export default function Wait({ snap, mode }) {
   if (mode === 'round-intro') return <RoundIntro snap={snap} />;
 
   const headline =
-    mode === 'answered' ? 'Answer locked in'
-      : mode === 'bluff-wait' ? 'Answers are in'
-        : 'You knew it';
+    mode === 'judging' ? 'Checking your answer'
+      : mode === 'answered' ? 'Answer locked in'
+        : mode === 'bluff-wait' ? 'Answers are in'
+          : 'You knew it';
   const sub =
-    mode === 'answered' ? 'Waiting for everyone else to answer…'
-      : mode === 'bluff-wait'
-        ? (snap.correctCount === 1
-            ? '1 player knew the real answer — and is writing a lie about it right now.'
-            : snap.correctCount > 1
-              ? snap.correctCount + ' players knew the real answer — they\'re writing lies right now.'
-              : 'Nobody got it. The ballot is all honest guesses.')
-        : 'You already banked the points, so you sit out the vote. Watch who falls for your lie.';
+    mode === 'judging' ? 'Hang on one second…'
+      : mode === 'answered' ? 'Waiting for everyone else to answer…'
+        : mode === 'bluff-wait'
+          ? (snap.correctCount === 1
+              ? '1 player knew the real answer — and is writing a lie about it right now.'
+              : snap.correctCount > 1
+                ? snap.correctCount + ' players knew the real answer — they\'re writing lies right now.'
+                : 'Nobody got it. The ballot is all honest guesses.')
+          : 'You already banked the points, so you sit out the vote. Watch who falls for your lie.';
 
   return (
     <div className="phone-shell cutscene-page-shell">

@@ -155,26 +155,44 @@ export default function App() {
   // Routing depends on the player's own verdict, which the server sends as
   // snap.myAnswerCorrect: right players write a lie and skip voting, wrong
   // players skip bluffing and vote. Nobody sees the other branch.
+  // ANSWERING doubles as the front half of the bluff window. The server judges
+  // every answer the moment it lands, so a player who nailed it is handed the
+  // lie screen immediately rather than sitting out the rest of the clock.
+  // myAnswerCorrect is null until the verdict resolves — that gap is its own
+  // screen, so "checking" never reads as "waiting for everyone else".
+  const earlyBluff = state === 'ANSWERING' && !snap.canAnswer && snap.myAnswerCorrect === true;
+
   let screen;
   if (state === 'LOBBY') screen = <Lobby snap={snap} />;
   else if (state === 'ROUND_INTRO') screen = <Wait snap={snap} mode="round-intro" />;
   else if (state === 'ANSWERING') {
-    screen = snap.canAnswer ? <Answer snap={snap} /> : <Wait snap={snap} mode="answered" />;
+    screen = snap.canAnswer ? <Answer snap={snap} />
+      : earlyBluff ? <Bluff snap={snap} early />
+        : snap.myAnswerCorrect == null ? <Wait snap={snap} mode="judging" />
+          : <Wait snap={snap} mode="answered" />;
   } else if (state === 'BLUFFING') {
     screen = snap.myAnswerCorrect ? <Bluff snap={snap} /> : <Wait snap={snap} mode="bluff-wait" />;
   } else if (state === 'VOTING') {
     screen = snap.myAnswerCorrect ? <Wait snap={snap} mode="vote-wait" /> : <Vote snap={snap} />;
   } else if (state === 'REVIEW') {
     screen = <Review snap={snap} />;
+  } else if (state === 'FACE_OFF') {
+    // Finalists and spectators share one screen — it branches internally, and
+    // the sudden-death beats are the finale for everybody watching.
+    screen = <FaceOff snap={snap} />;
   } else if (state === 'REVEAL' || state === 'SCORING' || state === 'GAME_OVER') {
     screen = <Watch snap={snap} />;
   } else screen = <div className="phone-shell"><div className="phone-status">Loading…</div></div>;
 
   // Phase key for the entrance animation. REVEAL → SCORING → GAME_OVER all
   // render inside <Watch>, which owns its own sound cues — re-mounting it
-  // between those phases would replay them, so they share one key. ANSWERING
-  // and BLUFFING keep their own key so submitting swaps the screen cleanly.
-  const phaseKey = (state === 'SCORING' || state === 'GAME_OVER') ? 'WATCH' : state;
+  // between those phases would replay them, so they share one key. <Bluff> is
+  // the same story across the ANSWERING → BLUFFING seam: a correct player is
+  // already on it, and a new key there would remount and replay the "you nailed
+  // it" sting a second time.
+  const phaseKey = (state === 'SCORING' || state === 'GAME_OVER') ? 'WATCH'
+    : (earlyBluff || state === 'BLUFFING') ? 'BLUFF'
+      : state;
 
   return (
     <>

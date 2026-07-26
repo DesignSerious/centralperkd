@@ -45,11 +45,18 @@ const STATES = {
   REVEAL: 'REVEAL',
   REVIEW: 'REVIEW',
   SCORING: 'SCORING',
+  FACE_OFF: 'FACE_OFF',
   GAME_OVER: 'GAME_OVER'
 };
 
 const ROOM_IDLE_MS = 2 * 60 * 60 * 1000; // 2h
 const MAX_PLAYERS = 8;
+
+// "Give me one" on the ANSWER screen: a believable WRONG answer for a player
+// who has drawn a blank, so they put something on the ballot instead of nothing.
+// It never scores the answer points — it buys a lottery ticket on other people's
+// votes. Two per game is what stops it becoming everyone's default move.
+const RESCUES_PER_GAME = 2;
 
 // ─── phase timings ───
 const ROUND_INTRO_MS = 2600;
@@ -57,6 +64,11 @@ const ROUND_INTRO_MS = 2600;
 // checkmark land before the screen changes. Lifted from Wilderdash — small
 // touch, big difference in feel.
 const LAST_DING_BEAT_MS = 700;
+// Every correct player wrote their lie during ANSWERING, so BLUFFING has
+// nothing to wait for. It still gets a short hold rather than the 700ms ding
+// beat: the players who missed the question have not seen "N of you knew it"
+// yet, and flashing that card for two thirds of a second reads as a glitch.
+const BLUFF_ALL_EARLY_MS = 1600;
 // Leaving ANSWERING while an AI judgement is still in flight would misclassify
 // that player (a genuinely-correct paraphrase gets stamped WRONG and loses its
 // points), so we hold for stragglers before falling back to the tier-2 verdict.
@@ -575,10 +587,25 @@ function closeAnswering(io, room, waited = 0) {
   // silently skipping it read as a bug in playtesting.
   if (correctIds.length >= connected) {
     room.skipReason = 'everyone-knew';
+    // Drop any lie written early — with nobody left to fool there is no vote,
+    // so an early bluff would otherwise turn up on the reveal having never been
+    // on a ballot.
+    room.bluffs = {};
     beginReveal(io, room);
     return;
   }
   beginBluffing(io, room);
+}
+
+// A correct player doesn't wait for the answer clock. The judge clears them the
+// moment their answer lands, and from that instant their bluff window is open —
+// they write their lie while everyone else is still typing. BLUFFING is then
+// just the phase where the rest of the right-answerers catch up.
+function bluffWindowOpen(room, playerId) {
+  if (room.state === STATES.BLUFFING) return true;
+  if (room.state !== STATES.ANSWERING) return false;
+  const a = room.answers[playerId];
+  return !!(a && a.judged && a.correct);
 }
 
 function correctPlayerIds(room) {
@@ -595,17 +622,27 @@ function wrongPlayerIds(room) {
 function beginBluffing(io, room) {
   clearTimer(room);
   room.state = STATES.BLUFFING;
-  room.bluffs = {};
+  // room.bluffs is deliberately NOT cleared here. Correct players write their
+  // lie during ANSWERING now (see bluffWindowOpen), and those early entries have
+  // to survive the phase change. beginRoundIntro already clears it per round.
   touch(room);
-  setTimer(room, (room.botMode ? SIM.BLUFF_MS / 1000 : room.settings.bluffSeconds) * 1000,
-    () => beginVoting(io, room));
+  // Everyone who knew it lied while the others were still answering — there is
+  // nothing to wait for, so take the beat and move to the vote.
+  const waiting = correctPlayerIds(room).filter((id) => !room.bluffs[id]);
+  setTimer(
+    room,
+    waiting.length
+      ? (room.botMode ? SIM.BLUFF_MS / 1000 : room.settings.bluffSeconds) * 1000
+      : (room.botMode ? LAST_DING_BEAT_MS : BLUFF_ALL_EARLY_MS),
+    () => beginVoting(io, room)
+  );
   broadcast(io, room.code);
 }
 
 // A correct player's crafted lie. Rejected if it's really the truth wearing a
 // hat — the ballot must never contain two true answers.
 async function submitBluff(io, room, playerId, text) {
-  if (room.state !== STATES.BLUFFING) return { ok: false, error: 'Not accepting lies' };
+  if (!bluffWindowOpen(room, playerId)) return { ok: false, error: 'Not accepting lies' };
   const answer = room.answers[playerId];
   if (!answer || !answer.correct) return { ok: false, error: 'Only players who got it right write a lie' };
   const clean = String(text || '').trim().slice(0, 120);
@@ -1330,12 +1367,22 @@ function handle(io, { socket, role, roomCode, playerId, action, data }) {
       if (role !== 'player') return false;
       return submitBluff(io, room, playerId, data && data.text);
     }
+    case 'rescueAnswer': {
+      if (role !== 'player') return false;
+      // Async: may call out to the model before it can answer.
+      return rescueAnswer(io, room, playerId);
+    }
     case 'randomBluff': {
       if (role !== 'player') return false;
-      if (room.state !== STATES.BLUFFING) return { ok: false, error: 'Not accepting lies' };
+      if (!bluffWindowOpen(room, playerId)) return { ok: false, error: 'Not accepting lies' };
       const text = randomBluff(room, playerId);
       if (!text) return { ok: false, error: 'No spare lies left — write your own.' };
       return { ok: true, text };
+    }
+    case 'submitFaceOffAnswer': {
+      if (role !== 'player') return false;
+      // Async: the dispatcher in index.js awaits the promise for the ack.
+      return submitFaceOffAnswer(io, room, playerId, data && data.text);
     }
     case 'vote': {
       if (role !== 'player') return false;
@@ -1549,7 +1596,10 @@ function baseSnapshot(room) {
     // Counts only — never who got it right, until REVEAL.
     correctCount: revealed(room.state) || room.state === STATES.BLUFFING || room.state === STATES.VOTING
       ? correctPlayerIds(room).length : 0,
-    bluffedPlayerIds: Object.keys(room.bluffs),
+    // Withheld during ANSWERING: correct players start their lie early, so a
+    // non-empty list in that phase would name exactly who got it right while
+    // the rest of the room is still typing.
+    bluffedPlayerIds: room.state === STATES.ANSWERING ? [] : Object.keys(room.bluffs),
     // Who got laughed WITH this round (author -> 😂 count), shown at the reveal.
     laughLeaders: revealed(room.state) ? laughLeaders(room) : [],
     // During BLUFFING, WHO is writing lies (the players who got it right) so the
@@ -1626,11 +1676,22 @@ function playerSnapshot(room, playerId) {
   base.myLaughs = Object.keys(room.laughs).filter((l) => (room.laughs[l] || []).includes(playerId));
   base.myResult = revealed(room.state) ? (room.lastResults[playerId] || null) : null;
   base.canAnswer = room.state === STATES.ANSWERING && !myAnswer;
-  base.canBluff = room.state === STATES.BLUFFING && iWasCorrect && !room.bluffs[playerId];
+  // Rescues are private to the player who owns them. The room never learns that
+  // somebody reached for one — an entry the table knows was auto-generated is an
+  // entry nobody votes for, which would defeat the whole point of offering it.
+  base.rescuesLeft = typeof p.rescuesLeft === 'number' ? p.rescuesLeft : RESCUES_PER_GAME;
+  base.rescuesPerGame = RESCUES_PER_GAME;
+  base.canBluff = bluffWindowOpen(room, playerId) && iWasCorrect && !room.bluffs[playerId];
   base.canVote = room.state === STATES.VOTING && !iWasCorrect && !room.votes[playerId];
   // Entries this player wrote, so the phone can grey them out when voting.
   base.myBallotLetters = room.ballot.filter((b) => b.authorIds.includes(playerId)).map((b) => b.letter);
   base.mustPickDuel = !!(room.duelPick && room.duelPick.playerId === playerId && !room.duelPick.opponentId);
+  // Face-off: finalists get the sudden-death input, everyone else watches.
+  const fo = room.faceOff;
+  base.iAmFinalist = !!(fo && fo.playerIds.includes(playerId));
+  base.myFaceOffAnswer = fo && fo.answers[playerId] ? fo.answers[playerId].text : null;
+  base.canFaceOff = room.state === STATES.FACE_OFF && !!fo && fo.phase === 'answer'
+    && base.iAmFinalist && !fo.answers[playerId];
   // Review: during REVEAL a wrongly-judged player can request one (once); during
   // REVIEW the disputer waits while the OTHER players get a yes/no ballot.
   base.iRequestedReview = room.reviewRequests.includes(playerId);

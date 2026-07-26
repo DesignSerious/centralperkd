@@ -10,7 +10,13 @@ import * as sfx from '../lib/sfx';
 // The server re-runs the judging funnel on the lie and rejects anything that
 // is really the truth in disguise, so the ballot can never hold two true
 // answers. That rejection arrives as a normal error on the ack.
-export default function Bluff({ snap }) {
+//
+// `early` means this screen opened during ANSWERING — the judge cleared this
+// player while the rest of the room is still typing, so they get a head start
+// on their lie. The countdown is hidden in that window: it belongs to the
+// answer clock, and would visibly jump UP when BLUFFING starts and hands out a
+// fresh one, which reads as a bug.
+export default function Bluff({ snap, early }) {
   const [text, setText] = useState(snap.myBluff || '');
   const [submitted, setSubmitted] = useState(!!snap.myBluff);
   const [error, setError] = useState('');
@@ -54,10 +60,14 @@ export default function Bluff({ snap }) {
         <div className="eyebrow">You nailed it! 🎉</div>
         <div className="word-help">
           {submitted
-            ? 'Lie submitted. Now watch who bites.'
-            : 'Points banked. Now write a LIE — every player who votes for it moves you further.'}
+            ? (early
+                ? 'Lie planted before the others even finished answering. Nice.'
+                : 'Lie submitted. Now watch who bites.')
+            : (early
+                ? 'Points banked — and you got there first. Write a LIE now, while everyone else is still answering.'
+                : 'Points banked. Now write a LIE — every player who votes for it moves you further.')}
         </div>
-        {seconds != null && (
+        {!early && seconds != null && (
           <div className={'timer ' + (seconds < 8 ? 'urgent' : '')}>
             {seconds}<span className="timer-suffix">s</span>
           </div>
