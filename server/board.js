@@ -11,7 +11,9 @@
 // Tile types map 1:1 onto the artwork:
 //
 //   plain    parchment square
-//   bonus    gold tile with a coffee cup — your NEXT correct answer pays double
+//   bonus    gold tile with a coffee cup — your NEXT scoring move pays double.
+//            Everything that round: knowing it, votes your entry pulled, and
+//            spotting the truth. A round you score nothing in leaves it armed.
 //   advance  an arrow painted along the direction of travel: the blue arrow
 //            nudges you 1 space, the purple arrows 2. These are relative
 //            steps, not jumps to a fixed square.

@@ -818,7 +818,8 @@ function MovementScreen({ snap }) {
                   {r.votesPulled > 0 && <span className="tv-row-flair">fooled {r.votesPulled}</span>}
                   {r.duel === 'won' && <span className="tv-row-flair">⚡ duel</span>}
                   {r.advanced > 0 && <span className="tv-row-flair">→ arrow +{r.advanced}</span>}
-                  {r.landedBonus && <span className="tv-row-flair">☕ double next</span>}
+                  {r.landedBonus && <span className="tv-row-flair">☕ next move doubled</span>}
+                  {r.doubled && <span className="tv-row-flair">☕ doubled</span>}
                 </span>
                 <span className="delta">{gained > 0 ? '+' + gained : gained < 0 ? String(gained) : '·'}</span>
                 <span className="total">{p.position}</span>

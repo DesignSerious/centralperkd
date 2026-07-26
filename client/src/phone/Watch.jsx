@@ -52,12 +52,10 @@ function Result({ snap }) {
 
   // Itemize where the movement came from, so "+2" is never a mystery number.
   const lines = [];
-  if (r.fromAnswer) {
-    lines.push({
-      label: r.doubled ? 'You knew the answer (☕ doubled)' : 'You knew the answer',
-      v: r.fromAnswer
-    });
-  }
+  // The coffee cup no longer doubles only the answer points — it doubles every
+  // line below it, so the marker belongs on the round, not on one row. Each `v`
+  // here is already the doubled figure.
+  if (r.fromAnswer) lines.push({ label: 'You knew the answer', v: r.fromAnswer });
   if (r.fromVotes) {
     lines.push({
       label: r.votesPulled === 1 ? '1 player voted for your answer' : r.votesPulled + ' players voted for your answer',
@@ -147,7 +145,7 @@ function Result({ snap }) {
       )}
       {r.landedBonus && (
         <div className="phone-slide-note is-forward">
-          ☕ Coffee-cup tile — your next correct answer pays double.
+          ☕ Coffee-cup tile — your next scoring move is worth double. All of it.
         </div>
       )}
 
@@ -169,6 +167,12 @@ function Result({ snap }) {
 
       {lines.length > 0 && (
         <div className="phone-breakdown">
+          {r.doubled && (
+            <div className="phone-breakdown-row is-doubled">
+              <span>☕ Coffee cup — everything below is multiplied</span>
+              <span className="v">×{(snap.settings && snap.settings.bonusTileMultiplier) || 2}</span>
+            </div>
+          )}
           {lines.map((l) => (
             <div className="phone-breakdown-row" key={l.label}>
               <span>{l.label}</span>

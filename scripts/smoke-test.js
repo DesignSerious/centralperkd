@@ -16,6 +16,9 @@
 
 const { io } = require('socket.io-client');
 const BANK = require('../server/questions.json');
+// Same normalizer the server compares with, so "is this the truth?" assertions
+// here match what the game would actually have decided.
+const Judge = require('../server/judge');
 
 const BASE = process.env.BASE || 'http://localhost:3000';
 const EXPECTED_ORDER = ['ROUND_INTRO', 'ANSWERING', 'BLUFFING', 'VOTING', 'REVEAL', 'SCORING'];

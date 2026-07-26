@@ -161,7 +161,7 @@ const DEFAULT_SETTINGS = {
   pointsCorrectAnswer: 3,              // you knew it — the strongest single play
   pointsPerVote: 2,                    // each vote your ballot entry pulls
   pointsFoundTruth: 1,                 // you missed, but you spotted the truth
-  bonusTileMultiplier: 2,              // coffee-cup tile doubles your next correct answer
+  bonusTileMultiplier: 2,              // coffee-cup tile doubles your next scoring move, in full
   // Optional: when NO voter finds the truth, the players who knew it get this
   // many extra spaces. Off by default — it rewards a round where the table was
   // collectively fooled, which is fun but swingy.
@@ -484,6 +484,8 @@ function beginRoundIntro(io, room) {
   room.judgeBudget = Judge.newRoundBudget();
   room.pendingJudgements = 0;
   room.skipReason = null;
+  room.faceOff = null;
+  room.rescueOffers = {};
 
   // A duel space landed on last round becomes this round's duel, now that its
   // challenger has picked (or been auto-assigned) an opponent.
@@ -1096,9 +1098,16 @@ function tallyReview(io, room) {
 }
 
 // A passed review promotes the player to "correct" and patches JUST their row of
-// lastResults (a full recompute would double-consume the coffee-cup bonus and
-// re-run everyone). Their votes-pulled / found-truth stay as computed; only the
-// knowing-it points are added, then spaces are re-summed so SCORING moves them.
+// lastResults (a full recompute would re-run everyone and re-apply the duel).
+// Their votes-pulled / found-truth stay as computed; only the knowing-it points
+// are added, then spaces are re-summed so SCORING moves them.
+//
+// The coffee cup needs care here, because this row was scored as a miss and the
+// cup may have gone either way:
+//   - it already fired this round (they scored something while wrong), so
+//     fromVotes/fromTruth are doubled and the new answer points must be too;
+//   - or it is still armed (they scored nothing), and being promoted to correct
+//     is the scoring move that finally spends it — on every source.
 function applyReviewPass(room, playerId) {
   const r = room.lastResults[playerId];
   const p = room.players.find((x) => x.id === playerId);
@@ -1106,9 +1115,13 @@ function applyReviewPass(room, playerId) {
   const s = room.settings;
   r.correct = true;
   r.reviewed = true;
-  let gain = s.pointsCorrectAnswer;
-  if (p.doubleNext) { gain *= s.bonusTileMultiplier; r.doubled = true; p.doubleNext = false; }
-  r.fromAnswer = gain;
+  r.fromAnswer = s.pointsCorrectAnswer * ((r.doubled || p.doubleNext) ? s.bonusTileMultiplier : 1);
+  if (p.doubleNext) {
+    r.fromVotes *= s.bonusTileMultiplier;
+    r.fromTruth *= s.bonusTileMultiplier;
+    r.doubled = true;
+    p.doubleNext = false;
+  }
   r.spaces = Math.max(0, r.fromAnswer + r.fromVotes + r.fromTruth);
   if (room.answers[playerId]) room.answers[playerId].correct = true;
   // Running tallies so the leaderboard + streaks count the overturned answer.
@@ -1143,13 +1156,7 @@ function computeResults(room) {
   for (const p of room.players) {
     const r = results[p.id];
     if (!r.correct) continue;
-    let gain = s.pointsCorrectAnswer;
-    if (p.doubleNext) {
-      gain *= s.bonusTileMultiplier;
-      r.doubled = true;
-      p.doubleNext = false;   // the coffee-cup tile is consumed
-    }
-    r.fromAnswer = gain;
+    r.fromAnswer = s.pointsCorrectAnswer;
   }
 
   // 2. Votes pulled by each ballot entry, credited to its author(s). Shared
@@ -1189,12 +1196,33 @@ function computeResults(room) {
     }
   }
 
+  // 4. The coffee cup. It pays on the WHOLE move — knowing it, votes your entry
+  //    pulled, and spotting the truth — not just the answer points. The tile
+  //    promises "your next move is worth twice the points" and that is now
+  //    literally what it does.
+  //
+  //    Every source is doubled rather than the total, so the results card still
+  //    itemizes to the number the piece actually walks.
+  //
+  //    A round you scored nothing in is not your "next move": the cup stays
+  //    armed rather than being burned on a zero, however many rounds that takes.
+  for (const p of room.players) {
+    const r = results[p.id];
+    if (!p.doubleNext) continue;
+    if (r.fromAnswer + r.fromVotes + r.fromTruth <= 0) continue;
+    r.fromAnswer *= s.bonusTileMultiplier;
+    r.fromVotes *= s.bonusTileMultiplier;
+    r.fromTruth *= s.bonusTileMultiplier;
+    r.doubled = true;
+    p.doubleNext = false;   // the coffee-cup tile is consumed
+  }
+
   for (const p of room.players) {
     const r = results[p.id];
     r.spaces = r.fromAnswer + r.fromVotes + r.fromTruth;
   }
 
-  // 4. Duel: only the two named players, decided on this round's totals. The
+  // 5. Duel: only the two named players, decided on this round's totals. The
   //    winner takes DUEL_STAKE spaces off the loser on top of their own gains.
   if (room.duelPending) {
     const { challengerId, opponentId } = room.duelPending;
@@ -1307,7 +1335,7 @@ function applyMovement(io, room) {
       r.advancedFrom = from;
       r.advancedTo = pos;
     } else if (landed.type === Board.TYPES.BONUS) {
-      p.doubleNext = true;               // next correct answer pays double
+      p.doubleNext = true;               // next scoring move pays double, in full
       r.landedBonus = true;
     } else if (landed.type === Board.TYPES.DUEL) {
       duelLanders.push(p.id);
@@ -2210,5 +2238,8 @@ module.exports = {
   setQuestionHooks,
   readDefaults,
   writeDefaults,
-  settingsMeta
+  settingsMeta,
+  // exported for tests — the scoring arithmetic is worth asserting directly
+  // rather than reconstructing it from a dozen rounds of live play
+  _computeResults: computeResults
 };

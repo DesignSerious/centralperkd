@@ -59,7 +59,9 @@ export default function RulesOverlay({ snap, onClose }) {
           <ul className="rules-body-list">
             <li><strong>→ Arrow</strong> — nudges you further along the path: the blue
               arrow 1 space, the purple ones 2.</li>
-            <li><strong>☕ Coffee cup</strong> — your next correct answer pays double.</li>
+            <li><strong>☕ Coffee cup</strong> — your next scoring move is worth double.
+              All of it: knowing the answer, votes your entry pulls, spotting the truth.
+              Score nothing and you keep it for next round.</li>
           </ul>
           <p className="rules-body">
             Nothing on this board sends you backwards — a round either moves you
@@ -83,6 +85,12 @@ export default function RulesOverlay({ snap, onClose }) {
             {finalQuestion
               ? 'Reaching the couch arms the clincher: you take the game the next round you score. Miss out and you simply wait on the line and try again.'
               : 'First piece to reach the couch wins outright.'}
+          </p>
+          <p className="rules-body">
+            <strong>☕ Face-off</strong> — if two or more of you reach the couch in
+            the same round, nobody is handed the win. It's sudden death between
+            you: one question, no bluffing, no voting. The fastest correct answer
+            takes the game. Nobody gets it, you go again on a new question.
           </p>
         </div>
 

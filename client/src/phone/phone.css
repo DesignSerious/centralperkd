@@ -1347,3 +1347,116 @@ video.photo-capture-frame { transform: scaleX(-1); }
 .phone-review-verdict.is-deny {
   border: 1px solid rgba(232, 132, 132, 0.5); background: rgba(122, 38, 46, 0.2); color: #f2c4c4;
 }
+
+/* ─── FACE_OFF ───
+   The phone half of the couch face-off. Finalists get the input; everyone else
+   gets the same beats as a spectator, so these styles serve both. */
+.faceoff-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 14px auto 16px;
+}
+.faceoff-player {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.85;
+}
+.faceoff-player.is-me { opacity: 1; }
+.faceoff-name {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  color: var(--cream);
+}
+.faceoff-player.is-me .faceoff-name { color: var(--gold-soft); }
+.faceoff-tick { color: var(--true-green); font-size: 0.9rem; }
+.faceoff-vs {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--gold-soft);
+  opacity: 0.8;
+}
+
+.faceoff-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(var(--panel), 0.6);
+  border: 1px solid rgba(215, 192, 149, 0.16);
+  border-radius: 14px;
+  text-align: left;
+}
+.faceoff-result.is-correct { border-color: rgba(var(--tg-glow), 0.4); }
+.faceoff-result.is-winner {
+  background: rgba(var(--panel-lift), 0.8);
+  border-color: var(--true-green);
+  box-shadow: 0 0 20px rgba(var(--tg-glow), 0.22);
+}
+.faceoff-result-piece { flex: 0 0 auto; }
+.faceoff-result-body { flex: 1 1 auto; min-width: 0; }
+.faceoff-result-name {
+  display: block;
+  font-family: var(--display);
+  font-size: 0.95rem;
+  color: var(--cream);
+}
+.faceoff-result-answer {
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  color: var(--cream-dim);
+  overflow-wrap: anywhere;
+}
+.faceoff-result-mark {
+  flex: 0 0 auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 1.2rem;
+  color: var(--coral-soft);
+}
+.faceoff-result.is-correct .faceoff-result-mark { color: var(--true-green); }
+.faceoff-result-ms {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--cream-fade);
+  font-variant-numeric: tabular-nums;
+}
+
+/* "Give me one" on the answer screen — the two-per-game rescue. The remaining
+   count rides inside the button rather than sitting beside it, so the control
+   reads as one thing and the phone keeps a single column of full-width buttons. */
+.rescue-count {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill, 999px);
+  background: rgba(255, 245, 225, 0.10);
+  border: 1px solid rgba(215, 192, 149, 0.28);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--cream-dim);
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Coffee-cup header on the results breakdown. The rows beneath it already show
+   their doubled values, so this line explains them rather than adding to them —
+   gold and rule-less so it reads as a banner over the list, not another entry. */
+.phone-breakdown-row.is-doubled {
+  color: var(--gold-soft);
+  border-bottom: 0;
+  font-weight: 600;
+}
+.phone-breakdown-row.is-doubled .v {
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}

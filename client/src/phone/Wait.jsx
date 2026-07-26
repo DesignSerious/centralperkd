@@ -95,7 +95,7 @@ function RoundIntro({ snap }) {
           {duel && a && b
             ? '⚡ Duel: ' + a.name + ' vs ' + b.name
             : snap.me && snap.me.doubleNext
-              ? '☕ Your next correct answer pays double.'
+              ? '☕ This round is worth double — everything you score.'
               : 'Eyes on the TV.'}
         </div>
         <div className="cutscene-page-divider" aria-hidden="true"><span>✦</span></div>
