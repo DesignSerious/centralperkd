@@ -24,6 +24,10 @@
 //              who falls for their lie. Skipped when everyone was right.
 //   REVEAL     the truth, who knew it, who fooled whom.
 //   SCORING    points board lands, then pieces walk the board one at a time.
+//   FACE_OFF   only when SCORING puts TWO OR MORE pieces on the couch at once.
+//              Sudden death between them: one question, finalists only, fastest
+//              correct answer takes the game. Nobody right, new question. See
+//              beginFaceOff for why this exists instead of a tiebreak sort.
 //
 // State transitions are server-driven. Clients only emit actions; they never
 // decide what comes next, never learn which ballot entry is the real answer,
@@ -77,6 +81,20 @@ const BLUFF_ALL_EARLY_MS = 1600;
 // wrong. The grace loops in 250ms steps and proceeds the instant every
 // judgement resolves, so a fast round never actually waits this long.
 const JUDGE_GRACE_MS = 7000;
+
+// ─── couch face-off (sudden death) ───
+// The intro card names the finalists before the first question, so the room
+// understands why the game just stopped. Later legs skip it — the previous
+// leg's result card already said "nobody got it, again".
+const FACE_OFF_INTRO_MS = 4200;
+const FACE_OFF_RESULT_MS = 5200;
+// Sudden death runs on a shorter clock than a normal round: two people who both
+// walked 32 spaces either know it or they don't, and a 40-second stare-down
+// kills the moment. Capped rather than fixed so a lobby set to 20s stays at 20.
+const FACE_OFF_ANSWER_CAP_S = 25;
+// Backstop. Five questions with nobody right means the bank is fighting the
+// table; fall back to a deterministic tiebreak rather than loop forever.
+const FACE_OFF_MAX_LEGS = 5;
 
 // REVEAL choreography: the truth card builds, lands, then each ballot entry is
 // walked through so the room can see who wrote what.
@@ -268,6 +286,8 @@ function makeRoom(code) {
     usedQuestions: new Set(),
     duelPending: null,       // { challengerId, opponentId } resolved next round
     duelPick: null,          // { playerId } owes us an opponent choice
+    faceOff: null,           // sudden-death tiebreak on the couch — see beginFaceOff
+    rescueOffers: {},        // playerId -> the wrong answer handed out this round
     createdAt: Date.now(),
     lastActivityAt: Date.now(),
     timer: null,
@@ -1267,19 +1287,203 @@ function endScoring(io, room) {
   const finish = room.settings.boardSpaces;
   const arrived = room.players.filter((p) => p.position >= finish);
   if (arrived.length) {
-    if (!room.settings.finalRoundToClinch) {
-      // Ties on the finish line break on this round's spaces, then correct count.
-      const winner = arrived.sort((a, b) =>
+    // Clinch mode: standing on the couch only counts if you scored this round.
+    // Anyone else waits on the line and tries again next round.
+    const eligible = room.settings.finalRoundToClinch
+      ? arrived.filter((p) => ((room.lastResults[p.id] || {}).spaces || 0) > 0)
+      : arrived;
+    // Two or more claimants: they play for it. A disconnected piece can't answer
+    // a sudden-death question, so it isn't a finalist — if that leaves exactly
+    // one live claimant, they simply take the game.
+    const finalists = eligible.filter((p) => p.connected);
+    if (finalists.length >= 2) { beginFaceOff(io, room, finalists.map((p) => p.id)); return; }
+    if (finalists.length === 1) { beginGameOver(io, room, { winnerId: finalists[0].id }); return; }
+    if (eligible.length) {
+      // Only disconnected arrivals. Nobody is here to play a face-off, so fall
+      // back to the deterministic tiebreak: this round's spaces, then correct count.
+      const winner = eligible.sort((a, b) =>
         ((room.lastResults[b.id] || {}).spaces || 0) - ((room.lastResults[a.id] || {}).spaces || 0) ||
         b.correct - a.correct)[0];
       beginGameOver(io, room, { winnerId: winner.id });
       return;
     }
-    // Clinch mode: reaching FINISH only wins if you actually scored this round.
-    const clinched = arrived.find((p) => ((room.lastResults[p.id] || {}).spaces || 0) > 0);
-    if (clinched) { beginGameOver(io, room, { winnerId: clinched.id }); return; }
   }
   beginRoundIntro(io, room);
+}
+
+// ─── couch face-off ───
+//
+// Two pieces reaching the couch in the same round used to be settled by a sort:
+// most spaces this round, then most correct answers. Nobody at the table could
+// see that happen — the game simply ended and named someone. (Clinch mode was
+// worse: it took the first match in player order, so a simultaneous clinch went
+// to whoever joined the room earliest.) Now they play for it.
+//
+// Sudden death, finalists only: one question, no bluffing, no voting. The
+// FASTEST CORRECT answer takes the game — submission time is already recorded on
+// every answer, so ranking by it is free. Nobody right, next question.
+//
+// Everyone else is a spectator. Their pieces stay where they finished; the
+// face-off decides the winner, not the standings.
+function beginFaceOff(io, room, finalistIds) {
+  clearTimer(room);
+  clearBotTimers(room);
+  room.state = STATES.FACE_OFF;
+  room.faceOff = {
+    playerIds: finalistIds.slice(),
+    phase: 'intro',      // 'intro' -> 'answer' -> 'result' -> (answer | GAME_OVER)
+    leg: 0,              // sudden-death questions played so far
+    answers: {},         // playerId -> { text, ms, correct, tier, judged }
+    openedAt: 0,
+    pending: 0,          // in-flight judgements, same guard as ANSWERING
+    result: null
+  };
+  touch(room);
+  console.log('[faceoff] on the couch: ' + finalistIds
+    .map((id) => (room.players.find((p) => p.id === id) || {}).name).join(' vs '));
+  setTimer(room, room.botMode ? 600 : FACE_OFF_INTRO_MS, () => beginFaceOffLeg(io, room));
+  broadcast(io, room.code);
+}
+
+function faceOffFinalists(room) {
+  if (!room.faceOff) return [];
+  return room.faceOff.playerIds
+    .map((id) => room.players.find((p) => p.id === id))
+    .filter(Boolean);
+}
+
+function beginFaceOffLeg(io, room) {
+  const fo = room.faceOff;
+  if (room.state !== STATES.FACE_OFF || !fo) return;
+  clearTimer(room);
+
+  const q = dealQuestion(room);
+  if (!q) { resolveFaceOffFallback(io, room, 'out-of-questions'); return; }
+  room.question = q;
+  room.usedQuestions.add(q.id);
+  for (const p of room.players) {
+    if (p.userId && onQuestionServed) {
+      try { onQuestionServed(p.userId, q.id); } catch (e) {}
+    }
+  }
+
+  fo.leg += 1;
+  fo.phase = 'answer';
+  fo.answers = {};
+  fo.result = null;
+  fo.pending = 0;
+  fo.openedAt = Date.now();
+  room.judgeBudget = Judge.newRoundBudget();
+  touch(room);
+  const secs = Math.min(room.settings.answerSeconds, FACE_OFF_ANSWER_CAP_S);
+  setTimer(room, room.botMode ? SIM.ANSWER_MS : secs * 1000, () => closeFaceOffLeg(io, room));
+  broadcast(io, room.code);
+  scheduleBotFaceOff(io, room);
+}
+
+// A finalist's sudden-death answer. Judged on arrival like any other, but the
+// verdict is NOT returned on the ack the way a normal answer's is — with two
+// people racing, telling one of them "correct" while the other is still typing
+// throws away the only moment this phase exists for. Everyone finds out together
+// on the result card.
+async function submitFaceOffAnswer(io, room, playerId, text) {
+  const fo = room.faceOff;
+  if (room.state !== STATES.FACE_OFF || !fo || fo.phase !== 'answer') {
+    return { ok: false, error: 'Not accepting answers' };
+  }
+  if (!fo.playerIds.includes(playerId)) return { ok: false, error: 'Only the players on the couch answer' };
+  if (fo.answers[playerId]) return { ok: false, error: 'You already answered' };
+  const clean = String(text || '').trim().slice(0, 120);
+  if (!clean) return { ok: false, error: 'Type your answer.' };
+
+  const entry = { text: clean, ms: Date.now() - fo.openedAt, correct: false, tier: 0, judged: false };
+  fo.answers[playerId] = entry;
+  fo.pending += 1;
+  touch(room);
+  broadcast(io, room.code);
+
+  let verdict = { correct: false, tier: 2 };
+  try {
+    verdict = await Judge.judgeAnswer(clean, room.question, room.judgeBudget);
+  } catch (e) {
+    console.error('[faceoff] judge threw, treating as wrong:', e.message);
+  }
+  entry.correct = !!verdict.correct;
+  entry.tier = verdict.tier;
+  entry.judged = true;
+  fo.pending = Math.max(0, fo.pending - 1);
+
+  if (room.state === STATES.FACE_OFF && fo.phase === 'answer') {
+    broadcast(io, room.code);
+    const live = faceOffFinalists(room).filter((p) => p.connected);
+    if (live.length && live.every((p) => fo.answers[p.id] && fo.answers[p.id].judged)) {
+      setTimer(room, LAST_DING_BEAT_MS, () => closeFaceOffLeg(io, room));
+    }
+  }
+  return { ok: true };
+}
+
+function closeFaceOffLeg(io, room, waited = 0) {
+  const fo = room.faceOff;
+  if (room.state !== STATES.FACE_OFF || !fo || fo.phase !== 'answer') return;
+  // Same grace as ANSWERING, and it matters more here: resolving on a tier-2
+  // verdict while the AI judge is still in flight would hand somebody the GAME.
+  if (fo.pending > 0 && waited < JUDGE_GRACE_MS) {
+    setTimer(room, 250, () => closeFaceOffLeg(io, room, waited + 250));
+    return;
+  }
+  if (fo.pending > 0) {
+    console.warn('[faceoff] ' + fo.pending + ' judgement(s) pending after grace — using tier-2 verdicts');
+    fo.pending = 0;
+  }
+  clearTimer(room);
+
+  const rows = faceOffFinalists(room).map((p) => {
+    const a = fo.answers[p.id];
+    return {
+      playerId: p.id,
+      text: a ? a.text : null,
+      correct: !!(a && a.correct),
+      ms: a ? a.ms : null
+    };
+  });
+  // Fastest correct answer wins. Nobody correct -> winnerId stays null and the
+  // room goes again on a fresh question.
+  const winners = rows.filter((r) => r.correct).sort((a, b) => a.ms - b.ms);
+  const winnerId = winners.length ? winners[0].playerId : null;
+
+  fo.phase = 'result';
+  fo.result = {
+    leg: fo.leg,
+    question: room.question.question,
+    truth: room.question.answer,
+    rows,
+    winnerId,
+    again: !winnerId && fo.leg < FACE_OFF_MAX_LEGS
+  };
+  touch(room);
+  console.log('[faceoff] leg ' + fo.leg + ': ' + (winnerId
+    ? (room.players.find((p) => p.id === winnerId) || {}).name + ' takes it in ' +
+      Math.round((winners[0].ms || 0) / 100) / 10 + 's'
+    : 'nobody got it'));
+  broadcast(io, room.code);
+
+  setTimer(room, room.botMode ? 900 : FACE_OFF_RESULT_MS, () => {
+    if (room.state !== STATES.FACE_OFF) return;
+    if (winnerId) { beginGameOver(io, room, { winnerId }); return; }
+    if (fo.leg < FACE_OFF_MAX_LEGS) { beginFaceOffLeg(io, room); return; }
+    resolveFaceOffFallback(io, room, 'face-off-exhausted');
+  });
+}
+
+// The bank ran dry mid-face-off, or five questions went by with nobody right.
+// Fall back to season-long form rather than leaving the room stuck on the couch.
+function resolveFaceOffFallback(io, room, reason) {
+  const best = faceOffFinalists(room)
+    .slice()
+    .sort((a, b) => b.correct - a.correct || b.fooled - a.fooled)[0];
+  console.warn('[faceoff] unresolved (' + reason + ') — falling back to season stats');
+  beginGameOver(io, room, { winnerId: best ? best.id : null, reason });
 }
 
 let onGameOver = null;
@@ -1322,6 +1526,7 @@ function returnToLobby(io, room) {
   room.reviewVotes = {};
   room.duelPending = null;
   room.duelPick = null;
+  room.faceOff = null;
   room.winnerId = null;
   room.players.forEach((p) => {
     p.position = 0;
@@ -1423,6 +1628,19 @@ function handle(io, { socket, role, roomCode, playerId, action, data }) {
           endScoring(io, room);
           return true;
         }
+        // Skips one sub-phase of the face-off, not the whole thing — a host
+        // shouldn't be able to jump past the question that decides the game.
+        case STATES.FACE_OFF: {
+          const fo = room.faceOff;
+          if (!fo) return false;
+          if (fo.phase === 'intro') { beginFaceOffLeg(io, room); return true; }
+          if (fo.phase === 'answer') { closeFaceOffLeg(io, room, JUDGE_GRACE_MS); return true; }
+          clearTimer(room);
+          if (fo.result && fo.result.winnerId) { beginGameOver(io, room, { winnerId: fo.result.winnerId }); return true; }
+          if (fo.leg < FACE_OFF_MAX_LEGS) { beginFaceOffLeg(io, room); return true; }
+          resolveFaceOffFallback(io, room, 'face-off-exhausted');
+          return true;
+        }
         default: return false;
       }
     }
@@ -1501,6 +1719,13 @@ function handleDisconnect(io, socket) {
       const voters = room.players.filter((x) => x.connected && !(room.answers[x.id] && room.answers[x.id].correct));
       if (voters.length && voters.every((x) => room.votes[x.id])) {
         setTimer(room, LAST_DING_BEAT_MS, () => beginReveal(io, room));
+      }
+    } else if (room.state === STATES.FACE_OFF && room.faceOff && room.faceOff.phase === 'answer') {
+      // Don't sit out the clock waiting on a finalist who just left. Their
+      // missing answer simply counts as wrong when the leg resolves.
+      const live = faceOffFinalists(room).filter((x) => x.connected);
+      if (live.length && live.every((x) => room.faceOff.answers[x.id] && room.faceOff.answers[x.id].judged)) {
+        setTimer(room, LAST_DING_BEAT_MS, () => closeFaceOffLeg(io, room));
       }
     }
     broadcast(io, room.code);
@@ -1629,7 +1854,24 @@ function baseSnapshot(room) {
     review: reviewView(room),
     duel: room.duelPending || null,
     duelPick: room.duelPick || null,
+    faceOff: faceOffView(room),
     winnerId: room.winnerId || null
+  };
+}
+
+// The face-off as everyone (TV included) may see it. During the answer phase
+// only WHO has locked in is public — never a verdict and never the truth. Both
+// arrive together on the result card, which is the whole point of the phase.
+function faceOffView(room) {
+  const fo = room.faceOff;
+  if (room.state !== STATES.FACE_OFF || !fo) return null;
+  return {
+    phase: fo.phase,
+    leg: fo.leg,
+    maxLegs: FACE_OFF_MAX_LEGS,
+    playerIds: fo.playerIds.slice(),
+    answeredPlayerIds: Object.keys(fo.answers),
+    result: fo.phase === 'result' ? fo.result : null
   };
 }
 
@@ -1775,6 +2017,31 @@ function startSimulation(io, code) {
   touch(room);
   startGame(io, room);
   return true;
+}
+
+// Bots race for the couch too. Scheduled directly from beginFaceOffLeg rather
+// than through scheduleBotActions: that only fires on a STATE change, and every
+// leg of a face-off happens inside the one FACE_OFF state.
+function scheduleBotFaceOff(io, room) {
+  const fo = room.faceOff;
+  const q = room.question;
+  if (!fo || !q || room.paused) return;
+  let i = 0;
+  for (const p of faceOffFinalists(room)) {
+    if (!p.isBot) continue;
+    const idx = i++;
+    const knowsIt = Math.random() < BOT_ACCURACY;
+    const text = knowsIt
+      ? q.answer
+      : (q.decoys && q.decoys.length
+          ? q.decoys[Math.floor(Math.random() * q.decoys.length)]
+          : BOT_WRONG_GUESSES[Math.floor(Math.random() * BOT_WRONG_GUESSES.length)]);
+    trackedBotTimeout(room, () => {
+      if (room.state !== STATES.FACE_OFF || !room.faceOff
+        || room.faceOff.phase !== 'answer' || room.paused) return;
+      submitFaceOffAnswer(io, room, p.id, text);
+    }, room.botMode ? 400 + idx * 250 : 2000 + Math.random() * 4000);
+  }
 }
 
 function scheduleBotActions(io, room) {

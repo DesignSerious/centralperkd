@@ -331,9 +331,198 @@ async function partB() {
   tv.close();
 }
 
+// ─── PART C — two pieces reach the couch together, so they play for it ───
+//
+// Deterministic by construction: TWO phones, both of which answer every question
+// correctly. With nobody left to fool, each round takes the "everyone knew it"
+// path straight to the reveal, both players bank the same 3 spaces, and they
+// walk the 16-space board in lockstep — arriving on the couch on the same round.
+// That is exactly the collision that used to be settled by a hidden sort.
+//
+// The face-off itself is then driven through BOTH of its branches: leg 1 has
+// both finalists answer wrong (nobody wins, the room goes again) and leg 2 has
+// both answer right, with a deliberate delay on one so the speed tiebreak is
+// what decides the game.
+async function partC() {
+  console.log('\n=== PART C — couch face-off (two pieces arrive together) ===');
+  const tv = io(BASE, { transports: ['websocket'] });
+  const phones = [0, 1].map(() => io(BASE, { transports: ['websocket'] }));
+  let tvState = null;
+  const pState = [null, null];
+  tv.on('state', (d) => { tvState = d; });
+  phones.forEach((s, i) => s.on('state', (d) => { pState[i] = d; }));
+
+  const created = await new Promise((r) => tv.emit('tv:create', (res) => r(res)));
+  if (!created || !created.ok) throw new Error('TV could not create a room');
+  log('TV', 'room', created.code);
+
+  const names = ['Racer', 'Chaser'];
+  for (let i = 0; i < 2; i++) {
+    const res = await new Promise((r) => phones[i].emit('player:join',
+      { code: created.code, name: names[i], piece: ['lantern', 'ufo'][i] }, (x) => r(x)));
+    if (!res || !res.ok) throw new Error('join failed for ' + names[i] + ': ' + (res && res.error));
+  }
+  await waitFor(() => tvState && tvState.players.length === 2, 5000, '2 players in lobby');
+
+  await new Promise((r) => tv.emit('action', { type: 'updateSettings',
+    data: { boardSpaces: 16, answerSeconds: 20, bluffSeconds: 15, voteSeconds: 20 } }, r));
+  await waitFor(() => tvState.settings.boardSpaces === 16, 4000, 'settings applied');
+  await new Promise((r) => tv.emit('action', { type: 'startGame' }, r));
+
+  // Race to the couch: both phones answer every question correctly.
+  const answeredIn = new Set();
+  const deadline = Date.now() + 180000;
+  while (Date.now() < deadline && tvState.state !== 'FACE_OFF' && tvState.state !== 'GAME_OVER') {
+    if (tvState.state === 'ANSWERING' && tvState.question && !answeredIn.has(tvState.round)) {
+      answeredIn.add(tvState.round);
+      const truth = answerFor(tvState.question.question);
+      if (!truth) throw new Error('could not resolve the answer for: ' + tvState.question.question);
+      await Promise.all(phones.map((s) => new Promise((r) =>
+        s.emit('action', { type: 'submitAnswer', data: { text: truth } }, (x) => r(x)))));
+    }
+    await wait(60);
+  }
+
+  console.log('\n— arrival —');
+  check(tvState.state === 'FACE_OFF',
+    'two pieces on the couch triggered a FACE_OFF (state: ' + tvState.state + ')');
+  if (tvState.state !== 'FACE_OFF') { tv.close(); phones.forEach((s) => s.close()); return; }
+  check(tvState.players.every((p) => p.position >= 16), 'both pieces are ON the couch');
+  check(!!tvState.faceOff && tvState.faceOff.playerIds.length === 2, 'both players are finalists');
+  check(tvState.faceOff.phase === 'intro', 'the face-off opens on its intro card');
+  check(pState[0].iAmFinalist === true && pState[1].iAmFinalist === true,
+    'both phones are told they are in it');
+
+  // ── leg 1: both wrong, so nobody takes it and the room goes again ──
+  await waitFor(() => tvState.faceOff && tvState.faceOff.phase === 'answer', 12000, 'leg 1 question');
+  console.log('\n— leg 1: nobody gets it —');
+  check(tvState.faceOff.leg === 1, 'leg counter starts at 1');
+  check(!tvState.truth, 'the TV is not told the answer during the face-off');
+  check(pState[0].canFaceOff === true, 'a finalist may answer');
+  const wrong0 = await new Promise((r) => phones[0].emit('action',
+    { type: 'submitFaceOffAnswer', data: { text: 'a wrong sudden death guess' } }, (x) => r(x)));
+  check(wrong0 && wrong0.ok === true, 'a face-off answer is accepted');
+  check(wrong0.correct === undefined, 'the ack does NOT leak the verdict (that is the reveal)');
+  const dup = await new Promise((r) => phones[0].emit('action',
+    { type: 'submitFaceOffAnswer', data: { text: 'second try' } }, (x) => r(x)));
+  check(dup && dup.ok === false, 'a second face-off answer from the same phone is refused');
+  await new Promise((r) => phones[1].emit('action',
+    { type: 'submitFaceOffAnswer', data: { text: 'also completely wrong' } }, (x) => r(x)));
+
+  await waitFor(() => tvState.faceOff && tvState.faceOff.phase === 'result', 20000, 'leg 1 result');
+  check(tvState.faceOff.result.winnerId === null, 'nobody wins a leg where both were wrong');
+  check(tvState.faceOff.result.again === true, 'the room is told it is going again');
+  check(!!tvState.faceOff.result.truth, 'the result card carries the real answer');
+
+  // ── leg 2: both right, so the CLOCK decides ──
+  await waitFor(() => tvState.faceOff && tvState.faceOff.phase === 'answer' && tvState.faceOff.leg === 2,
+    20000, 'leg 2 question');
+  console.log('\n— leg 2: both right, fastest wins —');
+  const truth2 = answerFor(tvState.question.question);
+  if (!truth2) throw new Error('could not resolve the leg-2 answer');
+  await new Promise((r) => phones[0].emit('action',
+    { type: 'submitFaceOffAnswer', data: { text: truth2 } }, (x) => r(x)));
+  await wait(1200);                       // Chaser is a second and a bit slower
+  await new Promise((r) => phones[1].emit('action',
+    { type: 'submitFaceOffAnswer', data: { text: truth2 } }, (x) => r(x)));
+
+  await waitFor(() => tvState.faceOff && tvState.faceOff.phase === 'result', 20000, 'leg 2 result');
+  const res = tvState.faceOff.result;
+  const racer = tvState.players.find((p) => p.name === 'Racer');
+  check(res.rows.every((r) => r.correct), 'both finalists judged correct');
+  check(res.winnerId === racer.id, 'the FASTER correct answer won it');
+  const times = res.rows.map((r) => r.ms);
+  check(times.every((t) => typeof t === 'number'), 'both answers carry a submission time');
+  console.log('    ' + res.rows.map((r) =>
+    (tvState.players.find((p) => p.id === r.playerId) || {}).name + ' ' +
+    (r.ms / 1000).toFixed(1) + 's ' + (r.correct ? '✓' : '✗')).join('  |  '));
+
+  await waitFor(() => tvState.state === 'GAME_OVER', 20000, 'game over');
+  console.log('\n— the game is decided —');
+  check(tvState.winnerId === racer.id, 'the face-off winner is the game winner');
+  tv.close();
+  phones.forEach((s) => s.close());
+}
+
+// ─── PART D — the coffee cup doubles the WHOLE move ───
+//
+// The reported bug: a player standing on a coffee cup scored 1 space and the
+// tile did nothing, because the multiplier only ever touched the points for
+// knowing the answer. It now pays on everything — and, crucially, a round you
+// score nothing in must NOT burn it.
+//
+// Driven through computeResults directly rather than over sockets: getting a
+// specific player onto a specific tile and then engineering a votes-only round
+// takes a dozen rounds of live play, and the arithmetic is the thing under test.
+function partD() {
+  console.log('\n=== PART D — coffee-cup scoring ===');
+  const Game = require('../server/game');
+  const s = {
+    pointsCorrectAnswer: 3, pointsPerVote: 2, pointsFoundTruth: 1,
+    pointsNobodyFoundTruth: 0, bonusTileMultiplier: 2
+  };
+
+  // A room stub with just what computeResults reads.
+  function room({ correct, votesFor, foundTruth, doubleNext }) {
+    const me = { id: 'me', name: 'Cupholder', doubleNext, correct: 0, fooled: 0, streak: 0, bestStreak: 0 };
+    const them = { id: 'them', name: 'Voter', doubleNext: false, correct: 0, fooled: 0, streak: 0, bestStreak: 0 };
+    const ballot = [
+      { letter: 'A', text: 'the truth', authorIds: [], isTruth: true },
+      { letter: 'B', text: 'my guess', authorIds: ['me'], isTruth: false }
+    ];
+    return {
+      settings: s,
+      players: [me, them],
+      answers: { me: { text: 'x', correct }, them: { text: 'y', correct: false } },
+      ballot,
+      votes: Object.assign({}, votesFor ? { them: 'B' } : {}, foundTruth ? { me: 'A' } : {}),
+      laughs: {}, duelPending: null, lastResults: {}
+    };
+  }
+
+  // computeResults writes into room.lastResults rather than returning.
+  function score(opts) {
+    const r = room(opts);
+    Game._computeResults(r);
+    return { r: r.lastResults.me, doubleNextAfter: r.players[0].doubleNext };
+  }
+
+  // The exact round from the bug report: on a cup, answered WRONG, but voted
+  // for the real answer. One point, which used to come out as one point.
+  const bug = score({ correct: false, votesFor: false, foundTruth: true, doubleNext: true });
+  check(bug.r.spaces === 2, 'on a cup: a 1-space found-truth round now pays 2 (was 1)');
+  check(bug.r.doubled === true, 'the round is marked as doubled');
+  check(bug.doubleNextAfter === false, 'the cup is spent');
+
+  // Knowing it still doubles, as it always did.
+  const knew = score({ correct: true, votesFor: false, foundTruth: false, doubleNext: true });
+  check(knew.r.spaces === 6, 'on a cup: knowing it still pays 3 x2 = 6');
+
+  // Votes pulled by your entry are doubled too — they never were before.
+  const fooled = score({ correct: false, votesFor: true, foundTruth: false, doubleNext: true });
+  check(fooled.r.spaces === 4, 'on a cup: a 2-space votes round now pays 4');
+
+  // Everything at once: 3 + 2 + 1 = 6, doubled.
+  const all = score({ correct: true, votesFor: true, foundTruth: true, doubleNext: true });
+  check(all.r.spaces === 12, 'on a cup: knew it + a vote + found truth = 12');
+
+  // The important guard: score nothing and you KEEP the cup.
+  const blank = score({ correct: false, votesFor: false, foundTruth: false, doubleNext: true });
+  check(blank.r.spaces === 0, 'a scoreless round pays 0');
+  check(blank.doubleNextAfter === true, 'a scoreless round does NOT burn the cup');
+  check(blank.r.doubled === false, 'a scoreless round is not marked doubled');
+
+  // And without a cup nothing changes.
+  const plain = score({ correct: true, votesFor: true, foundTruth: true, doubleNext: false });
+  check(plain.r.spaces === 6, 'without a cup: 3 + 2 + 1 = 6');
+  check(plain.r.doubled === false, 'without a cup nothing is marked doubled');
+}
+
 (async function main() {
+  partD();
   await partA();
   await partB();
+  await partC();
   console.log('\n' + (failures === 0 ? 'ALL CHECKS PASSED' : failures + ' CHECK(S) FAILED'));
   process.exit(failures === 0 ? 0 : 1);
 })().catch((e) => {

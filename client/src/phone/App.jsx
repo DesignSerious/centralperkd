@@ -9,6 +9,7 @@ import Lobby from './Lobby';
 import Wait from './Wait';
 import Answer from './Answer';
 import Bluff from './Bluff';
+import FaceOff from './FaceOff';
 import Vote from './Vote';
 import Review from './Review';
 import Watch from './Watch';

@@ -2308,3 +2308,97 @@
   color: #2a0f14;
   background: linear-gradient(180deg, #f0a6a6, #d97070);
 }
+
+/* ─── FACE_OFF ───
+   Sudden death on the couch: the finalists face each other, then their two
+   answers land side by side with the clock that separated them. The winner's
+   row is the only one that glows — a correct-but-slower answer stays green
+   (they were right) without competing for the eye. */
+.tv-faceoff-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 4cqw, 56px);
+  margin: 18px 0 6px;
+}
+.tv-faceoff-player {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.tv-faceoff-name {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 2cqw, 2.1rem);
+  color: var(--cream);
+  letter-spacing: 0.03em;
+}
+.tv-faceoff-vs {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2cqw, 2.2rem);
+  color: var(--gold-soft);
+  opacity: 0.8;
+}
+
+.tv-faceoff-truth {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.4cqw, 2.4rem);
+  color: var(--true-green);
+  text-shadow: 0 0 22px rgba(var(--tg-glow), 0.45);
+  margin: 6px 0 14px;
+}
+
+.tv-faceoff-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(90%, 1100px);
+  margin: 0 auto;
+}
+.tv-faceoff-result {
+  display: grid;
+  grid-template-columns: auto minmax(140px, 1fr) 3fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 22px;
+  background: rgba(var(--panel), 0.62);
+  border: 1px solid rgba(215, 192, 149, 0.16);
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(4px);
+}
+.tv-faceoff-result.is-correct {
+  border-color: rgba(var(--tg-glow), 0.45);
+}
+.tv-faceoff-result.is-winner {
+  background: rgba(var(--panel-lift), 0.82);
+  border-color: var(--true-green);
+  box-shadow: 0 0 34px rgba(var(--tg-glow), 0.28);
+}
+.tv-faceoff-result-name {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 1.6cqw, 1.7rem);
+  color: var(--cream);
+}
+.tv-faceoff-result-answer {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.5cqw, 1.6rem);
+  color: var(--cream-dim);
+  text-align: left;
+}
+.tv-faceoff-result-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(1.4rem, 2cqw, 2.1rem);
+  color: var(--coral-soft);
+}
+.tv-faceoff-result.is-correct .tv-faceoff-result-mark { color: var(--true-green); }
+.tv-faceoff-result-mark em {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.6em;
+  color: var(--cream-fade);
+  font-variant-numeric: tabular-nums;
+}

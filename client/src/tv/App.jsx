@@ -340,6 +340,7 @@ function PhaseStage({ snap, music }) {
   if (s === 'REVEAL') return <RevealScreen snap={snap} />;
   if (s === 'REVIEW') return <ReviewStage snap={snap} />;
   if (s === 'SCORING') return <MovementScreen snap={snap} />;
+  if (s === 'FACE_OFF') return <FaceOffScreen snap={snap} />;
   if (s === 'GAME_OVER') return <GameOverScreen snap={snap} />;
   return null;
 }
@@ -831,6 +832,105 @@ function MovementScreen({ snap }) {
 }
 
 // ─── GAME_OVER ───
+// ─── FACE_OFF ───
+// Two or more pieces landed on the couch together, so the game stops and they
+// play for it. Three beats inside the one phase: who's in it, the question, then
+// the answers side by side with the clock that separated them.
+//
+// The TV is the only screen showing this to the whole room, so it carries the
+// drama — the phones are deliberately quiet until the result.
+function FaceOffScreen({ snap }) {
+  const fo = snap.faceOff;
+  useCheckInDing((fo && fo.answeredPlayerIds) || []);
+  const phase = fo ? fo.phase : 'intro';
+  const leg = fo ? fo.leg : 0;
+
+  useEffect(() => {
+    if (phase === 'intro') sfx.bluffPhase();
+    if (phase === 'answer') sfx.wordReveal();
+    if (phase === 'result') sfx.revealDefinition();
+  }, [phase, leg]);
+
+  if (!fo) return null;
+  const finalists = fo.playerIds
+    .map((id) => snap.players.find((p) => p.id === id))
+    .filter(Boolean);
+
+  if (phase === 'intro') {
+    return (
+      <div className="tv-stage tv-stage--panel">
+        <div className="tv-eyebrow">☕ Photo finish</div>
+        <div className="tv-h1 lp-pulse">Face-off!</div>
+        <div className="tv-faceoff-row">
+          {finalists.map((p, i) => (
+            <React.Fragment key={p.id}>
+              {i > 0 && <span className="tv-faceoff-vs">vs</span>}
+              <span className="tv-faceoff-player">
+                <PieceVisual id={p.piece} size={120} glow />
+                <span className="tv-faceoff-name">{p.name}</span>
+              </span>
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="tv-sub">
+          {finalists.length} pieces reached the couch together. Sudden death — one question,
+          them only. The fastest right answer takes the game.
+        </div>
+      </div>
+    );
+  }
+
+  if (phase === 'result' && fo.result) {
+    const res = fo.result;
+    const winner = finalists.find((p) => p.id === res.winnerId);
+    return (
+      <div className="tv-stage tv-stage--panel">
+        <div className="tv-eyebrow">☕ Face-off — question {res.leg}</div>
+        <div className="tv-question">{res.question}</div>
+        <div className="tv-faceoff-truth">{res.truth}</div>
+        <div className="tv-faceoff-results">
+          {res.rows.map((row) => {
+            const p = finalists.find((x) => x.id === row.playerId);
+            return (
+              <div
+                key={row.playerId}
+                className={'tv-faceoff-result'
+                  + (row.playerId === res.winnerId ? ' is-winner' : '')
+                  + (row.correct ? ' is-correct' : '')}
+              >
+                <PieceVisual id={p && p.piece} size={72} glow={row.playerId === res.winnerId} />
+                <span className="tv-faceoff-result-name">{p ? p.name : '—'}</span>
+                <span className="tv-faceoff-result-answer">{row.text || 'no answer'}</span>
+                <span className="tv-faceoff-result-mark">
+                  {row.correct ? '✓' : '✗'}
+                  {row.ms != null && <em>{(row.ms / 1000).toFixed(1)}s</em>}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div className="tv-h1">
+          {winner
+            ? winner.name + ' takes it!'
+            : res.again ? 'Nobody got it — going again' : 'Nobody got it'}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="tv-stage tv-stage--panel">
+      <div className="tv-eyebrow">
+        ☕ Face-off — question {leg}{leg > 1 ? ' · still tied' : ''}
+      </div>
+      <div className="tv-question">{snap.question && snap.question.question}</div>
+      <div className="tv-sub">Sudden death. Fastest right answer wins the game.</div>
+      <Countdown deadline={snap.phaseEndsAt} />
+      <CheckInStrip snap={snap} doneIds={fo.answeredPlayerIds || []} onlyIds={fo.playerIds} />
+    </div>
+  );
+}
+
 function GameOverScreen({ snap }) {
   const winner = snap.players.find((p) => p.id === snap.winnerId)
     || [...snap.players].sort((a, b) => b.position - a.position)[0];
