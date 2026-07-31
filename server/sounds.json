@@ -9,7 +9,10 @@
     "bluffCard": "freesound_community-ding-36029.mp3",
     "bluffPhase": "universfield-notification-beep-229154.mp3",
     "votingIntro": "can-i-tell-you-what-the-answer-is.mp3",
-    "roundIntro": "universfield-warning-notification-199277.mp3"
+    "roundIntro": "universfield-warning-notification-199277.mp3",
+    "winApplause": "applause.mp3",
+    "winReaction": "my-god-oh-this-is-incredible.mp3",
+    "winBoom": "boom.mp3"
   },
   "volumes": {
     "arrowBonus": 0.85,
@@ -26,6 +29,8 @@
     "scoreboard": 0.4,
     "bluffPhase": 0.75,
     "votingIntro": 0.6,
-    "roundIntro": 0.5
+    "roundIntro": 0.5,
+    "winApplause": 0.7,
+    "winReaction": 0.95
   }
 }

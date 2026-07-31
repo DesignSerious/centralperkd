@@ -83,9 +83,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 6,
-      "correct": 10,
-      "answered": 29,
+      "served": 7,
+      "correct": 12,
+      "answered": 31,
       "topWrong": {
         "a sandwich": 2,
         "Julie": 6,
@@ -260,9 +260,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 6,
-      "answered": 11,
+      "served": 4,
+      "correct": 8,
+      "answered": 13,
       "topWrong": {
         "gambled away their rent money": 2,
         "a sandwich": 1,
@@ -425,7 +425,13 @@
       "season": 4,
       "episode": 15
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q015",
@@ -505,9 +511,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 4,
-      "answered": 13,
+      "served": 4,
+      "correct": 6,
+      "answered": 15,
       "topWrong": {
         "Chef": 1,
         "seven": 1,
@@ -636,12 +642,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 5,
-      "answered": 7,
+      "served": 3,
+      "correct": 6,
+      "answered": 9,
       "topWrong": {
         "telemarketeer": 1,
-        "pivot": 1
+        "pivot": 1,
+        "a completely made up thing": 1
       }
     }
   },
@@ -761,11 +768,12 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 0,
-      "answered": 3,
+      "served": 2,
+      "correct": 1,
+      "answered": 5,
       "topWrong": {
-        "Gloria Templeton": 3
+        "Gloria Templeton": 3,
+        "a completely made up thing": 1
       }
     }
   },
@@ -876,13 +884,14 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 9,
-      "answered": 14,
+      "served": 5,
+      "correct": 10,
+      "answered": 16,
       "topWrong": {
         "a beetle": 1,
         "a tooth": 3,
-        "a wedding ring": 1
+        "a wedding ring": 1,
+        "a completely made up thing": 1
       }
     }
   },
@@ -1146,10 +1155,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
+      "served": 2,
       "correct": 2,
-      "answered": 2,
-      "topWrong": {}
+      "answered": 4,
+      "topWrong": {
+        "it was his evil twin all along": 1,
+        "Ugly Naked Guy": 1
+      }
     }
   },
   {
@@ -1203,11 +1215,11 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
-      "correct": 1,
-      "answered": 2,
+      "served": 2,
+      "correct": 2,
+      "answered": 4,
       "topWrong": {
-        "a completely made up thing": 1
+        "a completely made up thing": 2
       }
     }
   },
@@ -1231,9 +1243,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 6,
-      "answered": 15,
+      "served": 5,
+      "correct": 8,
+      "answered": 17,
       "topWrong": {
         "Roberta": 2,
         "he was on a break": 1,
@@ -1264,9 +1276,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 5,
-      "correct": 6,
-      "answered": 16,
+      "served": 7,
+      "correct": 8,
+      "answered": 20,
       "topWrong": {
         "Russian": 1,
         "Italian": 3,
@@ -1274,7 +1286,8 @@
         "seven": 1,
         "a sandwich": 1,
         "a completely wrong guess xyz": 1,
-        "another wrong guess qqq": 1
+        "another wrong guess qqq": 1,
+        "a completely made up thing": 2
       }
     }
   },
@@ -1509,12 +1522,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 5,
-      "answered": 9,
+      "served": 3,
+      "correct": 6,
+      "answered": 11,
       "topWrong": {
         "A wall": 1,
-        "a slingshot for muffins": 3
+        "a slingshot for muffins": 3,
+        "a completely made up thing": 1
       }
     }
   },
@@ -1791,9 +1805,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 5,
-      "answered": 15,
+      "served": 4,
+      "correct": 7,
+      "answered": 17,
       "topWrong": {
         "Matt Damon": 4,
         "he was on a break": 1,
@@ -1825,9 +1839,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 5,
-      "answered": 6,
+      "served": 3,
+      "correct": 7,
+      "answered": 8,
       "topWrong": {
         "The glee club": 1
       }
@@ -2287,16 +2301,18 @@
     },
     "verified": false,
     "stats": {
-      "served": 5,
-      "correct": 6,
-      "answered": 13,
+      "served": 7,
+      "correct": 8,
+      "answered": 17,
       "topWrong": {
         "Dickhead": 1,
         "weekly couples therapy in England": 2,
         "a sandwich": 1,
         "the one with the monkey": 1,
         "he had to quit the museum": 1,
-        "they had to move to London": 1
+        "they had to move to London": 1,
+        "a completely made up thing": 1,
+        "something about a duck": 1
       }
     }
   },
@@ -2321,9 +2337,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 6,
-      "answered": 15,
+      "served": 4,
+      "correct": 8,
+      "answered": 17,
       "topWrong": {
         "Moustache": 1,
         "glasses and a scar": 4,
@@ -2687,14 +2703,15 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 5,
-      "answered": 10,
+      "served": 4,
+      "correct": 8,
+      "answered": 14,
       "topWrong": {
         "Parents fight": 1,
         "His parents announced his divorce": 1,
         "he was on a break": 2,
-        "he's allergic to turkey": 1
+        "he's allergic to turkey": 1,
+        "a completely made up thing": 1
       }
     }
   },
@@ -2749,15 +2766,16 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 3,
-      "answered": 8,
+      "served": 4,
+      "correct": 6,
+      "answered": 12,
       "topWrong": {
         "It was spilled onto the ground": 1,
         "it never set and poured like soup": 1,
         "Ugly Naked Guy": 1,
         "a completely wrong guess xyz": 1,
-        "another wrong guess qqq": 1
+        "another wrong guess qqq": 1,
+        "a completely made up thing": 1
       }
     }
   },
@@ -2809,9 +2827,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 3,
-      "answered": 9,
+      "served": 3,
+      "correct": 5,
+      "answered": 11,
       "topWrong": {
         "Lots of shirts": 1,
         "stretchy overalls": 2,
@@ -2900,9 +2918,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 3,
-      "answered": 7,
+      "served": 3,
+      "correct": 5,
+      "answered": 9,
       "topWrong": {
         "a completely made up thing": 1,
         "his spray tan": 2,
@@ -2963,7 +2981,13 @@
       "season": 7,
       "episode": null
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 4,
+      "answered": 4,
+      "topWrong": {}
+    }
   },
   {
     "id": "q098",
@@ -3105,16 +3129,16 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 3,
-      "answered": 10,
+      "served": 5,
+      "correct": 6,
+      "answered": 14,
       "topWrong": {
         "Cunt": 1,
         "duckie": 2,
         "seven": 1,
         "mama": 1,
         "juice": 1,
-        "a completely made up thing": 1
+        "a completely made up thing": 2
       }
     }
   },
@@ -3136,7 +3160,15 @@
       "season": 4,
       "episode": 2
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 3,
+      "answered": 4,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q104",
@@ -3158,9 +3190,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 2,
-      "correct": 2,
-      "answered": 7,
+      "served": 3,
+      "correct": 4,
+      "answered": 9,
       "topWrong": {
         "a completely wrong guess xyz": 1,
         "another wrong guess qqq": 1,
@@ -3283,9 +3315,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
-      "correct": 2,
-      "answered": 7,
+      "served": 4,
+      "correct": 4,
+      "answered": 9,
       "topWrong": {
         "Jack and Judy": 2,
         "gsdfg": 1,
@@ -3381,7 +3413,15 @@
       "season": 2,
       "episode": 14
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q112",
@@ -3482,7 +3522,15 @@
       "season": 2,
       "episode": 1
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q117",
@@ -3580,7 +3628,13 @@
       "season": 8,
       "episode": 7
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q122",
@@ -3616,7 +3670,13 @@
       "season": 8,
       "episode": 23
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q124",
@@ -3637,7 +3697,15 @@
       "season": 3,
       "episode": 15
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "Chandler's": 1
+      }
+    }
   },
   {
     "id": "q125",
@@ -3699,7 +3767,15 @@
       "season": 4,
       "episode": 24
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "no idea": 1
+      }
+    }
   },
   {
     "id": "q128",
@@ -3784,7 +3860,15 @@
       "season": 9,
       "episode": 10
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "he was on a break": 1
+      }
+    }
   },
   {
     "id": "q132",
@@ -3802,7 +3886,13 @@
       "season": 10,
       "episode": 9
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 4,
+      "answered": 4,
+      "topWrong": {}
+    }
   },
   {
     "id": "q133",
@@ -3982,7 +4072,13 @@
       "season": 5,
       "episode": 14
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q142",
@@ -4003,7 +4099,13 @@
       "season": 5,
       "episode": 14
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q143",
@@ -4148,7 +4250,13 @@
       "season": 3,
       "episode": 5
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q150",
@@ -4166,7 +4274,15 @@
       "season": 5,
       "episode": 3
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "Ross": 1
+      }
+    }
   },
   {
     "id": "q151",
@@ -4207,7 +4323,16 @@
       "season": 1,
       "episode": 1
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 0,
+      "answered": 2,
+      "topWrong": {
+        "chef": 1,
+        "hairdresser": 1
+      }
+    }
   },
   {
     "id": "q153",
@@ -4445,7 +4570,13 @@
       "season": 10,
       "episode": 10
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q165",
@@ -4549,7 +4680,15 @@
       "season": 1,
       "episode": 1
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q170",
@@ -4647,7 +4786,13 @@
       "season": 4,
       "episode": 12
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 4,
+      "answered": 4,
+      "topWrong": {}
+    }
   },
   {
     "id": "q175",
@@ -4811,7 +4956,15 @@
       "season": 2,
       "episode": 18
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a pool table": 1
+      }
+    }
   },
   {
     "id": "q183",
@@ -4890,7 +5043,13 @@
       "season": 1,
       "episode": 2
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q187",
@@ -4908,7 +5067,13 @@
       "season": 9,
       "episode": 8
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q188",
@@ -5105,7 +5270,13 @@
       "season": 1,
       "episode": 20
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q198",
@@ -5126,7 +5297,13 @@
       "season": 7,
       "episode": 23
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q199",
@@ -5147,7 +5324,13 @@
       "season": 6,
       "episode": 1
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q200",
@@ -5189,7 +5372,16 @@
       "season": 2,
       "episode": 8
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 2,
+      "answered": 4,
+      "topWrong": {
+        "a completely made up thing": 1,
+        "a spreadsheet of her exes": 1
+      }
+    }
   },
   {
     "id": "q202",
@@ -5273,7 +5465,16 @@
       "season": 1,
       "episode": 1
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 0,
+      "answered": 2,
+      "topWrong": {
+        "pivot": 1,
+        "a fossil dig site": 1
+      }
+    }
   },
   {
     "id": "q206",
@@ -5373,7 +5574,13 @@
       "season": 5,
       "episode": 10
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q211",
@@ -5493,7 +5700,13 @@
       "season": 6,
       "episode": 9
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 4,
+      "answered": 4,
+      "topWrong": {}
+    }
   },
   {
     "id": "q217",
@@ -5593,7 +5806,15 @@
       "season": 8,
       "episode": 9
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q222",
@@ -5632,7 +5853,13 @@
       "season": 7,
       "episode": 22
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 4,
+      "answered": 4,
+      "topWrong": {}
+    }
   },
   {
     "id": "q224",
@@ -5671,7 +5898,15 @@
       "season": 3,
       "episode": 3
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q226",
@@ -5691,7 +5926,13 @@
       "season": 9,
       "episode": 3
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q227",
@@ -5711,7 +5952,15 @@
       "season": 1,
       "episode": 6
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q228",
@@ -5793,7 +6042,15 @@
       "season": 1,
       "episode": 10
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q232",
@@ -5933,7 +6190,15 @@
       "season": 4,
       "episode": 20
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q239",
@@ -6151,7 +6416,13 @@
       "season": 3,
       "episode": 13
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q250",
@@ -6192,7 +6463,13 @@
       "season": 4,
       "episode": 10
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q252",
@@ -6290,7 +6567,15 @@
       "season": 3,
       "episode": 19
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q257",
@@ -6371,7 +6656,13 @@
       "season": 3,
       "episode": 15
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q261",
@@ -6412,7 +6703,13 @@
       "season": 8,
       "episode": 6
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 4,
+      "answered": 4,
+      "topWrong": {}
+    }
   },
   {
     "id": "q263",
@@ -6573,7 +6870,13 @@
       "season": 1,
       "episode": 12
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q271",
@@ -6941,7 +7244,15 @@
       "season": 3,
       "episode": 10
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 2,
+      "correct": 3,
+      "answered": 4,
+      "topWrong": {
+        "pivot": 1
+      }
+    }
   },
   {
     "id": "q289",
@@ -7002,7 +7313,15 @@
       "season": 4,
       "episode": 24
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a completely made up thing": 1
+      }
+    }
   },
   {
     "id": "q292",
@@ -7226,7 +7545,15 @@
       "season": 5,
       "episode": 8
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "pivot": 1
+      }
+    }
   },
   {
     "id": "q303",
@@ -7371,7 +7698,15 @@
       "season": 9,
       "episode": 22
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "pivot": 1
+      }
+    }
   },
   {
     "id": "q310",

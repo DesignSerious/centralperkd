@@ -10,6 +10,10 @@
 // buffer without a per-element user-activation gate, so once the context
 // is running every effect plays on the TV the same as on a phone.
 
+// The celebration boom is timed against the same constant the screen and the
+// particle canvas use, so it can't drift off the frame the confetti fires on.
+import { REVEAL } from './winnerTiming';
+
 let _ctx = null;
 let _master = null;
 
@@ -503,6 +507,9 @@ const _defaultTones = {
   bluffPhase: _bluffPhaseSynth,
   roundIntro: _roundIntroSynth,
   votingIntro: _votingIntroSynth,
+  // Wrapped rather than referenced directly: the entries here are called as
+  // fn(mul), and firework() takes an options object.
+  winBoom: (mul) => firework({ gain: 0.95 * mul }),
 };
 export function playDefaultTone(key, mul = 1) {
   const fn = _defaultTones[key];
@@ -552,16 +559,23 @@ export function bridge() {
   tone({ type: 'triangle', freq: 3135.96, dur: 0.8, gain: 0.04, attack: 0.005, delay: 2.84 });
 }
 
-// Win — short C major fanfare for the game-over screen.
-export function win() {
-  tone({ type: 'sine', freq: 523, dur: 0.22, gain: 0.18 });
-  tone({ type: 'sine', freq: 659, dur: 0.22, gain: 0.18, delay: 0.15 });
-  tone({ type: 'sine', freq: 784, dur: 0.35, gain: 0.18, delay: 0.30 });
-  tone({ type: 'sine', freq: 1047, dur: 0.50, gain: 0.18, delay: 0.45 });
-}
-
 // ─── Winner celebration audio ───
-// Synthesized so it needs no new assets and overlapping retriggers are free.
+//
+// Three cues, all operator-assignable from the /sounds admin: applause as
+// the winner screen goes up, a reaction line dropped in over it, and a
+// single boom when the confetti cannons fire. That's the whole celebration.
+//
+// It has been through two other shapes. Originally a four-note triangle
+// arpeggio (C-E-G-C) over white-noise fireworks that kept popping on a loop
+// until the screen unmounted — the archetypal cheap-browser-game sound, and
+// it never ended. Then a full drum-roll → stinger → crowd → applause-bed
+// sequence, which was a lot of production for a moment that reads better
+// with one hit and then quiet.
+//
+// Each fires through its trigger key ('winApplause', 'winReaction',
+// 'winBoom'), so whatever is dropped on those slots in the /sounds admin is
+// what plays. An unassigned boom falls back to the synthesized firework
+// below; the applause and the voice line are simply silent when unassigned.
 
 // White-noise buffer (created once, reused) for the firework boom + crackle.
 let _noiseBuf = null;
@@ -577,34 +591,17 @@ function noiseBuffer() {
   return buf;
 }
 
-// One firework: an optional rising launch whistle, a deep boom (low sine
-// thump + lowpassed noise punch), and a sparkly bandpassed-noise crackle tail
-// with a flickering envelope.
+// The built-in default behind the 'winBoom' trigger: a deep boom (low sine
+// thump + lowpassed noise punch) with a sparkly bandpassed-noise crackle
+// tail on a flickering envelope. Exported so the Sound Board's "play the
+// built-in tone" button can audition it.
 export function firework(opts = {}) {
   if (_masterVolume <= 0) return;
   const c = ctx();
   const m = master();
   if (!c || !m) return;
-  const now = c.currentTime + (opts.delay || 0);
+  const t = c.currentTime + (opts.delay || 0);
   const level = opts.gain != null ? opts.gain : 0.9;
-
-  if (opts.whistle) {
-    try {
-      const osc = c.createOscillator();
-      const g = c.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(480, now);
-      osc.frequency.exponentialRampToValueAtTime(1500, now + 0.45);
-      g.gain.setValueAtTime(0.0001, now);
-      g.gain.exponentialRampToValueAtTime(0.05 * level, now + 0.08);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
-      osc.connect(g); g.connect(m);
-      osc.start(now); osc.stop(now + 0.55);
-      osc.onended = () => { try { osc.disconnect(); g.disconnect(); } catch (e) {} };
-    } catch (e) {}
-  }
-
-  const t = now + (opts.whistle ? 0.5 : 0);
 
   // Boom — low sine thump.
   try {
@@ -666,53 +663,49 @@ export function firework(opts = {}) {
   }
 }
 
-// Triumphant rising fanfare — bigger than win(); leads the celebration.
-export function fanfare() {
-  const notes = [
-    { f: 523, d: 0 },     // C5
-    { f: 659, d: 0.13 },  // E5
-    { f: 784, d: 0.26 },  // G5
-    { f: 1047, d: 0.39 }, // C6
-  ];
-  notes.forEach((n) => {
-    tone({ type: 'triangle', freq: n.f, dur: 0.55, gain: 0.17, delay: n.d });
-    tone({ type: 'sine', freq: n.f * 2, dur: 0.4, gain: 0.05, delay: n.d });
-  });
-  // Sustained shimmer chord under the final note.
-  [523, 659, 784, 1047].forEach((f) => {
-    tone({ type: 'sawtooth', freq: f, dur: 1.0, gain: 0.05, delay: 0.39 });
-  });
+// The boom itself, routed through the operator override so the Sound Board
+// owns it like every other cue in the game.
+function winBoom() {
+  fire('winBoom', (g) => firework({ gain: 0.95 * g }), 0.95);
 }
 
-// Start the winner celebration: a fanfare + an opening firework volley, then
-// fireworks keep popping on a randomized loop. Returns { stop() } so the
-// screen ends it on unmount.
+// Applause as the winner screen goes up, under the build. No synthesized
+// default: fake applause sounds worse than none, so an unassigned slot is
+// simply silent and the screen still gets its boom.
+function winApplause() {
+  fire('winApplause', () => {}, 0.9);
+}
+
+// Reaction line over the top of the applause. Voice only — there is nothing
+// sensible to synthesize, so an unassigned slot is silent.
+function winReaction() {
+  fire('winReaction', () => {}, 0.95);
+}
+
+// Win — the phone-side version of the moment. Same single boom as the TV so
+// the room hits together on one sound rather than a chord of near-misses.
+export function win() {
+  winBoom();
+}
+
+// Start the winner celebration. Returns { stop() } so the screen cancels a
+// boom that hasn't fired yet when it unmounts (hitting Play again during
+// the build used to leave fireworks popping over the lobby).
+//
+// The boom is timed against winnerTiming.js, so it lands on the same frame
+// the confetti cannons fire — not "roughly around then".
 export function celebrationStart() {
-  fanfare();
-  firework({ gain: 1.0 });
-  firework({ delay: 0.55, gain: 0.85 });
-  firework({ delay: 1.1, whistle: true, gain: 0.9 });
-
-  let stopped = false;
-  let timer = null;
-  function schedule() {
-    if (stopped) return;
-    const n = 1 + Math.floor(Math.random() * 2);
-    for (let i = 0; i < n; i++) {
-      firework({
-        delay: Math.random() * 0.5,
-        whistle: Math.random() < 0.3,
-        gain: 0.6 + Math.random() * 0.4,
-      });
-    }
-    timer = setTimeout(schedule, 900 + Math.random() * 1100);
-  }
-  timer = setTimeout(schedule, 1500);
-
+  // Applause starts with the screen, the reaction line drops in over it, and
+  // the boom lands on the confetti.
+  winApplause();
+  const timers = [
+    setTimeout(winReaction, REVEAL.REACTION),
+    setTimeout(winBoom, REVEAL.CANNON),
+  ];
   return {
     stop() {
-      stopped = true;
-      if (timer) clearTimeout(timer);
+      timers.forEach(clearTimeout);
+      timers.length = 0;
     },
   };
 }

@@ -3,11 +3,13 @@ import { getSocket, sendAction } from '../lib/socket';
 import Fireflies from './Fireflies';
 import Board2D from './Board2D';
 import Celebration from './Celebration';
+import { Crown, DottedTitle, DotRule, Sunburst } from './WinnerCrest';
+import { REVEAL, COUNT_UP_MS } from '../lib/winnerTiming';
 import PieceVisual from '../lib/PieceVisual';
 import QrCode from '../lib/QrCode';
 import RulesOverlay from '../lib/RulesOverlay';
 import PauseOverlay from '../lib/PauseOverlay';
-import { MusicProvider } from '../lib/MusicContext';
+import { MusicProvider, useMusic } from '../lib/MusicContext';
 import MusicControls from '../lib/MusicControls';
 import FullscreenToggle from '../lib/FullscreenToggle';
 import AutoFit from '../lib/AutoFit';
@@ -18,6 +20,56 @@ import { preloadAiPiece } from '../lib/pieces';
 // the tile path over it, and every phase's wording sits in the overlay below.
 // The TV is a pure renderer — it never decides a transition, it just draws
 // whatever snapshot the server last pushed.
+
+// The celebration is one boom into quiet, and it only reads that way if the
+// room actually goes quiet first — a soundtrack running underneath turns the
+// build into mush and the boom into just another layer. So the music is
+// muted outright, not merely ducked, and comes back once the confetti is up.
+// setDuckLevel ramps rather than jumps, so both the drop and the release are
+// fades, not pops.
+const WIN_DUCK_LEVEL = 0;
+const WIN_DUCK_RELEASE_MS = REVEAL.CANNON + 900;
+function MusicDucker({ state }) {
+  const m = useMusic();
+  useEffect(() => {
+    if (!m || !m.setDuckLevel) return;
+    if (state !== 'GAME_OVER') { m.setDuckLevel(null); return; }
+    m.setDuckLevel(WIN_DUCK_LEVEL);
+    const t = setTimeout(() => m.setDuckLevel(null), WIN_DUCK_RELEASE_MS);
+    return () => clearTimeout(t);
+  }, [m, state]);
+  return null;
+}
+
+// Screen-wide reduced-motion check. Read once at module load: the winner
+// screen's whole point is a timed reveal, and re-evaluating mid-animation
+// would leave it half-played.
+const PREFERS_REDUCED =
+  typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
+
+// Winner-screen preview. Load /tv?testwin to drop straight onto the
+// game-over celebration with a mock result, so the reveal can be reviewed
+// (and re-reviewed after a tweak) without playing a game out to the end.
+// Matched against the WHOLE url, not location.search: the TV always carries
+// a #ROOMCODE, so /tv#ABCD?testwin is the natural thing to type and puts the
+// flag inside the hash where search never sees it.
+const TEST_WIN =
+  typeof window !== 'undefined' && /[?&#]testwin\b/.test(window.location.href);
+const TEST_WIN_SNAP = {
+  state: 'GAME_OVER',
+  paused: false,
+  round: 12,
+  settings: { boardSpaces: 30 },
+  winnerId: 'p1',
+  players: [
+    { id: 'p1', name: 'Marguerite', piece: 'champagne', position: 30, correct: 11, fooled: 7 },
+    { id: 'p2', name: 'Dev', piece: 'dj', position: 26, correct: 9, fooled: 5 },
+    { id: 'p3', name: 'Priya', piece: 'juicyjilz', position: 21, correct: 7, fooled: 4 },
+    { id: 'p4', name: 'Tomás', piece: 'pieguy', position: 17, correct: 5, fooled: 2 },
+  ],
+};
 
 // localStorage key for this TV's chosen music vibe (genre). Stored so the
 // pick survives reloads; cleared to fall back to the operator default.
@@ -63,8 +115,12 @@ function interleaveVibes(vibesWithTracks) {
 }
 
 export default function App() {
-  const [snap, setSnap] = useState(null);
-  const [code, setCode] = useState(null);
+  const [liveSnap, setSnap] = useState(null);
+  const [liveCode, setCode] = useState(null);
+  // ?testwin swaps in the mock result above; everything downstream (the
+  // celebration, the hero, the leaderboard) is the real code path.
+  const snap = TEST_WIN ? TEST_WIN_SNAP : liveSnap;
+  const code = TEST_WIN ? 'TEST' : liveCode;
   // Music "vibes" fetched from /api/playlist. `pl` stays null until resolved
   // so we hold render until MusicProvider can mount with the right rotation;
   // a 2s timeout guards against a flaky network never letting the TV load.
@@ -154,6 +210,12 @@ export default function App() {
   }
   const music = { vibes, vibeId: activeVibeId, allowAll, onPickVibe: setVibeId };
   const inGame = !!(snap && snap.state && snap.state !== 'LOBBY' && snap.state !== 'GAME_OVER');
+  // In the ?testwin preview the page load and the celebration happen at the
+  // same instant, so the lead track's opening bars play straight over the
+  // reveal and read as part of it. Suppressed there so the preview shows what
+  // a real game does — by the time anyone wins the rotation is long past this
+  // track, and the music is muted for the reveal regardless.
+  const leadTrack = TEST_WIN ? null : GAMEBOARD_LEAD_TRACK;
 
   return (
     <MusicProvider
@@ -161,9 +223,10 @@ export default function App() {
       rotationKey={hasTracks ? activeVibeId : '__default'}
       storageKeyOn="cperkd_music_on"
       storageKeyVolume="cperkd_music_volume"
-      leadTrackUrl={GAMEBOARD_LEAD_TRACK}
+      leadTrackUrl={leadTrack}
       trackVolumes={pl.volumes || {}}
     >
+    <MusicDucker state={snap && snap.state} />
     <div className="tv-shell">
       <div className="tv-board-frame">
         {/* The Central Perk'd board. Board2D's PATH is traced over this exact
@@ -213,9 +276,21 @@ export default function App() {
         {snap && snap.paused && <PauseOverlay />}
 
         {isTracing() ? null : snap && code && snap.state === 'GAME_OVER' ? (
-          <div className="tv-overlay-center">
+          <div className="tv-overlay-center tv-overlay-center--gameover">
+            {/* Frame-level lighting for the win: the house lights go down
+                (vignette), a warm spotlight opens on the winner, and a
+                flare blows out on the hit. These live OUTSIDE AutoFit
+                because AutoFit clips to the card's box — lighting has to
+                cover the whole board. */}
+            <div className="tv-gameover-lights" aria-hidden="true">
+              <span className="tv-gameover-vignette" />
+              <span className="tv-gameover-flare" style={at(REVEAL.HERO)} />
+            </div>
+            {/* phase-fade--instant: GameOverScreen owns its own staged
+                reveal, and the generic 0.42s wrapper fade on top of it just
+                blurred the first beat. */}
             <AutoFit>
-              <div className="phase-fade" key={snap.state}>
+              <div className="phase-fade phase-fade--instant" key={snap.state}>
                 <PhaseStage snap={snap} music={music} />
               </div>
             </AutoFit>
@@ -932,34 +1007,121 @@ function FaceOffScreen({ snap }) {
   );
 }
 
+// Every element on the winner screen enters with the same animation and
+// differs only in WHEN — see winnerTiming.js for the beats. Elements are
+// never added or removed to stage the reveal, only faded/moved: AutoFit
+// measures this card's real height and would visibly re-zoom the whole
+// screen if the layout grew as pieces arrived.
+function at(ms) {
+  return { animationDelay: ms + 'ms' };
+}
+
+// One shared clock for the score count-up. A rAF loop per leaderboard row
+// would mean every row re-rendering 60x/sec for identical output, on top of
+// whatever the celebration canvas is already costing. The clock runs once,
+// stops the moment the last row has finished counting, and every row reads
+// its own progress off it.
+function useRevealClock(untilMs) {
+  const [t, setT] = useState(PREFERS_REDUCED ? untilMs : 0);
+  useEffect(() => {
+    if (PREFERS_REDUCED) { setT(untilMs); return; }
+    let raf = 0;
+    const t0 = performance.now();
+    const tick = (now) => {
+      const elapsed = now - t0;
+      setT(elapsed);
+      if (elapsed < untilMs) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [untilMs]);
+  return t;
+}
+
+// Value counted up to `value`, easing out so the number decelerates onto
+// its final total instead of stopping dead.
+function countAt(clock, value, startMs) {
+  if (!value) return value || 0;
+  const k = Math.min(1, Math.max(0, (clock - startMs) / COUNT_UP_MS));
+  return Math.round(value * (1 - Math.pow(1 - k, 3)));
+}
+
 function GameOverScreen({ snap }) {
   const winner = snap.players.find((p) => p.id === snap.winnerId)
     || [...snap.players].sort((a, b) => b.position - a.position)[0];
   const sorted = [...snap.players].sort((a, b) => b.position - a.position || b.correct - a.correct);
-  useEffect(() => { sfx.win(); }, []);
+  // The win cue used to fire here AND inside <Celebration/>, so the fanfare
+  // played twice, a frame apart, every single game. Celebration owns it now
+  // — it's the thing that knows the reveal timeline.
+
+  // Rows land one after another and each counts its score up as it arrives.
+  // The clock stops as soon as the last one has finished.
+  const rowsEnd = REVEAL.BOARD + sorted.length * REVEAL.ROW_STEP + COUNT_UP_MS;
+  const clock = useRevealClock(rowsEnd);
+
+  // The card itself is part of the reveal: it stays invisible while the
+  // winner lands in the dark, then materialises just before the results
+  // arrive. Its box is full-size from the start regardless, so AutoFit
+  // measures once and never re-zooms mid-animation.
   return (
-    <div className="tv-stage">
+    <div className="tv-stage tv-stage--gameover" style={at(REVEAL.BOARD - 300)}>
       <div className="tv-winner-hero">
-        <div className="tv-winner-crown" aria-hidden="true">👑</div>
-        <div className="tv-winner-piece"><PieceVisual id={winner && winner.piece} size={188} glow /></div>
-        <div className="tv-winner-title">Winner</div>
-        <div className="tv-winner-name">{winner ? winner.name : 'The end.'}</div>
-        {winner && <div className="tv-winner-sub">{winner.correct} right · fooled people {winner.fooled} times</div>}
+        <div className="tv-winner-crest">
+          <span className="tv-winner-spot" style={at(REVEAL.SPOT)} aria-hidden="true" />
+          <Crown className="tv-winner-crown" style={at(REVEAL.CREST)} />
+          {/* The ray fan frames the PIECE, not the whole crest, so the crown
+              above it never stretches the burst off-centre. */}
+          <div className="tv-winner-plinth">
+            <Sunburst className="tv-winner-rays" style={at(REVEAL.HERO)} />
+            <span className="tv-winner-shock" style={at(REVEAL.HERO)} aria-hidden="true" />
+            <div className="tv-winner-piece" style={at(REVEAL.HERO)}>
+              <PieceVisual id={winner && winner.piece} size={240} glow />
+            </div>
+          </div>
+        </div>
+        <DottedTitle text="WINNER" className="tv-winner-title" style={at(REVEAL.TITLE)} />
+        <DotRule className="tv-winner-rule" style={at(REVEAL.TITLE + 140)} />
+        <div className="tv-winner-name" style={at(REVEAL.NAME)}>
+          {winner ? winner.name : 'The end.'}
+        </div>
+        {winner && (
+          <div className="tv-winner-sub" style={at(REVEAL.SUB)}>
+            {winner.correct} right · fooled people {winner.fooled} times
+          </div>
+        )}
       </div>
       <div className="tv-leaderboard">
         {sorted.map((p, i) => (
-          <div key={p.id} className="row">
+          <div
+            key={p.id}
+            className={'row tv-reveal' + (i === 0 ? ' is-winner' : '')}
+            style={at(REVEAL.BOARD + i * REVEAL.ROW_STEP)}
+          >
             <span className="rank">{i + 1}</span>
-            <span className="emoji"><PieceVisual id={p.piece} size={64} /></span>
+            <span className="emoji"><PieceVisual id={p.piece} size={48} /></span>
             <span className="name">{p.name}</span>
             <span className="delta">{p.correct} ✓ · {p.fooled} fooled</span>
-            <span className="total">{p.position}</span>
+            <span className="total">
+              {countAt(clock, p.position, REVEAL.BOARD + i * REVEAL.ROW_STEP)}
+            </span>
           </div>
         ))}
       </div>
       <div className="tv-gameover-actions">
-        <button className="lp-btn" onClick={() => sendAction('playAgain')}>Play again</button>
-        <button className="lp-btn lp-btn--ghost" onClick={() => sendAction('returnToLobby')}>Back to lobby</button>
+        <button
+          className="lp-btn tv-reveal"
+          style={at(REVEAL.BUTTONS)}
+          onClick={() => sendAction('playAgain')}
+        >
+          Play again
+        </button>
+        <button
+          className="lp-btn lp-btn--ghost tv-reveal"
+          style={at(REVEAL.BUTTONS + 90)}
+          onClick={() => sendAction('returnToLobby')}
+        >
+          Back to lobby
+        </button>
       </div>
     </div>
   );

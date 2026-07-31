@@ -24,5 +24,8 @@ module.exports = [
   { key: 'countdownTick',  label: 'Countdown tick',              desc: 'Alternating clock tick in the final seconds.',            defaultFile: 'Tick1.mp3' },
   { key: 'countdownTock',  label: 'Countdown tock',              desc: 'Alternating clock tock in the final seconds.',            defaultFile: 'Tock1.mp3' },
   { key: 'timeUp',         label: "Time's up buzzer",            desc: 'The blast when the countdown hits zero.',                 defaultFile: 'Buzzer.mp3' },
-  { key: 'scoreboard',     label: 'Scoreboard appears',          desc: 'When the round scoreboard lands.',                        defaultFile: 'Scoreboard.mp3' }
+  { key: 'scoreboard',     label: 'Scoreboard appears',          desc: 'When the round scoreboard lands.',                        defaultFile: 'Scoreboard.mp3' },
+  { key: 'winApplause',    label: 'Winner screen appears',       desc: 'Applause the moment the winner screen goes up, under the build. Silent if nothing is assigned.', defaultFile: null },
+  { key: 'winReaction',    label: 'Winner — reaction line',      desc: 'A voice line dropped in just after the applause starts. Silent if nothing is assigned.', defaultFile: null },
+  { key: 'winBoom',        label: 'Winner — confetti cannon',    desc: 'The single boom as the confetti fires, about a second after the winner lands.', defaultFile: null }
 ];

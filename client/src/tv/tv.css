@@ -1888,137 +1888,348 @@
 }
 
 /* ─── Winner celebration ──────────────────────────────────────────────────
-   Fireworks + confetti layer (decorative) plus the grand winner hero. The
-   layer fills the board frame and sits above the centered game-over card;
-   pointer-events:none keeps the Play Again / Return buttons clickable. */
+   The game-over moment: house lights down, spotlight up, winner lands, then
+   pyro. Timings here mirror winnerTiming.js — the delays themselves are set
+   inline from those constants (see App.jsx `at()`), so JS and CSS cannot
+   drift; only the durations and curves live here. */
+
+/* Canvas layers from <Celebration/>. Two of them, straddling the winner
+   card (z-index 5): fireworks behind so the card stays readable and the sky
+   has depth, confetti in front because that is where paper would be.
+   pointer-events:none keeps Play again / Back to lobby clickable. */
 .tv-celebration {
   position: absolute;
   inset: 0;
-  z-index: 7;
+  pointer-events: none;
+  display: block;
+}
+.tv-celebration--back  { z-index: 4; }
+.tv-celebration--front { z-index: 8; }
+
+/* House lights: the backdrop drops well below the other overlays so the
+   spotlight has something to cut through. */
+.tv-overlay-center--gameover {
+  background: rgba(var(--panel-deepest), 0.86);
+  animation: tv-house-lights 900ms ease-out both;
+}
+@keyframes tv-house-lights {
+  from { background-color: rgba(var(--panel), 0.30); }
+  to   { background-color: rgba(var(--panel-deepest), 0.86); }
+}
+
+/* Frame-wide lighting, outside AutoFit so it covers the whole board rather
+   than being clipped to the card. */
+.tv-gameover-lights {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
 }
-
-/* A firework burst: a zero-size anchor whose ::before is the white flash and
-   whose child .cel-spark dots shoot outward. Repeats on a stagger so the sky
-   never goes quiet and never visibly syncs. */
-.cel-burst {
+.tv-gameover-vignette {
   position: absolute;
-  width: 0; height: 0;
-  animation-name: cel-flash;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-out;
+  inset: -12%;
+  /* Unlike Wilderdash's near-black board, the Central Perk'd board art is
+     bright olive and reads straight through a centre-transparent vignette —
+     the painted logo ended up sitting behind the winner's figurine. So the
+     centre carries a dim too, and the spotlight (screen blend) lifts the
+     hero back out of it. */
+  background: radial-gradient(ellipse at 50% 42%,
+    rgba(3, 10, 7, 0.30) 0%,
+    rgba(3, 10, 7, 0.44) 34%,
+    rgba(3, 10, 7, 0.74) 70%,
+    rgba(3, 10, 7, 0.94) 100%);
+  animation: tv-simple-in 1200ms ease-out both;
 }
-.cel-burst::before {
-  content: '';
+/* The flare on the hit — one hard bloom that decays fast. */
+.tv-gameover-flare {
   position: absolute;
-  left: -28px; top: -28px;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0) 68%);
-  animation: inherit;
+  inset: 0;
+  opacity: 0;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 50% 40%,
+    rgba(255, 244, 220, 0.92) 0%,
+    rgba(255, 214, 142, 0.32) 26%,
+    rgba(255, 198, 116, 0) 58%);
+  animation: tv-flare 780ms cubic-bezier(0.05, 0.8, 0.25, 1) backwards;
 }
-.cel-spark {
-  position: absolute;
-  left: -3.5px; top: -3.5px;
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
-  animation-name: cel-spark;
-  animation-timing-function: cubic-bezier(0.15, 0.6, 0.3, 1);
-  animation-iteration-count: infinite;
-}
-@keyframes cel-flash {
-  0%   { opacity: 0; transform: scale(0.2); }
-  5%   { opacity: 0.95; transform: scale(1); }
-  18%  { opacity: 0; transform: scale(1.35); }
+@keyframes tv-flare {
+  0%   { opacity: 0; }
+  7%   { opacity: 1; }
   100% { opacity: 0; }
 }
-@keyframes cel-spark {
-  0%   { transform: translate(0, 0) scale(1.1); opacity: 0; }
-  6%   { opacity: 1; }
-  45%  { transform: translate(var(--tx), var(--ty)) scale(0.45); opacity: 0.9; }
-  60%  { transform: translate(calc(var(--tx) * 1.08), calc(var(--ty) * 1.08 + 16px)) scale(0.2); opacity: 0; }
-  100% { transform: translate(calc(var(--tx) * 1.08), calc(var(--ty) * 1.08 + 16px)) scale(0.2); opacity: 0; }
+@keyframes tv-simple-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-/* Confetti — thin rectangles (and a few dots) raining down with a sway and
-   tumble. Drifts past the bottom of the frame, then loops. */
-.cel-confetti {
-  position: absolute;
-  top: 0;
-  border-radius: 2px;
-  opacity: 0.9;
-  animation-name: cel-fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+/* The one entrance every staged element shares — only the delay differs. */
+.tv-reveal {
+  animation: tv-reveal-in 620ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards;
 }
-.cel-confetti.is-round { border-radius: 50%; }
-@keyframes cel-fall {
-  0%   { transform: translate(0, -12vh) rotate(0deg); opacity: 0; }
-  8%   { opacity: 0.95; }
-  50%  { transform: translate(var(--sway), 50vh) rotate(360deg); }
-  100% { transform: translate(calc(var(--sway) * -1), 114vh) rotate(760deg); opacity: 0.9; }
+@keyframes tv-reveal-in {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
 }
 
-/* The hero: crown, big glowing piece, shimmering title, name. */
+/* The game-over card takes a real width instead of shrinking to its
+   content — .tv-stage is width:100% but max-width:1500px with nothing
+   pushing it out, which left the whole finale in a narrow column on a big
+   screen. AutoFit still scales this down to fit, so a fixed width here sets
+   the proportions, not the final size.
+
+   The panel fades up with the results rather than being there from the
+   first frame: the winner should land in the dark, not inside a large empty
+   box. No backdrop-filter, for the same reason — it would paint a blurred
+   rectangle over the board while the card is still invisible. */
+.tv-stage.tv-stage--gameover {
+  width: min(1180px, 92vw);
+  max-width: none;
+  padding: 30px 54px 36px;
+  gap: 8px;
+  border: 1px solid rgba(255, 245, 225, 0.14);
+  border-radius: var(--radius-lg);
+  animation: tv-panel-in 700ms ease-out backwards;
+}
+@keyframes tv-panel-in {
+  from {
+    background-color: rgba(var(--panel-deep), 0);
+    border-color: rgba(255, 245, 225, 0);
+  }
+  to {
+    background-color: rgba(var(--panel-deep), 0.80);
+    border-color: rgba(255, 245, 225, 0.14);
+  }
+}
+
+/* ─── The hero ─── */
 .tv-winner-hero {
   display: flex; flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+}
+
+/* Positioning context for the spotlight, rays and shockwave, all of which
+   are absolute so none of them can change the card's measured size — AutoFit
+   re-scales the whole screen if this box grows mid-reveal. */
+.tv-winner-crest {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center;
+  padding: 0 4%;
+}
+/* Warm coffeehouse light rather than a cold stage white. */
+.tv-winner-spot {
+  position: absolute;
+  inset: -95% -50% -65%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(255, 226, 168, 0.40) 0%,
+    rgba(226, 166, 78, 0.19) 30%,
+    rgba(183, 143, 83, 0.06) 55%,
+    rgba(183, 143, 83, 0) 72%);
+  animation: tv-spot-open 1100ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards;
+}
+@keyframes tv-spot-open {
+  from { opacity: 0; transform: scale(0.55, 0.2); }
+  to   { opacity: 1; transform: none; }
+}
+.tv-winner-plinth {
+  position: relative;
+  display: flex;
+  align-items: center; justify-content: center;
+}
+/* Ray fan behind the winner. Sized off the piece in both axes (top/height
+   resolve against the plinth's height) so it stays centred on the figure.
+   Very low contrast and very slow — presence, not decoration. */
+.tv-winner-rays {
+  position: absolute;
+  left: -46%; top: -46%;
+  width: 192%; height: 192%;
+  opacity: 0.15;
+  pointer-events: none;
+  animation:
+    tv-rays-in 1000ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards,
+    tv-rays-spin 120s linear infinite;
+}
+@keyframes tv-rays-in {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 0.15; transform: none; }
+}
+@keyframes tv-rays-spin {
+  from { rotate: 0deg; }
+  to   { rotate: 360deg; }
 }
 .tv-winner-crown {
-  font-size: clamp(2.4rem, 4cqw, 4rem);
-  line-height: 1;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
-  animation: tv-crown-bob 2.4s ease-in-out infinite;
+  position: relative;
+  z-index: 3;
+  width: clamp(76px, 8.4cqw, 150px);
+  height: auto;
+  margin-bottom: -1%;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 22px rgba(226, 176, 92, 0.35));
+  animation: tv-crown-in 780ms cubic-bezier(0.2, 1.28, 0.4, 1) backwards;
 }
+@keyframes tv-crown-in {
+  from { opacity: 0; transform: translateY(-30px) scale(0.68); }
+  to   { opacity: 1; transform: none; }
+}
+/* Light travelling across the metal — clipped to the crown inside the SVG.
+   Its own element, so it animates independently of the crown's entrance. */
+.tv-crest-shine {
+  animation: tv-crest-shine 5.5s ease-in-out 2.4s infinite;
+}
+@keyframes tv-crest-shine {
+  0%   { transform: translateX(0); }
+  16%  { transform: translateX(280px); }
+  100% { transform: translateX(280px); }
+}
+
+/* The piece drops in from above, overshoots, settles. */
 .tv-winner-piece {
-  filter: drop-shadow(0 0 32px rgba(255, 213, 107, 0.55));
-  animation: tv-winner-pop 0.6s cubic-bezier(0.22, 1.4, 0.5, 1) backwards;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 38px rgba(255, 213, 130, 0.50))
+          drop-shadow(0 14px 26px rgba(0, 0, 0, 0.60));
+  animation: tv-winner-slam 700ms cubic-bezier(0.18, 1.5, 0.36, 1) backwards;
 }
+@keyframes tv-winner-slam {
+  0%   { opacity: 0; transform: translateY(-46px) scale(1.85); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+/* Impact ring, fired on the same beat as the slam. */
+.tv-winner-shock {
+  position: absolute;
+  left: 50%; top: 52%;
+  width: 220px; height: 220px;
+  margin: -110px 0 0 -110px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 238, 198, 0.9);
+  box-shadow: 0 0 30px rgba(255, 220, 150, 0.55),
+              inset 0 0 30px rgba(255, 220, 150, 0.30);
+  opacity: 0;
+  pointer-events: none;
+  animation: tv-shock 820ms cubic-bezier(0.08, 0.75, 0.3, 1) backwards;
+}
+@keyframes tv-shock {
+  0%   { opacity: 0; transform: scale(0.12); }
+  10%  { opacity: 0.95; }
+  100% { opacity: 0; transform: scale(3); border-width: 1px; }
+}
+
+/* ─── Title, set the way the show sets its own ───
+   Chunky Rubik caps with a coloured dot between every pair of letters. The
+   spacing comes from the flex gap rather than letter-spacing so the dots sit
+   in real gaps instead of being crowded by tracking. */
 .tv-winner-title {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(2.6rem, 6cqw, 6rem);
-  letter-spacing: 0.12em;
-  line-height: 1;
-  margin-top: 6px;
-  background: linear-gradient(110deg, var(--gold) 30%, #fff6df 50%, var(--gold) 70%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 16px rgba(255, 200, 80, 0.4));
-  animation: tv-title-sheen 3s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, 0.62cqw, 13px);
+  margin-top: 14px;
+  animation: tv-title-in 780ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards;
 }
+@keyframes tv-title-in {
+  /* Transform only — animating font-size or letter-spacing here would
+     change the card's measured width and make AutoFit re-zoom the screen. */
+  from { opacity: 0; transform: translateY(16px) scale(0.93); }
+  to   { opacity: 1; transform: none; }
+}
+.tv-title-letter {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 6cqw, 6rem);
+  line-height: 0.95;
+  color: #FFF8EA;
+  /* Hard drop shadow first (the title-card ink line), then the warm glow. */
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 226, 160, 0.30),
+    0 8px 24px rgba(0, 0, 0, 0.75);
+}
+.tv-title-dot {
+  flex: 0 0 auto;
+  width: clamp(9px, 1.05cqw, 20px);
+  height: clamp(9px, 1.05cqw, 20px);
+  border-radius: 50%;
+  /* Nudge down to sit on the optical centre of the caps, not the line box. */
+  margin-top: 0.12em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+/* Divider: hairline rule with the same three dots set into the middle. */
+.tv-winner-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: min(460px, 68%);
+  margin: 12px 0 6px;
+  animation: tv-reveal-in 620ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards;
+}
+.tv-rule-line {
+  flex: 1 1 auto;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(215, 192, 149, 0), rgba(215, 192, 149, 0.7));
+}
+.tv-winner-rule .tv-rule-line:last-child { transform: scaleX(-1); }
+.tv-rule-dot {
+  flex: 0 0 auto;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+
 .tv-winner-name {
   font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3cqw, 3rem);
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.2cqw, 3.2rem);
   color: var(--cream);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
+  animation: tv-reveal-in 620ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards;
 }
 .tv-winner-sub {
   font-family: var(--sans);
-  font-style: italic;
   font-size: clamp(1rem, 1.4cqw, 1.5rem);
   color: var(--cream-dim);
+  animation: tv-reveal-in 620ms cubic-bezier(0.16, 0.84, 0.28, 1) backwards;
 }
-@keyframes tv-crown-bob {
-  0%, 100% { transform: translateY(0) rotate(-5deg); }
-  50%      { transform: translateY(-9px) rotate(5deg); }
+
+/* Two leaderboard columns means each row is about half the width the base
+   styles assume, and rank + piece + name + stats + score do not fit: the
+   name is the flexible one, so it ate the shortfall and truncated to
+   "Mar…". Pull the stats and padding in so the name keeps its space. */
+.tv-stage--gameover .tv-leaderboard .row {
+  gap: 12px;
+  padding: 12px 18px;
 }
-@keyframes tv-winner-pop {
-  from { transform: scale(0.4); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+.tv-stage--gameover .tv-leaderboard .row .name { min-width: 0; }
+.tv-stage--gameover .tv-leaderboard .row .delta {
+  flex: 0 0 auto;
+  margin-right: 4px;
+  font-size: clamp(0.85rem, 1.12cqw, 1.15rem);
+  opacity: 0.82;
 }
-@keyframes tv-title-sheen {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+
+/* Top of the leaderboard gets the gold treatment so the winner's row reads
+   as first place at a glance, not just as the row that happens to be on top. */
+.tv-leaderboard .row.is-winner {
+  border-color: rgba(215, 192, 149, 0.55);
+  background: linear-gradient(120deg, rgba(183, 143, 83, 0.26), rgba(var(--panel), 0.72));
+  box-shadow: 0 0 22px rgba(183, 143, 83, 0.22);
 }
+.tv-leaderboard .row.is-winner .rank,
+.tv-leaderboard .row.is-winner .total { color: #F6E6BE; }
+
 @media (prefers-reduced-motion: reduce) {
-  .cel-burst, .cel-spark, .cel-confetti,
-  .tv-winner-crown, .tv-winner-piece, .tv-winner-title { animation: none; }
+  .tv-overlay-center--gameover, .tv-stage.tv-stage--gameover,
+  .tv-gameover-vignette, .tv-gameover-flare,
+  .tv-reveal, .tv-winner-spot, .tv-winner-rays, .tv-winner-crown,
+  .tv-crest-shine, .tv-winner-piece, .tv-winner-shock,
+  .tv-winner-title, .tv-winner-rule, .tv-winner-name, .tv-winner-sub {
+    animation: none;
+  }
 }
 
 /* ============================================================
