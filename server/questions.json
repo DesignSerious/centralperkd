@@ -7727,5 +7727,5601 @@
       "episode": 18
     },
     "verified": false
+  },
+  {
+    "id": "q311",
+    "category": "Numbers & Names",
+    "difficulty": 4,
+    "question": "What is Rachel's middle name?",
+    "answer": "Karen",
+    "altAnswers": [
+      "Rachel Karen Green"
+    ],
+    "decoys": [
+      "Anne",
+      "Elizabeth",
+      "Michelle"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q312",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "In the apartment quiz, what was the name of Ross and Monica's grandmother who had died?",
+    "answer": "Althea",
+    "altAnswers": [],
+    "decoys": [
+      "Ida",
+      "Gladys",
+      "Nana Rose"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q313",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "According to the apartment quiz, how many categories does Monica sort her towels into?",
+    "answer": "eleven",
+    "altAnswers": [
+      "11"
+    ],
+    "decoys": [
+      "seven",
+      "fourteen",
+      "nine"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q314",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "In the apartment quiz, where did Monica get a pencil stuck at age fourteen?",
+    "answer": "in her ear",
+    "altAnswers": [
+      "her ear",
+      "ear"
+    ],
+    "decoys": [
+      "up her nose",
+      "in her foot",
+      "in her knee"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q315",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "According to the apartment quiz, how old was Chandler when he first touched a girl’s breast?",
+    "answer": "nineteen",
+    "altAnswers": [
+      "19"
+    ],
+    "decoys": [
+      "fourteen",
+      "sixteen",
+      "twenty-two"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q316",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What was the name of Joey's imaginary childhood friend?",
+    "answer": "Maurice",
+    "altAnswers": [],
+    "decoys": [
+      "Sal",
+      "Rocco",
+      "Vinnie"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q317",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What was the profession of Joey's imaginary childhood friend Maurice?",
+    "answer": "space cowboy",
+    "altAnswers": [
+      "a space cowboy"
+    ],
+    "decoys": [
+      "deep-sea diver",
+      "rodeo clown",
+      "fighter pilot"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q318",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What is the surname of Susan, Carol's partner?",
+    "answer": "Bunch",
+    "altAnswers": [
+      "Susan Bunch"
+    ],
+    "decoys": [
+      "Birch",
+      "Bunn",
+      "Burnside"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q319",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "Chandler once declared his love using Janice's full name. What was it?",
+    "answer": "Janice Litman Goralnik née Hosenstein",
+    "altAnswers": [
+      "Litman Goralnik nee Hosenstein",
+      "Litman Goralnik Hosenstein"
+    ],
+    "decoys": [
+      "Janice Hosenstein Lipman",
+      "Janice Goldfarb-Litman",
+      "Janice Rosenblatt Goralnik"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q320",
+    "category": "Numbers & Names",
+    "difficulty": 4,
+    "question": "What is the surname of Mike, the man Phoebe marries?",
+    "answer": "Hannigan",
+    "altAnswers": [
+      "Mike Hannigan"
+    ],
+    "decoys": [
+      "Halloran",
+      "Hannity",
+      "Harrigan"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q321",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What did Frank Jr. and Alice name the triplets Phoebe carried?",
+    "answer": "Frank Jr. Jr., Leslie and Chandler",
+    "altAnswers": [
+      "Frank Jr Jr, Leslie and Chandler",
+      "Leslie, Chandler and Frank Jr. Jr."
+    ],
+    "decoys": [
+      "Frankie, Lily and Chandler",
+      "Frank III, Alice and Chandler",
+      "Frank Jr. Jr., Ursula and Chandler"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q322",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What was the name of Richard's son, whom Monica briefly dated?",
+    "answer": "Timothy",
+    "altAnswers": [
+      "Tim",
+      "Timothy Burke"
+    ],
+    "decoys": [
+      "Michael",
+      "Andrew",
+      "Peter"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q323",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What was the name of Mike Hannigan's mother?",
+    "answer": "Bitsy",
+    "altAnswers": [
+      "Bitsy Hannigan"
+    ],
+    "decoys": [
+      "Bunny",
+      "Muffy",
+      "Kitty"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q324",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "Which of Joey's seven sisters did Chandler drunkenly make out with at Joey's birthday party?",
+    "answer": "Mary-Angela",
+    "altAnswers": [
+      "Mary Angela",
+      "Maryangela"
+    ],
+    "decoys": [
+      "Mary Therese",
+      "Cookie",
+      "Dina"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q325",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "Which of Joey's sisters casually mentioned she had shot her husband?",
+    "answer": "Cookie",
+    "altAnswers": [],
+    "decoys": [
+      "Gina",
+      "Veronica",
+      "Tina"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q326",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Trapped in the ATM vestibule with Jill Goodacre, Chandler finally accepted gum by saying what?",
+    "answer": "Gum would be perfection",
+    "altAnswers": [
+      "gum would be perfection"
+    ],
+    "decoys": [
+      "Gum is good",
+      "Gum would be perfect",
+      "I do enjoy gum"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q327",
+    "category": "Exact Words",
+    "difficulty": 4,
+    "question": "In the pilot, Rachel says everyone's always told her she's what — and now she wants to be a purse?",
+    "answer": "a shoe",
+    "altAnswers": [
+      "shoe"
+    ],
+    "decoys": [
+      "a princess",
+      "a doll",
+      "a hat"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q328",
+    "category": "Exact Words",
+    "difficulty": 4,
+    "question": "Monica welcomes Rachel to the real world with what two-sentence warning?",
+    "answer": "It sucks. You’re gonna love it.",
+    "altAnswers": [
+      "it sucks, you’re gonna love it",
+      "it sucks you are gonna love it"
+    ],
+    "decoys": [
+      "It’s hard. You’ll survive it.",
+      "It’s awful. You’ll get used to it.",
+      "It’s cruel. You’ll be fine."
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q329",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler tells a distraught friend he’s no good at advice — but can he interest them in what?",
+    "answer": "a sarcastic comment",
+    "altAnswers": [
+      "sarcastic comment"
+    ],
+    "decoys": [
+      "a stiff drink",
+      "an inappropriate joke",
+      "a hug"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q330",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Rachel silences the men debating childbirth with which four-word rule?",
+    "answer": "No uterus, no opinion",
+    "altAnswers": [
+      "no uterus no opinion"
+    ],
+    "decoys": [
+      "No womb, no vote",
+      "No baby, no say",
+      "No uterus, no vote"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q331",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler ends a needy answering-machine message by insisting he is what — a word Joey says totally negates itself?",
+    "answer": "breezy",
+    "altAnswers": [
+      "I'm breezy"
+    ],
+    "decoys": [
+      "chill",
+      "cool",
+      "casual"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q332",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Monica defends her rigid approach to games with what line about rules?",
+    "answer": "Rules help control the fun",
+    "altAnswers": [
+      "rules control the fun"
+    ],
+    "decoys": [
+      "Rules make the fun fair",
+      "Rules are what make it fun",
+      "Rules protect the fun"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q333",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler explains his defence mechanism by introducing himself how?",
+    "answer": "I make jokes when I’m uncomfortable",
+    "altAnswers": [
+      "I make jokes when I am uncomfortable",
+      "he makes jokes when uncomfortable"
+    ],
+    "decoys": [
+      "I get sarcastic when I’m nervous",
+      "I say stupid things when I panic",
+      "I hide behind humour"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q334",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Phoebe’s favourite way of turning down a favour is: “Oh, I wish I could, but” what?",
+    "answer": "I don’t want to",
+    "altAnswers": [
+      "but I don't want to"
+    ],
+    "decoys": [
+      "I have plans",
+      "I’m busy that day",
+      "I really shouldn’t"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q335",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "In Joey’s sci-fi cop show, what does the robot’s name C.H.E.E.S.E. stand for?",
+    "answer": "Computerized Humanoid Electronically Enhanced Secret Enforcer",
+    "altAnswers": [
+      "Computerised Humanoid Electronically Enhanced Secret Enforcer"
+    ],
+    "decoys": [
+      "Cybernetic Humanoid Enforcement and Enemy Suppression Entity",
+      "Computerized Hardware Enabling Effective Space Exploration",
+      "Combat Hydraulic Enhanced Enforcement Search Engine"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q336",
+    "category": "Showbiz & Auditions",
+    "difficulty": 4,
+    "question": "Joey starred in a terrible one-man musical about which historical figure?",
+    "answer": "Sigmund Freud",
+    "altAnswers": [
+      "Freud"
+    ],
+    "decoys": [
+      "Napoleon",
+      "Sigmund Romberg",
+      "Karl Marx"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q337",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Joey filmed a movie in Las Vegas that collapsed when the funding fell through. What was it called?",
+    "answer": "Shutter Speed",
+    "altAnswers": [],
+    "decoys": [
+      "Desert Heat",
+      "Night Shift",
+      "Fast Exposure"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q338",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "On the confusing game show Joey auditioned to host, what kind of card could a contestant pick?",
+    "answer": "a Wicked Wango card",
+    "altAnswers": [
+      "Wicked Wango"
+    ],
+    "decoys": [
+      "a Mystery Mambo card",
+      "a Jumping Jackpot card",
+      "a Wild Wango card"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q339",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Joey shot a Japanese commercial for a men’s lipstick called what?",
+    "answer": "Ichiban",
+    "altAnswers": [
+      "Ichiban lipstick for men"
+    ],
+    "decoys": [
+      "Kabuki",
+      "Sakura",
+      "Hombre"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q340",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "When Joey returned to Days of Our Lives, he got the brain of which character, played by Susan Sarandon?",
+    "answer": "Jessica Lockhart",
+    "altAnswers": [
+      "Jessica"
+    ],
+    "decoys": [
+      "Sabrina Chandler",
+      "Olivia Barrington",
+      "Victoria Lockwood"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q341",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "What was the name of the off-Broadway play whose review called Joey’s performance uneven?",
+    "answer": "Boxing Day",
+    "altAnswers": [],
+    "decoys": [
+      "Cold Snap",
+      "The Long Weekend",
+      "Christmas Eve"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q342",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "What is the name of the soap-opera awards Joey was nominated for?",
+    "answer": "the Soapie Awards",
+    "altAnswers": [
+      "Soapies",
+      "Soapie"
+    ],
+    "decoys": [
+      "the Daytime Globes",
+      "the Sudsies",
+      "the Emmys"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q343",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Rachel’s long-suffering assistant at Bloomingdale’s, whom Joanna bullied?",
+    "answer": "Sophie",
+    "altAnswers": [],
+    "decoys": [
+      "Nancy",
+      "Denise",
+      "Marla"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q344",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Ross’s boss at the museum?",
+    "answer": "Dr. Ledbetter",
+    "altAnswers": [
+      "Ledbetter"
+    ],
+    "decoys": [
+      "Dr. Kinsey",
+      "Dr. Bramwell",
+      "Dr. Hollings"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q345",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the rival palaeontologist, played by Greg Kinnear, who was Charlie’s ex?",
+    "answer": "Benjamin Hobart",
+    "altAnswers": [
+      "Hobart",
+      "Benjamin"
+    ],
+    "decoys": [
+      "Benjamin Fairfax",
+      "David Hobbs",
+      "Julian Hobart"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q346",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the husband Janice had after Chandler — the one she \"nabbed at the dermatologist’s office\"?",
+    "answer": "Sid",
+    "altAnswers": [],
+    "decoys": [
+      "Marty",
+      "Gary",
+      "Saul"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q347",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Janice’s husband Sid had what condition, forcing everyone to shout at him?",
+    "answer": "he was almost completely deaf",
+    "altAnswers": [
+      "deaf",
+      "he was deaf",
+      "almost completely deaf"
+    ],
+    "decoys": [
+      "he was going blind",
+      "he had no sense of smell",
+      "he had a terrible memory"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q348",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the doctor who implanted Phoebe’s embryos?",
+    "answer": "Dr. Zane",
+    "altAnswers": [
+      "Zane"
+    ],
+    "decoys": [
+      "Dr. Oberman",
+      "Dr. Harad",
+      "Dr. Wesley"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q349",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Who delivered Rachel’s baby Emma — the doctor obsessed with talking about Fonzie?",
+    "answer": "Dr. Long",
+    "altAnswers": [
+      "Long"
+    ],
+    "decoys": [
+      "Dr. Schiff",
+      "Dr. Barrett",
+      "Dr. Weller"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q350",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the name of the song Phoebe wrote about the Central Perk manager who had fired her?",
+    "answer": "Terry’s a jerk",
+    "altAnswers": [
+      "Terry's a jerk",
+      "Terry is a jerk"
+    ],
+    "decoys": [
+      "Coffee and Lies",
+      "The Perk Song",
+      "Bitter Barista"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q351",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe’s grandmother covered for her absent father by claiming he was a famous what?",
+    "answer": "tree surgeon",
+    "altAnswers": [
+      "a tree surgeon"
+    ],
+    "decoys": [
+      "sailor",
+      "pharmacist",
+      "travelling salesman"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q352",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the doctor who delivered Phoebe’s triplets — the one obsessed with Fonzie?",
+    "answer": "Dr. Harad",
+    "altAnswers": [
+      "Harad"
+    ],
+    "decoys": [
+      "Dr. Schiff",
+      "Dr. Barrett",
+      "Dr. Weller"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q353",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "In the apartment quiz, what phenomenon did Chandler admit scares the bejeezus out of him?",
+    "answer": "Michael Flatley, Lord of the Dance",
+    "altAnswers": [
+      "Michael Flatley",
+      "Lord of the Dance"
+    ],
+    "decoys": [
+      "mimes",
+      "clowns",
+      "hot-air balloons"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q354",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was engraved on the gaudy gold bracelet Joey bought Chandler?",
+    "answer": "To my best bud",
+    "altAnswers": [
+      "my best bud",
+      "best bud"
+    ],
+    "decoys": [
+      "Best friends forever",
+      "To my brother from another mother",
+      "Bracelet buddies"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q355",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Four of the five names on Ross’s laminated list were actresses. Who was the fifth — an Olympic figure skater?",
+    "answer": "Dorothy Hamill",
+    "altAnswers": [
+      "Dorothy Hammel"
+    ],
+    "decoys": [
+      "Nancy Kerrigan",
+      "Katarina Witt",
+      "Peggy Fleming"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q356",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What fake name did Joey use when demonstrating that people give out false identities?",
+    "answer": "Ken Adams",
+    "altAnswers": [],
+    "decoys": [
+      "Rex Steel",
+      "Vic Manning",
+      "Chip Callahan"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q357",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Told his own name was forgettable, what stage name did Joey settle on — one Chandler pointed out was already taken?",
+    "answer": "Joseph Stalin",
+    "altAnswers": [
+      "Stalin"
+    ],
+    "decoys": [
+      "Joey Diamond",
+      "Joe Sterling",
+      "Joseph Star"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q358",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the title of Nora Tyler Bing’s book that she promoted on The Tonight Show?",
+    "answer": "Euphoria Unbound",
+    "altAnswers": [
+      "Euphoria Unbound by Nora Tyler Bing"
+    ],
+    "decoys": [
+      "Mistress Bitch",
+      "Passion’s Reward",
+      "Wild Surrender"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q359",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which of his mother’s novels did Chandler’s eleven-year-old classmates pass around page 79 of?",
+    "answer": "Mistress Bitch",
+    "altAnswers": [],
+    "decoys": [
+      "Euphoria Unbound",
+      "Scarlet Nights",
+      "The Governess"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q360",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Besides Joey, Estelle had one other client — a man who did what?",
+    "answer": "he ate paper",
+    "altAnswers": [
+      "ate paper",
+      "eats paper"
+    ],
+    "decoys": [
+      "juggled chainsaws",
+      "impersonated Elvis",
+      "swallowed swords"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q361",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Estelle’s other client, the man who ate paper?",
+    "answer": "Al T. Booker",
+    "altAnswers": [
+      "Al Booker",
+      "Al Zebooker"
+    ],
+    "decoys": [
+      "Sy Rothman",
+      "Marv Kessler",
+      "Artie Bloom"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q362",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the tailor Joey’s family had used for years, whom he sent Chandler to?",
+    "answer": "Frankie",
+    "altAnswers": [],
+    "decoys": [
+      "Vito",
+      "Sal",
+      "Gino"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q363",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "According to Ross, why couldn’t Monica get braces as a child?",
+    "answer": "the dog needed knee surgery",
+    "altAnswers": [
+      "Chi-Chi needed knee surgery",
+      "the dog’s knee surgery"
+    ],
+    "decoys": [
+      "their father lost his job",
+      "she chewed through the first set",
+      "Ross needed glasses"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q364",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What free gift came with the bank account that gave Monica a thousand dollars?",
+    "answer": "a football phone",
+    "altAnswers": [
+      "football phone"
+    ],
+    "decoys": [
+      "a toaster",
+      "a beach towel",
+      "a clock radio"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q365",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the title of the Phoebe song about a love triangle, which mortified Ross and Rachel?",
+    "answer": "Two of Them Kissed Last Night",
+    "altAnswers": [
+      "Two of them kissed last night"
+    ],
+    "decoys": [
+      "The Girl and the Boy",
+      "Somebody Kissed Somebody",
+      "Three of Us"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q366",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe and her old singing partner performed a song about stepping in something icky. What was it called?",
+    "answer": "Sticky Shoes",
+    "altAnswers": [
+      "sticky shoes"
+    ],
+    "decoys": [
+      "Icky Feet",
+      "Gum on My Sole",
+      "Squishy"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q367",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the name of the feminist book Phoebe pressed on Rachel and Monica, about not letting men steal your wind?",
+    "answer": "Be Your Own Windkeeper",
+    "altAnswers": [
+      "Be your own wind keeper",
+      "Windkeeper"
+    ],
+    "decoys": [
+      "The Goddess Within",
+      "Reclaim Your Sky",
+      "Woman Unbound"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q368",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "Chandler’s office had a WENUS. What did the related acronym ANUS stand for?",
+    "answer": "Annual Net Usage Statistics",
+    "altAnswers": [
+      "annual net usage statistics"
+    ],
+    "decoys": [
+      "Annual Net Usage Systems",
+      "Average Net User Statistics",
+      "Annual Numerical Usage Summary"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q369",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "What was Ross’s technique for escaping a cuddle in bed, which he taught Chandler?",
+    "answer": "the hug and roll",
+    "altAnswers": [
+      "hug and roll"
+    ],
+    "decoys": [
+      "the yawn and stretch",
+      "the drift and turn",
+      "the slow slide"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q370",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "Joey and Chandler’s chick was named after which Baywatch actress?",
+    "answer": "Yasmine Bleeth",
+    "altAnswers": [
+      "Yasmine"
+    ],
+    "decoys": [
+      "Pamela Anderson",
+      "Nicole Eggert",
+      "Erika Eleniak"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q371",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the first name of Phoebe’s adoptive mother, who died by suicide?",
+    "answer": "Lily",
+    "altAnswers": [
+      "Lily Buffay"
+    ],
+    "decoys": [
+      "Ruth",
+      "Iris",
+      "Deborah"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q372",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What did Monica dress as for the Halloween party at her apartment?",
+    "answer": "Catwoman",
+    "altAnswers": [
+      "Cat woman"
+    ],
+    "decoys": [
+      "a witch",
+      "Wonder Woman",
+      "a flapper"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q373",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What did Phoebe dress as for that same Halloween party?",
+    "answer": "Supergirl",
+    "altAnswers": [
+      "Super girl"
+    ],
+    "decoys": [
+      "Batgirl",
+      "a fairy",
+      "Wonder Woman"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q374",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Joey told Chandler to greet his tailor with which phrase, insisting the man would know what it meant?",
+    "answer": "Joey Tribbiani says hello",
+    "altAnswers": [
+      "Joey Tribbiani says hello",
+      "tell him Joey Tribbiani says hello"
+    ],
+    "decoys": [
+      "the eagle has landed",
+      "Joey sent me",
+      "say the word banana"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q375",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Phoebe’s love song ends by comparing her lover’s love to a giant pigeon doing what?",
+    "answer": "crapping on my heart",
+    "altAnswers": [
+      "crapping on her heart"
+    ],
+    "decoys": [
+      "landing on my head",
+      "nesting in my chest",
+      "pecking at my soul"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q376",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Janice insists Chandler seeks her out because something deep in his soul calls out to her like what?",
+    "answer": "a foghorn",
+    "altAnswers": [
+      "foghorn"
+    ],
+    "decoys": [
+      "a siren",
+      "a bell",
+      "a trumpet"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q377",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Complete Phoebe’s line about the secret: \"They don’t know that we know\" what?",
+    "answer": "they know we know",
+    "altAnswers": [
+      "that they know we know"
+    ],
+    "decoys": [
+      "we know they lied",
+      "about the two of them",
+      "what we did"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q378",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Joey mocks Chandler by wearing his entire wardrobe and asking: \"Could I BE wearing any more\" what?",
+    "answer": "clothes",
+    "altAnswers": [
+      "any more clothes"
+    ],
+    "decoys": [
+      "sweaters",
+      "layers",
+      "sarcasm"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q379",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Ross’s long-suffering divorce lawyer?",
+    "answer": "Russell",
+    "altAnswers": [],
+    "decoys": [
+      "Marvin",
+      "Howard",
+      "Leonard"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q380",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What is the surname of Carol, Ross’s first wife?",
+    "answer": "Willick",
+    "altAnswers": [
+      "Carol Willick"
+    ],
+    "decoys": [
+      "Wilkins",
+      "Willis",
+      "Whitman"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q381",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "Carol and Susan wanted to give their baby a triple-barrelled surname. What was the full name Ross objected to?",
+    "answer": "Helen Willick-Bunch-Geller",
+    "altAnswers": [
+      "Willick-Bunch-Geller"
+    ],
+    "decoys": [
+      "Helen Geller-Willick",
+      "Helen Bunch-Willick",
+      "Helen Susan Willick"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q382",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What did Jack Geller buy himself when he turned fifty?",
+    "answer": "a Porsche",
+    "altAnswers": [
+      "Porsche"
+    ],
+    "decoys": [
+      "a boat",
+      "a Corvette",
+      "a motorbike"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q383",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which song did Ross’s monkey Marcel love so much that he danced to it constantly?",
+    "answer": "The Lion Sleeps Tonight",
+    "altAnswers": [
+      "Lion Sleeps Tonight"
+    ],
+    "decoys": [
+      "Wipeout",
+      "Y.M.C.A.",
+      "Brown Eyed Girl"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q384",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "What perk was Monica proudest of when she got her first restaurant promotion?",
+    "answer": "a beeper",
+    "altAnswers": [
+      "beeper",
+      "a pager"
+    ],
+    "decoys": [
+      "a parking space",
+      "business cards",
+      "her own knives"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q385",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler claims that until he was twenty-five, he thought the only response to \"I love you\" was what?",
+    "answer": "oh crap",
+    "altAnswers": [
+      "oh crap!"
+    ],
+    "decoys": [
+      "thank you",
+      "me too",
+      "I know"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q386",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "What was the surname of Rachel’s assistant Tag, whom she hired for his looks?",
+    "answer": "Jones",
+    "altAnswers": [
+      "Tag Jones"
+    ],
+    "decoys": [
+      "Riley",
+      "Bennett",
+      "Doyle"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q387",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the name of the dangerous game Joey and Chandler invented, which had its own official rulebook?",
+    "answer": "Fireball",
+    "altAnswers": [
+      "Fire ball"
+    ],
+    "decoys": [
+      "Ballzooka",
+      "Hot Potato",
+      "Torchball"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q388",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the name of the made-up card game Joey used to win money off Chandler?",
+    "answer": "Cups",
+    "altAnswers": [
+      "the Cups game"
+    ],
+    "decoys": [
+      "Jacks",
+      "Cones",
+      "Fives"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q389",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "What was the name of the pizza delivery girl Chandler flirted with on Joey’s behalf?",
+    "answer": "Caitlin",
+    "altAnswers": [],
+    "decoys": [
+      "Kathy",
+      "Erin",
+      "Megan"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q390",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "In Rachel’s invented wedding story, which singer serenaded her down the aisle?",
+    "answer": "Stevie Wonder",
+    "altAnswers": [
+      "Stevie"
+    ],
+    "decoys": [
+      "Elton John",
+      "Lionel Richie",
+      "Billy Joel"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q391",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "In that same invented story, which Stevie Wonder song did Rachel claim was performed?",
+    "answer": "Isn’t She Lovely",
+    "altAnswers": [
+      "Isn't She Lovely"
+    ],
+    "decoys": [
+      "You Are the Sunshine of My Life",
+      "Signed, Sealed, Delivered",
+      "My Cherie Amour"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q392",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "Where did Rachel claim her fictional wedding took place?",
+    "answer": "on a cliff in Barbados",
+    "altAnswers": [
+      "Barbados",
+      "a cliff in Barbados"
+    ],
+    "decoys": [
+      "a beach in Bermuda",
+      "a vineyard in Tuscany",
+      "a castle in Scotland"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q393",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "According to Ross, who did it on the back of the Staten Island Ferry?",
+    "answer": "Joey",
+    "altAnswers": [],
+    "decoys": [
+      "Chandler",
+      "Ross",
+      "Phoebe"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q394",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "Rachel’s sister Amy dismissed Ross’s doctorate — what does Ross insist a PhD is just as good as?",
+    "answer": "an MD",
+    "altAnswers": [
+      "a medical degree",
+      "MD"
+    ],
+    "decoys": [
+      "a law degree",
+      "a professorship",
+      "a Nobel"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q395",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Ross, terrified of an injection, suggested the doctor use what instead?",
+    "answer": "a squirt gun",
+    "altAnswers": [
+      "squirt gun",
+      "thquirt gun"
+    ],
+    "decoys": [
+      "a patch",
+      "a pill",
+      "a straw"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q396",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler describes his own worst quality as being what — \"and awkward and desperate for love\"?",
+    "answer": "hopeless",
+    "altAnswers": [
+      "hopeless and awkward"
+    ],
+    "decoys": [
+      "needy",
+      "pathetic",
+      "clingy"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q397",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "Monica took a job developing recipes for a synthetic chocolate substitute. What was it called?",
+    "answer": "Mockolate",
+    "altAnswers": [
+      "mockolate"
+    ],
+    "decoys": [
+      "Chocolite",
+      "Cocoa-Lite",
+      "Chocoflax"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q398",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the executive who hired Monica to cook with fake chocolate?",
+    "answer": "Mr. Rastatter",
+    "altAnswers": [
+      "Rastatter"
+    ],
+    "decoys": [
+      "Mr. Hollingsworth",
+      "Mr. Delaney",
+      "Mr. Prentiss"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q399",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "What was the name of the swing band Chandler desperately wanted to play at his wedding?",
+    "answer": "the Swing Kings",
+    "altAnswers": [
+      "Swing Kings"
+    ],
+    "decoys": [
+      "the Jump Cats",
+      "the Brass Monkeys",
+      "the Rhythm Aces"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q400",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "A bride Monica met at the dress sale complained her fiancé wanted which heavy metal band at their wedding?",
+    "answer": "Carcass",
+    "altAnswers": [],
+    "decoys": [
+      "Entrails",
+      "Gristle",
+      "Cadaver"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q401",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "Which brand of men’s cologne was Joey squirting at customers in the department store?",
+    "answer": "Bijan",
+    "altAnswers": [
+      "Bijan for men"
+    ],
+    "decoys": [
+      "Aramis",
+      "Drakkar",
+      "Obsession"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q402",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Before that, Joey modelled at Macy’s as the guy for which fragrance?",
+    "answer": "Aramis",
+    "altAnswers": [
+      "the Aramis guy"
+    ],
+    "decoys": [
+      "Bijan",
+      "Obsession",
+      "Old Spice"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q403",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What was Ben’s first word?",
+    "answer": "hi",
+    "altAnswers": [
+      "hi!"
+    ],
+    "decoys": [
+      "dada",
+      "ball",
+      "no"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q404",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler defended drunkenly kissing a man by saying it was dark and he was what?",
+    "answer": "a very pretty guy",
+    "altAnswers": [
+      "very pretty guy",
+      "pretty"
+    ],
+    "decoys": [
+      "wearing a wig",
+      "built like a woman",
+      "wearing perfume"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q405",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Rachel dated Russ, who looked uncannily like Ross. Who did Rachel claim he reminded her of instead?",
+    "answer": "Bob Saget",
+    "altAnswers": [
+      "Saget"
+    ],
+    "decoys": [
+      "Tom Hanks",
+      "Jeff Goldblum",
+      "John Ritter"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q406",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Monica hired a rival waitress for her big catering job, dismissing Rachel as an amateur. What was her name?",
+    "answer": "Wendy",
+    "altAnswers": [],
+    "decoys": [
+      "Wanda",
+      "Trish",
+      "Robin"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q407",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "What was the surname of Barry, the man Rachel left at the altar?",
+    "answer": "Farber",
+    "altAnswers": [
+      "Barry Farber"
+    ],
+    "decoys": [
+      "Finkel",
+      "Fishman",
+      "Feldman"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q408",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the name of the Las Vegas club where Chandler’s father performed?",
+    "answer": "the 4 Queens",
+    "altAnswers": [
+      "4 Queens",
+      "Four Queens"
+    ],
+    "decoys": [
+      "the Golden Nugget",
+      "the Pink Flamingo",
+      "the Sandpiper"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q409",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Which show tune was Helena Handbasket singing when Chandler and Monica walked in?",
+    "answer": "I Feel Pretty",
+    "altAnswers": [
+      "I feel pretty"
+    ],
+    "decoys": [
+      "Big Spender",
+      "Cabaret",
+      "Diamonds Are a Girl’s Best Friend"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q410",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Janice’s young son, whom she introduced to Ross as his \"future son-in-law\"?",
+    "answer": "Aaron",
+    "altAnswers": [],
+    "decoys": [
+      "Adam",
+      "Ethan",
+      "Aidan"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q411",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "When Phoebe finally met her father’s family, what did she say Ursula did for a living?",
+    "answer": "she was a waitress",
+    "altAnswers": [
+      "a waitress",
+      "waitress"
+    ],
+    "decoys": [
+      "a masseuse",
+      "a dancer",
+      "a dog groomer"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q412",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Ross blurted out that Monica, not a named storm, had broken the porch swing. Which hurricane had taken the blame?",
+    "answer": "Hurricane Gloria",
+    "altAnswers": [
+      "Gloria"
+    ],
+    "decoys": [
+      "Hurricane Andrew",
+      "Hurricane Betsy",
+      "Hurricane Diane"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q413",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the Animal Control officer — an old classmate of Rachel’s — who impounded Marcel?",
+    "answer": "Luisa",
+    "altAnswers": [
+      "Louisa"
+    ],
+    "decoys": [
+      "Dora",
+      "Marisa",
+      "Nina"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q414",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "When Ross finally found Marcel at Mr. Heckles’s apartment, what was the monkey wearing?",
+    "answer": "a pink dress",
+    "altAnswers": [
+      "a dress",
+      "pink dress"
+    ],
+    "decoys": [
+      "a tuxedo",
+      "a nappy",
+      "a tiny hat"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q415",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "How much did the salesman want for the full set of encyclopedias he tried to sell Joey?",
+    "answer": "twelve hundred dollars",
+    "altAnswers": [
+      "$1200",
+      "1200",
+      "1,200"
+    ],
+    "decoys": [
+      "eight hundred dollars",
+      "two thousand dollars",
+      "five hundred dollars"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q416",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the homeless woman Phoebe befriended, who called her \"Weird Girl\"?",
+    "answer": "Lizzie",
+    "altAnswers": [],
+    "decoys": [
+      "Bertha",
+      "Maggie",
+      "Dot"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q417",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Phoebe brought Lizzie alphabet soup with the vowels picked out — but left which letters in?",
+    "answer": "the Ys",
+    "altAnswers": [
+      "Y",
+      "the Y’s",
+      "Ys"
+    ],
+    "decoys": [
+      "the Ws",
+      "the Xs",
+      "the Zs"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q418",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Having let slip that Ross was in love with Rachel, what two words did a panicking Chandler blurt out to cover it?",
+    "answer": "crystal duck",
+    "altAnswers": [
+      "Crystal duck"
+    ],
+    "decoys": [
+      "crystal clear",
+      "glass swan",
+      "crystal ball"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q419",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What did Phoebe alarm everyone by bringing to Rachel’s birthday party in a box?",
+    "answer": "rat babies",
+    "altAnswers": [
+      "baby rats",
+      "rats"
+    ],
+    "decoys": [
+      "a possum",
+      "baby squirrels",
+      "a snake"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q420",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "Rachel dreaded returning Barry’s ring, calling herself the girl in the veil who did what?",
+    "answer": "stomped on your heart",
+    "altAnswers": [
+      "stomped on his heart"
+    ],
+    "decoys": [
+      "ran out on your son",
+      "ruined your family",
+      "broke your heart"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q421",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which of Emily’s friends dragged Ross into a brutal game of rugby?",
+    "answer": "Liam",
+    "altAnswers": [],
+    "decoys": [
+      "Colin",
+      "Nigel",
+      "Declan"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q422",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "Joey confessed he had been cast in a porno but backed out — why did he take the job in the first place?",
+    "answer": "he just wanted a job",
+    "altAnswers": [
+      "he wanted a job",
+      "he needed the money"
+    ],
+    "decoys": [
+      "he lost a bet",
+      "his agent forced him",
+      "he thought it was a soap"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q423",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "Rachel refused to let the others skip which milestone, insisting it would never happen again?",
+    "answer": "Emma’s first birthday",
+    "altAnswers": [
+      "Emma's first birthday",
+      "her first birthday"
+    ],
+    "decoys": [
+      "Emma’s christening",
+      "Emma’s first steps",
+      "Thanksgiving"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q424",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Gunther revealed he had been an actor. Which character did he play on All My Children?",
+    "answer": "Bryce",
+    "altAnswers": [],
+    "decoys": [
+      "Tad",
+      "Cliff",
+      "Palmer"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q425",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "How did Gunther’s soap-opera character get written out of All My Children?",
+    "answer": "he was buried in an avalanche",
+    "altAnswers": [
+      "an avalanche",
+      "buried in an avalanche"
+    ],
+    "decoys": [
+      "he fell off a yacht",
+      "a car crash",
+      "he was struck by lightning"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q426",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Joey auditioned for All My Children for the part of a boxer with what name?",
+    "answer": "Nick",
+    "altAnswers": [],
+    "decoys": [
+      "Rocco",
+      "Tony",
+      "Vince"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q427",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Watching Chandler through the window, what kind of television programme did Monica catch him getting excited by?",
+    "answer": "a shark attack show",
+    "altAnswers": [
+      "shark attack show",
+      "shark documentary",
+      "sharks"
+    ],
+    "decoys": [
+      "a cooking show",
+      "a wrestling match",
+      "a nature show about lions"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q428",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "On what Phoebe believed was their thirtieth birthday, Ursula corrected her — how old were the twins really?",
+    "answer": "thirty-one",
+    "altAnswers": [
+      "31",
+      "thirty one"
+    ],
+    "decoys": [
+      "twenty-nine",
+      "thirty-two",
+      "thirty-three"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q429",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "In the very first episode, what was the name of Ross’s museum colleague helping him set up the cave-people exhibit?",
+    "answer": "Marsha",
+    "altAnswers": [],
+    "decoys": [
+      "Martha",
+      "Marcy",
+      "Marion"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q430",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "Phoebe guessed Joey’s idea for the perfect food, earning \"you are the master\". What was it?",
+    "answer": "a meatball sub",
+    "altAnswers": [
+      "meatball sub",
+      "meatball sandwich"
+    ],
+    "decoys": [
+      "a cheesesteak",
+      "a hero",
+      "a hot pastrami"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q431",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "How did Elizabeth get her revenge on Ross after he broke up with her?",
+    "answer": "she threw a water balloon at him",
+    "altAnswers": [
+      "a water balloon",
+      "water balloons",
+      "threw water balloons"
+    ],
+    "decoys": [
+      "she keyed his car",
+      "she told the dean",
+      "she poured paint on him"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q432",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Whose death took Ross and Monica to the hospital, prompting the story about her stealing from restaurants?",
+    "answer": "their grandmother",
+    "altAnswers": [
+      "Nana",
+      "their Nana",
+      "grandmother"
+    ],
+    "decoys": [
+      "their aunt",
+      "their grandfather",
+      "Mrs. Geller’s sister"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q433",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the name of the comet Ross dragged everyone to the roof to see?",
+    "answer": "the Bapstein-King comet",
+    "altAnswers": [
+      "Bapstein-King",
+      "Bapstein King comet"
+    ],
+    "decoys": [
+      "the Hale-Bopp comet",
+      "the Burger King comet",
+      "the Halstead comet"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q434",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "What was the exact model of the recliner Joey and Chandler bought?",
+    "answer": "the La-Z-Boy E-cliner 3000",
+    "altAnswers": [
+      "La-Z-Boy E-cliner 3000",
+      "E-cliner 3000"
+    ],
+    "decoys": [
+      "the Barcalounger Deluxe",
+      "the La-Z-Boy Comfort King",
+      "the Recline-O-Matic 2000"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q435",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "Which magazine had named that recliner \"Chair of the Year\"?",
+    "answer": "Sit magazine",
+    "altAnswers": [
+      "Sit"
+    ],
+    "decoys": [
+      "Lounge",
+      "Recline",
+      "Comfort Weekly"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q436",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "What was the name of the infomercial Joey appeared in, to the group’s delight?",
+    "answer": "Amazing Discoveries",
+    "altAnswers": [],
+    "decoys": [
+      "Wonder Buys",
+      "Incredible Inventions",
+      "Home Marvels"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q437",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "What did Joey and Chandler name the large ceramic dog in their apartment?",
+    "answer": "Pat",
+    "altAnswers": [
+      "Pat the Dog",
+      "Pat the dog"
+    ],
+    "decoys": [
+      "Duke",
+      "Rex",
+      "Buster"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q438",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the name of the dog Phoebe took in and became attached to?",
+    "answer": "Clunkers",
+    "altAnswers": [
+      "Klunkers"
+    ],
+    "decoys": [
+      "Rufus",
+      "Biscuit",
+      "Buster"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q439",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Phoebe dated a relentlessly enthusiastic man who called the Long Island Expressway \"a concrete miracle\". What was his name?",
+    "answer": "Parker",
+    "altAnswers": [],
+    "decoys": [
+      "Preston",
+      "Porter",
+      "Palmer"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q440",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "Which baby name suggested by Rachel did Ross veto by mocking a girl with her own kiln?",
+    "answer": "Rain",
+    "altAnswers": [],
+    "decoys": [
+      "Sunbeam",
+      "River",
+      "Meadow"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q441",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Rachel dated a doctor whose surname made his title absurd. What was he called?",
+    "answer": "Dr. Bobby",
+    "altAnswers": [
+      "Bobby"
+    ],
+    "decoys": [
+      "Dr. Kevin",
+      "Dr. Charlie",
+      "Dr. Barry"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q442",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the man who was stalking Ursula, and mistook Phoebe for her?",
+    "answer": "Malcolm",
+    "altAnswers": [
+      "Malcom"
+    ],
+    "decoys": [
+      "Martin",
+      "Marshall",
+      "Miles"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q443",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Ross was startled to learn that Mr. Zelner’s son shared a name with whom?",
+    "answer": "Ross",
+    "altAnswers": [
+      "himself",
+      "Ross Geller"
+    ],
+    "decoys": [
+      "Emma",
+      "Ben",
+      "Rachel"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q444",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "A student evaluation praised Ross as definitely the \"hottie\" of which department?",
+    "answer": "the paleontology department",
+    "altAnswers": [
+      "paleontology"
+    ],
+    "decoys": [
+      "the biology department",
+      "the geology department",
+      "the natural sciences department"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q445",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe hoped a pair of spectacles would class up which of her songs?",
+    "answer": "the ballad of the uncircumcised man",
+    "altAnswers": [
+      "the uncircumcised man"
+    ],
+    "decoys": [
+      "Smelly Cat",
+      "the one about her mother",
+      "the ode to a pigeon"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q446",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "Rachel made Joey a deal: she would read The Shining if he read which book?",
+    "answer": "Little Women",
+    "altAnswers": [
+      "Little Women by Louisa May Alcott"
+    ],
+    "decoys": [
+      "Jane Eyre",
+      "Pride and Prejudice",
+      "Wuthering Heights"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q447",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Carol’s obstetrician, whom Monica shamelessly flirted with?",
+    "answer": "Dr. Franzblau",
+    "altAnswers": [
+      "Franzblau"
+    ],
+    "decoys": [
+      "Dr. Feldman",
+      "Dr. Fishbein",
+      "Dr. Frankel"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q448",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "George Clooney and Noah Wyle played two doctors. What were their characters’ surnames?",
+    "answer": "Mitchell and Rosen",
+    "altAnswers": [
+      "Dr. Mitchell and Dr. Rosen",
+      "Mitchell & Rosen"
+    ],
+    "decoys": [
+      "Mitchell and Ross",
+      "Rosen and Kaplan",
+      "Marsh and Rosenthal"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q449",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the zookeeper who wanted Marcel for his \"interactive wildlife experience\"?",
+    "answer": "Dr. Baldhara",
+    "altAnswers": [
+      "Baldhara"
+    ],
+    "decoys": [
+      "Dr. Bhatia",
+      "Dr. Balewa",
+      "Dr. Bhandari"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q450",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "Ross tried to secure an apartment by visiting the family of which recently deceased neighbour?",
+    "answer": "Mrs. Verhoeven",
+    "altAnswers": [
+      "Verhoeven"
+    ],
+    "decoys": [
+      "Mrs. Vandenberg",
+      "Mrs. Vermeer",
+      "Mrs. Voorhees"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q451",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "What was the name of the company where Rachel took her first job after quitting Central Perk?",
+    "answer": "Fortunata Fashions",
+    "altAnswers": [
+      "Fortunata"
+    ],
+    "decoys": [
+      "Bellucci Brands",
+      "Verona Apparel",
+      "Fontana Fashions"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q452",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the boss at that job, who was very particular about his coffee?",
+    "answer": "Mr. Kaplan Sr.",
+    "altAnswers": [
+      "Mr. Kaplan",
+      "Kaplan"
+    ],
+    "decoys": [
+      "Mr. Kastner",
+      "Mr. Kelleher",
+      "Mr. Kramer"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q453",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "When Joey asked for stage-name ideas, what did Phoebe suggest?",
+    "answer": "Flame Boy",
+    "altAnswers": [
+      "Flameboy"
+    ],
+    "decoys": [
+      "Rocket Man",
+      "Duke Diamond",
+      "Sparky"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q454",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What did Ross call the Hanukkah story’s heroes when trying to explain the holiday to Ben?",
+    "answer": "the Maccabees",
+    "altAnswers": [
+      "Maccabees"
+    ],
+    "decoys": [
+      "the Zealots",
+      "the Israelites",
+      "the Hasmoneans"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q455",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the name of the comic book Ross created as a boy, whose original artwork was stolen with his backpack?",
+    "answer": "Science Boy",
+    "altAnswers": [
+      "Science-Boy"
+    ],
+    "decoys": [
+      "Captain Fossil",
+      "Dino Lad",
+      "Professor Atom"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q456",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was Science Boy’s superpower?",
+    "answer": "a superhuman thirst for knowledge",
+    "altAnswers": [
+      "superhuman thirst for knowledge",
+      "thirst for knowledge"
+    ],
+    "decoys": [
+      "super hearing",
+      "the power of deduction",
+      "photographic memory"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q457",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "To humiliate Ross, Benjamin Hobart invented a dinosaur and made him spell it. What was it called?",
+    "answer": "Boscodictiasaur",
+    "altAnswers": [
+      "Boscodictiasaurus"
+    ],
+    "decoys": [
+      "Brachyosaurapod",
+      "Coelodictiasaur",
+      "Bostricodactyl"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q458",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "Joey ran up $3,500 of debt at which shop, buying his beloved animal statues?",
+    "answer": "Porcelain Safari",
+    "altAnswers": [
+      "the Porcelain Safari"
+    ],
+    "decoys": [
+      "Ceramic Kingdom",
+      "Animal Attic",
+      "Safari Statues"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q459",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "Joey also owed $1,100 at a furniture shop with which pun name?",
+    "answer": "I Love Lucite",
+    "altAnswers": [
+      "I love Lucite"
+    ],
+    "decoys": [
+      "Lucite and Lucid",
+      "Plastic Fantastic",
+      "Clearly Furniture"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q460",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "And $2,300 at a third shop — what was that one called?",
+    "answer": "Isn’t It Chromantic",
+    "altAnswers": [
+      "Isn't it Chromantic",
+      "Isnt It Chromantic"
+    ],
+    "decoys": [
+      "Chrome Sweet Chrome",
+      "Heavy Metal",
+      "All That Glitters"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q461",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "How much had Joey paid for the giant plastic bird he refused to give up?",
+    "answer": "twelve hundred dollars",
+    "altAnswers": [
+      "$1200",
+      "1200"
+    ],
+    "decoys": [
+      "four hundred dollars",
+      "six hundred dollars",
+      "two thousand dollars"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q462",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "How much did each round of fertility treatment cost Frank Jr. and Alice?",
+    "answer": "sixteen thousand dollars",
+    "altAnswers": [
+      "$16,000",
+      "16000",
+      "16 thousand"
+    ],
+    "decoys": [
+      "eight thousand",
+      "twenty-five thousand",
+      "forty thousand"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q463",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "A radio station ran a $1,000 daily challenge asking Joey a question. Which station was it?",
+    "answer": "K-Rock",
+    "altAnswers": [
+      "WXRK",
+      "92.3 K-Rock",
+      "92.3 WXRK"
+    ],
+    "decoys": [
+      "Z100",
+      "WPLJ",
+      "Hot 97"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q464",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "Monica nearly took a job at a 1950s-themed restaurant with which name?",
+    "answer": "Laverne and Curly Fries",
+    "altAnswers": [
+      "Laverne & Curly Fries"
+    ],
+    "decoys": [
+      "Happy Days Diner",
+      "Shake, Rattle and Roll",
+      "The Fonz Cafe"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q465",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What household gadget did Monica sheepishly admit to buying for $69.95 off the television?",
+    "answer": "a Wonder Mop",
+    "altAnswers": [
+      "Wonder Mop"
+    ],
+    "decoys": [
+      "a juicer",
+      "a set of knives",
+      "a steam cleaner"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q466",
+    "category": "Monica & Chandler",
+    "difficulty": 5,
+    "question": "Which song did Monica sing at karaoke, terrified, on Mike’s suggestion of the songbook?",
+    "answer": "Delta Dawn",
+    "altAnswers": [],
+    "decoys": [
+      "Fever",
+      "I Will Survive",
+      "Delta Lady"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q467",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "While job-hunting in Tulsa for Monica, Chandler found a barbecue restaurant called what?",
+    "answer": "Slim Pickings",
+    "altAnswers": [
+      "Slim Pickins"
+    ],
+    "decoys": [
+      "Big Smoke",
+      "Hog Heaven",
+      "The Rib Shack"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q468",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "A photo of Monica’s grandmother was captioned \"Me and the gang at\" which establishment?",
+    "answer": "Java Joe’s",
+    "altAnswers": [
+      "Java Joe's",
+      "Java Joes"
+    ],
+    "decoys": [
+      "Sal’s",
+      "the Blue Note",
+      "Cafe Roma"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q469",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the herbalist Ross consulted instead of a real doctor?",
+    "answer": "Guru Saj",
+    "altAnswers": [
+      "Saj"
+    ],
+    "decoys": [
+      "Guru Ravi",
+      "Guru Baba",
+      "Swami Raj"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q470",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "At the department store, what did the girls call Joey’s cologne-spraying rival, whose name nobody knew?",
+    "answer": "the Hombre Man",
+    "altAnswers": [
+      "Hombre Man",
+      "Hombre"
+    ],
+    "decoys": [
+      "the Drakkar Guy",
+      "the Musk Man",
+      "the Aqua Guy"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q471",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "What was the name of the woman Joey worked alongside at the department-store cologne counter?",
+    "answer": "Annabelle",
+    "altAnswers": [],
+    "decoys": [
+      "Angela",
+      "Arabella",
+      "Amanda"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q472",
+    "category": "Monica & Chandler",
+    "difficulty": 5,
+    "question": "Monica’s young boyfriend Ethan claimed to be a senior in college. What was he really a senior in?",
+    "answer": "high school",
+    "altAnswers": [
+      "he was in high school",
+      "a high school senior"
+    ],
+    "decoys": [
+      "junior high",
+      "his first year of college",
+      "summer school"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q473",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "What was the name of Sting’s wife, whose son went to school with Ben?",
+    "answer": "Trudie Styler",
+    "altAnswers": [
+      "Trudie"
+    ],
+    "decoys": [
+      "Heather Styler",
+      "Tricia Sumner",
+      "Trudy Sting"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q474",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which Hollywood legend’s shower did Joey sneak into on a film set?",
+    "answer": "Charlton Heston",
+    "altAnswers": [
+      "Heston"
+    ],
+    "decoys": [
+      "Marlon Brando",
+      "Gene Hackman",
+      "Robert Redford"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q475",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Monica and Phoebe adopted an unconscious hospital patient they nicknamed what?",
+    "answer": "Coma Guy",
+    "altAnswers": [
+      "the Coma Guy"
+    ],
+    "decoys": [
+      "Sleeping Beauty",
+      "Mystery Man",
+      "John Doe"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q476",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "In the prom-video era, what unkind nickname did Rachel have before her nose job?",
+    "answer": "Big Nosed Rachel",
+    "altAnswers": [
+      "Big-Nosed Rachel"
+    ],
+    "decoys": [
+      "Beak",
+      "Rachel the Schnoz",
+      "Big Nose Green"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q477",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "In the Thanksgiving flashback, Big Nosed Rachel announces she has broken up with whom?",
+    "answer": "Chip",
+    "altAnswers": [
+      "Chip Matthews"
+    ],
+    "decoys": [
+      "Barry",
+      "Tommy",
+      "Kyle"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q478",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which action film did Joey and Chandler watch obsessively, back to back?",
+    "answer": "Die Hard",
+    "altAnswers": [
+      "Diehard"
+    ],
+    "decoys": [
+      "Lethal Weapon",
+      "Predator",
+      "Speed"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q479",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the doctor treating Ross when he needed a shot, whom Monica had to ask about oral options?",
+    "answer": "Dr. Carlin",
+    "altAnswers": [
+      "Carlin"
+    ],
+    "decoys": [
+      "Dr. Corman",
+      "Dr. Casey",
+      "Dr. Callahan"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q480",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Which relative did Monica bring in to teach the women poker, having played since she was five?",
+    "answer": "Aunt Iris",
+    "altAnswers": [
+      "Iris"
+    ],
+    "decoys": [
+      "Aunt Lillian",
+      "Aunt Sylvia",
+      "Nana"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q481",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "What was the first thing Aunt Iris said on walking through the door?",
+    "answer": "Is Tony Randall dead?",
+    "altAnswers": [
+      "Is Tony Randall dead",
+      "Tony Randall"
+    ],
+    "decoys": [
+      "Who’s got the money?",
+      "Are we playing or talking?",
+      "Where’s the ashtray?"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q482",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Ross deliberately abandoned a fellow academic on the way to a lecture. What was his name?",
+    "answer": "Professor Spafford",
+    "altAnswers": [
+      "Spafford"
+    ],
+    "decoys": [
+      "Professor Stanhope",
+      "Professor Sanford",
+      "Professor Sheffield"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q483",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "From which university was the professor Ross ditched?",
+    "answer": "Cornell",
+    "altAnswers": [],
+    "decoys": [
+      "Yale",
+      "Rutgers",
+      "Columbia"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q484",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "At which studios was Joey’s soap opera filmed?",
+    "answer": "Silvercup Studios",
+    "altAnswers": [
+      "Silvercup"
+    ],
+    "decoys": [
+      "Kaufman Astoria",
+      "Steiner Studios",
+      "Chelsea Piers"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q485",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the Brown Bird whose leg Ross broke, leaving him to sell her cookies?",
+    "answer": "Sarah",
+    "altAnswers": [],
+    "decoys": [
+      "Emma",
+      "Katie",
+      "Molly"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q486",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which biscuit was Ross buying from the Brown Bird when he caused her accident?",
+    "answer": "Holiday Macaroons",
+    "altAnswers": [
+      "macaroons"
+    ],
+    "decoys": [
+      "Mint Treasures",
+      "Coconut Dreams",
+      "Chocolate Snaps"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q487",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "What organisation did Sarah salute Ross on behalf of?",
+    "answer": "the Brown Birds of America",
+    "altAnswers": [
+      "Brown Birds of America",
+      "the Brown Birds"
+    ],
+    "decoys": [
+      "the Bluebirds of America",
+      "the Brownie Guides",
+      "the Junior Birdwatchers"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q488",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Where did Joey’s girlfriend Angela say she grew up, in the double-date dinner from hell?",
+    "answer": "Brooklyn Heights",
+    "altAnswers": [
+      "Brooklyn"
+    ],
+    "decoys": [
+      "Staten Island",
+      "Yonkers",
+      "Queens"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q489",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which venue were the guys at when they missed Phoebe and the girls’ crisis at home?",
+    "answer": "Madison Square Garden",
+    "altAnswers": [
+      "the Garden",
+      "MSG"
+    ],
+    "decoys": [
+      "Yankee Stadium",
+      "Shea Stadium",
+      "the Meadowlands"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q490",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Watching Joey’s soap debut, which actor did Grandma Tribbiani insist was on screen instead of him?",
+    "answer": "Sam Waterston",
+    "altAnswers": [
+      "Waterston"
+    ],
+    "decoys": [
+      "Sam Elliott",
+      "Tom Selleck",
+      "Al Pacino"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q491",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "In which magazine did Joey excitedly show Phoebe his photo on page 42?",
+    "answer": "Soap Opera Digest",
+    "altAnswers": [
+      "Soap Opera Digest magazine"
+    ],
+    "decoys": [
+      "TV Guide",
+      "Variety",
+      "Daytime Weekly"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q492",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "What did that magazine caption call Joey — \"new ___ on the block\"?",
+    "answer": "doc",
+    "altAnswers": [
+      "new doc on the block",
+      "doctor"
+    ],
+    "decoys": [
+      "star",
+      "face",
+      "kid"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q493",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of Chloe’s colleague at the copy place, who swapped registers with her?",
+    "answer": "Issac",
+    "altAnswers": [
+      "Isaac"
+    ],
+    "decoys": [
+      "Ivan",
+      "Ira",
+      "Igor"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q494",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the name of the club where Ross found Chloe on the night he slept with her?",
+    "answer": "the Philly",
+    "altAnswers": [
+      "Philly"
+    ],
+    "decoys": [
+      "the Hudson",
+      "the Basement",
+      "the Rooftop"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q495",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Monica joked Phoebe might win the first Nobel Prize in what?",
+    "answer": "rubbing",
+    "altAnswers": [
+      "Nobel prize in rubbing"
+    ],
+    "decoys": [
+      "kneading",
+      "squeezing",
+      "touching"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q496",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which poker variant did Aunt Iris teach the women, that Joey wanted to add to the regular game?",
+    "answer": "Cross-Eyed Mary",
+    "altAnswers": [
+      "Cross Eyed Mary"
+    ],
+    "decoys": [
+      "Dirty Sally",
+      "One-Eyed Jack",
+      "Blind Bessie"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q497",
+    "category": "Monica & Chandler",
+    "difficulty": 5,
+    "question": "What had Chandler bought together with his old roommate Kip, making the break-up ugly?",
+    "answer": "a hibachi",
+    "altAnswers": [
+      "hibachi",
+      "a barbecue"
+    ],
+    "decoys": [
+      "a car",
+      "a sofa",
+      "a dog"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q498",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "Which relative cornered and kissed Ross at Monica and Chandler’s wedding?",
+    "answer": "Aunt Millie",
+    "altAnswers": [
+      "Millie"
+    ],
+    "decoys": [
+      "Aunt Iris",
+      "Aunt Lillian",
+      "Aunt Sylvia"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q499",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "As a joke, which celebrity did Phoebe name as the father of the triplets she was carrying?",
+    "answer": "James Brolin",
+    "altAnswers": [
+      "Brolin"
+    ],
+    "decoys": [
+      "James Garner",
+      "Jeff Bridges",
+      "James Caan"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q500",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe confronted a stranger for putting out her cigarette on what?",
+    "answer": "a tree",
+    "altAnswers": [
+      "tree"
+    ],
+    "decoys": [
+      "a dog",
+      "a pram",
+      "a bench"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q501",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "In Las Vegas, Phoebe was hounded at the slot machines by a woman the group nicknamed what?",
+    "answer": "the lurker",
+    "altAnswers": [
+      "lurker"
+    ],
+    "decoys": [
+      "the vulture",
+      "the hoverer",
+      "the shadow"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q502",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Who beat Joey to the Soapie award, representing Days of Our Lives?",
+    "answer": "Jessica Ashley",
+    "altAnswers": [
+      "Jessica"
+    ],
+    "decoys": [
+      "Sarah Mchann",
+      "Susan Lockhart",
+      "Ashley Jessup"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q503",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Which soap did the nominee Sarah Mchann represent at the Soapie awards?",
+    "answer": "All My Children",
+    "altAnswers": [],
+    "decoys": [
+      "General Hospital",
+      "As the World Turns",
+      "Another World"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q504",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "Which Star Wars character did Ross ask Rachel to dress as, ruining the fantasy?",
+    "answer": "Princess Leia",
+    "altAnswers": [
+      "Leia"
+    ],
+    "decoys": [
+      "Queen Amidala",
+      "Princess Aura",
+      "a Jedi"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q505",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "According to Joey’s recovery plan for a heartbroken friend, what was Phase Two?",
+    "answer": "getting drunk and going to a strip club",
+    "altAnswers": [
+      "getting drunk and going to a strip club",
+      "a strip club"
+    ],
+    "decoys": [
+      "burning her photos",
+      "a road trip",
+      "getting a haircut"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q506",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "Joey pretended a car was his after finding its keys. What make was it?",
+    "answer": "a Porsche",
+    "altAnswers": [
+      "Porsche"
+    ],
+    "decoys": [
+      "a Ferrari",
+      "a Jaguar",
+      "a Corvette"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q507",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "A neighbour woke Rachel every morning bellowing which two words, repeatedly?",
+    "answer": "Morning’s here",
+    "altAnswers": [
+      "Morning's here",
+      "mornings here"
+    ],
+    "decoys": [
+      "Rise and shine",
+      "Wake up",
+      "Good morning"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q508",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Grandma Tribbiani proved she knew Sam Waterston by naming two of his films — Capricorn One and which other?",
+    "answer": "Crimes and Misdemeanors",
+    "altAnswers": [
+      "Crimes & Misdemeanors"
+    ],
+    "decoys": [
+      "The Killing Fields",
+      "Hannah and Her Sisters",
+      "Serial Mom"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q509",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What was the brand of the \"extra-tough\" German laundry detergent Ross brought to the laundromat?",
+    "answer": "Uberveiss",
+    "altAnswers": [
+      "Uberweiss",
+      "Uber Veiss"
+    ],
+    "decoys": [
+      "Weisskraft",
+      "Blitzclean",
+      "Reinigen"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q510",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Phoebe’s fake summary of Jane Eyre claimed the title character was secretly what?",
+    "answer": "a cyborg",
+    "altAnswers": [
+      "cyborg",
+      "a robot"
+    ],
+    "decoys": [
+      "a ghost",
+      "a man",
+      "a vampire"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q511",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "A couple in the delivery room had unusual pet names for each other — \"Evil Bitch\" and what?",
+    "answer": "Sick Bastard",
+    "altAnswers": [
+      "sick bastard"
+    ],
+    "decoys": [
+      "Filthy Animal",
+      "Rotten Swine",
+      "Nasty Devil"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q512",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Phoebe explained she was watching the football because Green Bay is \"only like my favourite\" what?",
+    "answer": "bay",
+    "altAnswers": [
+      "favorite bay",
+      "my favourite bay"
+    ],
+    "decoys": [
+      "team",
+      "city",
+      "colour"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q513",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "At the hockey game, what hit Ross in the face?",
+    "answer": "the puck",
+    "altAnswers": [
+      "a puck",
+      "hockey puck"
+    ],
+    "decoys": [
+      "a hockey stick",
+      "a beer cup",
+      "an elbow"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q514",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "What did Rachel read instead of the book Phoebe assigned her?",
+    "answer": "Vogue",
+    "altAnswers": [
+      "a copy of Vogue"
+    ],
+    "decoys": [
+      "Cosmopolitan",
+      "People",
+      "Elle"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 9
+    },
+    "verified": false
+  },
+  {
+    "id": "q515",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "What was the name of the gadget Joey demonstrated on the infomercial, for opening milk cartons?",
+    "answer": "the Milk Master 2000",
+    "altAnswers": [
+      "Milk Master 2000",
+      "Milk Master"
+    ],
+    "decoys": [
+      "the Carton Captain",
+      "the Milk Mate 3000",
+      "the Dairy Master"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 4
+    },
+    "verified": false
+  },
+  {
+    "id": "q516",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "What was the name of the actress Joey fell for while starring opposite her in Boxing Day?",
+    "answer": "Kate Miller",
+    "altAnswers": [
+      "Kate"
+    ],
+    "decoys": [
+      "Kate Mosley",
+      "Katie Marks",
+      "Kathy Miller"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q517",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "In that play, Joey played Kate’s husband. What was the character’s name?",
+    "answer": "Victor",
+    "altAnswers": [],
+    "decoys": [
+      "Vincent",
+      "Vito",
+      "Walter"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q518",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "To win the rugby match, Ross announced he had to become which alter ego?",
+    "answer": "Red Ross",
+    "altAnswers": [
+      "red Ross"
+    ],
+    "decoys": [
+      "Mad Ross",
+      "Rage Ross",
+      "Big Ross"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q519",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "What did Ross bellow across the courtyard on discovering Monica and Chandler together?",
+    "answer": "Get off my sister",
+    "altAnswers": [
+      "get off my sister!"
+    ],
+    "decoys": [
+      "Leave her alone",
+      "What are you doing",
+      "Not my sister"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q520",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Chandler used a hypnosis tape to quit smoking, but it kept telling him he was what?",
+    "answer": "a strong, confident woman",
+    "altAnswers": [
+      "a strong confident woman",
+      "a woman"
+    ],
+    "decoys": [
+      "a calm, powerful man",
+      "free of all cravings",
+      "in total control"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q521",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Ross and Chandler made a college pact never to date which classmate?",
+    "answer": "Missy Goldberg",
+    "altAnswers": [
+      "Missy"
+    ],
+    "decoys": [
+      "Molly Ringwald",
+      "Phoebe Cates",
+      "Marcy Goldman"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q522",
+    "category": "Numbers & Names",
+    "difficulty": 5,
+    "question": "Which high school did Monica, Ross and Rachel attend?",
+    "answer": "Lincoln High",
+    "altAnswers": [
+      "Lincoln"
+    ],
+    "decoys": [
+      "Roosevelt High",
+      "Jefferson High",
+      "Washington High"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q523",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the full name of the Animal Control officer who had sat behind Monica and Rachel in home room?",
+    "answer": "Luisa Gianetti",
+    "altAnswers": [
+      "Gianetti",
+      "Luisa"
+    ],
+    "decoys": [
+      "Luisa Marcone",
+      "Louisa Gambetti",
+      "Luisa Ricci"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q524",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Mr. Heckles claimed a stray cat was his. What name did he invent on the spot?",
+    "answer": "Bob Buttons",
+    "altAnswers": [
+      "Buttons"
+    ],
+    "decoys": [
+      "Mr. Whiskers",
+      "Fluffy Buttons",
+      "Bobcat"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q525",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "Which professor decided whether Ross would be keynote speaker at the palaeontology conference?",
+    "answer": "Professor Sherman",
+    "altAnswers": [
+      "Sherman"
+    ],
+    "decoys": [
+      "Professor Spafford",
+      "Professor Sheffield",
+      "Professor Stanton"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 22
+    },
+    "verified": false
+  },
+  {
+    "id": "q526",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "A colleague at Chandler’s office had spent years calling him by which wrong name?",
+    "answer": "Toby",
+    "altAnswers": [],
+    "decoys": [
+      "Tony",
+      "Bobby",
+      "Teddy"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q527",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Phoebe’s scientist boyfriend David and his colleague Max argued over which actress being the most beautiful woman alive?",
+    "answer": "Daryl Hannah",
+    "altAnswers": [
+      "Hannah"
+    ],
+    "decoys": [
+      "Kim Basinger",
+      "Michelle Pfeiffer",
+      "Kelly LeBrock"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q528",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Besides Missy Goldberg, which two celebrities were on Ross and Chandler’s college \"no-go\" list?",
+    "answer": "Phoebe Cates and Molly Ringwald",
+    "altAnswers": [
+      "Phoebe Cates and Molly Ringwald",
+      "Molly Ringwald and Phoebe Cates"
+    ],
+    "decoys": [
+      "Brooke Shields and Madonna",
+      "Molly Ringwald and Ally Sheedy",
+      "Phoebe Cates and Demi Moore"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q529",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Impersonating Rachel on the phone to her father, Monica claimed to have slept with whom, on Rachel’s bed?",
+    "answer": "Billy Dreskin",
+    "altAnswers": [
+      "Dreskin"
+    ],
+    "decoys": [
+      "Chip Matthews",
+      "Barry Farber",
+      "Billy Dressler"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q530",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Rachel remembered an ex nicknamed \"the Weeper\" who cried during sex. What was his name?",
+    "answer": "Pete Carney",
+    "altAnswers": [
+      "Pete",
+      "Pete the Weeper"
+    ],
+    "decoys": [
+      "Roger",
+      "Pete Becker",
+      "Paul Stevens"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q531",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "What nickname did Joey use for his manhood, having upgraded it from \"the Little Major\"?",
+    "answer": "the Little General",
+    "altAnswers": [
+      "Little General"
+    ],
+    "decoys": [
+      "the Colonel",
+      "the Little Captain",
+      "the Sergeant"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q532",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "After which woman did Joey promote the nickname from Major to General?",
+    "answer": "Denise DeMarco",
+    "altAnswers": [
+      "Denise"
+    ],
+    "decoys": [
+      "Angela Delvecchio",
+      "Donna DiMarco",
+      "Denise Russo"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q533",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which product’s infomercial had Joey marvelling that a burning car’s paint job was protected?",
+    "answer": "Miracle Wax",
+    "altAnswers": [
+      "Miracle Wax infomercial"
+    ],
+    "decoys": [
+      "Wonder Shine",
+      "Turtle Wax",
+      "Magic Gloss"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q534",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Where did Fake Monica take the real Monica, skipping work to go?",
+    "answer": "the Big Apple Circus",
+    "altAnswers": [
+      "Big Apple Circus",
+      "the circus"
+    ],
+    "decoys": [
+      "the Bronx Zoo",
+      "Coney Island",
+      "the Met"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q535",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Where were Carol and Susan going for their first weekend without Ben?",
+    "answer": "Colonial Williamsburg",
+    "altAnswers": [
+      "Williamsburg"
+    ],
+    "decoys": [
+      "the Hamptons",
+      "Cape Cod",
+      "Niagara Falls"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q536",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the name of Phoebe’s business idea — a taxi people take when they need to relax?",
+    "answer": "Relaxi-Taxi",
+    "altAnswers": [
+      "Relaxi Taxi",
+      "Relaxi Cab"
+    ],
+    "decoys": [
+      "Calm Cab",
+      "Zen Cab",
+      "Chill Ride"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q537",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Rachel claimed credit for naming the relaxing taxi, but Phoebe said Rachel’s version was the far worse what?",
+    "answer": "Relaxi Cab",
+    "altAnswers": [
+      "Relaxi Cab"
+    ],
+    "decoys": [
+      "Relax-o-Cab",
+      "Taxi Relaxi",
+      "Easy Cab"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q538",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe’s birth mother eventually admitted the man in the photograph was not her father, but whom?",
+    "answer": "Chuck Magioni",
+    "altAnswers": [
+      "Chuck Magioni",
+      "Magioni"
+    ],
+    "decoys": [
+      "Frank Buffay",
+      "Chuck Mangione",
+      "Carl Magioni"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 25
+    },
+    "verified": false
+  },
+  {
+    "id": "q539",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "Rachel still resented Chip for sleeping with which girl during their prom?",
+    "answer": "Amy Welch",
+    "altAnswers": [
+      "Amy"
+    ],
+    "decoys": [
+      "Missy Goldberg",
+      "Amy Green",
+      "Annie Walsh"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 2
+    },
+    "verified": false
+  },
+  {
+    "id": "q540",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "Chandler bought Kathy an early edition of her favourite childhood book. Which book?",
+    "answer": "The Velveteen Rabbit",
+    "altAnswers": [
+      "Velveteen Rabbit"
+    ],
+    "decoys": [
+      "The Secret Garden",
+      "Goodnight Moon",
+      "Charlotte’s Web"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q541",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Trying to impress her diplomat date through a translator, Phoebe claimed to be fascinated by whom?",
+    "answer": "Boutros Boutros-Ghali",
+    "altAnswers": [
+      "Boutros Boutros Gali",
+      "Boutros Boutros-Ghali",
+      "Boutros"
+    ],
+    "decoys": [
+      "Henry Kissinger",
+      "Kofi Annan",
+      "Yasser Arafat"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q542",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which London hotel did Joey and Chandler stay in for Ross’s wedding?",
+    "answer": "the London Marriott",
+    "altAnswers": [
+      "London Marriott",
+      "Marriott"
+    ],
+    "decoys": [
+      "the Savoy",
+      "the Dorchester",
+      "the Hilton"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q543",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the title of the adult film Ursula made under Phoebe’s name?",
+    "answer": "Buffay: The Vampire Layer",
+    "altAnswers": [
+      "Buffay the Vampire Layer",
+      "The Vampire Layer"
+    ],
+    "decoys": [
+      "Buffay: Undercover",
+      "Fangs for Everything",
+      "Nightshift Nurses"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q544",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "A woman gave Ross a fake name and number. What was the absurd surname on the paper?",
+    "answer": "Hornswoggle",
+    "altAnswers": [
+      "Elizabeth Hornswoggle"
+    ],
+    "decoys": [
+      "Hornbuckle",
+      "Hornsby",
+      "Snodgrass"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q545",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "What was the weekly tradition Chandler thought was just his and Joey’s \"thing\"?",
+    "answer": "Naked Thursdays",
+    "altAnswers": [
+      "Naked Thursday",
+      "Naked Thursday’s"
+    ],
+    "decoys": [
+      "Naked Tuesdays",
+      "Pants-Free Fridays",
+      "Bare Mondays"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q546",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "In the Thanksgiving flashback, which girl had Chip dumped Rachel for?",
+    "answer": "Nancy Branson",
+    "altAnswers": [
+      "Nancy"
+    ],
+    "decoys": [
+      "Amy Welch",
+      "Missy Goldberg",
+      "Nancy Bronson"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q547",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler’s excruciating \"work laugh\" story hinged on a colleague’s doctor being called Doctor Muppy — what did Chandler call him?",
+    "answer": "Doctor Monkey",
+    "altAnswers": [
+      "Dr. Monkey"
+    ],
+    "decoys": [
+      "Doctor Puppy",
+      "Doctor Muppet",
+      "Doctor Guppy"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 12
+    },
+    "verified": false
+  },
+  {
+    "id": "q548",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the dim-witted actor Joey had to apologise for at an audition?",
+    "answer": "Carl",
+    "altAnswers": [],
+    "decoys": [
+      "Chuck",
+      "Cal",
+      "Kirk"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 17
+    },
+    "verified": false
+  },
+  {
+    "id": "q549",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "What was the name of the veteran actress who played Jessica Lockhart on Days of Our Lives?",
+    "answer": "Cecilia Monroe",
+    "altAnswers": [
+      "Cecilia"
+    ],
+    "decoys": [
+      "Celia Monroe",
+      "Cecilia Marlowe",
+      "Cecily Monroe"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q550",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Ross discovered Rachel had bought him a tuxedo previously worn by which actor, in Batman?",
+    "answer": "Val Kilmer",
+    "altAnswers": [
+      "Kilmer"
+    ],
+    "decoys": [
+      "Michael Keaton",
+      "George Clooney",
+      "Adam West"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q551",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "In the alternate-reality episode, Monica was dating an overweight Joey. What weight did he say he was down to?",
+    "answer": "375",
+    "altAnswers": [
+      "375 pounds",
+      "three hundred and seventy-five"
+    ],
+    "decoys": [
+      "420",
+      "350",
+      "400"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 16
+    },
+    "verified": false
+  },
+  {
+    "id": "q552",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What nickname were Phoebe and Mike briefly \"trying out\", which Rachel found hilarious?",
+    "answer": "Big Daddy",
+    "altAnswers": [
+      "Big Daddy"
+    ],
+    "decoys": [
+      "Papa Bear",
+      "Sugar Lips",
+      "Chief"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q553",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "While pregnant, Phoebe confessed to trying to steal a cardboard cutout of which boxer from a Foot Locker?",
+    "answer": "Evander Holyfield",
+    "altAnswers": [
+      "Holyfield"
+    ],
+    "decoys": [
+      "Mike Tyson",
+      "George Foreman",
+      "Riddick Bowe"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q554",
+    "category": "Weddings & Breakups",
+    "difficulty": 5,
+    "question": "Ross gatecrashed which relative’s wedding, having not been invited?",
+    "answer": "Cousin Frannie’s",
+    "altAnswers": [
+      "Cousin Frannie's",
+      "Frannie"
+    ],
+    "decoys": [
+      "Cousin Cassie’s",
+      "Aunt Millie’s",
+      "Cousin Nancy’s"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q555",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Joey wandered around dressed as which TV character while learning to sail?",
+    "answer": "Captain Stubing",
+    "altAnswers": [
+      "Stubing",
+      "the Love Boat captain"
+    ],
+    "decoys": [
+      "Popeye",
+      "Captain Ahab",
+      "Gilligan"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 24
+    },
+    "verified": false
+  },
+  {
+    "id": "q556",
+    "category": "Showbiz & Auditions",
+    "difficulty": 5,
+    "question": "Which celebrity hosted the Pyramid episode Joey appeared on during Soap Opera week?",
+    "answer": "Donny Osmond",
+    "altAnswers": [
+      "Osmond"
+    ],
+    "decoys": [
+      "Dick Clark",
+      "Bob Barker",
+      "Alex Trebek"
+    ],
+    "source": {
+      "season": 10,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q557",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which historical mystery was Ross obsessed with solving, to the group’s irritation?",
+    "answer": "what happened to Amelia Earhart",
+    "altAnswers": [
+      "Amelia Earhart",
+      "Earhart"
+    ],
+    "decoys": [
+      "the Bermuda Triangle",
+      "Jimmy Hoffa",
+      "the Loch Ness Monster"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q558",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which hotel hosted the palaeontology conference in Barbados?",
+    "answer": "the Paradise Hotel",
+    "altAnswers": [
+      "Paradise Hotel"
+    ],
+    "decoys": [
+      "the Coral Reef",
+      "the Blue Lagoon",
+      "the Sandpiper"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q559",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "What mocking nickname did Rachel give Gavin, the colleague who covered her maternity leave?",
+    "answer": "Super Gavin",
+    "altAnswers": [
+      "super Gavin"
+    ],
+    "decoys": [
+      "Wonder Gavin",
+      "Gavin the Great",
+      "Captain Gavin"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 11
+    },
+    "verified": false
+  },
+  {
+    "id": "q560",
+    "category": "Joey",
+    "difficulty": 5,
+    "question": "Whose answering-machine message about Joey’s party did Rachel accidentally play, exposing his lie?",
+    "answer": "Jane Rogers",
+    "altAnswers": [
+      "Jane"
+    ],
+    "decoys": [
+      "Janine",
+      "Jane Rodgers",
+      "Jenny Rogers"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q561",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Phoebe famously mangled Elton John’s \"Tiny Dancer\". What did she sing instead?",
+    "answer": "Hold me close, young Tony Danza",
+    "altAnswers": [
+      "young Tony Danza",
+      "Tony Danza"
+    ],
+    "decoys": [
+      "Hold me closer, Tiny Dancer",
+      "Hold me close, you tiny dancer",
+      "Hold me now, young Tony Danza"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q562",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "What was the title of Phoebe’s song about the hair she discovered in her bed?",
+    "answer": "Little Black Curly Hair",
+    "altAnswers": [
+      "little black curly hair"
+    ],
+    "decoys": [
+      "Mystery in My Bed",
+      "The Hair Song",
+      "Curly and Black"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q563",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "During the blackout, Phoebe sang that New York City has no power and what else?",
+    "answer": "the milk is getting sour",
+    "altAnswers": [
+      "the milk is getting sour"
+    ],
+    "decoys": [
+      "the streets are getting dark",
+      "the phones are all dead",
+      "nobody can see"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 7
+    },
+    "verified": false
+  },
+  {
+    "id": "q564",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe wrote a song while in the shower whose entire chorus was which three words, repeated?",
+    "answer": "lather, rinse, repeat",
+    "altAnswers": [
+      "lather rinse repeat"
+    ],
+    "decoys": [
+      "wash, dry, fold",
+      "soap, scrub, rinse",
+      "wet, wash, warm"
+    ],
+    "source": {
+      "season": 2,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q565",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Phoebe serenaded a room of children with a song saying they are tiny and chubby, and soon they will grow up and do what?",
+    "answer": "resent you so much",
+    "altAnswers": [
+      "resent you"
+    ],
+    "decoys": [
+      "forget you",
+      "leave you",
+      "disappoint you"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q566",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Phoebe wrote a holiday song naming each friend. Which friend did she wish a snowy Christmas?",
+    "answer": "Joey",
+    "altAnswers": [],
+    "decoys": [
+      "Ross",
+      "Chandler",
+      "Rachel"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q567",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Phoebe’s song about a heart condition claimed it only takes how many heart attacks to finally make you see?",
+    "answer": "two",
+    "altAnswers": [
+      "2",
+      "two heart attacks"
+    ],
+    "decoys": [
+      "three",
+      "one",
+      "four"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q568",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "What was the name of the software Monica’s millionaire boyfriend Pete had invented?",
+    "answer": "Moss 865",
+    "altAnswers": [
+      "Moss865",
+      "Moss"
+    ],
+    "decoys": [
+      "Byte 900",
+      "Nexus 7",
+      "Moss 2000"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 18
+    },
+    "verified": false
+  },
+  {
+    "id": "q569",
+    "category": "The Apartments & Central Perk",
+    "difficulty": 5,
+    "question": "What dangerous game had Joey and Chandler invented before Fireball?",
+    "answer": "hammer darts",
+    "altAnswers": [
+      "hammer-darts"
+    ],
+    "decoys": [
+      "knife bowling",
+      "ceiling ball",
+      "sock boxing"
+    ],
+    "source": {
+      "season": 5,
+      "episode": 10
+    },
+    "verified": false
+  },
+  {
+    "id": "q570",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Chandler eventually admitted he had invented the game of Cups for what purpose?",
+    "answer": "to give Joey money",
+    "altAnswers": [
+      "to give Joey money",
+      "so Joey could win money"
+    ],
+    "decoys": [
+      "to win Joey’s rent back",
+      "to teach Joey maths",
+      "to settle an argument"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 6
+    },
+    "verified": false
+  },
+  {
+    "id": "q571",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "According to Ross, who invented bifocals?",
+    "answer": "Ben Franklin",
+    "altAnswers": [
+      "Benjamin Franklin",
+      "Franklin"
+    ],
+    "decoys": [
+      "Thomas Edison",
+      "Isaac Newton",
+      "Galileo"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q572",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the Gellers’ childhood doctor, whom Ross wrongly believed was dead?",
+    "answer": "Dr. Gettleman",
+    "altAnswers": [
+      "Gettleman"
+    ],
+    "decoys": [
+      "Dr. Gerber",
+      "Dr. Goodman",
+      "Dr. Gettelman"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 3
+    },
+    "verified": false
+  },
+  {
+    "id": "q573",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Outside Monica’s restaurant, what did Phoebe sing to drive customers away?",
+    "answer": "the food here at Javu will kill you",
+    "altAnswers": [
+      "Food here at Javu will kill you",
+      "the food will kill you"
+    ],
+    "decoys": [
+      "Javu is closed forever",
+      "Don’t eat at Javu",
+      "The chef at Javu hates you"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q574",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "What was the full name of the sorority sister who claimed she and Rachel had kissed?",
+    "answer": "Melissa Warburton",
+    "altAnswers": [
+      "Melissa"
+    ],
+    "decoys": [
+      "Melissa Warrington",
+      "Marissa Warburton",
+      "Melissa Wexler"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q575",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "What nickname did Melissa shriek at Rachel on recognising her in Central Perk?",
+    "answer": "Ray-ray Green",
+    "altAnswers": [
+      "Ray-ray",
+      "Rayray Green"
+    ],
+    "decoys": [
+      "Rach-Rach",
+      "Green Bean",
+      "Ray Ray Greenie"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 20
+    },
+    "verified": false
+  },
+  {
+    "id": "q576",
+    "category": "Jobs & Money",
+    "difficulty": 5,
+    "question": "What was the name of the spa where Phoebe secretly worked, and Rachel booked a massage?",
+    "answer": "Lavender Day Spa",
+    "altAnswers": [
+      "the Lavender Day Spa",
+      "Lavender"
+    ],
+    "decoys": [
+      "Serenity Spa",
+      "Blue Lotus Spa",
+      "The Willow Room"
+    ],
+    "source": {
+      "season": 9,
+      "episode": 21
+    },
+    "verified": false
+  },
+  {
+    "id": "q577",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "What did Jack Geller turn Monica’s childhood bedroom into, twenty minutes after she moved out?",
+    "answer": "a gym",
+    "altAnswers": [
+      "a home gym",
+      "gym"
+    ],
+    "decoys": [
+      "a study",
+      "a guest room",
+      "a sewing room"
+    ],
+    "source": {
+      "season": 7,
+      "episode": 13
+    },
+    "verified": false
+  },
+  {
+    "id": "q578",
+    "category": "Guest Stars & Exes",
+    "difficulty": 5,
+    "question": "In the very first episode, what was the nickname of the man Monica had a date with?",
+    "answer": "Paul the Wine Guy",
+    "altAnswers": [
+      "Paul",
+      "the Wine Guy"
+    ],
+    "decoys": [
+      "Paul the Chef",
+      "Alan",
+      "Paul the Banker"
+    ],
+    "source": {
+      "season": 1,
+      "episode": 1
+    },
+    "verified": false
+  },
+  {
+    "id": "q579",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the name of the translator who accompanied Phoebe’s diplomat boyfriend Sergei?",
+    "answer": "Mischa",
+    "altAnswers": [
+      "Misha"
+    ],
+    "decoys": [
+      "Yuri",
+      "Dmitri",
+      "Nikolai"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q580",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Ross joked that a medical condition named after him would be called what?",
+    "answer": "The Ross",
+    "altAnswers": [
+      "the Ross"
+    ],
+    "decoys": [
+      "Geller’s Syndrome",
+      "The Geller",
+      "Ross Disease"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 23
+    },
+    "verified": false
+  },
+  {
+    "id": "q581",
+    "category": "Ross & Rachel",
+    "difficulty": 5,
+    "question": "Where were Ross and Emily when Rachel discovered their relationship had become serious?",
+    "answer": "a bed and breakfast in Vermont",
+    "altAnswers": [
+      "Vermont",
+      "a B&B in Vermont"
+    ],
+    "decoys": [
+      "a hotel in Boston",
+      "a cabin in Maine",
+      "a cottage in the Hamptons"
+    ],
+    "source": {
+      "season": 4,
+      "episode": 14
+    },
+    "verified": false
+  },
+  {
+    "id": "q582",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler observed that Goldman is a surname but there is no what?",
+    "answer": "Gold Man",
+    "altAnswers": [
+      "Goldman",
+      "a Gold Man"
+    ],
+    "decoys": [
+      "Silver Man",
+      "Gold Woman",
+      "Goldberg"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 19
+    },
+    "verified": false
+  },
+  {
+    "id": "q583",
+    "category": "Phoebe",
+    "difficulty": 5,
+    "question": "Asked which country her massage guru came from, what unpronounceable name did Phoebe invent?",
+    "answer": "Ick-neck-tree-anis",
+    "altAnswers": [
+      "Ickneckntreeanis",
+      "Ick neck tree anis"
+    ],
+    "decoys": [
+      "Bulgaristan",
+      "Vlachovia",
+      "Kreplakistan"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 15
+    },
+    "verified": false
+  },
+  {
+    "id": "q584",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Chandler’s laminated list of five included four real women and one cartoon. Which?",
+    "answer": "Jessica Rabbit",
+    "altAnswers": [
+      "Jessica Rabbit"
+    ],
+    "decoys": [
+      "Betty Boop",
+      "Wilma Flintstone",
+      "Daphne from Scooby-Doo"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q585",
+    "category": "Deep Cuts",
+    "difficulty": 5,
+    "question": "Which supermodel appeared on both Chandler’s list and as the chick’s namesake?",
+    "answer": "Yasmine Bleeth",
+    "altAnswers": [
+      "Yasmine"
+    ],
+    "decoys": [
+      "Cindy Crawford",
+      "Halle Berry",
+      "Kim Basinger"
+    ],
+    "source": {
+      "season": 3,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q586",
+    "category": "Minor Characters",
+    "difficulty": 5,
+    "question": "What was the first name of Rachel’s frosty boss at Ralph Lauren, who ignored her in the lift?",
+    "answer": "Kim",
+    "altAnswers": [
+      "Kim"
+    ],
+    "decoys": [
+      "Joanna",
+      "Nancy",
+      "Gail"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 8
+    },
+    "verified": false
+  },
+  {
+    "id": "q587",
+    "category": "Exact Words",
+    "difficulty": 5,
+    "question": "Chandler accused Ross of only liking a certain shop because of which display?",
+    "answer": "the Purple Rain display",
+    "altAnswers": [
+      "Purple Rain",
+      "Purple Rain display"
+    ],
+    "decoys": [
+      "the Thriller display",
+      "the neon display",
+      "the Prince display"
+    ],
+    "source": {
+      "season": 8,
+      "episode": 5
+    },
+    "verified": false
+  },
+  {
+    "id": "q588",
+    "category": "Monica & Chandler",
+    "difficulty": 5,
+    "question": "Handing Chandler his key to the new place, what did Monica insist he do?",
+    "answer": "christen it",
+    "altAnswers": [
+      "christen the key",
+      "go out and come back in"
+    ],
+    "decoys": [
+      "carry her over the threshold",
+      "make a wish",
+      "hide a spare"
+    ],
+    "source": {
+      "season": 6,
+      "episode": 1
+    },
+    "verified": false
   }
 ]
