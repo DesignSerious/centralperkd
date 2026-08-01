@@ -577,9 +577,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 4,
-      "correct": 4,
-      "answered": 11,
+      "served": 5,
+      "correct": 5,
+      "answered": 13,
       "topWrong": {
         "a completely made up thing": 1,
         "no idea": 1,
@@ -587,7 +587,8 @@
         "cunt": 1,
         "a completely wrong guess xyz": 1,
         "another wrong guess qqq": 1,
-        "clearly the wrong thing zzz": 1
+        "clearly the wrong thing zzz": 1,
+        "Mon-Bon": 1
       }
     }
   },
@@ -736,9 +737,9 @@
     },
     "verified": false,
     "stats": {
-      "served": 5,
-      "correct": 5,
-      "answered": 15,
+      "served": 6,
+      "correct": 7,
+      "answered": 17,
       "topWrong": {
         "Joey cracked under pressure": 4,
         "Through Phoebe": 1,
@@ -2827,14 +2828,15 @@
     },
     "verified": false,
     "stats": {
-      "served": 3,
+      "served": 4,
       "correct": 5,
-      "answered": 11,
+      "answered": 13,
       "topWrong": {
         "Lots of shirts": 1,
         "stretchy overalls": 2,
         "A turkey on his head": 1,
-        "a bathrobe with no belt": 2
+        "a bathrobe with no belt": 3,
+        "the one with the monkey": 1
       }
     }
   },
@@ -4550,7 +4552,13 @@
       "season": 6,
       "episode": 20
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q164",
@@ -4572,10 +4580,13 @@
     },
     "verified": false,
     "stats": {
-      "served": 1,
+      "served": 2,
       "correct": 2,
-      "answered": 2,
-      "topWrong": {}
+      "answered": 4,
+      "topWrong": {
+        "Dr. Drake Ramoray": 1,
+        "Sir Joseph": 1
+      }
     }
   },
   {
@@ -5228,7 +5239,13 @@
       "season": 8,
       "episode": 5
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q196",
@@ -5249,7 +5266,15 @@
       "season": 6,
       "episode": 1
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "four": 1
+      }
+    }
   },
   {
     "id": "q197",
@@ -5553,7 +5578,13 @@
       "season": 1,
       "episode": 2
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q210",
@@ -6997,7 +7028,13 @@
       "season": 4,
       "episode": 2
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q277",
@@ -8702,7 +8739,13 @@
       "season": 1,
       "episode": 11
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q360",
@@ -9065,7 +9108,13 @@
       "season": 5,
       "episode": 14
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 2,
+      "answered": 2,
+      "topWrong": {}
+    }
   },
   {
     "id": "q378",
@@ -9801,7 +9850,15 @@
       "season": 1,
       "episode": 19
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 1,
+      "answered": 2,
+      "topWrong": {
+        "a nappy": 1
+      }
+    }
   },
   {
     "id": "q415",
@@ -13301,7 +13358,16 @@
       "season": 8,
       "episode": 5
     },
-    "verified": false
+    "verified": false,
+    "stats": {
+      "served": 1,
+      "correct": 0,
+      "answered": 2,
+      "topWrong": {
+        "the neon display": 1,
+        "Ugly Naked Guy": 1
+      }
+    }
   },
   {
     "id": "q588",
