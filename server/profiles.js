@@ -110,10 +110,27 @@ function usernameKey(raw) {
   return String(raw == null ? '' : raw).trim().replace(/\s+/g, ' ').toLowerCase();
 }
 
+/* TWEN accounts sit alongside the PIN ones rather than replacing them: on a
+   phone, mid-round, four digits beat an OAuth round trip, and guests still need
+   no account at all. What TWEN adds is one identity across every TWEN game.
+   Added by ALTER so an existing database gains the column without a migration. */
+if (db) {
+  try {
+    const cols = db.prepare('PRAGMA table_info(users)').all().map((c) => c.name);
+    if (!cols.includes('twen_id')) db.exec('ALTER TABLE users ADD COLUMN twen_id TEXT');
+    db.exec('CREATE UNIQUE INDEX IF NOT EXISTS users_twen_id ON users(twen_id) WHERE twen_id IS NOT NULL');
+  } catch (e) {
+    console.error('[accounts] could not add twen_id:', e.message);
+  }
+}
+
 // ─── Queries ─── (null when accounts are disabled; every caller guards on it)
 const Q = db ? {
   byKey: db.prepare('SELECT * FROM users WHERE username_key = ?'),
   byId: db.prepare('SELECT * FROM users WHERE id = ?'),
+  byTwen: db.prepare('SELECT * FROM users WHERE twen_id = ?'),
+  insertTwen: db.prepare('INSERT INTO users (id, username, username_key, pin, avatar, created_at, twen_id) VALUES (?, ?, ?, ?, ?, ?, ?)'),
+  linkTwen: db.prepare('UPDATE users SET twen_id = ? WHERE id = ?'),
   insert: db.prepare('INSERT INTO users (id, username, username_key, pin, avatar, created_at) VALUES (?, ?, ?, ?, ?, ?)'),
   setAvatar: db.prepare('UPDATE users SET avatar = ? WHERE id = ?'),
   game: db.prepare('UPDATE users SET games_played = games_played + 1, games_won = games_won + ?, correct_answers = correct_answers + ?, best_streak = max(best_streak, ?) WHERE id = ?')
@@ -147,6 +164,49 @@ function createUser(username, pin, avatar) {
   const id = crypto.randomBytes(8).toString('hex');
   Q.insert.run(id, name, key, hashPin(p), avatar || null, Date.now());
   return publicUser(Q.byId.get(id));
+}
+
+/* A TWEN identity, turned into a Central Perk'd profile. Seen before → that
+   profile, stats and all; new → a profile with no usable PIN, under a free
+   name derived from the Google one. Deliberately identical in behaviour to
+   Wilderdash's, because the two share players and should not surprise them. */
+function fromTwen(identity) {
+  if (!Q) throw new Error(ACCOUNTS_DOWN);
+  if (!identity || !identity.id) throw new Error('No TWEN identity');
+
+  const seen = Q.byTwen.get(identity.id);
+  if (seen) return publicUser(seen);
+
+  let base = String(identity.name || (identity.email || '').split('@')[0] || 'Player')
+    .replace(/[^A-Za-z0-9 _-]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 20).trim();
+  if (base.length < 3) base = 'Player';
+
+  let name = base, n = 1;
+  while (Q.byKey.get(name.toLowerCase())) {
+    const suffix = ' ' + (++n);
+    name = base.slice(0, 20 - suffix.length) + suffix;
+    if (n > 999) throw new Error('Could not find a free username');
+  }
+
+  const id = crypto.randomBytes(8).toString('hex');
+  // The PIN column is NOT NULL; a hash of random bytes keeps it unusable, which
+  // is the point — the way into this profile is TWEN.
+  Q.insertTwen.run(id, name, name.toLowerCase(), hashPin(crypto.randomBytes(12).toString('hex')),
+                   null, Date.now(), identity.id);
+  return publicUser(Q.byId.get(id));
+}
+
+/* Claim an existing PIN profile for a TWEN account, so stats keep counting
+   after switching to Google. Refuses if either side is already spoken for. */
+function linkTwen(userId, twenId) {
+  if (!Q) throw new Error(ACCOUNTS_DOWN);
+  const row = Q.byId.get(userId);
+  if (!row) throw new Error('No such profile');
+  if (row.twen_id && row.twen_id !== twenId) throw new Error('That profile is already linked to another TWEN account');
+  const taken = Q.byTwen.get(twenId);
+  if (taken && taken.id !== userId) throw new Error('That TWEN account already has a profile here');
+  Q.linkTwen.run(twenId, userId);
+  return publicUser(Q.byId.get(userId));
 }
 
 // Returns public user on success, null on bad credentials.
@@ -186,6 +246,8 @@ function recordGame({ userId, won, correct, bestStreak }) {
 module.exports = {
   createUser,
   login,
+  fromTwen,
+  linkTwen,
   getUser,
   setAvatar,
   recordGame,

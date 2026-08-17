@@ -14,6 +14,9 @@ const { Server } = require('socket.io');
 const sharp = require('sharp');
 const Game = require('./game');
 const Profiles = require('./profiles');
+// Vendored from twen/twen-id/twen-verify.js — turns a TWEN access token into a
+// verified identity using Supabase's published keys. No dependencies, no secret.
+const TwenVerify = require('./twen-verify');
 
 // Record per-account stats when a game ends. game.js fires this hook with
 // the room (players carry an optional userId set at join from the phone's
@@ -69,7 +72,12 @@ const PUBLIC_LOGO_DIR = path.join(__dirname, '..', 'client', 'public');
 // the endpoint reports the feature as unavailable so the client UI greys
 // out gracefully.
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || '';
-const AI_PIECE_DIR = path.join(__dirname, 'uploads', 'pieces');
+/* Uploads are things people made — generated pieces (an image call each) and
+   sounds they recorded — and the container's own disk loses them at every
+   deploy. PERKD_UPLOADS points at the mounted volume in production; locally it
+   stays in the repo, exactly where it was. */
+const UPLOAD_DIR = process.env.PERKD_UPLOADS || path.join(__dirname, 'uploads');
+const AI_PIECE_DIR = path.join(UPLOAD_DIR, 'pieces');
 const AI_GENERATIONS_PER_SOCKET = 2;
 
 // ─── Sound board (operator-assignable game SFX) ───
@@ -77,8 +85,8 @@ const AI_GENERATIONS_PER_SOCKET = 2;
 // /ai-pieces pattern); sounds.json maps a trigger key -> filename. sfx.js reads
 // the resolved map from GET /api/sounds and overrides its built-in defaults.
 // Declared here (before the static route + API routes that reference them).
-const SOUNDS_DIR = path.join(__dirname, 'uploads', 'sounds');
-const SOUNDS_FILE = path.join(__dirname, 'sounds.json');
+const SOUNDS_DIR = path.join(UPLOAD_DIR, 'sounds');
+const SOUNDS_FILE = process.env.PERKD_SOUNDS || path.join(__dirname, 'sounds.json');
 const SOUND_TRIGGERS = require('./sound-triggers');
 const SOUND_KEYS = new Set(SOUND_TRIGGERS.map((t) => t.key));
 try { fs.mkdirSync(SOUNDS_DIR, { recursive: true }); } catch (e) {}
@@ -279,6 +287,50 @@ app.post('/api/auth/login', express.json(), (req, res) => {
   const user = Profiles.login(b.username, b.pin);
   if (!user) return res.status(401).json({ ok: false, error: 'Wrong username or PIN.' });
   res.json({ ok: true, token: Profiles.signToken(user.id), user });
+});
+
+/* Sign in with a TWEN account (twen.lol). The phone sends the access token it
+   already holds; it is verified here against Supabase's published keys, so
+   nothing on the client can claim to be someone it isn't. The response is the
+   same { ok, token, user } shape as /login, leaving everything downstream —
+   join, scoring, the profile card — untouched. */
+app.post('/api/auth/twen', express.json(), async (req, res) => {
+  let who = null;
+  try {
+    who = await TwenVerify.verifyTwenToken(String((req.body || {}).access_token || ''));
+  } catch (e) {
+    return res.status(401).json({ ok: false, error: 'That TWEN sign-in could not be verified.' });
+  }
+  // An anonymous TWEN session is nobody in particular yet; a profile built on
+  // one would vanish the moment they signed in properly.
+  if (who.anonymous) {
+    return res.status(400).json({ ok: false, error: 'Sign in to TWEN with Google first, then try again.' });
+  }
+  try {
+    const user = Profiles.fromTwen(who);
+    res.json({ ok: true, token: Profiles.signToken(user.id), user });
+  } catch (e) {
+    res.status(400).json({ ok: false, error: e.message });
+  }
+});
+
+/* Claim the profile already signed in here for a TWEN account, so existing
+   stats keep counting after switching to Google. */
+app.post('/api/auth/twen/link', express.json(), async (req, res) => {
+  const mine = userFromReq(req);
+  if (!mine) return res.status(401).json({ ok: false, error: 'Not signed in' });
+  let who = null;
+  try {
+    who = await TwenVerify.verifyTwenToken(String((req.body || {}).access_token || ''));
+  } catch (e) {
+    return res.status(401).json({ ok: false, error: 'That TWEN sign-in could not be verified.' });
+  }
+  if (who.anonymous) return res.status(400).json({ ok: false, error: 'Sign in to TWEN with Google first.' });
+  try {
+    res.json({ ok: true, user: Profiles.linkTwen(mine.id, who.id) });
+  } catch (e) {
+    res.status(409).json({ ok: false, error: e.message });
+  }
 });
 
 app.get('/api/auth/me', (req, res) => {
@@ -496,7 +548,25 @@ app.post('/api/generate-piece-from-photo', express.json({ limit: '600kb' }), asy
 // Auth is a single shared password (env `PLAYLIST_PASSWORD`, fallback
 // 'centralperkd' with a startup warning). Sent as `Authorization: Bearer <pwd>`
 // on every protected request.
-const PLAYLIST_FILE = path.join(__dirname, 'playlist.json');
+const PLAYLIST_FILE = process.env.PERKD_PLAYLIST || path.join(__dirname, 'playlist.json');
+
+/* First boot on a volume: these files aren't there yet, but the repo copies are.
+   Seed rather than start empty — an order someone dragged into place, and the
+   sound triggers they wired up, should not quietly reset the day this moves to
+   persistent storage. */
+[[PLAYLIST_FILE, path.join(__dirname, 'playlist.json')],
+ [SOUNDS_FILE, path.join(__dirname, 'sounds.json')]].forEach(([live, seed]) => {
+  if (live === seed) return;
+  try {
+    fs.mkdirSync(path.dirname(live), { recursive: true });
+    if (!fs.existsSync(live) && fs.existsSync(seed)) {
+      fs.copyFileSync(seed, live);
+      console.log('[seed]', path.basename(live), 'copied from the repo copy');
+    }
+  } catch (e) {
+    console.error('[seed] could not seed', live, e.message);
+  }
+});
 const PLAYLIST_PASSWORD = process.env.PLAYLIST_PASSWORD || 'centralperkd';
 if (!process.env.PLAYLIST_PASSWORD) {
   console.warn('[playlist] PLAYLIST_PASSWORD not set — using default "centralperkd". Set this env var in production.');

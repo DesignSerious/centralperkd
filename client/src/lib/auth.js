@@ -57,6 +57,25 @@ export async function login(username, pin) {
   return d.user;
 }
 
+/* Sign in with a TWEN account. The access token goes to our server, which
+   verifies it and returns a normal Central Perk'd token — so join, scoring and
+   the profile card are unchanged and do not care which door was used. */
+export async function loginWithTwen(accessToken) {
+  const d = await postJson('/api/auth/twen', { access_token: accessToken });
+  set({ token: d.token, user: d.user });
+  return d.user;
+}
+
+/* Attach a TWEN account to the profile already signed in here, so existing
+   stats keep counting after switching to Google. */
+export async function linkTwen(accessToken) {
+  const token = getToken();
+  if (!token) throw new Error('Not signed in');
+  const d = await postJson('/api/auth/twen/link', { access_token: accessToken }, token);
+  set({ token, user: d.user });
+  return d.user;
+}
+
 // Re-fetch the profile (refreshed stats / validate the stored token). Clears
 // auth on a 401 so a stale token doesn't strand the UI in a signed-in state.
 export async function refreshMe() {

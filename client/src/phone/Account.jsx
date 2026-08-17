@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { getAuth, signup, login, signOut, saveAvatar } from '../lib/auth';
+import React, { useState, useEffect } from 'react';
+import { getAuth, signup, login, signOut, saveAvatar, loginWithTwen } from '../lib/auth';
+import { ready as twenReady, twenSignIn, twenAccessToken, twenUser } from '../lib/twen';
 import { PIECES, pieceById, isPhotoPiece, isAiPiece } from '../lib/pieces';
 import PieceVisual from '../lib/PieceVisual';
 import PhotoCapture from '../lib/PhotoCapture';
@@ -172,6 +173,29 @@ function AuthForms({ onClose }) {
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  // TWEN is offered only once its script has actually loaded — a button that
+  // cannot work is worse than no button, especially mid-round on a phone.
+  const [twenOk, setTwenOk] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    twenReady().then((ok) => { if (alive) setTwenOk(ok); });
+    return () => { alive = false; };
+  }, []);
+
+  function twen() {
+    setError('');
+    setBusy(true);
+    const first = twenUser() ? Promise.resolve(twenUser()) : twenSignIn();
+    first
+      .then(() => twenAccessToken())
+      .then((tok) => {
+        if (!tok) throw new Error('No TWEN session to use.');
+        return loginWithTwen(tok);
+      })
+      .then(() => { setBusy(false); onClose(); })
+      .catch((err) => { setBusy(false); setError(err.message || 'Could not sign in with TWEN.'); });
+  }
 
   function submit(e) {
     e.preventDefault();
@@ -233,6 +257,23 @@ function AuthForms({ onClose }) {
             {busy ? 'Please wait…' : (mode === 'create' ? 'Create account' : 'Sign in')}
           </button>
         </form>
+        {twenOk && (
+          <>
+            <div className="acct-or">or</div>
+            <button
+              type="button"
+              className="lp-btn lp-btn--twen"
+              style={{ width: '100%' }}
+              onClick={twen}
+              disabled={busy}
+            >
+              {twenUser() ? 'Continue as ' + twenUser().name : 'Sign in with TWEN'}
+            </button>
+            <div className="acct-note">
+              One account across Central Perk'd, Wilderdash, Kroaky and the rest — no PIN to forget.
+            </div>
+          </>
+        )}
         <button type="button" className="lp-btn lp-btn--ghost" style={{ width: '100%', marginTop: 12 }} onClick={onClose}>
           Continue as guest
         </button>

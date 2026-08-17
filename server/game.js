@@ -208,7 +208,9 @@ function sanitizeSettings(patch, base) {
 
 // Operator-configured defaults every new room starts from (set at /admin). A
 // missing/partial file safely falls back to DEFAULT_SETTINGS via sanitizeSettings.
-const GAME_SETTINGS_FILE = path.join(__dirname, 'game-settings.json');
+// Host settings survive a deploy for the same reason the playlist does: someone
+// set them on purpose and should not have to set them again on Tuesday.
+const GAME_SETTINGS_FILE = process.env.PERKD_SETTINGS || path.join(__dirname, 'game-settings.json');
 function readDefaults() {
   let persisted = null;
   try { persisted = JSON.parse(fs.readFileSync(GAME_SETTINGS_FILE, 'utf8')); } catch (e) {}
